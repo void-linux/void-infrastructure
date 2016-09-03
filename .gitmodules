@@ -1,0 +1,15 @@
+[submodule "roles/network"]
+	path = roles/network
+	url = git@github.com:void-ansible-roles/network.git
+[submodule "roles/nginx"]
+	path = roles/nginx
+	url = git@github.com:void-ansible-roles/nginx.git
+[submodule "roles/sshd"]
+	path = roles/sshd
+	url = git@github.com:void-ansible-roles/sshd.git
+[submodule "roles/xbps-repoconf"]
+	path = roles/xbps-repoconf
+	url = git@github.com:void-ansible-roles/xbps-repoconf.git
+[submodule "roles/certbot"]
+	path = roles/certbot
+	url = git@github.com:void-ansible-roles/certbot.git
