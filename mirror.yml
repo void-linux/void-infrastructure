@@ -6,6 +6,6 @@
   roles:
     - xbps-repoconf
     - sshd
-    - certbot
-
+    - void-mirror
+    - rsync
     
