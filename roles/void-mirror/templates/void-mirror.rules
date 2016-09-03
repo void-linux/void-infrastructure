@@ -1,0 +1,3 @@
+*filter
+-A OUTPUT -p tcp -d {{ mirror_sync_host }} --dport 873 -j ACCEPT
+COMMIT
