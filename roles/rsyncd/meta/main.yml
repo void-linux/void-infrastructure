@@ -1,4 +1,3 @@
 ---
 dependencies:
-  - { role: void-mirror }
   - { role: network }

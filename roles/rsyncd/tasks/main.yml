@@ -1,0 +1,21 @@
+---
+- name: Install rsync
+  xbps: pkg=rsync state=present
+
+- name: Install rsync firewall rules
+  copy: src=rsyncd.rules dest=/etc/{{ item }}/rsync.rules owner=root group=root mode=0640
+  with_items:
+    - iptables.d
+    - ip6tables.d
+  notify:
+    - iptables
+
+- name: Create rsyncd.conf.d
+  file: path=/etc/rsyncd.conf.d state=directory owner=root group=root mode=0755
+  notify:
+    - rsyncd.conf
+
+- name: Enable rsyncd
+  file: src=/etc/sv/rsyncd dest=/var/service/rsyncd state=link
+  notify:
+    - rsyncd
