@@ -1,0 +1,10 @@
+---
+network_managed_addressing: false
+
+xbps_repository_main: http://repo3.voidlinux.eu/current
+xbps_repository_nonfree: http://repo3.voidlinux.eu/current/nonfree
+xbps_repository_multilib: http://repo3.voidlinux.eu/current/multilib
+xbps_repository_multilib_nonfree: http://repo3.voidlinux.eu/current/multilib/nonfree
+
+xbps_repository_address: repo3.voidlinux.eu
+xbps_repository_port: 80
