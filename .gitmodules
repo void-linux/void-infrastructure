@@ -10,6 +10,3 @@
 [submodule "roles/xbps-repoconf"]
 	path = roles/xbps-repoconf
 	url = git@github.com:void-ansible-roles/xbps-repoconf.git
-[submodule "roles/certbot"]
-	path = roles/certbot
-	url = git@github.com:void-ansible-roles/certbot.git
