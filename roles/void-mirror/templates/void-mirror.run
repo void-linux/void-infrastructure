@@ -1,3 +1,0 @@
-#!/bin/sh
-chpst -u reposync:reposync rsync -avzurk --delete {{ mirror_sync_host }}::{{ mirror_sync_path }} {{ mirror_path }} >/dev/null 2>&1
-sleep 300
