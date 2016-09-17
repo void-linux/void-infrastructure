@@ -1,4 +1,6 @@
 ---
+network_input_policy: ALLOW
+network_output_policy: ALLOW
 network_managed_addressing: false
 
 xbps_repository_main: http://repo3.voidlinux.eu/current
