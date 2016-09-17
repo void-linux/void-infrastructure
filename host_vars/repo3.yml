@@ -10,3 +10,6 @@ xbps_repository_multilib_nonfree: http://repo3.voidlinux.eu/current/multilib/non
 
 xbps_repository_address: repo3.voidlinux.eu
 xbps_repository_port: 80
+
+sshd_listen_addresses:
+  - 69.197.177.66
