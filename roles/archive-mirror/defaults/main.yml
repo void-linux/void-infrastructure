@@ -1,0 +1,28 @@
+---
+
+# IP/Port tuple to bind the archive nginx listen block to
+# archive_mirror_bindip:
+archive_mirror_bindport: 80
+
+# What server names to listen on
+# archive_mirror_servername:
+#   - archive.voidlinux.fr
+#   - paris.voidlinux.net
+#   - archive.voidlinux.com
+#   - archive.voidlinux.net
+#   - archive.voidlinux.us
+#   - archive.voidlinux.eu
+#   - void-archive.rubyists.com
+
+# Where to store the nginx access log
+archive_mirror_accesslog: /var/log/nginx/archive.access.log
+
+# Where to actually serve the mirror from
+archive_mirror_srvroot: /var/www/archive
+
+# Where to store the repo data
+archive_mirror_dataroot: /archive
+
+# Archive data source
+archive_mirror_datasource_server: paris.voidlinux.net
+archive_mirror_datasource_dir: /archive/

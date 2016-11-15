@@ -1,0 +1,6 @@
+uid = {{ rsync_uid }}
+gid = {{ rsync_gid }}
+use chroot = {{ rsync_use_chroot }}
+max connections = {{ rsync_max_connections }}
+
+&include /etc/rsyncd.conf.d

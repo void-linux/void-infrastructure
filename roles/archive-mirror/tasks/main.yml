@@ -1,0 +1,66 @@
+---
+- name: Create archive dataroot directory
+  file:
+    path: "{{ archive_mirror_dataroot }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Configure firewall rules
+  template:
+    src: void-archive.rules.j2
+    dest: /etc/iptables.d/void-archive.rules
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Configure nginx
+  template:
+    src: void-archive.nginx.conf.j2
+    dest: /etc/nginx/sites-available/void-archive.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nginx
+ 
+- name: Enable nginx config
+  file:
+    src: /etc/nginx/sites-available/void-archive.conf
+    dest: /etc/nginx/sites-enabled/void-archive.conf
+    state: link
+  notify:
+    - nginx
+
+- name: Template rsync config
+  template:
+    src: void-archive.rsyncd.conf.j2
+    dest: /etc/rsyncd.conf.d/void-archive.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - rsyncd
+
+- name: Install archive sync service (1/3)
+  file:
+    path: /etc/sv/void-archive-mirror
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install archive sync service (2/3)
+  template:
+    src: run.j2
+    dest: /etc/sv/void-archive/mirror/run
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install archive sync service (3/3)
+  file:
+    src: /etc/sv/void-archive-mirror
+    dest: /var/service/void-archive-mirror
+    state: link

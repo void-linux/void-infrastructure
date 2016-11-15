@@ -1,0 +1,5 @@
+---
+rsync_uid: nobody
+rsync_gid: nogroup
+rsync_use_chroot: no
+rsync_max_connections: 16

@@ -1,6 +1,3 @@
 ---
-- name: rsyncd.conf
-  assemble: src=/etc/rsyncd.conf.d dest=/etc/rsyncd.conf owner=root group=root mode=0644
-
 - name: rsyncd
   command: sv restart rsyncd

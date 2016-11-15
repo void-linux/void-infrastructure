@@ -13,3 +13,17 @@ xbps_repository_port: 80
 
 sshd_listen_addresses:
   - 69.197.177.66
+
+archive_mirror_bindip: 69.197.177.66
+
+archive_mirror_servername:
+  - archive.voidlinux.fr
+  - paris.voidlinux.net
+  - archive.voidlinux.com
+  - archive.voidlinux.net
+  - archive.voidlinux.us
+  - archive.voidlinux.eu
+  - void-archive.rubyists.com
+
+archive_mirror_datasource_server: paris.voidlinux.net
+archive_mirror_datasource_dir: /archive/

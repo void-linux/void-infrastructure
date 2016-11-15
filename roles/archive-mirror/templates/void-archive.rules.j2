@@ -1,0 +1,7 @@
+*filter
+-A OUTPUT -p tcp -d {{ archive_mirror_datasource_server }} --dport 873 -j ACCEPT
+
+-A INPUT -p tcp --dport {{ archive_mirror_bindport }} -j ACCEPT
+-A INPUT -p tcp -d {{ archive_mirror_bindip }} --dport {{ archive_mirror_bindport }} -j ACCEPT
+-A INPUT -p tcp --dport {{ archive_mirror_bindip }} --dport 873 -j ACCEPT
+COMMIT

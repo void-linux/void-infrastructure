@@ -1,0 +1,13 @@
+---
+- name: Create the reposync group
+  group:
+    name: reposync
+    state: present
+    system: yes
+
+- name: Create the reposync user
+  user:
+    name: reposync
+    state: present
+    group: reposync
+    system: yes

@@ -12,8 +12,11 @@
 
 - name: Create rsyncd.conf.d
   file: path=/etc/rsyncd.conf.d state=directory owner=root group=root mode=0755
+
+- name: Template rsyncd.conf
+  template: src=rsyncd.conf.j2 dest=/etc/rsyncd.conf owner=root mode=root mode=0644
   notify:
-    - rsyncd.conf
+    - rsyncd
 
 - name: Enable rsyncd
   file: src=/etc/sv/rsyncd dest=/var/service/rsyncd state=link
