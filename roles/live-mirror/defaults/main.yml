@@ -1,0 +1,72 @@
+# This mapping maps top level continent codes into servers that exist.
+# This allows us to point people to a server that should be accessible
+# without pointing them to somewhere that isn't on the same continent.
+# All production servers should have an entry in this mapping.
+live_mirror_geoip_mapping:
+  - { code: 'default', server: 'repo.voidlinux.eu' }
+  - { code: 'EU', server: 'repo.voidlinux.eu' }
+  - { code: 'AS', server: 'repo2.voidlinux.eu' }
+  - { code: 'AN', server: 'repo2.voidlinux.eu' }
+  - { code: 'NA', server: 'repo3.voidlinux.eu' }
+  - { code: 'SA', server: 'repo3.voidlinux.eu' }
+  - { code: 'AF', server: 'repo4.voidlinux.eu' }
+  - { code: 'OC', server: 'repo4.voidlinux.eu' }
+
+
+# This mapping provides finer resolution than the continental map by
+# providing resolution to the country level.  This allows us to handle
+# the case where there may be multiple mirrors on a continent, but the
+# respective countries may not have high speed peering links for us to
+# route traffic over.  Any continent having more than 1 production
+# server should have entries for relevant countries in this mapping.
+live_mirror_countrycode_mapping:
+  - { code: 'default', server: '$closest_server' }
+  - { code: 'DE', server: 'repo2.voidlinux.eu' }
+  - { code: 'FR', server: 'repo4.voidlinux.eu' }
+  - { code: 'ES', server: 'repo4.voidlinux.eu' }
+
+# What hostnames should this mirror listen for?  The default is all
+# production hostnames for recognized mirrors.
+live_mirror_servernames:
+  - repo.voidlinux.eu
+  - repo2.voidlinux.eu
+  - repo3.voidlinux.eu
+  - repo4.voidlinux.eu
+  - repo.voidlinux.us
+  - repo.voidlinux.fr
+  - repo.voidlinux.org
+  - repo.voidlinux.com
+  - repo.voidlinux.net
+
+# What hostnames is this the best_server for?  This usually means the
+# hostnames that this box is authoritative for as listed in DNS, but
+# may be reasonable to override in exceptional circumstances.  Since
+# this is server specific, the entry below is purely for informational
+# purposes.
+# live_mirror_authoritative_servernames:
+#   - repo.voidlinux.us
+#   - repo3.voidlinux.eu
+#   - repo3.voidlinux.net
+#   - repo3.voidlinux.com
+
+# Standard bindIP/bindPort for the mirror
+# live_mirror_bindip:
+live_mirror_bindport: 80
+
+# nginx access log location
+live_mirror_accesslog: /var/log/nginx/void-mirror.access.log
+
+# Where is the mirror served from
+live_mirror_srvdir: /srv/repo
+
+# Various sync settings
+live_mirror_syncuser: vmirror
+live_mirror_syncserver: repo.voidlinux.eu
+live_mirror_syncsrcdir: voidmirror/
+live_mirror_syncdstdir: /srv/repo
+
+# How often to sync with the master mirror, in seconds
+live_mirror_sync_interval: 300
+
+# This is the city scale database that gives GeoIP better resolution
+live_mirror_GeoIP_citydb_url: http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz

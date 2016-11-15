@@ -1,0 +1,93 @@
+---
+- name: Install nginx and GeoIP
+  xbps:
+   pkg:
+     - nginx
+     - libgeoip
+   state: present
+
+- name: Download GeoIP city database
+  unarchive:
+    src: "{{ live_mirror_GeoIP_citydb_url }}"
+    remote_src: yes
+    dest: /usr/share/GeoIP/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create the mirror dataroot directory
+  file:
+    path: "{{ live_mirror_srvdir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Configure firewall rules
+  template:
+    src: void-mirror.rules.j2
+    dest: /etc/iptables.d/void-mirror.rules.j2
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables
+
+- name: Configure nginx
+  template:
+    src: live-mirror.nginx.conf.j2
+    dest: /etc/nginx/sites-available/void-mirror.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nginx
+
+- name: Enable nginx site
+  file:
+    src: /etc/nginx/sites-available/void-mirror.conf
+    dest: /etc/nginx/sites-enabled/void-mirror.conf
+    state: link
+  notify:
+    - nginx
+
+- name: Configure rsyncd
+  template:
+    src: void-mirror.rsyncd.conf.j2
+    dest: /etc/rsyncd.conf.d/void-mirror.j2
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - rsyncd
+
+- name: Install sync service secret
+  template:
+    src: void-mirrorsync.secret.j2
+    dest: /etc/void-mirrorsync.secret
+    owner: reposync
+    group: reposync
+    mode: 0400
+  no_log: True
+
+- name: Install mirror sync service (1/3)
+  file:
+    path: /etc/sv/void-mirror
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install mirror sync service (2/3)
+  template:
+    src: run.j2
+    dest: /etc/sv/void-mirror/run
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install mirror sync service (3/3)
+  file:
+    src: /etc/sv/void-mirror
+    dest: /var/service/void-mirror
+    state: link

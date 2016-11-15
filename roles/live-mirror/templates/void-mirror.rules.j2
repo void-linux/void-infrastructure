@@ -1,0 +1,6 @@
+*filter
+-A INPUT -p tcp --dport {{ live_mirror_bindport }} -j ACCEPT
+-A INPUT -p tcp --dport 873 -j ACCEPT
+
+-A OUTPUT -p tcp -d {{ live_mirror_syncserver }} --dport 873 -j ACCEPT
+COMMIT

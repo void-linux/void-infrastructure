@@ -27,3 +27,14 @@ archive_mirror_servername:
 
 archive_mirror_datasource_server: paris.voidlinux.net
 archive_mirror_datasource_dir: /archive/
+
+live_mirror_bindip: 69.197.177.66
+
+live_mirror_authoritative_servernames:
+  - repo.voidlinux.us
+  - repo3.voidlinux.eu
+  - repo3.voidlinux.net
+  - repo3.voidlinux.com
+
+live_mirror_srvdir: /repo
+live_mirror_syncdstdir: /repo
