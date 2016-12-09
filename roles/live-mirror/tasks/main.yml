@@ -68,7 +68,7 @@
 - name: Configure rsyncd
   template:
     src: void-mirror.rsyncd.conf.j2
-    dest: /etc/rsyncd.conf.d/void-mirror.j2
+    dest: /etc/rsyncd.conf.d/void-mirror.conf
     owner: root
     group: root
     mode: 0644
