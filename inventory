@@ -1,5 +1,13 @@
-[build]
+[buildmaster]
 build.voidlinux.eu
+
+[buildslave]
+build.voidlinux.eu
+repo3
+
+[build:children]
+buildmaster
+buildslave
 
 [mirror]
 repo3

@@ -1,0 +1,24 @@
+---
+- name: Create sources link
+  file:
+    src: /hostdir/sources
+    dest: /srv/www/sources
+    state: link
+
+- name: Install sources_site nginx config
+  copy:
+    src: sources.conf
+    dest: /etc/nginx/sites-available/sources.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nginx
+
+- name: Enable sources_site
+  file:
+    src: ../sites-available/sources.conf
+    dest: /etc/nginx/sites-enabled/sources.conf
+    state: link
+  notify:
+    - nginx

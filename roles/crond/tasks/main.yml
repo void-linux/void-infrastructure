@@ -1,0 +1,11 @@
+---
+- name: Install cronie
+  xbps:
+    pkg: cronie
+    state: present
+
+- name: Enable cronie
+  file:
+    src: /etc/sv/crond
+    dest: /var/service/crond
+    state: link

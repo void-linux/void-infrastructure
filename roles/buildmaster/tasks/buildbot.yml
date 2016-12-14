@@ -1,0 +1,137 @@
+---
+- name: Install virtualenv & deps
+  xbps:
+    pkg:
+      - acl-progs
+      - base-devel
+      - python-devel
+      - python-virtualenv
+    state: present
+
+- name: Create the BuildBot Master user
+  user:
+    name: "{{ buildmaster_user }}"
+    state: present
+    createhome: yes
+
+- name: Create the BuildMaster Root Directory
+  file:
+    path: "/{{ buildmaster_rootdir }}/buildmaster"
+    state: directory
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0750
+
+- name: Install Buildbot
+  pip:
+    name: buildbot
+    version: "{{ buildmaster_version }}"
+    virtualenv: "/{{ buildmaster_rootdir }}/virtual_builder"
+    virtualenv_python: python2
+  become_user: "{{ buildmaster_user }}"
+  become_method: sudo
+
+- name: Create BuildMaster Subdirectories
+  file:
+    path: "/{{ buildmaster_rootdir }}/buildmaster/{{ item }}"
+    state: directory
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0750
+  with_items:
+    - scripts
+    - public_html
+    - templates
+
+- name: Copy un-inheritable Buildbot Assets
+  copy:
+    src: "/{{ buildmaster_rootdir }}/virtual_builder/lib/python2.7/site-packages/buildbot/status/web/files/{{ item }}"
+    remote_src: true
+    dest: "/{{ buildmaster_rootdir }}/buildmaster/public_html/{{ item }}"
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0644
+  with_items:
+    - bg_gradient.jpg
+    - default.css
+    - favicon.ico
+    - robots.txt
+
+- name: Copy Buildbot Bootstrap Database
+  copy:
+    src: state.sqlite
+    dest: "/{{ buildmaster_rootdir }}/buildmaster/state.sqlite"
+    force: no
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0644
+
+- name: Install GitHub Webhook Password
+  copy:
+    src: secret/buildmaster_github_webhook_passwd
+    dest: "/{{ buildmaster_rootdir }}/github-webhook.passwd"
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0400
+  no_log: True
+
+- name: Configure BuildMaster
+  template:
+    src: master.cfg.j2
+    dest: "/{{ buildmaster_rootdir }}/buildmaster/master.cfg"
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0400
+  no_log: True
+
+- name: Install Static Scripts
+  copy:
+    src: "{{ item }}"
+    dest: "/{{ buildmaster_rootdir }}/buildmaster/scripts/{{ item }}"
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0640
+  with_items:
+    - __init__.py
+    - ShellCommandChangeList.py
+
+- name: Install Buildbot Master Configuration
+  template:
+    src: buildbot.tac.j2
+    dest: "/{{ buildmaster_rootdir }}/buildmaster/buildbot.tac"
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0644
+
+- include_vars: secret/buildslave_credentials.yml
+- include_vars: secret/buildmaster_users.yml
+
+- name: Configure BuildSlave References
+  template:
+    src: user_settings.py.j2
+    dest: "/{{ buildmaster_rootdir }}/buildmaster/scripts/user_settings.py"
+    owner: "{{ buildmaster_user }}"
+    group: "{{ buildmaster_user }}"
+    mode: 0400
+
+- name: Install BuildBot Service (1/2)
+  file:
+    path: /etc/sv/void-buildmaster
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install BuildBot Service (2/2)
+  template:
+    src: run.j2
+    dest: /etc/sv/void-buildmaster/run
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Enable BuildBot Service
+  file:
+    src: /etc/sv/void-buildmaster
+    dest: /var/service/void-buildmaster
+    state: link

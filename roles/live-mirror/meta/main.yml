@@ -2,3 +2,4 @@
 dependencies:
   - { role: mirror-base }
   - { role: nginx }
+  - { role: rsyncd }

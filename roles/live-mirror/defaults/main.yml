@@ -50,8 +50,13 @@ live_mirror_servernames:
 #   - repo3.voidlinux.com
 
 # Standard bindIP/bindPort for the mirror
+live_mirror_bind4: true
 # live_mirror_bindip:
 live_mirror_bindport: 80
+
+# v6 controls for nginx bind
+live_mirror_bind6: false
+# live_mirror_bind6ip:
 
 # nginx access log location
 live_mirror_accesslog: /var/log/nginx/void-mirror.access.log
@@ -78,9 +83,29 @@ live_mirror_sync_interval: 300
 # This is the city scale database that gives GeoIP better resolution
 live_mirror_GeoIP_citydb_url: http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
 
+# Use SSL?
+live_mirror_ssl: false
+
+# Use LetsEncrypt for SSL (ignored if live_mirror_ssl is false)?
+live_mirror_letsencrypt: true
+live_mirror_cert_domain: repo.voidlinux.eu
+
+# If not using LetsEncrypt but using SSL, where are the certs
+live_mirror_cert_path:
+live_mirror_certkey_path:
+
+# Should the mirror use HSTS?  USE THIS WITH CARE!!
+live_mirror_hsts: false
+
+# What resolver should the SSL library use
+live_mirror_resolver: 8.8.8.8
+
 # Is this a root mirror (Has a local authoritative builder and
 # signer process)?
 live_mirror_isroot: false
+
+# What rsync name should the share live under
+live_mirror_sharename: voidmirror
 
 # What services should this mirror expose
 live_mirror_services:

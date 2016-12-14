@@ -38,3 +38,8 @@ live_mirror_authoritative_servernames:
 
 live_mirror_srvdir: /repo
 live_mirror_syncdstdir: /repo
+
+buildslave_user: buildbot
+buildslave_sync_user: xbps-master
+buildslave_rootdir: /home/buildbot
+buildslave_zone: US-KC-1

@@ -6,3 +6,20 @@
   roles:
     - xbps-repoconf
     - sshd
+
+- hosts: buildmaster
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - buildmaster
+    - root-mirror-shim
+    - live-mirror
+    - sources_site
+
+- hosts: buildslave
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - buildslave

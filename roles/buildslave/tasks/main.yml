@@ -1,0 +1,164 @@
+---
+- name: Install BuildBot Slave and Dependencies
+  xbps:
+    pkg:
+      - buildbot-slave
+      - git-all
+    state: present
+
+- name: Create Buildslave user ({{ buildslave_user}})
+  user:
+    name: "{{ buildslave_user }}"
+    state: present
+    createhome: yes
+    groups: "{{ buildslave_groups | join(',') }}"
+
+- name: Create Buildsync user ({{ buildslave_sync_user }})
+  user:
+    name: "{{ buildslave_sync_user }}"
+    state: present
+    createhome: yes
+  when: "{{ buildslave_isremote }}"
+
+- name: Create {{ buildslave_sync_user }} .ssh
+  file:
+    path: /home/{{ buildslave_sync_user }}/.ssh
+    state: directory
+    owner: "{{ buildslave_sync_user }}"
+    group: "{{ buildslave_sync_user }}"
+    mode: 0700
+  when: "{{ buildslave_isremote }}"
+
+- name: Install sync key
+  copy:
+    src: secret/buildmaster_slave_reposync_public
+    dest: /home/{{ buildslave_sync_user }}/.ssh/authorized_keys
+    owner: "{{ buildslave_sync_user }}"
+    group: "{{ buildslave_sync_user }}"
+    mode: 0600
+  when: "{{ buildslave_isremote }}"
+
+- name: Create Builder Directories
+  file:
+    path: "/{{ buildslave_rootdir }}/{{ item.directory | default('void-builder-' + item.mach) }}"
+    state: directory
+    owner: "{{ buildslave_user }}"
+    group: "{{ buildslave_user }}"
+    mode: 0755
+  with_items: "{{ buildslave_buildslaves | json_query(query) | unique }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.mach }}"
+
+- name: Enforce permissions on hostdir
+  file:
+    path: "{{ buildslave_zones[item.zone].hostdir | default('/hostdir') }}"
+    state: directory
+    owner: root
+    group: "{{ buildslave_hostdir_group | default('root') }}"
+    mode: 0775
+  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.zone }}"
+
+- include_vars: secret/buildslave_credentials.yml
+
+- name: Configure buildbot-slave
+  template:
+    src: buildbot.tac.j2
+    dest: "/{{ buildslave_rootdir }}/{{ item.directory | default('void-builder-' + item.mach) }}/buildbot.tac"
+    owner: "{{ buildslave_user }}"
+    group: "{{ buildslave_user }}"
+    mode: 0644
+  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.mach }}"
+
+- name: Create buildbot-slave info directories
+  file:
+    path: "/{{ buildslave_rootdir }}/{{ item.directory | default('void-builder-' + item.mach) }}/info"
+    state: directory
+    owner: "{{ buildslave_user }}"
+    group: "{{ buildslave_user }}"
+    mode: 0755
+  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.mach }}"
+
+- name: Configure buildbot host description
+  template:
+    src: host.j2
+    dest: "/{{ buildslave_rootdir }}/{{ item.directory | default('void-builder-' + item.mach) }}/info/host"
+    owner: "{{ buildslave_user }}"
+    group: "{{ buildslave_user }}"
+    mode: 0644
+  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.mach }}"
+
+- name: Configure buildbot admin description
+  template:
+    src: admin.j2
+    dest: "/{{ buildslave_rootdir }}/{{ item.directory | default('void-builder-' + item.mach) }}/info/admin"
+    owner: "{{ buildslave_user }}"
+    group: "{{ buildslave_user }}"
+    mode: 0644
+  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.mach }}"
+
+- name: Configure xbps-src
+  template:
+    src: xbps-src.conf.j2
+    dest: "/home/{{ buildslave_user }}/.xbps-src.conf"
+    owner: "{{ buildslave_user }}"
+    group: "{{ buildslave_user }}"
+    mode: 0644
+
+- name: Create Service Directories
+  file:
+    path: "/etc/sv/{{ item.service_name | default('void-builder-' + item.mach) }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.mach }}"
+
+- name: Configure Runit
+  template:
+    src: run.j2
+    dest: "/etc/sv/{{ item.service_name | default('void-builder-' + item.mach) }}/run"
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.mach }}"
+
+- name: Enable BuildSlave
+  file:
+    src: "/etc/sv/{{ item.service_name | default('void-builder-' + item.mach) }}"
+    dest: "/var/service/{{ item.service_name | default('void-builder-' + item.mach) }}"
+    state: link
+  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+  loop_control:
+    label: "{{ item.mach }}"

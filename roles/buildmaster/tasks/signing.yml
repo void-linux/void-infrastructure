@@ -1,0 +1,50 @@
+---
+- name: Create the Signing User
+  user:
+    name: "{{ buildmaster_repomgr }}"
+    state: present
+    groups: "void-repo"
+    createhome: yes
+
+- name: Create .ssh for {{ buildmaster_repomgr }}
+  file:
+    path: /home/{{ buildmaster_repomgr }}/.ssh
+    state: directory
+    owner: "{{ buildmaster_repomgr }}"
+    group: "{{ buildmaster_repomgr }}"
+    mode: 0700
+
+- name: Install Signing Key
+  copy:
+    src: secret/buildmaster_signing_key
+    dest: /home/{{ buildmaster_repomgr }}/.ssh/void-rsa
+    owner: "{{ buildmaster_repomgr }}"
+    group: "{{ buildmaster_repomgr }}"
+    mode: 0400
+
+- name: Create bin/ directory for {{ buildmaster_repomgr }}
+  file:
+    path: /home/{{ buildmaster_repomgr }}/bin
+    state: directory
+    owner: "{{ buildmaster_repomgr }}"
+    group: "{{ buildmaster_repomgr }}"
+    mode: 0700
+
+- name: Install Signing and Repo-Management Scripts
+  template:
+    src: "{{ item }}.sh.j2"
+    dest: /home/{{ buildmaster_repomgr }}/bin/{{ item }}
+    owner: "{{ buildmaster_repomgr }}"
+    group: "{{ buildmaster_repomgr }}"
+    mode: 0755
+  with_items:
+    - xbps-sign-repos
+    - xbps-clean-repos
+
+- name: Install Signing Cronjob
+  template:
+    src: buildmaster_repomgmt.j2
+    dest: /etc/cron.d/buildmaster_repomgmt
+    owner: root
+    group: root
+    mode: 0644

@@ -51,6 +51,70 @@
   notify:
     - iptables
 
+- name: Install Diffie-Hellman Parameters
+  copy:
+    src: dhparam.pem
+    dest: /etc/nginx/live_mirror_dhparam.pem
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nginx
+  when:
+    - live_mirror_ssl
+    - '"http" in live_mirror_services'
+
+- name: Install certbot dependencies
+  xbps:
+    pkg:
+      - base-devel
+      - libressl-devel
+      - python-devel
+      - python-pip
+    state: present
+  when:
+    - live_mirror_ssl
+    - live_mirror_letsencrypt
+    - '"http" in live_mirror_services'
+
+- name: Install letsencrypt
+  pip:
+    name: certbot
+    state: present
+  when:
+    - live_mirror_ssl
+    - live_mirror_letsencrypt
+    - '"http" in live_mirror_services'
+
+- name: Check for certificate
+  stat:
+    path: "/etc/letsencrypt/live/{{ live_mirror_cert_domain }}/fullchain.pem"
+  register: certificate
+  when:
+    - live_mirror_ssl
+    - live_mirror_letsencrypt
+    - '"http" in live_mirror_services'
+
+- name: Run Certbot
+  command: "certbot certonly --non-interactive --agree-tos --email {{ live_mirror_cert_email }} --standalone -d {{ live_mirror_cert_domain }} --pre-hook 'sv d nginx' --post-hook 'sv u nginx'"
+  when:
+    - not certificate.stat.exists
+    - live_mirror_ssl
+    - live_mirror_letsencrypt
+    - '"http" in live_mirror_services'
+
+- name: Install cert renewal crontab
+  copy:
+    src: live_mirror_cert
+    dest: /etc/cron.d/live_mirror_cert
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - live_mirror_ssl
+    - live_mirror_letsencrypt
+    - '"http" in live_mirror_services'
+
 - name: Configure nginx
   template:
     src: live-mirror.nginx.conf.j2
@@ -71,6 +135,9 @@
     - nginx
   when: '"http"in live_mirror_services'
 
+- name: Include rsyncd user secrets
+  include_vars: secret/live_mirror_syncusers.yml
+
 - name: Configure rsyncd
   template:
     src: void-mirror.rsyncd.conf.j2
@@ -81,10 +148,6 @@
   notify:
     - rsyncd
   when: '"rsync" in live_mirror_services'
-
-- name: Include rsyncd user secrets
-  include_vars: secret/live_mirror_syncusers.yml
-  when: live_mirror_securersync
 
 - name: Configure rsyncd secrets
   template:
@@ -102,9 +165,9 @@
     owner: reposync
     group: reposync
     mode: 0400
-#  no_log: True
+  no_log: True
   when: not live_mirror_isroot
-  
+
 - name: Install mirror sync service (1/3)
   file:
     path: /etc/sv/void-mirror

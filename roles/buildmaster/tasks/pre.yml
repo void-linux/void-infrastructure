@@ -1,0 +1,5 @@
+---
+- name: Create the void-repo group
+  group:
+    name: void-repo
+    state: present

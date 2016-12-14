@@ -2,16 +2,54 @@
 network_input_policy: ACCEPT
 network_output_policy: ACCEPT
 
+network_interfaces:
+  - name: eth0
+    mode: static
+    mode6: disabled
+    resolvermode: static
+    addresses:
+      - 148.251.199.112/32
+    resolvers:
+      - 213.133.100.100
+    routers:
+      - 136.243.133.13
+  - name: eth1
+    mode: disabled
+    mode6: static
+    resolvermode6: static
+    addresses6:
+      - 2a01:4f8:212:34cc::01d:b/64
+    resolvers6:
+      - 2a01:4f8:0:a0a1::add:1010
+
 network_address_use_slaac: false
-network_address_mode: static
-network_address: 148.251.199.112/32
-network_gateway: 136.243.133.13
-network_ipv6_address: 2a01:4f8:212:34cc::01d:b/64
-network_ipv6_enabled: true
-network_ipv6_rs_enabled: false
 
-network_dns:
-  - 213.133.100.100
+xbps_repository_main: /hostdir/binpkgs
+xbps_repository_nonfree: /hostdir/binpkgs/nonfree
+xbps_repository_multilib: /hostdir/binpkgs/multilib
+xbps_repository_multilib_nonfree: /hostdir/binpkgs/multilib/nonfree
 
-network_6dns:
-  - 2a01:4f8:0:a0a1::add:1010
+buildslave_zone: DE-1
+buildslave_master: localhost
+buildslave_isremote: false
+
+buildslave_groups:
+  - xbuilder
+  - void-repo
+
+buildslave_hostdir_group: void-repo
+
+live_mirror_bind6: true
+live_mirror_authoritative_servernames:
+  - repo.voidlinux.eu
+  - repo.voidlinux.net
+  - repo.voidlinux.com
+
+live_mirror_srvdir: /srv/www/void-repo
+live_mirror_secure_sync: true
+live_mirror_isroot: true
+
+live_mirror_ssl: true
+live_mirror_letsencrypt: true
+live_mirror_cert_domain: repo.voidlinux.eu
+live_mirror_cert_email: postmaster@voidlinux.eu

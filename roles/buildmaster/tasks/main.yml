@@ -1,0 +1,6 @@
+---
+- include: pre.yml
+- include: buildbot.yml
+- include: www.yml
+- include: signing.yml
+- include: sync.yml
