@@ -3,3 +3,7 @@ comment = Void Repo
 path = {{ live_mirror_srvdir }}
 read only = yes
 list = yes
+{% if live_mirror_securersync %}
+auth users={{ live_mirror_syncusers | json_query('[*].name') | join(",") }}
+secrets file=/etc/void-rsyncd.secret
+{% endif %}

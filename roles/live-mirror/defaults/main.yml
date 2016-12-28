@@ -59,7 +59,14 @@ live_mirror_accesslog: /var/log/nginx/void-mirror.access.log
 # Where is the mirror served from
 live_mirror_srvdir: /srv/repo
 
-# Various sync settings
+# Settings for secure rsync
+live_mirror_securersync: false
+
+live_mirror_syncusers:
+  - desc: Default Sync User
+    name: vmirror
+
+# Various sync settings - not needed if master mirror
 live_mirror_syncuser: vmirror
 live_mirror_syncserver: repo.voidlinux.eu
 live_mirror_syncsrcdir: voidmirror/
@@ -70,3 +77,12 @@ live_mirror_sync_interval: 300
 
 # This is the city scale database that gives GeoIP better resolution
 live_mirror_GeoIP_citydb_url: http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+
+# Is this a root mirror (Has a local authoritative builder and
+# signer process)?
+live_mirror_isroot: false
+
+# What services should this mirror expose
+live_mirror_services:
+  - http
+  - rsync
