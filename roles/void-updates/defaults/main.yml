@@ -1,0 +1,4 @@
+---
+void_updates_user: voidupdates
+void_updates_homedir: /var/cache/void-updates
+void_updates_srvdir: /srv/www/void-repo/

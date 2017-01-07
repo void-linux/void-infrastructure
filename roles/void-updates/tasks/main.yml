@@ -1,0 +1,28 @@
+---
+- name: Install void-updates
+  xbps:
+    pkg: void-updates
+    state: present
+
+- name: Create the {{ void_updates_user }} user
+  user:
+    name: "{{ void_updates_user }}"
+    state: present
+    groups: "xbuilder"
+    system: yes
+    createhome: yes
+    home: "{{ void_updates_homedir }}"
+
+- name: Install Update Check Cron Job
+  template:
+    src: void_updates.j2
+    dest: /etc/cron.d/void_updates
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Link Results
+  file:
+    src: "{{ void_updates_homedir }}/result"
+    dest: "{{ void_updates_srvdir }}/void-updates"
+    state: link
