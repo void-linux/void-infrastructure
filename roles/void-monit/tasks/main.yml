@@ -1,0 +1,28 @@
+---
+- name: Install nginx config
+  copy:
+    src: monit.conf
+    dest: /etc/nginx/sites-available/monit.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nginx
+
+- name: Enable nginx config
+  file:
+    src: ../sites-available/monit.conf
+    dest: /etc/nginx/sites-enabled/monit.conf
+    state: link
+  notify:
+    - nginx
+
+- name: Configure monit
+  copy:
+    src: void
+    dest: /etc/monit/conf.d/void
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - monit

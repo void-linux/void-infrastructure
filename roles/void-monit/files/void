@@ -1,0 +1,24 @@
+check host repo.voidlinux.eu with address repo.voidlinux.eu
+  if failed ping then alert
+  if failed port 80 protocol http then alert
+  if failed port 443 protocol https then alert
+  if failed port 873 protocol rsync then alert
+
+check host repo2.voidlinux.eu with address repo.voidlinux.eu
+  if failed ping then alert
+  if failed port 80 protocol http then alert
+
+check host repo3.voidlinux.eu with address repo.voidlinux.eu
+  if failed ping then alert
+  if failed port 80 protocol http then alert
+  if failed port 873 protocol rsync then alert
+
+check host forum.voidlinux.eu with address forum.voidlinux.eu
+  if failed ping then alert
+  if failed port 80 protocol http then alert
+  if failed port 443 protocol https then alert
+
+check host wiki.voidlinux.eu with address wiki.voidlinux.eu
+  if failed ping then alert
+  if failed port 80 protocol http then alert
+  if failed port 443 protocol https then alert
