@@ -38,6 +38,7 @@ live_mirror_authoritative_servernames:
 
 live_mirror_srvdir: /repo
 live_mirror_syncdstdir: /repo
+live_mirror_sharename: repo
 
 buildslave_user: buildbot
 buildslave_sync_user: xbps-master

@@ -4,13 +4,13 @@ geoip_city /usr/share/GeoIP/GeoLiteCity.dat;
 
 map $geoip_city_continent_code $closest_server {
 {% for item in live_mirror_geoip_mapping %}
-  {{ item.code }}  {{ item.server }};
+    {{ item.code }}  {{ item.server }};
 {% endfor %}
 }
 
 map $geoip_country_code $best_server {
 {% for item in live_mirror_countrycode_mapping %}
-  {{ item.code }}  {{ item.server }};
+    {{ item.code }}  {{ item.server }};
 {% endfor %}
 }
 
@@ -103,29 +103,30 @@ server {
     listen [::]:{{ live_mirror_bindport }} default_server;
 {% endif %}
 {% endif %}
+    server_name {{ live_mirror_servernames | join(" ") }};
 {% endif %}
 
-  access_log {{ live_mirror_accesslog }};
+    access_log {{ live_mirror_accesslog }};
 
 {% for host in live_mirror_authoritative_servernames %}
-  if ($host ~* {{ host }}) {
-    set $best_server {{ host }};
-  }
+    if ($host ~* {{ host }}) {
+        set $best_server {{ host }};
+    }
 
 {% endfor %}
-  if ($best_server != $host) {
+    if ($best_server != $host) {
         rewrite ^ $scheme://$best_server$request_uri?country=$geoip_country_code break;
-  }
+    }
 
-  location / {
-    root {{ live_mirror_srvdir }};
-    autoindex on;
-    index  index.html index.htm;
-  }
+    location / {
+        root {{ live_mirror_srvdir }};
+        autoindex on;
+        index  index.html index.htm;
+    }
 
-  error_page   500 502 503 504  /50x.html;
+    error_page   500 502 503 504  /50x.html;
 
-  location = /50x.html {
-    root   /usr/share/nginx/html;
-  }
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
 }
