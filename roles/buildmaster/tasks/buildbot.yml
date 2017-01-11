@@ -31,6 +31,12 @@
   become_user: "{{ buildmaster_user }}"
   become_method: sudo
 
+- name: Make Buildbot More Terse
+  patch:
+    src: terse-irc.patch
+    dest: "/{{ buildmaster_rootdir }}/virtual_builder/lib/python2.7/site-packages/buildbot/status/words.py"
+    backup: yes
+
 - name: Create BuildMaster Subdirectories
   file:
     path: "/{{ buildmaster_rootdir }}/buildmaster/{{ item }}"
