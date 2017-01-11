@@ -1,0 +1,20 @@
+---
+network_input_policy: DROP
+network_output_policy: ACCEPT
+
+network_interfaces:
+  - name: eth0
+    mode: static
+    mode6: static
+    resolvermode: static
+    resolvermode6: static
+    addresses:
+      - 172.32.1.100/24
+    resolvers:
+      - 213.133.100.100
+    routers:
+      - 172.31.1.1
+    addresses6:
+      - 2a01:4f8:c17:da9::2/64
+    resolvers6:
+      - 2a01:4f8:0:a0a1::add:1010

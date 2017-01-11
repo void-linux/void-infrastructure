@@ -1,0 +1,8 @@
+---
+- hosts: md
+  become: yes
+  become_method: sudo
+  become_user: root
+  roles:
+    - sshd
+    - xbps-repoconf
