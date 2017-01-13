@@ -122,6 +122,9 @@ server {
         root {{ live_mirror_srvdir }};
         autoindex on;
         index  index.html index.htm;
+{% if live_mirror_isroot %}
+        add_header 'Access-Control-Allow-Origin' '*';
+{% endif %}
     }
 
     error_page   500 502 503 504  /50x.html;
