@@ -45,7 +45,7 @@
   register: certificate
 
 - name: Run certbot
-  command: "certbot certonly --non-interactive --agree-tos --email {{ buildmaster_cert_email }} --standalone -d {{ certbot_domain }} --pre-hook 'sv d nginx' --post-hook 'sv u nginx'"
+  command: "certbot certonly --non-interactive --agree-tos --email {{ buildmaster_cert_email }} --standalone -d {{ buildmaster_www_domain }} --pre-hook 'sv d nginx' --post-hook 'sv u nginx'"
   when: not certificate.stat.exists
 
 - name: Install renewal cronjob

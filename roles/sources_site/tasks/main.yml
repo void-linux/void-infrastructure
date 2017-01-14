@@ -5,8 +5,25 @@
     dest: /srv/www/sources
     state: link
 
-- name: Install sources_site nginx config
+- name: Check for certificate
+  stat:
+    path: "/etc/letsencrypt/live/sources.voidlinux.eu/fullchain.pem"
+  register: certificate
+
+- name: Run certbot
+  command: "certbot certonly --non-interactive --agree-tos --email {{ buildmaster_cert_email }} --standalone -d sources.voidlinux.eu --pre-hook 'sv d nginx' --post-hook 'sv u nginx'"
+  when: not certificate.stat.exists
+
+- name: Install renewal cronjob
   copy:
+    src: sources_cert_cronjob
+    dest: /etc/cron.d/sources_cert
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install sources_site nginx config
+  template:
     src: sources.conf
     dest: /etc/nginx/sites-available/sources.conf
     owner: root

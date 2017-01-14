@@ -39,6 +39,8 @@ buildslave_groups:
 
 buildslave_hostdir_group: void-repo
 
+buildmaster_cert_email: postmaster@voidlinux.eu
+
 live_mirror_bind6: true
 live_mirror_authoritative_servernames:
   - repo.voidlinux.eu
