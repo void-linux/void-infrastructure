@@ -3,3 +3,23 @@
   group:
     name: void-repo
     state: present
+
+- name: Install the buildmaster firewall rules
+  copy:
+    src: buildmaster.rules
+    dest: /etc/iptables.d
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables
+
+- name: Install the buildmaster firewall rules (v6)
+  copy:
+    src: buildmaster.6rules
+    dest: /etc/ip6tables.d
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables
