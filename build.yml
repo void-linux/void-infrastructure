@@ -6,6 +6,7 @@
   roles:
     - xbps-repoconf
     - sshd
+    - mosh
 
 - hosts: buildmaster
   become: yes
