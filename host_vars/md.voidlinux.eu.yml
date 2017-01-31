@@ -9,14 +9,16 @@ network_interfaces:
     resolvermode: static
     resolvermode6: static
     addresses:
-      - 172.32.1.100/24
+      - 172.31.1.100/24
     resolvers:
-      - 213.133.100.100
+      - 8.8.8.8
+      - 8.8.4.4
     routers:
       - 172.31.1.1
     addresses6:
       - 2a01:4f8:c17:da9::2/64
     resolvers6:
-      - 2a01:4f8:0:a0a1::add:1010
+      - 2001:4860:4860::8888
+      - 2001:4860:4860::8844
 
 monit_bind: 127.0.1.1
