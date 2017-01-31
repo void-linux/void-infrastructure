@@ -2,15 +2,11 @@ server {
     listen 80;
     server_name {{ buildmaster_www_servername }};
 
-    location /.well-known/acme-challenge {
-          root /srv/www/void-repo/.well-known/acme-challenge;
+    location /.well-known/acme-challenge/ {
+        alias /var/run/acme/acme-challenge/;
     }
 
-    location / {
-        proxy_buffering off;
-        proxy_pass http://127.0.0.1:8010;
-    }
-    #return 301 https://$host$request_uri;
+    return 301 https://$host$request_uri;
 }
 
 server {
@@ -18,8 +14,8 @@ server {
     listen [::]:443 ssl http2;
     server_name {{ buildmaster_www_servername }};
 
-    ssl_certificate      /etc/letsencrypt/live/{{ buildmaster_www_servername }}/fullchain.pem;
-    ssl_certificate_key  /etc/letsencrypt/live/{{ buildmaster_www_servername }}/privkey.pem;
+    ssl_certificate {{ buildmaster_ssl_cert_path }};
+    ssl_certificate_key {{ buildmaster_ssl_certkey_path }};
 
     # https://cipherli.st/ 2016-06-02 chris2
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
@@ -39,5 +35,9 @@ server {
     location / {
         proxy_buffering off;
         proxy_pass http://127.0.0.1:8010;
+    }
+
+    location /.well-known/acme-challenge/ {
+        alias /var/run/acme/acme-challenge/;
     }
 }

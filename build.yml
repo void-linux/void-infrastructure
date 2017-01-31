@@ -13,6 +13,7 @@
   become_user: root
   become_method: sudo
   roles:
+    - acmetool
     - buildmaster
     - root-mirror-shim
     - void-updates

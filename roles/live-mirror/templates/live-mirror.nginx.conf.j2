@@ -7,7 +7,6 @@ map $geoip_city_continent_code $closest_server {
     {{ item.code }}  {{ item.server }};
 {% endfor %}
 }
-
 map $geoip_country_code $best_server {
 {% for item in live_mirror_countrycode_mapping %}
     {{ item.code }}  {{ item.server }};
@@ -31,6 +30,11 @@ server {
 {% endif %}
 {% endif %}
     server_name {{ live_mirror_servernames | join(" ") }};
+
+    location /.well-known/acme-challenge/ {
+        alias /var/run/acme/acme-challenge/;
+    }
+
     return 301 https://$host$request_uri;
 }
 {% endif %}
@@ -54,13 +58,9 @@ server {
 {% endif %}
     server_name {{ live_mirror_servernames | join(" ") }};
     # certs sent to the client in SERVER HELLO are concatenated in ssl_certificate
-{% if live_mirror_letsencrypt %}
-    ssl_certificate /etc/letsencrypt/live/{{ live_mirror_cert_domain }}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/{{ live_mirror_cert_domain }}/privkey.pem;
-{% else %}
     ssl_certificate {{ live_mirror_cert_path }};
     ssl_certificate_key {{ live_mirror_certkey_path }};
-{% endif %}
+
     ssl_session_timeout 1d;
     ssl_session_cache shared:SSL:10m;
     ssl_session_tickets off;
@@ -125,6 +125,10 @@ server {
 {% if live_mirror_isroot %}
         add_header 'Access-Control-Allow-Origin' '*';
 {% endif %}
+    }
+
+    location /.well-known/acme-challenge/ {
+        alias /var/run/acme/acme-challenge/;
     }
 
     error_page   500 502 503 504  /50x.html;

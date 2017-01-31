@@ -29,6 +29,22 @@ xbps_repository_nonfree: /hostdir/binpkgs/nonfree
 xbps_repository_multilib: /hostdir/binpkgs/multilib
 xbps_repository_multilib_nonfree: /hostdir/binpkgs/multilib/nonfree
 
+acmetool:
+  sites:
+    - site: build.voidlinux.eu
+      names:
+        - build.voidlinux.eu
+    - site: sources.voidlinux.eu
+      names:
+        - sources.voidlinux.eu
+    - site: repo.voidlinux.eu
+      names:
+        - repo.voidlinux.eu
+  hostmaster_email: postmaster@voidlinux.eu
+
+buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.eu/fullchain
+buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.eu/privkey
+
 buildslave_zone: DE-1
 buildslave_master: localhost
 buildslave_isremote: false
@@ -38,8 +54,6 @@ buildslave_groups:
   - void-repo
 
 buildslave_hostdir_group: void-repo
-
-buildmaster_cert_email: postmaster@voidlinux.eu
 
 live_mirror_bind6: true
 live_mirror_authoritative_servernames:
@@ -52,6 +66,5 @@ live_mirror_secure_sync: true
 live_mirror_isroot: true
 
 live_mirror_ssl: true
-live_mirror_letsencrypt: true
-live_mirror_cert_domain: repo.voidlinux.eu
-live_mirror_cert_email: postmaster@voidlinux.eu
+live_mirror_cert_path: /var/lib/acme/live/repo.voidlinux.eu/fullchain
+live_mirror_certkey_path: /var/lib/acme/live/repo.voidlinux.eu/privkey

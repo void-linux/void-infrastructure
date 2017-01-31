@@ -13,9 +13,9 @@
 [submodule "library/ansible_xbps"]
 	path = library/ansible_xbps
 	url = git@github.com:void-ansible-roles/ansible_xbps.git
-[submodule "roles/certbot"]
-	path = roles/certbot
-	url = git@github.com:void-ansible-roles/certbot.git
 [submodule "roles/monit"]
 	path = roles/monit
 	url = git@github.com:void-ansible-roles/monit.git
+[submodule "roles/acmetool"]
+	path = roles/acmetool
+	url = git@github.com:void-ansible-roles/acmetool.git
