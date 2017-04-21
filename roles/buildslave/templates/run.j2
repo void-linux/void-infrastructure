@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec chpst -u {{ buildslave_user }}:{{ buildslave_user }}:xbuilder buildslave start --nodaemon "{{ buildslave_rootdir }}/{{ item.directory | default('void-builder-' + item.mach) }}"
+exec su --login {{ buildslave_user }} -c 'buildslave start --nodaemon "{{ buildslave_rootdir }}/{{ item.directory | default('void-builder-' + item.mach) }}"'
