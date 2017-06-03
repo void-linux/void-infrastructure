@@ -27,4 +27,16 @@
     - live
     - logos
     - static
-    - xlocate
+
+- name: Create xlocate group
+  group:
+    name: xlocate
+    state: present
+
+- name: Create xlocate directory
+  file:
+    path: /srv/www/void-repo/xlocate
+    state: directory
+    owner: root
+    group: xlocate
+    mode: 0775
