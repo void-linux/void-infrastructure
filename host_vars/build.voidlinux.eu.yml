@@ -10,7 +10,7 @@ network_interfaces:
     addresses:
       - 148.251.199.112/32
     resolvers:
-      - 213.133.100.100
+      - 213.133.99.99
     routers:
       - 136.243.133.13
   - name: eth1
