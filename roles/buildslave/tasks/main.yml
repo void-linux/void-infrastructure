@@ -18,7 +18,7 @@
     name: "{{ buildslave_sync_user }}"
     state: present
     createhome: yes
-  when: "{{ buildslave_isremote }}"
+  when: buildslave_isremote
 
 - name: Create {{ buildslave_sync_user }} .ssh
   file:
@@ -27,7 +27,7 @@
     owner: "{{ buildslave_sync_user }}"
     group: "{{ buildslave_sync_user }}"
     mode: 0700
-  when: "{{ buildslave_isremote }}"
+  when: buildslave_isremote
 
 - name: Install sync key
   copy:
@@ -36,7 +36,7 @@
     owner: "{{ buildslave_sync_user }}"
     group: "{{ buildslave_sync_user }}"
     mode: 0600
-  when: "{{ buildslave_isremote }}"
+  when: buildslave_isremote
 
 - name: Create Builder Directories
   file:
