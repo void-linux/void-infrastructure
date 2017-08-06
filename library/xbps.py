@@ -1,1 +1,0 @@
-ansible_xbps/xbps.py
