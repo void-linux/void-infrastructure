@@ -1,0 +1,46 @@
+---
+network_input_policy: ACCEPT
+network_output_policy: ACCEPT
+network_managed_addressing: true
+
+xbps_repository_address: repo.voidlinux.eu
+xbps_repository_main: http://{{ xbps_repository_address }}/current
+xbps_repository_nonfree: http://{{ xbps_repository_address }}/current/nonfree
+xbps_repository_multilib: http://{{ xbps_repository_address }}/current/multilib
+xbps_repository_multilib_nonfree: http://{{ xbps_repository_address }}/current/multilib/nonfree
+xbps_repository_port: 80
+
+
+sshd_listen_addresses:
+  - 198.204.250.219
+
+archive_mirror_bindip: 198.204.250.219
+
+archive_mirror_servername:
+  - archive.voidlinux.fr
+  - paris.voidlinux.net
+  - archive.voidlinux.com
+  - archive.voidlinux.net
+  - archive.voidlinux.us
+  - archive.voidlinux.eu
+  - void-archive.rubyists.com
+
+archive_mirror_datasource_server: paris.voidlinux.net
+archive_mirror_datasource_dir: /archive/
+
+live_mirror_bindip: 198.204.250.219
+
+live_mirror_authoritative_servernames:
+  - repo.voidlinux.us
+  - repo3.voidlinux.eu
+  - repo3.voidlinux.net
+  - repo3.voidlinux.com
+
+live_mirror_srvdir: /repo
+live_mirror_syncdstdir: /repo
+live_mirror_sharename: repo
+
+buildslave_user: buildbot
+buildslave_sync_user: xbps-master
+buildslave_rootdir: /home/buildbot
+buildslave_zone: US-KC-1
