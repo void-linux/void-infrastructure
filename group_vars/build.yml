@@ -27,21 +27,21 @@ buildslave_buildslaves:
     mach: x86_64-musl
     directory: slave-x86_64-musl
     service_name: buildslave-x86_64-musl
-    zone: US-KC-1
+    zone: US-MCI
 
   - name: armv6l-musl-primary
     sname: cross-armv6-musl_void
     mach: armv6l-musl
     directory: slave-cross-armv6l-musl
     service_name: buildslave-cross-armv6l-musl
-    zone: US-KC-1
+    zone: US-MCI
 
   - name: armv7l-musl-primary
     sname: cross-armv7-musl_void
     mach: armv7l-musl
     directory: slave-cross-armv7l-musl
     service_name: buildslave-cross-armv7l-musl
-    zone: US-KC-1
+    zone: US-MCI
 
   - name: aarch64-primary
     sname: cross-aarch64_builder
@@ -66,13 +66,14 @@ buildslave_zones:
       name: Christian Neukirchen
       mail: chneukirchen@gmail.com
     xbps:
-  US-KC-1:
+  US-MCI:
     admin:
-      nick: duncaen
-      name: Duncaen
-      mail: duncaen@voidlinux.eu
+      nick: maldridge
+      name: maldridge
+      mail: maldridge@voidlinux.eu
     xbps:
+      makejobs: 6
 
 buildmaster_remote_zones:
   - DE-2
-  - US-KC-1
+  - US-MCI

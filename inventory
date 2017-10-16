@@ -3,14 +3,17 @@ build.voidlinux.eu
 
 [buildslave]
 build.voidlinux.eu
-repo3-build
+repo3
 
 [build:children]
 buildmaster
 buildslave
 
 [mirror]
-repo3-mirror
+repo3
 
 [md]
 md.voidlinux.eu
+
+[lxc]
+repo3
