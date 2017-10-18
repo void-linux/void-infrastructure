@@ -1,9 +1,10 @@
 ---
-- name: Install nginx and GeoIP
+- name: Install Prerequisites
   xbps:
    pkg:
      - nginx
      - libgeoip
+     - sv-helper
    state: present
   when: '"http" in live_mirror_services'
 
@@ -117,16 +118,18 @@
   no_log: True
   when: not live_mirror_isroot
 
-- name: Install mirror sync service (1/3)
+- name: Install mirror sync service (1/4)
   file:
-    path: /etc/sv/void-mirror
+    path:
+      - /etc/sv/void-mirror
+      - /etc/sv/void-mirror/log
     state: directory
     owner: root
     group: root
     mode: 0755
   when: not live_mirror_isroot
 
-- name: Install mirror sync service (2/3)
+- name: Install mirror sync service (2/4)
   template:
     src: run.j2
     dest: /etc/sv/void-mirror/run
@@ -135,7 +138,14 @@
     mode: 0755
   when: not live_mirror_isroot
 
-- name: Install mirror sync service (3/3)
+- name: Install mirror sync service (3/4)
+  file:
+    src: /usr/bin/rsvlog
+    dest: /etc/sv/void-mirror/log/run
+    state: link
+  when: not live_mirror_isroot
+
+- name: Install mirror sync service (4/4)
   file:
     src: /etc/sv/void-mirror
     dest: /var/service/void-mirror
