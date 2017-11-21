@@ -126,6 +126,15 @@
     group: "{{ buildslave_user }}"
     mode: 0644
 
+- name: Configure local build mirror
+  template:
+    src: local-repository.conf
+    dest: /etc/xbps.d/99-local-repository.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: buildslave_zone in buildmaster_remote_zones
+
 - name: Create Service Directories
   file:
     path: "/etc/sv/{{ item.service_name | default('void-builder-' + item.mach) }}"
