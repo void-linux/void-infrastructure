@@ -1,19 +1,20 @@
 [buildmaster]
-build.voidlinux.eu
+build-master.infrastructure.voidlinux.com
 
 [buildslave]
-build.voidlinux.eu
-repo3
+build-master.infrastructure.voidlinux.com
+build-vuxu.infrastructure.voidlinux.com
+build-kc1.infrastructure.voidlinux.com
 
 [build:children]
 buildmaster
 buildslave
 
 [mirror]
-repo3
+a.mci.us.mirrors.voidlinux.com
 
 [md]
-md.voidlinux.eu
+monitoring.infrastructure.voidlinux.com
 
 [lxc]
-repo3
+a.mci.us.mirrors.voidlinux.com
