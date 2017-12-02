@@ -1,18 +1,3 @@
-geoip_country /usr/share/GeoIP/GeoIP.dat;
-# From {{ live_mirror_GeoIP_citydb_url }}
-geoip_city /usr/share/GeoIP/GeoLiteCity.dat;
-
-map $geoip_city_continent_code $closest_server {
-{% for item in live_mirror_geoip_mapping %}
-    {{ item.code }}  {{ item.server }};
-{% endfor %}
-}
-map $geoip_country_code $best_server {
-{% for item in live_mirror_countrycode_mapping %}
-    {{ item.code }}  {{ item.server }};
-{% endfor %}
-}
-
 {% if live_mirror_ssl %}
 server {
 {% if live_mirror_bind4 %}
@@ -37,9 +22,8 @@ server {
 
     return 301 https://$host$request_uri;
 }
+
 {% endif %}
-
-
 server {
 {% if live_mirror_ssl %}
 {% if live_mirror_bind4 %}
@@ -107,16 +91,6 @@ server {
 {% endif %}
 
     access_log {{ live_mirror_accesslog }};
-
-{% for host in live_mirror_authoritative_servernames %}
-    if ($host ~* {{ host }}) {
-        set $best_server {{ host }};
-    }
-
-{% endfor %}
-    if ($best_server != $host) {
-        rewrite ^ $scheme://$best_server$request_uri?country=$geoip_country_code break;
-    }
 
     location / {
         root {{ live_mirror_srvdir }};

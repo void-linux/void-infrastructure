@@ -8,32 +8,6 @@
    state: present
   when: '"http" in live_mirror_services'
 
-- name: Download GeoIP city database
-  get_url:
-    url: "{{ live_mirror_GeoIP_citydb_url }}"
-    remote_src: yes
-    dest: /usr/share/GeoIP/
-    owner: root
-    group: root
-    mode: 0644
-  when: '"http" in live_mirror_services'
-
-- name: Expand the GeoIP city database
-  command: gunzip GeoLiteCity.dat.gz
-  args:
-    chdir: /usr/share/GeoIP
-    creates: /usr/share/GeoIP/GeoLiteCity.dat
-  when: '"http"in live_mirror_services'
-
-- name: Enforce ownership on the GeoIP database
-  file:
-    path: /usr/share/GeoIP/GeoLiteCity.dat
-    state: file
-    owner: root
-    group: root
-    mode: 0644
-  when: '"http"in live_mirror_services'
-
 - name: Create the mirror dataroot directory
   file:
     path: "{{ live_mirror_srvdir }}"

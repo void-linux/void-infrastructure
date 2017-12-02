@@ -80,9 +80,6 @@ live_mirror_syncdstdir: /srv/repo
 # How often to sync with the master mirror, in seconds
 live_mirror_sync_interval: 300
 
-# This is the city scale database that gives GeoIP better resolution
-live_mirror_GeoIP_citydb_url: http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
-
 # Use SSL?
 live_mirror_ssl: false
 
