@@ -1,4 +1,0 @@
-#!/bin/sh
-
-chpst -u reposync:reposync rsync -avzurkH --delete {{ archive_mirror_datasource_server }}:{{ archive_mirror_datasource_dir }} {{ archive_mirror_dataroot }} >/dev/null
-sleep 200

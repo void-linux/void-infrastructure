@@ -13,20 +13,6 @@ xbps_repository_port: 80
 sshd_listen_addresses:
   - 198.204.250.219
 
-archive_mirror_bindip: 198.204.250.219
-
-archive_mirror_servername:
-  - archive.voidlinux.fr
-  - paris.voidlinux.net
-  - archive.voidlinux.com
-  - archive.voidlinux.net
-  - archive.voidlinux.us
-  - archive.voidlinux.eu
-  - void-archive.rubyists.com
-
-archive_mirror_datasource_server: paris.voidlinux.net
-archive_mirror_datasource_dir: /archive/
-
 live_mirror_bindip: 198.204.250.219
 
 live_mirror_authoritative_servernames:
