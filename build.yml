@@ -1,13 +1,4 @@
 ---
-- hosts: build
-  become: yes
-  become_user: root
-  become_method: sudo
-  roles:
-    - xbps-repoconf
-    - sshd
-    - mosh
-
 - hosts: buildmaster
   become: yes
   become_user: root

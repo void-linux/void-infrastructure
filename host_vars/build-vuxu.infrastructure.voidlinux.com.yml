@@ -1,0 +1,26 @@
+---
+network_input_policy: DROP
+network_output_policy: ACCEPT
+
+network_interfaces:
+  - name: eth0
+    mode: dhcp
+    resolvermode: dhcp
+    mode6: dhcp
+    resolvermode6: dhcp
+
+network_address_use_slaac: false
+
+sshd_usepam: false
+
+xbps_repository_address: repo.voidlinux.eu
+xbps_repository_main: http://{{ xbps_repository_address }}/current
+xbps_repository_nonfree: http://{{ xbps_repository_address }}/current/nonfree
+xbps_repository_multilib: http://{{ xbps_repository_address }}/current/multilib
+xbps_repository_multilib_nonfree: http://{{ xbps_repository_address }}/current/multilib/nonfree
+xbps_repository_port: 80
+
+buildslave_user: buildbot
+buildslave_sync_user: xbps-master
+buildslave_rootdir: /home/buildbot
+buildslave_zone: DE-2

@@ -4,7 +4,6 @@
   become_user: root
   become_method: sudo
   roles:
-    - xbps-repoconf
     - sshd
     - rsyncd
     - live-mirror
