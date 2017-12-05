@@ -3,7 +3,7 @@
   xbps:
     pkg:
       - buildbot-slave
-      - git-all
+      - git
     state: present
 
 - name: Create Buildslave user ({{ buildslave_user}})
