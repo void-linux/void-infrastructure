@@ -45,11 +45,15 @@ buildslave_buildslaves:
 
   - name: aarch64-primary
     sname: cross-aarch64_builder
+    directory: slave-cross-aarch64
+    service_name: buildslave-cross-aarch64
     mach: aarch64
     zone: DE-2
 
   - name: aarch64-musl-primary
     sname: cross-aarch64-musl_builder
+    directory: slave-cross-aarch64-musl
+    service_name: buildslave-cross-aarch64-musl
     mach: aarch64-musl
     zone: DE-2
 
