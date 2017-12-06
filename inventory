@@ -14,7 +14,13 @@ buildslave
 a.mci.us.mirrors.voidlinux.com
 
 [md]
-monitoring.infrastructure.voidlinux.com
+monitor.infrastructure.voidlinux.com
 
 [lxc]
 a.mci.us.mirrors.voidlinux.com
+
+[prod]
+build-master.infrastructure.voidlinux.com
+build-vuxu.infrastructure.voidlinux.com
+build-kc1.infrastructure.voidlinux.com
+monitor.infrastructure.voidlinux.com

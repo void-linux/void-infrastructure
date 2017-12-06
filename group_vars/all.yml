@@ -1,0 +1,8 @@
+---
+telegraf:
+  remotes:
+    - host: "{{ influxdb_host }}"
+  output:
+    influxdb:
+      url: "http://{{ influxdb_host }}:8086"
+  agent:

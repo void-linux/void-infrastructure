@@ -1,0 +1,9 @@
+---
+influxdb_host: monitor.infrastructure.voidlinux.com
+
+telegraf_remotes:
+  - build-master.infrastructure.voidlinux.com
+  - build-vuxu.infrastructure.voidlinux.com
+  - build-kc1.infrastructure.voidlinux.com
+
+void_aquire_certs: true

@@ -6,4 +6,7 @@
   roles:
     - sshd
     - xbps-repoconf
-    - void-monit
+    - acmetool
+    - nginx
+    - influxdb
+    - grafana

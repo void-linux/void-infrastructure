@@ -1,0 +1,14 @@
+---
+telegraf:
+  remotes:
+    - host: localhost
+  output:
+    influxdb:
+      url: http://localhost:8086
+  agent:
+
+influxdb:
+  remote_sources:
+    - build-master.infrastructure.voidlinux.com
+    - build-vuxu.infrastructure.voidlinux.com
+    - build-kc1.infrastructure.voidlinux.com

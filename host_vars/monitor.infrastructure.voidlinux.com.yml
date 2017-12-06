@@ -21,4 +21,17 @@ network_interfaces:
       - 2001:4860:4860::8888
       - 2001:4860:4860::8844
 
-monit_bind: 127.0.1.1
+grafana:
+  urls:
+    - monitor.voidlinux.com
+    - monitor.infrastructure.voidlinux.com
+  ssl_certificate_path: /var/lib/acme/live/monitor.voidlinux.com/fullchain
+  ssl_key_path: /var/lib/acme/live/monitor.voidlinux.com/privkey
+
+acmetool:
+  sites:
+    - site: monitor.voidlinux.com
+      names:
+        - monitor.voidlinux.com
+        - monitor.infrastructure.voidlinux.com
+  hostmaster_email: postmaster@voidlinux.eu
