@@ -28,6 +28,7 @@ live_mirror_sharename: repo
 live_mirror_nodebug: true
 
 buildslave_user: buildbot
+buildslave_hostdir_owner: buildbot
 buildslave_sync_user: xbps-master
 buildslave_rootdir: /home/buildbot
 buildslave_zone: US-MCI

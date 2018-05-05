@@ -58,7 +58,7 @@
     owner: "{{ buildslave_hostdir_owner | default('root') }}"
     group: "{{ buildslave_hostdir_group | default('root') }}"
     mode: 0775
-  with_items: "{{ buildslave_buildslaves | json_query(query) }}"
+  with_items: "{{ buildslave_buildslaves | json_query(query) | unique }}"
   vars:
     query: "[?zone=='{{ buildslave_zone }}']"
   loop_control:

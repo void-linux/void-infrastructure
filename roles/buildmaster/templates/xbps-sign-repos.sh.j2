@@ -2,25 +2,24 @@
 
 MAINREPO="/hostdir/binpkgs"
 REPOS="$MAINREPO $MAINREPO/nonfree $MAINREPO/multilib $MAINREPO/multilib/nonfree $MAINREPO/debug"
-REPOS="$REPOS $MAINREPO/musl $MAINREPO/musl/nonfree $MAINREPO/musl/multilib $MAINREPO/musl/multilib/nonfree $MAINREPO/musl/debug"
+REPOS="$REPOS $MAINREPO/musl $MAINREPO/musl/nonfree $MAINREPO/musl/debug"
 REPOS="$REPOS $MAINREPO/aarch64 $MAINREPO/aarch64/debug $MAINREPO/aarch64/nonfree"
 ARCHS="i686 x86_64 armv6l armv7l"
 ARCHS="$ARCHS x86_64-musl armv6l-musl armv7l-musl"
 ARCHS="$ARCHS aarch64 aarch64-musl"
 
-# Sign repos...
 for f in ${REPOS}; do
+    export XBPS_PASSPHRASE="{{ buildmaster_signing_keyphrase }}"
     for x in ${ARCHS}; do
-	XBPS_PASSPHRASE="{{ buildmaster_signing_keyphrase }}" \
-		       XBPS_TARGET_ARCH=$x xbps-rindex -v -s \
-		       --signedby "Void Linux" --privkey $HOME/.ssh/void-rsa ${f} 2>/dev/null
-	XBPS_PASSPHRASE="{{ buildmaster_signing_keyphrase }}" \
-		       XBPS_TARGET_ARCH=$x xbps-rindex -v -S \
-		       --signedby "Void Linux" --privkey $HOME/.ssh/void-rsa ${f}/*.${x}.xbps 2>/dev/null
+       export XBPS_TARGET_ARCH=$x
+       xbps-rindex -v -s \
+		       --signedby "Void Linux" --privkey $HOME/.ssh/void-rsa ${f}
+       find ${f} -maxdepth 1 -name '*.xbps' -print0 | \
+		       xargs -L 1000 -r0 xbps-rindex -v -S \
+		       --signedby "Void Linux" --privkey $HOME/.ssh/void-rsa
     done
-    XBPS_PASSPHRASE="{{ buildmaster_signing_keyphrase }}" \
-		   XBPS_TARGET_ARCH=$x xbps-rindex -v -S \
-		   --signedby "Void Linux" --privkey $HOME/.ssh/void-rsa ${f}/*.noarch.xbps 2>/dev/null
+    xbps-rindex -v -S \
+		   --signedby "Void Linux" --privkey $HOME/.ssh/void-rsa ${f}/*.noarch.xbps
 done
 
 exit 0

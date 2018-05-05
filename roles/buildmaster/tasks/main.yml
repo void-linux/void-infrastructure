@@ -1,6 +1,6 @@
 ---
-- include: pre.yml
-- include: buildbot.yml
-- include: www.yml
-- include: signing.yml
-- include: sync.yml
+- import_tasks: pre.yml
+- import_tasks: buildbot.yml
+- import_tasks: www.yml
+- import_tasks: signing.yml
+- import_tasks: sync.yml
