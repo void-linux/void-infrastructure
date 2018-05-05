@@ -8,7 +8,4 @@ telegraf:
   agent:
 
 influxdb:
-  remote_sources:
-    - build-master.infrastructure.voidlinux.com
-    - build-vuxu.infrastructure.voidlinux.com
-    - build-kc1.infrastructure.voidlinux.com
+  remote_sources: '{{ telegraf_remotes }}'

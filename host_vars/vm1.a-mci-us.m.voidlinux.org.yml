@@ -20,10 +20,12 @@ live_mirror_authoritative_servernames:
   - repo3.voidlinux.eu
   - repo3.voidlinux.net
   - repo3.voidlinux.com
+  - vm1.a-mci-us.m.voidlinux.org
 
 live_mirror_srvdir: /repo
 live_mirror_syncdstdir: /repo
 live_mirror_sharename: repo
+live_mirror_nodebug: true
 
 buildslave_user: buildbot
 buildslave_sync_user: xbps-master

@@ -6,3 +6,7 @@ telegraf:
     influxdb:
       url: "http://{{ influxdb_host }}:8086"
   agent:
+
+metal_domain_root: '.m.voidlinux.org'
+network_hostname: '{{ inventory_hostname | regex_replace(metal_domain_root, "") | regex_replace("\.", "-") }}'
+network_fqdn: '{{ inventory_hostname }}'

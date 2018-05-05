@@ -1,26 +1,34 @@
 [buildmaster]
-build-master.infrastructure.voidlinux.com
+vm1.a-lej-de.m.voidlinux.org
 
 [buildslave]
-build-master.infrastructure.voidlinux.com
-build-vuxu.infrastructure.voidlinux.com
-build-kc1.infrastructure.voidlinux.com
+vm1.a-lej-de.m.voidlinux.org
+c-lej-de.m.voidlinux.org
+vm1.a-mci-us.m.voidlinux.org
 
 [build:children]
 buildmaster
 buildslave
 
 [mirror]
-a.mci.us.mirrors.voidlinux.com
+vm1.a-mci-us.m.voidlinux.org
+vm1.a-lej-de.m.voidlinux.org
 
 [md]
-monitor.infrastructure.voidlinux.com
+b-lej-de.m.voidlinux.org
 
 [lxc]
-a.mci.us.mirrors.voidlinux.com
+vm1.a-mci-us.m.voidlinux.org
+
+[unmanaged]
+a-mci-us.m.voidlinux.org
+a-lej-de.m.voidlinux.org
 
 [prod]
-build-master.infrastructure.voidlinux.com
-build-vuxu.infrastructure.voidlinux.com
-build-kc1.infrastructure.voidlinux.com
-monitor.infrastructure.voidlinux.com
+a-mci-us.m.voidlinux.org
+a-lej-de.m.voidlinux.org
+b-lej-de.m.voidlinux.org
+c-lej-de.m.voidlinux.org
+
+vm1.a-lej-de.m.voidlinux.org
+vm1.a-mci-us.m.voidlinux.org

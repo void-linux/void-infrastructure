@@ -1,4 +1,4 @@
 #!/bin/sh
 
-chpst -u reposync:reposync rsync -avzurk --delete --password-file /etc/void-mirrorsync.secret {{ live_mirror_syncuser }}@{{ live_mirror_syncserver }}::{{ live_mirror_syncsrcdir }} {{ live_mirror_syncdstdir }}
+chpst -u reposync:reposync rsync -avzurk --delete {% if live_mirror_nodebug %}--exclude "debug" --delete-excluded {% endif %}--password-file /etc/void-mirrorsync.secret {{ live_mirror_syncuser }}@{{ live_mirror_syncserver }}::{{ live_mirror_syncsrcdir }} {{ live_mirror_syncdstdir }}
 exec sleep {{ live_mirror_sync_interval }}

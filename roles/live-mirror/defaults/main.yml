@@ -108,3 +108,6 @@ live_mirror_sharename: voidmirror
 live_mirror_services:
   - http
   - rsync
+
+# Disable debug packages on this mirror?
+live_mirror_nodebug: false

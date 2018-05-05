@@ -36,12 +36,15 @@ acmetool:
     - site: build.voidlinux.eu
       names:
         - build.voidlinux.eu
+        - build.voidlinux.org
     - site: sources.voidlinux.eu
       names:
         - sources.voidlinux.eu
+        - sources.voidlinux.org
     - site: repo.voidlinux.eu
       names:
         - repo.voidlinux.eu
+        - vm1.a-lej-de.m.voidlinux.org
   hostmaster_email: postmaster@voidlinux.eu
 
 buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.eu/fullchain
@@ -62,6 +65,7 @@ live_mirror_authoritative_servernames:
   - repo.voidlinux.eu
   - repo.voidlinux.net
   - repo.voidlinux.com
+  - vm1.a-lej-de.m.voidlinux.org
 
 live_mirror_srvdir: /srv/www/void-repo
 live_mirror_secure_sync: true

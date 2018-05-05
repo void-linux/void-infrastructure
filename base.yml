@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: all:!unmanaged
   become: yes
   become_method: sudo
   become_user: root

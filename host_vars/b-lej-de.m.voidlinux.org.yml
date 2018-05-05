@@ -25,6 +25,7 @@ grafana:
   urls:
     - monitor.voidlinux.com
     - monitor.infrastructure.voidlinux.com
+    - monitor.voidlinux.org
   ssl_certificate_path: /var/lib/acme/live/monitor.voidlinux.com/fullchain
   ssl_key_path: /var/lib/acme/live/monitor.voidlinux.com/privkey
 
@@ -34,4 +35,5 @@ acmetool:
       names:
         - monitor.voidlinux.com
         - monitor.infrastructure.voidlinux.com
+        - monitor.voidlinux.org
   hostmaster_email: postmaster@voidlinux.eu
