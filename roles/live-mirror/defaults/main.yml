@@ -1,30 +1,3 @@
-# This mapping maps top level continent codes into servers that exist.
-# This allows us to point people to a server that should be accessible
-# without pointing them to somewhere that isn't on the same continent.
-# All production servers should have an entry in this mapping.
-live_mirror_geoip_mapping:
-  - { code: 'default', server: 'repo.voidlinux.eu' }
-  - { code: 'EU', server: 'repo.voidlinux.eu' }
-  - { code: 'AS', server: 'repo2.voidlinux.eu' }
-  - { code: 'AN', server: 'repo2.voidlinux.eu' }
-  - { code: 'NA', server: 'repo3.voidlinux.eu' }
-  - { code: 'SA', server: 'repo3.voidlinux.eu' }
-  - { code: 'AF', server: 'repo4.voidlinux.eu' }
-  - { code: 'OC', server: 'repo4.voidlinux.eu' }
-
-
-# This mapping provides finer resolution than the continental map by
-# providing resolution to the country level.  This allows us to handle
-# the case where there may be multiple mirrors on a continent, but the
-# respective countries may not have high speed peering links for us to
-# route traffic over.  Any continent having more than 1 production
-# server should have entries for relevant countries in this mapping.
-live_mirror_countrycode_mapping:
-  - { code: 'default', server: '$closest_server' }
-  - { code: 'DE', server: 'repo2.voidlinux.eu' }
-  - { code: 'FR', server: 'repo4.voidlinux.eu' }
-  - { code: 'ES', server: 'repo4.voidlinux.eu' }
-
 # What hostnames should this mirror listen for?  The default is all
 # production hostnames for recognized mirrors.
 live_mirror_servernames:
@@ -37,29 +10,6 @@ live_mirror_servernames:
   - repo.voidlinux.org
   - repo.voidlinux.com
   - repo.voidlinux.net
-
-# What hostnames is this the best_server for?  This usually means the
-# hostnames that this box is authoritative for as listed in DNS, but
-# may be reasonable to override in exceptional circumstances.  Since
-# this is server specific, the entry below is purely for informational
-# purposes.
-# live_mirror_authoritative_servernames:
-#   - repo.voidlinux.us
-#   - repo3.voidlinux.eu
-#   - repo3.voidlinux.net
-#   - repo3.voidlinux.com
-
-# Standard bindIP/bindPort for the mirror
-live_mirror_bind4: true
-# live_mirror_bindip:
-live_mirror_bindport: 80
-
-# v6 controls for nginx bind
-live_mirror_bind6: false
-# live_mirror_bind6ip:
-
-# nginx access log location
-live_mirror_accesslog: /var/log/nginx/void-mirror.access.log
 
 # Where is the mirror served from
 live_mirror_srvdir: /srv/repo
@@ -79,23 +29,6 @@ live_mirror_syncdstdir: /srv/repo
 
 # How often to sync with the master mirror, in seconds
 live_mirror_sync_interval: 300
-
-# Use SSL?
-live_mirror_ssl: false
-
-# Use LetsEncrypt for SSL (ignored if live_mirror_ssl is false)?
-live_mirror_letsencrypt: true
-live_mirror_cert_domain: repo.voidlinux.eu
-
-# If not using LetsEncrypt but using SSL, where are the certs
-live_mirror_cert_path:
-live_mirror_certkey_path:
-
-# Should the mirror use HSTS?  USE THIS WITH CARE!!
-live_mirror_hsts: false
-
-# What resolver should the SSL library use
-live_mirror_resolver: 8.8.8.8
 
 # Is this a root mirror (Has a local authoritative builder and
 # signer process)?

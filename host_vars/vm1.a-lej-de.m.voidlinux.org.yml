@@ -50,6 +50,9 @@ acmetool:
 buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.eu/fullchain
 buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.eu/privkey
 
+sources_site_cert_path: /var/lib/acme/live/sources.voidlinux.eu/fullchain
+sources_site_key_path: /var/lib/acme/live/sources.voidlinux.eu/privkey
+
 buildslave_zone: DE-1
 buildslave_master: localhost
 buildslave_isremote: false
@@ -61,7 +64,7 @@ buildslave_groups:
 buildslave_hostdir_group: void-repo
 
 live_mirror_bind6: true
-live_mirror_authoritative_servernames:
+live_mirror_servernames:
   - repo.voidlinux.eu
   - repo.voidlinux.net
   - repo.voidlinux.com

@@ -15,7 +15,7 @@ sshd_listen_addresses:
 
 live_mirror_bindip: 198.204.250.219
 
-live_mirror_authoritative_servernames:
+live_mirror_servernames:
   - repo.voidlinux.us
   - repo3.voidlinux.eu
   - repo3.voidlinux.net
@@ -26,6 +26,7 @@ live_mirror_srvdir: /repo
 live_mirror_syncdstdir: /repo
 live_mirror_sharename: repo
 live_mirror_nodebug: true
+live_mirror_use_ssl: false
 
 buildslave_user: buildbot
 buildslave_hostdir_owner: buildbot

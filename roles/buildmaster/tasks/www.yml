@@ -1,26 +1,27 @@
 ---
-- name: Install nginx config
-  template:
-    src: buildmaster.conf.j2
-    dest: /etc/nginx/sites-available/buildmaster.conf
+- name: Configure webserver
+  include_role:
+    name: nginx
+    tasks_from: base-site
+  vars:
+    - site:
+        name: buildmaster
+        static_root: false
+        urls:
+          - build.voidlinux.eu
+          - build.voidlinux.org
+        use_ssl: void_aquire_certs
+        ssl_certificate_path: buildmaster_ssl_cert_path | default('/dev/null')
+        ssl_certificate_key_path: buildmaster_ssl_certkey_path | default('/dev/null')
+
+- name: Install root location block
+  copy:
+    src: buildmaster_root.conf
+    dest: /etc/nginx/locations.d/build.voidlinux.eu/
     owner: root
     group: root
     mode: 0644
   notify:
     - nginx
 
-- name: Install dhparam_buildmaster.pem
-  copy:
-    src: dhparam.pem
-    dest: /etc/nginx/dhparam_buildmaster.pem
-    owner: root
-    group: root
-    mode: 0644
-    
-- name: Enable Buildmaster site
-  file:
-    src: ../sites-available/buildmaster.conf
-    dest: /etc/nginx/sites-enabled/buildmaster.conf
-    state: link
-  notify:
-    - nginx
+        

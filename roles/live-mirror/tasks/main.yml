@@ -26,37 +26,19 @@
   notify:
     - iptables
 
-- name: Install Diffie-Hellman Parameters
-  copy:
-    src: dhparam.pem
-    dest: /etc/nginx/live_mirror_dhparam.pem
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - nginx
-  when:
-    - live_mirror_ssl
-    - '"http" in live_mirror_services'
-
-- name: Configure nginx
-  template:
-    src: live-mirror.nginx.conf.j2
-    dest: /etc/nginx/sites-available/void-mirror.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - nginx
-  when: '"http"in live_mirror_services'
-
-- name: Enable nginx site
-  file:
-    src: /etc/nginx/sites-available/void-mirror.conf
-    dest: /etc/nginx/sites-enabled/void-mirror.conf
-    state: link
-  notify:
-    - nginx
+- name: Configure webserver
+  include_role:
+    name: nginx
+    tasks_from: base-site
+  vars:
+    - site:
+        name: void-mirror
+        urls: "{{live_mirror_servernames}}"
+        root_path: "{{live_mirror_srvdir}}"
+        autoindex: true
+        use_ssl: "{{live_mirror_use_ssl | default(void_aquire_certs)}}"
+        ssl_certificate_path: "{{live_mirror_cert_path | default('/dev/null')}}"
+        ssl_key_path: "{{live_mirror_certkey_path | default('/dev/null')}}"
   when: '"http"in live_mirror_services'
 
 - name: Include rsyncd user secrets
