@@ -1,0 +1,10 @@
+---
+- name: statrepo
+  runit:
+    name: statrepo
+    state: restarted
+
+- name: popcorn-reports
+  runit:
+    name: popcorn-reports
+    state: restarted

@@ -1,0 +1,82 @@
+---
+- name: Install packages
+  xbps:
+    pkg:
+      - PopCorn-Server
+      - snooze
+    state: present
+
+- name: Configure statrepo server
+  template:
+    src: statrepo.conf.j2
+    dest: /etc/sv/statrepo/conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - statrepo
+
+- name: Create webroot
+  file:
+    path: /srv/www/popcorn
+    state: directory
+    owner: _popcorn
+    group: _popcorn
+    mode: 0755
+
+- name: Configure nginx
+  include_role:
+    name: nginx
+    tasks_from: base-site
+  vars:
+    - site:
+        name: popcorn
+        urls:
+          - popcorn.voidlinux.org
+        use_ssl: false
+        root_path: /srv/www/popcorn
+        autoindex: true
+
+- name: Install report service (1/2)
+  file:
+    path: /etc/sv/popcorn-reports
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install report service (2/2)
+  template:
+    src: reports_service.sh.j2
+    dest: /etc/sv/popcorn-reports/run
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - popcorn-reports
+
+- name: Install report script
+  template:
+    src: popcorn_report.j2
+    dest: /usr/local/bin/popcorn_report
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install firewall rules
+  copy:
+    src: popcorn.rules
+    dest: /etc/iptables.d/popcorn.rules
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - iptables
+
+- name: Enable services
+  runit:
+    name: "{{ item }}"
+    enabled: yes
+  with_items:
+    - statrepo
+    - popcorn-reports
