@@ -39,6 +39,7 @@
         use_ssl: "{{live_mirror_use_ssl | default(void_aquire_certs)}}"
         ssl_certificate_path: "{{live_mirror_cert_path | default('/dev/null')}}"
         ssl_key_path: "{{live_mirror_certkey_path | default('/dev/null')}}"
+        ssl_stapling: true
   when: '"http"in live_mirror_services'
 
 - name: Include rsyncd user secrets
