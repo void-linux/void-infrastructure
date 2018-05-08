@@ -7,14 +7,6 @@
     group: root
     mode: 0755
 
-- name: Create Links from hostdir
-  file:
-    src: "{{ item.src }}"
-    dest: "/srv/www/void-repo/{{ item.dst }}"
-    state: link
-  with_items:
-    - { src: /hostdir/binpkgs, dst: current }
-
 - name: Create Static Mirror Directories
   file:
     path: "/srv/www/void-repo/{{ item }}"
@@ -27,6 +19,14 @@
     - live
     - logos
     - static
+    - current
+
+- name: Mount the package filesystem into the mirror
+  mount:
+    fstype: bindfs
+    src: /hostdir/binpks
+    path: /srv/www/void-repo/current
+    state: mounted
 
 - name: Create xlocate group
   group:
