@@ -16,6 +16,16 @@
   notify:
     - statrepo
 
+- name: Configure pqueryd
+  copy:
+    src: pqueryd.conf
+    dest: /etc/sv/pqueryd/conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - pqueryd
+
 - name: Create webroot
   file:
     path: /srv/www/popcorn
@@ -80,3 +90,4 @@
   with_items:
     - statrepo
     - popcorn-reports
+    - pqueryd

@@ -8,3 +8,8 @@
   runit:
     name: popcorn-reports
     state: restarted
+
+- name: pqueryd
+  runit:
+    name: pqueryd
+    state: restarted
