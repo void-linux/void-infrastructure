@@ -7,19 +7,32 @@
     group: root
     mode: 0755
 
+- name: Create xlocate group
+  group:
+    name: xlocate
+    state: present
+
 - name: Create Static Mirror Directories
   file:
-    path: "/srv/www/void-repo/{{ item }}"
+    path: "/srv/www/void-repo/{{ item.name }}"
     state: directory
-    owner: root
-    group: root
-    mode: 0755
+    owner: "{{ item.owner|default('root') }}"
+    group: "{{ item.group|default('root') }}"
+    mode: "{{ item.mode|default(0755) }}"
   with_items:
-    - distfiles
-    - live
-    - logos
-    - static
-    - current
+    - name: distfiles
+    - name: live
+    - name: logos
+    - name: static
+    - name: current
+      owner: void-buildslave
+      group: void-repo
+      mode: '0775'
+    - name: xlocate
+      group: xlocate
+      mode: '0775'
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: Mount the package filesystem into the mirror
   mount:
@@ -27,16 +40,3 @@
     src: /hostdir/binpks
     path: /srv/www/void-repo/current
     state: mounted
-
-- name: Create xlocate group
-  group:
-    name: xlocate
-    state: present
-
-- name: Create xlocate directory
-  file:
-    path: /srv/www/void-repo/xlocate
-    state: directory
-    owner: root
-    group: xlocate
-    mode: 0775
