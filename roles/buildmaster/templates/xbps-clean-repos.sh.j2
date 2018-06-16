@@ -43,20 +43,28 @@ for f in ${REPOS64}; do
 	( xbps-rindex -c ${f} 2>/dev/null ) &
 done
 wait
-for f in ${REPOS64}; do
-	( xbps-rindex -r ${f} 2>/dev/null ) &
-done
-wait
 for f in ${REPOS}; do
 	for x in ${ARCHS}; do
 		XBPS_TARGET_ARCH=$x xbps-rindex -c ${f} 2>/dev/null
 	done
 done
 wait
+
+# do not delete packages if there are staged packages
+for f in ${REPOS} ${REPOS64}; do
+	for x in ${ARCHS}; do
+		[ -e "$f/${x}-stagedata" ] && exit 0
+	done
+done
+
 for f in ${REPOS}; do
 	for x in ${ARCHS}; do
 		XBPS_TARGET_ARCH=$x xbps-rindex -r ${f} 2>/dev/null
 	done
+done
+wait
+for f in ${REPOS64}; do
+	( xbps-rindex -r ${f} 2>/dev/null ) &
 done
 wait
 
