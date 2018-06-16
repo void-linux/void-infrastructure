@@ -68,8 +68,8 @@ for m in user_settings.machines:
 	subarch = m['subarch']
 	BootstrapArgs = m['BootstrapArgs']
 
-	xbps_packages_url = 'git://github.com/voidlinux/void-packages.git'
-	bulk_url = 'git://github.com/voidlinux/xbps-bulk.git'
+	xbps_packages_url = 'git://github.com/void-linux/void-packages.git'
+	bulk_url = 'git://github.com/void-linux/xbps-bulk.git'
 
 	BootstrapZap = """
 {distdir}/xbps-src -m {masterdir} zap
@@ -87,7 +87,7 @@ for m in user_settings.machines:
 			'-a', crosstarget,
 			'-d', "../%s"  % distdir,
 			'-m', "../%s"  % masterdir,
-			'-h', hostdir, '-N', '-t']
+			'-h', hostdir, '-t']
 	get_pkgs  = ['make', 'print_pkgs']
 	bulk_make = ['make']
 
@@ -169,6 +169,6 @@ c['status'] = [
 ]
 
 c['title'] = proj
-c['titleURL'] = 'http://www.voidlinux.eu/'
-c['buildbotURL'] = 'https://build.voidlinux.eu/'
+c['titleURL'] = 'http://www.voidlinux.org/'
+c['buildbotURL'] = 'https://build.voidlinux.org/'
 c['db'] = { 'db_url' : 'sqlite:///state.sqlite' }
