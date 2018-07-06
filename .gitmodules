@@ -1,27 +1,27 @@
 [submodule "roles/network"]
-	path = roles/network
+	path = ansible/roles/network
 	url = git@github.com:void-ansible-roles/network.git
 [submodule "roles/nginx"]
-	path = roles/nginx
+	path = ansible/roles/nginx
 	url = git@github.com:void-ansible-roles/nginx.git
 [submodule "roles/sshd"]
-	path = roles/sshd
+	path = ansible/roles/sshd
 	url = git@github.com:void-ansible-roles/sshd.git
 [submodule "roles/xbps-repoconf"]
-	path = roles/xbps-repoconf
+	path = ansible/roles/xbps-repoconf
 	url = git@github.com:void-ansible-roles/xbps-repoconf.git
 [submodule "roles/acmetool"]
-	path = roles/acmetool
+	path = ansible/roles/acmetool
 	url = git@github.com:void-ansible-roles/acmetool.git
 [submodule "roles/telegraf"]
-	path = roles/telegraf
+	path = ansible/roles/telegraf
 	url = git@github.com:void-ansible-roles/telegraf.git
 [submodule "roles/influxdb"]
-	path = roles/influxdb
+	path = ansible/roles/influxdb
 	url = git@github.com:void-ansible-roles/influxdb.git
 [submodule "roles/grafana"]
-	path = roles/grafana
+	path = ansible/roles/grafana
 	url = git@github.com:void-ansible-roles/grafana.git
 [submodule "roles/mosh"]
-	path = roles/mosh
+	path = ansible/roles/mosh
 	url = git@github.com:void-ansible-roles/mosh.git
