@@ -1,0 +1,15 @@
+{
+    "CN": "Void Infrastructure CA",
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "Everywhere",
+            "O": "Void Linux",
+            "OU": "CA"
+        }
+    ]
+}
+

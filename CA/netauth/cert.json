@@ -1,0 +1,18 @@
+{
+    "CN": "netauth.voidlinux.org",
+    "hosts": [
+        "netauth.voidlinux.org"
+    ],
+    "key": {
+        "algo": "ecdsa",
+        "size": 256
+    },
+    "names": [
+        {
+            "C": "Everywhere",
+            "O": "Void Linux",
+            "OU": "Security Infrastructure"
+        }
+    ]
+}
+
