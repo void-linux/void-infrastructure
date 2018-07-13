@@ -1,0 +1,4 @@
+---
+- name: netauthd
+  debug:
+    msg: netauthd should be restarted!

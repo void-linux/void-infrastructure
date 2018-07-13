@@ -26,6 +26,9 @@ vm1.a-mci-us.m.voidlinux.org
 [mirrormanager]
 vm1.a-lej-de.m.voidlinux.org
 
+[netauth]
+vm2.a-lej-de.m.voidlinux.org
+
 [unmanaged]
 a-mci-us.m.voidlinux.org
 a-lej-de.m.voidlinux.org

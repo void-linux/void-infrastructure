@@ -1,0 +1,3 @@
+*filter
+-A INPUT -p tcp --dport 8443 -j ACCEPT
+COMMIT

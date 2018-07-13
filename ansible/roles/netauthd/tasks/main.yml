@@ -1,0 +1,97 @@
+---
+- name: Install NetAuth Server
+  xbps:
+    pkg:
+      - NetAuth-server
+      - sv-helper
+    state: present
+
+- name: Create group
+  group:
+    name: _netauthd
+    state: present
+
+- name: Create unprivileged user
+  user:
+    name: _netauthd
+    group: _netauthd
+    create_home: yes
+    home: /var/lib/netauthd
+    system: yes
+    state: present
+
+- name: Create data directories
+  file:
+    path: "/var/lib/netauthd/{{ item }}"
+    state: directory
+    owner: _netauthd
+    group: _netauthd
+    mode: 0750
+  with_items:
+    - data
+    - security
+
+- name: Install TLS Certificate
+  copy:
+    src: "{{ item }}"
+    dest: /var/lib/netauthd/security/
+    owner: root
+    group: _netauthd
+    mode: 0640
+  no_log: true
+  with_items:
+    - secret/netauth_tls_certificate.pem
+    - secret/netauth_tls_certificate.key
+  notify:
+    - netauthd
+
+- name: Install Token Keys
+  copy:
+    src: "{{ item }}"
+    dest: /var/lib/netauthd/security
+    owner: root
+    group: _netauthd
+    mode: 0640
+  no_log: true
+  with_items:
+    - secret/netauth_token.key
+    - secret/netauth_token.pem
+  notify:
+    - netauthd
+
+- name: Install Firewall Rules
+  copy:
+    src: netauthd.rules
+    dest: /etc/iptables.d/
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables
+
+- name: Install Service (1/3)
+  file:
+    path: /etc/sv/{{ item }}
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - netauthd
+    - netauthd/log
+
+- name: Install Service (2/3)
+  template:
+    src: run.j2
+    dest: /etc/sv/netauthd/run
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - netauthd
+
+- name: Install Service (3/3)
+  file:
+    src: /usr/bin/rsvlog
+    dest: /etc/sv/netauthd/log/run
+    state: link
