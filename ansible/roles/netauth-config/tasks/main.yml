@@ -1,0 +1,42 @@
+---
+- name: Configure NetAuth library
+  copy:
+    src: netauth.toml
+    dest: /etc/netauth.toml
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure data directory
+  file:
+    path: /usr/share/netauth/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install NetAuth Certificate
+  copy:
+    src: secret/netauth_tls_certificate.pem
+    dest: /usr/share/netauth/netauth.pem
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install Token Verification Key
+  copy:
+    src: secret/netauth_token.pem
+    dest: /usr/share/netauth/token.pem
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install Firewall Rules
+  copy:
+    src: netauth.rules
+    dest: /etc/iptables.d/
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - iptables

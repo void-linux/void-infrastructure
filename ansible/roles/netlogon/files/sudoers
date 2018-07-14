@@ -1,0 +1,8 @@
+# root bypass
+root ALL=(ALL) ALL
+
+# Local wheel group
+%wheel ALL=(ALL) ALL
+
+# Drop-in config
+#includedir /etc/sudoers.d

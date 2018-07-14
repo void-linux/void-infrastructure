@@ -1,0 +1,3 @@
+[group:netusers]
+renew=1w
+expire=3w

@@ -29,6 +29,9 @@ vm1.a-lej-de.m.voidlinux.org
 [netauth]
 vm2.a-lej-de.m.voidlinux.org
 
+[netlogon]
+vm2.a-lej-de.m.voidlinux.org
+
 [unmanaged]
 a-mci-us.m.voidlinux.org
 a-lej-de.m.voidlinux.org

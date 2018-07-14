@@ -1,0 +1,98 @@
+---
+- name: Create local management group
+  group:
+    name: "{{ netlogon_maintenance_user }}"
+    state: present
+
+- name: Create local management user
+  user:
+    name: "{{ netlogon_maintenance_user }}"
+    group: "{{ netlogon_maintenance_user }}"
+    state: present
+    createhome: yes
+
+- name: Install management keys (1/2)
+  file:
+    path: /home/{{ netlogon_maintenance_user }}/.ssh
+    state: directory
+    owner: "{{ netlogon_maintenance_user }}"
+    group: "{{ netlogon_maintenance_user }}"
+    mode: 0700
+
+- name: Install management keys (2/2)
+  template:
+    src: authorized_keys.j2
+    dest: /home/{{ netlogon_maintenance_user }}/.ssh/authorized_keys
+    owner: "{{ netlogon_maintenance_user }}"
+    group: "{{ netlogon_maintenance_user }}"
+    mode: 0600
+
+- name: Install Packages
+  xbps:
+    pkg:
+      - NetAuth-nsscache
+      - NetKeys
+      - libnss-cache
+      - pam_netauth
+    state: present
+
+- name: Install nsscache Service (1/2)
+  file:
+    path: /etc/sv/nsscache
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install nsscache Service (2/2)
+  copy:
+    src: nsscache.run
+    dest: /etc/sv/nsscache/run
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Enable nsscache Service
+  runit:
+    name: nsscache
+    enabled: true
+
+- name: Configure NSS
+  copy:
+    src: nsswitch.conf
+    dest: /etc/nsswitch.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install PAM Cache Policy
+  copy:
+    src: base.policy
+    dest: /etc/libpam-policycache.d/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure PAM
+  copy:
+    src: system-auth
+    dest: /etc/pam.d/system-auth
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure sudo
+  copy:
+    src: sudoers
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Install sudo policy
+  copy:
+    src: dante.sudoers
+    dest: /etc/sudoers.d/dante
+    owner: root
+    group: root
+    mode: 0640

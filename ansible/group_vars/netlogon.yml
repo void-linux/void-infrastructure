@@ -1,0 +1,8 @@
+sshd_AuthorizedKeysCommand: /usr/bin/netkeys --ID %u
+sshd_AllowGroupsAlways:
+  - wheel
+  - dante
+
+netlogon_maintenance_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9KC4FQ9SR0LOiZPAeNbiW2bpWHUdACkfMkmZoyuSGRdNazMwOFu3X5UR08if7uVIwbQItMDauxEP8H2zq/ChcOl5ZDbPO9EhIFZmnRCGHB2YtaMeT+w43zbLrnA9FC3Z3wNsNvqzerwaF2nmb1RNaJzLdzEj6dx+rqnPfk2FZj3v0Lgl+A2UAqK0W+uK+l/sS0vMTlWVdTKZuOgmu1nLt3ljeFVYOqWcaeqN+oIOargVA+4yas+N1YTAtNp6ShLqhIaNQS03kXSqHROFT6u5U4Aub7ryQPVyYasriW8dvxWQ41FZ26GcBPL1isMq348Ljgk7W5enGaDc7Xpmy8OMR maldridge@theGibson
+  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOy95ArbSNI2QXSIKfr2qyyrb2mNL2ER1sUkVBhtufh maldridge@deepblue

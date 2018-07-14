@@ -1,0 +1,5 @@
+#!/bin/sh
+
+nsscache
+
+exec sleep $(( 30 * 60 ))
