@@ -37,7 +37,7 @@
 - name: Mount the package filesystem into the mirror
   mount:
     fstype: none
-    src: /hostdir/binpks
+    src: /hostdir/binpkgs
     path: /srv/www/void-repo/current
     state: mounted
     opts: defaults,bind,ro
