@@ -60,10 +60,11 @@ buildslave_buildslaves:
 buildslave_zones:
   DE-1:
     admin:
-      nick: xtraeme
-      name: Juan RP
-      mail: xtraeme@voidlinux.eu
+      nick: gottox
+      name: Enno Boland
+      mail: gottox@voidlinux.eu
     xbps:
+      makejobs: 2
   DE-2:
     admin:
       nick: chris2
