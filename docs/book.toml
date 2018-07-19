@@ -1,0 +1,5 @@
+[book]
+authors = ["Michael Aldridge"]
+multilingual = false
+src = "src"
+title = "InfraDocs"
