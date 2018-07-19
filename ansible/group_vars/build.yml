@@ -64,6 +64,7 @@ buildslave_zones:
       name: Enno Boland
       mail: gottox@voidlinux.eu
     xbps:
+      makejobs: 2
   DE-2:
     admin:
       nick: chris2
