@@ -1,0 +1,4 @@
+{% for buildbot in local_buildbots %}
+%build-ops ALL=(ALL) NOPASSWD: /usr/bin/sv restart {{ buildbot.service_name | default('void-builder-' + buildbot.mach) }}
+{% endfor %}
+%build-ops ALL=({{ buildslave_user }}) ALL

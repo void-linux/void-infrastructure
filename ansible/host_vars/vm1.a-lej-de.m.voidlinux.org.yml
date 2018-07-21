@@ -31,6 +31,9 @@ xbps_repository_multilib_nonfree: /hostdir/binpkgs/multilib/nonfree
 
 sshd_usepam: false
 
+sshd_AllowGroups:
+  - build-ops
+
 acmetool:
   sites:
     - site: build.voidlinux.eu

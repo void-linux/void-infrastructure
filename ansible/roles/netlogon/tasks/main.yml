@@ -8,6 +8,8 @@
   user:
     name: "{{ netlogon_maintenance_user }}"
     group: "{{ netlogon_maintenance_user }}"
+    groups:
+      - wheel
     state: present
     createhome: yes
 
@@ -34,6 +36,7 @@
       - NetKeys
       - libnss-cache
       - pam_netauth
+      - libpam-policycache
     state: present
 
 - name: Install nsscache Service (1/2)

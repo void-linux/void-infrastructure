@@ -13,6 +13,9 @@ xbps_repository_port: 80
 sshd_listen_addresses:
   - 198.204.250.219
 
+sshd_AllowGroups:
+  - build-ops
+
 live_mirror_bindip: 198.204.250.219
 
 live_mirror_servernames:

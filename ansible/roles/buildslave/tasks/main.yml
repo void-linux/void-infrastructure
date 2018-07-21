@@ -171,3 +171,14 @@
     query: "[?zone=='{{ buildslave_zone }}']"
   loop_control:
     label: "{{ item.mach }}"
+
+- name: Install sudo policy
+  template:
+    src: buildslave.sudoers.j2
+    dest: /etc/sudoers.d/buildslave
+    owner: root
+    group: root
+    mode: 0640
+  vars:
+    query: "[?zone=='{{ buildslave_zone }}']"
+    local_buildbots: "{{ buildslave_buildslaves | json_query(query) }}"
