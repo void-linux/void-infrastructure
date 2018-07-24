@@ -3,6 +3,8 @@
 - [Introduction](./introduction/index.md)
 - [Terraform](./terraform/index.md)
   - [GitHub](./terraform/github.md)
+  - [GCP](./terraform/google.md)
+    - [DNS](./terraform/google-dns.md)
 - [Ansible](./ansible/index.md)
   - [Installation](./ansible/setup-installation.md)
   - [Secrets](./ansible/secrets.md)
