@@ -37,3 +37,5 @@ acmetool:
         - monitor.infrastructure.voidlinux.com
         - monitor.voidlinux.org
   hostmaster_email: postmaster@voidlinux.eu
+  services:
+    - nginx

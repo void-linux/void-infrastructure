@@ -49,6 +49,8 @@ acmetool:
         - repo.voidlinux.eu
         - vm1.a-lej-de.m.voidlinux.org
   hostmaster_email: postmaster@voidlinux.eu
+  services:
+    - nginx
 
 buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.eu/fullchain
 buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.eu/privkey
