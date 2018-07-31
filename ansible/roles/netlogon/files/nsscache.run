@@ -1,5 +1,5 @@
 #!/bin/sh
 
-nsscache
+nsscache --homedir "/home/{UID}"
 
 exec sleep $(( 30 * 60 ))
