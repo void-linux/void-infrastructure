@@ -15,6 +15,7 @@ sshd_usepam: false
 
 sshd_AllowGroups:
   - build-ops
+  - syncpeers
 
 xbps_repository_address: repo.voidlinux.eu
 xbps_repository_main: http://{{ xbps_repository_address }}/current

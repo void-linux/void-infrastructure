@@ -15,6 +15,7 @@ sshd_listen_addresses:
 
 sshd_AllowGroups:
   - build-ops
+  - syncpeers
 
 live_mirror_bindip: 198.204.250.219
 
