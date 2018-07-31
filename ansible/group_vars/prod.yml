@@ -7,3 +7,6 @@ telegraf_remotes:
   - c-lej-de.m.voidlinux.org
 
 void_aquire_certs: true
+
+sshd_passwords: false
+sshd_challengeresponse: false
