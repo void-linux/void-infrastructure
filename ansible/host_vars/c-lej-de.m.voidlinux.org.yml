@@ -11,8 +11,6 @@ network_interfaces:
 
 network_address_use_slaac: false
 
-sshd_usepam: false
-
 sshd_AllowGroups:
   - build-ops
   - syncpeers

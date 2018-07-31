@@ -29,8 +29,6 @@ xbps_repository_nonfree: /hostdir/binpkgs/nonfree
 xbps_repository_multilib: /hostdir/binpkgs/multilib
 xbps_repository_multilib_nonfree: /hostdir/binpkgs/multilib/nonfree
 
-sshd_usepam: false
-
 sshd_AllowGroups:
   - build-ops
 
