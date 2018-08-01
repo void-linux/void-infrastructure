@@ -44,8 +44,9 @@ acmetool:
         - sources.voidlinux.org
     - site: vm1.a-lej-de.m.voidlinux.org
       names:
-        - repo.voidlinux.eu
         - vm1.a-lej-de.m.voidlinux.org
+        - alpha.de.repo.voidlinux.org
+        - repo.voidlinux.eu
   hostmaster_email: postmaster@voidlinux.eu
   services:
     - nginx
@@ -69,6 +70,7 @@ buildslave_hostdir_group: void-repo
 live_mirror_bind6: true
 live_mirror_servernames:
   - vm1.a-lej-de.m.voidlinux.org
+  - alpha.de.repo.voidlinux.org
   - repo.voidlinux.eu
   - repo.voidlinux.net
   - repo.voidlinux.com

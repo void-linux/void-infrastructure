@@ -21,6 +21,7 @@ live_mirror_bindip: 198.204.250.219
 
 live_mirror_servernames:
   - vm1.a-mci-us.m.voidlinux.org
+  - alpha.us.repo.voidlinux.org
   - repo.voidlinux.us
   - repo3.voidlinux.eu
   - repo3.voidlinux.net

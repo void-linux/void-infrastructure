@@ -227,3 +227,36 @@ resource "google_dns_record_set" "service-sources" {
   rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
 }
 
+#######################################################################
+# Mirror Records                                                      #
+#                                                                     #
+# These records are largely for failover when the more intelligent    #
+# mirror router is unavailable.  This section should be hierarchical. #
+#######################################################################
+
+resource "google_dns_record_set" "mirror-de-1" {
+  name = "alpha.de.repo.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "CNAME"
+  ttl     = 300
+  rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
+}
+
+resource "google_dns_record_set" "mirror-de-2" {
+  name = "beta.de.repo.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "CNAME"
+  ttl     = 300
+  rrdatas = ["repo2.voidlinux.eu."]
+}
+
+resource "google_dns_record_set" "mirror-us-1" {
+  name = "alpha.us.repo.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "CNAME"
+  ttl     = 300
+  rrdatas = ["vm1.a-mci-us.m.${google_dns_managed_zone.voidlinux-org.dns_name}"]
+}
