@@ -20,11 +20,11 @@ sshd_AllowGroups:
 live_mirror_bindip: 198.204.250.219
 
 live_mirror_servernames:
+  - vm1.a-mci-us.m.voidlinux.org
   - repo.voidlinux.us
   - repo3.voidlinux.eu
   - repo3.voidlinux.net
   - repo3.voidlinux.com
-  - vm1.a-mci-us.m.voidlinux.org
 
 live_mirror_srvdir: /repo
 live_mirror_syncdstdir: /repo

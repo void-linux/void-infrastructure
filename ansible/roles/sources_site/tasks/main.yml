@@ -13,8 +13,8 @@
     - site:
         name: sources
         urls:
-          - sources.voidlinux.eu
           - sources.voidlinux.org
+          - sources.voidlinux.eu
         root_path: /srv/www/sources
         autoindex: true
         use_ssl: "{{ void_aquire_certs }}"

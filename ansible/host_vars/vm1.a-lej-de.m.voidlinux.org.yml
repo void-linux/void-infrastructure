@@ -34,15 +34,15 @@ sshd_AllowGroups:
 
 acmetool:
   sites:
-    - site: build.voidlinux.eu
+    - site: build.voidlinux.org
       names:
         - build.voidlinux.eu
         - build.voidlinux.org
-    - site: sources.voidlinux.eu
+    - site: sources.voidlinux.org
       names:
         - sources.voidlinux.eu
         - sources.voidlinux.org
-    - site: repo.voidlinux.eu
+    - site: vm1.a-lej-de.m.voidlinux.org
       names:
         - repo.voidlinux.eu
         - vm1.a-lej-de.m.voidlinux.org
@@ -50,11 +50,11 @@ acmetool:
   services:
     - nginx
 
-buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.eu/fullchain
-buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.eu/privkey
+buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.org/fullchain
+buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.org/privkey
 
-sources_site_cert_path: /var/lib/acme/live/sources.voidlinux.eu/fullchain
-sources_site_key_path: /var/lib/acme/live/sources.voidlinux.eu/privkey
+sources_site_cert_path: /var/lib/acme/live/sources.voidlinux.org/fullchain
+sources_site_key_path: /var/lib/acme/live/sources.voidlinux.org/privkey
 
 buildslave_zone: DE-1
 buildslave_master: localhost
@@ -68,15 +68,15 @@ buildslave_hostdir_group: void-repo
 
 live_mirror_bind6: true
 live_mirror_servernames:
+  - vm1.a-lej-de.m.voidlinux.org
   - repo.voidlinux.eu
   - repo.voidlinux.net
   - repo.voidlinux.com
-  - vm1.a-lej-de.m.voidlinux.org
 
 live_mirror_srvdir: /srv/www/void-repo
 live_mirror_secure_sync: true
 live_mirror_isroot: true
 
 live_mirror_ssl: true
-live_mirror_cert_path: /var/lib/acme/live/repo.voidlinux.eu/fullchain
-live_mirror_certkey_path: /var/lib/acme/live/repo.voidlinux.eu/privkey
+live_mirror_cert_path: /var/lib/acme/live/vm1.a-lej-de.m.voidlinux.org/fullchain
+live_mirror_certkey_path: /var/lib/acme/live/vm1.a-lej-de.m.voidlinux.org/privkey
