@@ -1,0 +1,6 @@
+---
+- name: terrastate
+  runit:
+    name: terrastate
+    state: restarted
+

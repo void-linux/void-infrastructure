@@ -1,0 +1,89 @@
+---
+- name: Install Packages
+  xbps:
+    pkg: TerraState
+    state: present
+
+- name: Configure Webserver
+  include_role:
+    name: nginx
+    tasks_from: base-site
+  vars:
+    - site:
+        name: terrastate
+        static_root: false
+        urls:
+          - terraform.voidlinux.org
+        use_ssl: "{{ void_aquire_certs }}"
+        ssl_certificate_path: "{{ terrastate_ssl_cert_path | default('/dev/null') }}"
+        ssl_key_path: "{{ terrastate_ssl_certkey_path | default('/dev/null') }}"
+        ssl_stapling: yes
+
+- name: Install root location block
+  copy:
+    src: root.conf
+    dest: /etc/nginx/locations.d/terraform.voidlinux.org/
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nginx
+
+- name: Configure firewall rules
+  copy:
+    src: terrastate.rules
+    dest: /etc/iptables.d/terrastate.rules
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables
+  when:
+    - void_aquire_certs
+
+- name: Create Service Group
+  group:
+    name: _terrastate
+    state: present
+    system: yes
+
+- name: Create Service User
+  user:
+    name: _terrastate
+    group: _terrastate
+    state: present
+    system: yes
+    home: /var/lib/terrastate
+    create_home: yes
+
+- name: Install Service (1/3)
+  file:
+    path: /etc/sv/{{ item }}
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    - terrastate
+    - terrastate/log
+
+- name: Install Service (2/3)
+  copy:
+    src: run
+    dest: /etc/sv/terrastate/run
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - terrastate
+
+- name: Install Service (3/3)
+  file:
+    src: /usr/bin/rsvlog
+    dest: /etc/sv/terrastate/log/run
+    state: link
+
+- name: Enable Service
+  runit:
+    name: terrastate
+    enabled: yes

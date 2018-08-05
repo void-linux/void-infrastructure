@@ -36,6 +36,9 @@ vm1.a-mci-us.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 c-lej-de.m.voidlinux.org
 
+[automation]
+vm2.a-lej-de.m.voidlinux.org
+
 [unmanaged]
 a-mci-us.m.voidlinux.org
 a-lej-de.m.voidlinux.org

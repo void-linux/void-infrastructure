@@ -23,3 +23,15 @@ network_interfaces:
       - 2a01:4f8:0:a0a1::add:1010
 
 network_address_use_slaac: false
+
+acmetool:
+  sites:
+    - site: terraform.voidlinux.org
+      names:
+        - terraform.voidlinux.org
+  hostmaster_email: postmaster@voidlinux.eu
+  services:
+    - nginx
+
+terrastate_ssl_cert_path: /var/lib/acme/live/terraform.voidlinux.org/fullchain
+terrastate_ssl_certkey_path: /var/lib/acme/live/terraform.voidlinux.org/privkey
