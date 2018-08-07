@@ -29,9 +29,25 @@ acmetool:
     - site: terraform.voidlinux.org
       names:
         - terraform.voidlinux.org
+    - site: infradocs.voidlinux.org
+      names:
+        - infradocs.voidlinux.org
   hostmaster_email: postmaster@voidlinux.eu
   services:
     - nginx
 
 terrastate_ssl_cert_path: /var/lib/acme/live/terraform.voidlinux.org/fullchain
 terrastate_ssl_certkey_path: /var/lib/acme/live/terraform.voidlinux.org/privkey
+
+mdbook_sites:
+  - name: infradocs
+    root_path: /srv/www/infradocs
+    urls:
+      - infradocs.voidlinux.org
+    source_url: https://github.com/void-linux/void-infrastructure
+    source_port: 443
+    source_dir: docs
+    use_ssl: true
+    ssl_stapling: true
+    ssl_certificate_path: /var/lib/acme/live/infradocs.voidlinux.org/fullchain
+    ssl_key_path: /var/lib/acme/live/infradocs.voidlinux.org/privkey
