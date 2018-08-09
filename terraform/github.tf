@@ -2,6 +2,28 @@ provider "github" {
   organization = "void-linux"
 }
 
+################
+# Issue Labels #
+################
+
+variable "issue_labels-pkgs" {
+  default = {
+    "ci-failure-unrelated" = "FBCA04"
+    "needs-tagged-release" = "D93F0B"
+    "big" = "FBCA04"
+    "needs-testing" = "D93F0B"
+    "WIP" = "B2E0F7"
+    "request" = "1E0C8E"
+  }
+}
+
+resource "github_issue_label" "void-packages" {
+  repository = "${github_repository.void-packages.id}"
+  count      = "${length(var.issue_labels-pkgs)}"
+  name       = "${element(keys(var.issue_labels-pkgs), count.index)}"
+  color      = "${element(values(var.issue_labels-pkgs), count.index)}"
+}
+
 #####################
 # Core Repositories #
 #####################
