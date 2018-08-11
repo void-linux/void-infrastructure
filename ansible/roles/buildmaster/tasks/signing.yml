@@ -48,3 +48,11 @@
     owner: root
     group: root
     mode: 0644
+
+- name: Install sudo policy
+  template:
+    src: repomaster.sudoers
+    dest: /etc/sudoers.d/repomaster
+    owner: root
+    group: root
+    mode: 0640

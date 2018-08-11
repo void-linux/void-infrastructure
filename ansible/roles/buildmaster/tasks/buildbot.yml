@@ -141,3 +141,11 @@
     src: /etc/sv/void-buildmaster
     dest: /var/service/void-buildmaster
     state: link
+
+- name: Install sudo policy
+  template:
+    src: buildmaster.sudoers
+    dest: /etc/sudoers.d/buildmaster
+    owner: root
+    group: root
+    mode: 0640
