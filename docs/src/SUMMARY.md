@@ -20,4 +20,5 @@
   - [rsyncd](./services/rsyncd.md)
   - [void-updates](./services/void-updates.md)
   - [xlocate](./services/xlocate.md)
+- [Organization](./org/index.md)
 
