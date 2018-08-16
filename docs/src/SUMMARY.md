@@ -22,3 +22,4 @@
   - [xlocate](./services/xlocate.md)
 - [Organization](./org/index.md)
   - [Onboarding](./org/onboarding.md)
+  - [Offboarding](./org/offboarding.md)
