@@ -23,3 +23,4 @@
 - [Organization](./org/index.md)
   - [Onboarding](./org/onboarding.md)
   - [Offboarding](./org/offboarding.md)
+  - [Forum Moderation](./org/forum-moderation.md)
