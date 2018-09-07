@@ -65,6 +65,15 @@ resource "google_dns_record_set" "c-lej-de" {
   rrdatas = ["5.9.152.66"]
 }
 
+resource "google_dns_record_set" "d-lej-de" {
+  name = "d-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "A"
+  ttl     = 300
+  rrdatas = ["94.130.237.33"]
+}
+
 resource "google_dns_record_set" "a-mci-us" {
   name = "a-mci-us.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
   managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"

@@ -1,0 +1,24 @@
+---
+network_input_policy: DROP
+network_output_policy: ACCEPT
+
+network_interfaces:
+    - name: default
+      mode: static
+      mode6: static
+      resolvermode: static
+      resolvermode6: disabled
+      addresses:
+        - 94.130.237.33/26
+      resolvers:
+        - 213.133.98.98
+        - 213.133.99.99
+        - 213.133.100.100
+      routers:
+        - 94.130.237.1
+      addresses6:
+        - 2a01:4f8:13b:131e::6565/64
+      resolvers6:
+        - 213.133.98.98
+        - 213.133.99.99
+        - 213.133.100.100
