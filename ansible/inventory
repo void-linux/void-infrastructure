@@ -10,6 +10,16 @@ vm1.a-mci-us.m.voidlinux.org
 buildmaster
 buildslave
 
+[dxpb-master]
+d-lej-de.m.voidlinux.org
+
+[dxpb-worker]
+d-lej-de.m.voidlinux.org
+
+[dxpb:children]
+dxpb-master
+dxpb-worker
+
 [mirror]
 vm1.a-mci-us.m.voidlinux.org
 vm1.a-lej-de.m.voidlinux.org

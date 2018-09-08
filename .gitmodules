@@ -28,3 +28,6 @@
 [submodule "ansible/roles/mdbook"]
 	path = ansible/roles/mdbook
 	url = git@github.com:void-ansible-roles/mdbook.git
+[submodule "ansible/roles/dxpb"]
+	path = ansible/roles/dxpb
+	url = git@github.com:void-ansible-roles/dxpb.git

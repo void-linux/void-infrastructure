@@ -1,0 +1,14 @@
+---
+- hosts: dxpb-master
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - dxpb/master
+
+- hosts: dxpb-worker
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - dxpb/slave

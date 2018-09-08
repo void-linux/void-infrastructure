@@ -22,3 +22,24 @@ network_interfaces:
         - 213.133.98.98
         - 213.133.99.99
         - 213.133.100.100
+
+sshd_AllowGroups:
+  - dxpb-root
+
+mirror_is_root: true
+
+dxpb_master_dataroot: /srv/dxpb
+
+dxpb_buildslaves:
+    - name: x86_64-1
+      cross: false
+      root: /srv/dxpb/buildslaves/x86_64-1
+      target: x86_64
+    - name: x86_64-2
+      cross: false
+      root: /srv/dxpb/buildslaves/x86_64-2
+      target: x86_64
+    - name: armv7l
+      cross: true
+      root: /srv/dxpb/buildslaves/armv7l-1
+      target: armv7l
