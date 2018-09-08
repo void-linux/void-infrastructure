@@ -5,6 +5,7 @@
   become_method: sudo
   roles:
     - dxpb/master
+    - live-mirror
 
 - hosts: dxpb-worker
   become: yes

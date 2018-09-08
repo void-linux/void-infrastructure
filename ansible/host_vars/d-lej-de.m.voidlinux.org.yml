@@ -26,8 +26,6 @@ network_interfaces:
 sshd_AllowGroups:
   - dxpb-root
 
-mirror_is_root: true
-
 dxpb_master_dataroot: /srv/dxpb
 
 dxpb_buildslaves:
@@ -43,3 +41,13 @@ dxpb_buildslaves:
       cross: true
       root: /srv/dxpb/buildslaves/armv7l-1
       target: armv7l
+
+live_mirror_servernames:
+  - d-lej-de.m.voidlinux.org
+
+live_mirror_services:
+  - http
+
+live_mirror_srvdir: /srv/www/void-repo
+live_mirror_isroot: true
+live_mirror_use_ssl: false
