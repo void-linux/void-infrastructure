@@ -1,9 +1,9 @@
 #%PAM-1.0
 
 auth    [success=4 default=ignore] pam_unix.so try_first_pass nullok
-auth    [success=3 default=ignore] pam_policycache.so action=check
+auth    [success=3 default=ignore] pam_policycache.so try_first_pass action=check
 auth    [success=ok default=die] pam_netauth.so try_first_pass
-auth    [success=1 default=ignore] pam_policycache.so action=update
+auth    [success=1 default=ignore] pam_policycache.so try_first_pass action=update
 auth    required  pam_deny.so
 auth    required  pam_env.so
 auth    required  pam_permit.so
