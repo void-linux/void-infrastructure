@@ -27,6 +27,15 @@ resource "github_repository" "void-mklive" {
   homepage_url = "https://voidlinux.org"
 }
 
+resource "github_repository" "void-docs" {
+  name = "void-docs"
+  description = "mdbook source for docs.voidlinux.org"
+  has_issues = true
+  homepage_url = "https://voidlinux.org"
+  allow_merge_commit = false
+  allow_squash_merge = false
+}
+
 resource "github_repository" "void-wiki" {
   name = "void-wiki"
   description = "Components for wiki.voidlinux.org"
@@ -167,6 +176,12 @@ resource "github_team_repository" "void-packages" {
 resource "github_team_repository" "void-mklive" {
   team_id    = "${github_team.pkg-committers.id}"
   repository = "${github_repository.void-mklive.name}"
+  permission = "push"
+}
+
+resource "github_team_repository" "void-docs" {
+  team_id    = "${github_team.pkg-committers.id}"
+  repository = "${github_repository.void-docs.name}"
   permission = "push"
 }
 
