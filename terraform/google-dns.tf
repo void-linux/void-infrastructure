@@ -196,6 +196,16 @@ resource "google_dns_record_set" "service-build" {
   rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
 }
 
+resource "google_dns_record_set" "service-docs" {
+  # Documentation
+  name = "docs.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "CNAME"
+  ttl     = 300
+  rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
+}
+
 resource "google_dns_record_set" "service-infradocs" {
   # Infrastructure Documentation
   name = "infradocs.${google_dns_managed_zone.voidlinux-org.dns_name}"

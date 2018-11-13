@@ -47,6 +47,9 @@ acmetool:
         - vm1.a-lej-de.m.voidlinux.org
         - alpha.de.repo.voidlinux.org
         - repo.voidlinux.eu
+    - site: docs.voidlinux.org
+      names:
+        - docs.voidlinux.org
   hostmaster_email: postmaster@voidlinux.eu
   services:
     - nginx
@@ -82,3 +85,15 @@ live_mirror_isroot: true
 live_mirror_ssl: true
 live_mirror_cert_path: /var/lib/acme/live/vm1.a-lej-de.m.voidlinux.org/fullchain
 live_mirror_certkey_path: /var/lib/acme/live/vm1.a-lej-de.m.voidlinux.org/privkey
+
+mdbook_sites:
+  - name: docs
+    root_path: /srv/www/void-repo/docs
+    urls:
+      - docs.voidlinux.org
+    source_url: https://github.com/void-linux/void-docs
+    source_port: 443
+    use_ssl: true
+    ssl_stapling: true
+    ssl_certificate_path: /var/lib/acme/live/docs.voidlinux.org/fullchain
+    ssl_key_path: /var/lib/acme/live/docs.voidlinux.org/privkey
