@@ -47,6 +47,15 @@ resource "google_dns_record_set" "vm2-a-lej-de" {
   rrdatas = ["148.251.199.117"]
 }
 
+resource "google_dns_record_set" "vm3-a-lej-de" {
+  name = "vm3.a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "A"
+  ttl     = 300
+  rrdatas = ["148.251.199.113"]
+}
+
 resource "google_dns_record_set" "b-lej-de" {
   name = "b-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
   managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
@@ -298,4 +307,18 @@ resource "google_dns_record_set" "mirror-us-1" {
   type    = "CNAME"
   ttl     = 300
   rrdatas = ["vm1.a-mci-us.m.${google_dns_managed_zone.voidlinux-org.dns_name}"]
+}
+
+#######################################################################
+# MX Records                                                          #
+#                                                                     #
+#######################################################################
+
+resource "google_dns_record_set" "mx-mail-host" {
+  name = "${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "MX"
+  ttl     = 300
+  rrdatas = ["10 vm3.a-lej-de.m.voidlinux.org."]
 }
