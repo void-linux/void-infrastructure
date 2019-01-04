@@ -15,7 +15,7 @@ sshd_AllowGroups:
   - build-ops
   - syncpeers
 
-xbps_repository_address: repo.voidlinux.eu
+xbps_repository_address: alpha.de.repo.voidlinux.org
 xbps_repository_main: http://{{ xbps_repository_address }}/current
 xbps_repository_nonfree: http://{{ xbps_repository_address }}/current/nonfree
 xbps_repository_multilib: http://{{ xbps_repository_address }}/current/multilib

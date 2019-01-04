@@ -32,7 +32,7 @@ acmetool:
     - site: infradocs.voidlinux.org
       names:
         - infradocs.voidlinux.org
-  hostmaster_email: postmaster@voidlinux.eu
+  hostmaster_email: postmaster@voidlinux.org
   services:
     - nginx
 

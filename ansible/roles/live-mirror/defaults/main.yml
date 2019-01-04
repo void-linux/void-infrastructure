@@ -1,10 +1,6 @@
 # What hostnames should this mirror listen for?  The default is all
 # production hostnames for recognized mirrors.
 live_mirror_servernames:
-  - repo.voidlinux.eu
-  - repo2.voidlinux.eu
-  - repo3.voidlinux.eu
-  - repo4.voidlinux.eu
   - repo.voidlinux.us
   - repo.voidlinux.fr
   - repo.voidlinux.org
@@ -23,7 +19,7 @@ live_mirror_syncusers:
 
 # Various sync settings - not needed if master mirror
 live_mirror_syncuser: vmirror
-live_mirror_syncserver: repo.voidlinux.eu
+live_mirror_syncserver: alpha.de.repo.voidlinux.org
 live_mirror_syncsrcdir: voidmirror/
 live_mirror_syncdstdir: /srv/repo
 

@@ -47,7 +47,7 @@ buildmaster_machmap:
 #   - name: foobar
 #     pass: ItsaPassword!
 
-buildmaster_www_servername: build.voidlinux.eu
+buildmaster_www_servername: build.voidlinux.org
 
 buildmaster_groups:
   - void-repo

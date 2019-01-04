@@ -9,7 +9,6 @@
         static_root: false
         urls:
           - build.voidlinux.org
-          - build.voidlinux.eu
         use_ssl: "{{ void_aquire_certs }}"
         ssl_certificate_path: "{{ buildmaster_ssl_cert_path | default('/dev/null') }}"
         ssl_key_path: "{{ buildmaster_ssl_certkey_path | default('/dev/null') }}"

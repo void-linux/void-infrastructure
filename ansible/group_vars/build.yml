@@ -48,6 +48,7 @@ buildslave_buildslaves:
     directory: slave-cross-aarch64
     service_name: buildslave-cross-aarch64
     mach: aarch64
+    bootstrapargs: ""
     zone: DE-2
 
   - name: aarch64-musl-primary
@@ -55,6 +56,7 @@ buildslave_buildslaves:
     directory: slave-cross-aarch64-musl
     service_name: buildslave-cross-aarch64-musl
     mach: aarch64-musl
+    bootstrapargs: ""
     zone: DE-2
 
 buildslave_zones:
@@ -62,9 +64,8 @@ buildslave_zones:
     admin:
       nick: gottox
       name: Enno Boland
-      mail: gottox@voidlinux.eu
+      mail: gottox@voidlinux.org
     xbps:
-      makejobs: 2
   DE-2:
     admin:
       nick: chris2
@@ -75,7 +76,7 @@ buildslave_zones:
     admin:
       nick: maldridge
       name: maldridge
-      mail: maldridge@voidlinux.eu
+      mail: maldridge@voidlinux.org
     xbps:
       makejobs: 6
 

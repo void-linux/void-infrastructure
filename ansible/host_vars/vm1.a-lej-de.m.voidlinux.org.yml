@@ -36,21 +36,18 @@ acmetool:
   sites:
     - site: build.voidlinux.org
       names:
-        - build.voidlinux.eu
         - build.voidlinux.org
     - site: sources.voidlinux.org
       names:
-        - sources.voidlinux.eu
         - sources.voidlinux.org
     - site: vm1.a-lej-de.m.voidlinux.org
       names:
         - vm1.a-lej-de.m.voidlinux.org
         - alpha.de.repo.voidlinux.org
-        - repo.voidlinux.eu
     - site: docs.voidlinux.org
       names:
         - docs.voidlinux.org
-  hostmaster_email: postmaster@voidlinux.eu
+  hostmaster_email: postmaster@voidlinux.org
   services:
     - nginx
 
@@ -74,9 +71,6 @@ live_mirror_bind6: true
 live_mirror_servernames:
   - vm1.a-lej-de.m.voidlinux.org
   - alpha.de.repo.voidlinux.org
-  - repo.voidlinux.eu
-  - repo.voidlinux.net
-  - repo.voidlinux.com
 
 live_mirror_srvdir: /srv/www/void-repo
 live_mirror_secure_sync: true

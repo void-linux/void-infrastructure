@@ -31,7 +31,7 @@ buildslave_rootdir: /home/void-buildslave/
 # all locations for consistency.  If persistent resolution issues are
 # preventing a host from connecting to the buildmaster this name
 # should very likely be specified in the hosts file.
-buildslave_master: build.voidlinux.eu
+buildslave_master: build.voidlinux.org
 
 # The following list contains hashes for the builders.  For standards
 # and sake of debugging, the 'mach' should be the architecture as

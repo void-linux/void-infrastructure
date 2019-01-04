@@ -2,7 +2,7 @@
 network_input_policy: ACCEPT
 network_output_policy: ACCEPT
 
-xbps_repository_address: repo.voidlinux.eu
+xbps_repository_address: alpha.de.repo.voidlinux.org
 xbps_repository_main: http://{{ xbps_repository_address }}/current
 xbps_repository_nonfree: http://{{ xbps_repository_address }}/current/nonfree
 xbps_repository_multilib: http://{{ xbps_repository_address }}/current/multilib
@@ -23,7 +23,6 @@ live_mirror_servernames:
   - vm1.a-mci-us.m.voidlinux.org
   - alpha.us.repo.voidlinux.org
   - repo.voidlinux.us
-  - repo3.voidlinux.eu
   - repo3.voidlinux.net
   - repo3.voidlinux.com
 
