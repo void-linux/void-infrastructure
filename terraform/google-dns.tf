@@ -297,7 +297,7 @@ resource "google_dns_record_set" "mirror-de-2" {
 
   type    = "CNAME"
   ttl     = 300
-  rrdatas = ["repo2.voidlinux.eu."]
+  rrdatas = ["void.nerdclub.org."]
 }
 
 resource "google_dns_record_set" "mirror-us-1" {
