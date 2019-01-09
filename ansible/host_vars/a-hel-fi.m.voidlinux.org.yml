@@ -1,0 +1,76 @@
+---
+network_input_policy: DROP
+network_output_policy: ACCEPT
+
+network_interfaces:
+  - name: enp0s31f6
+    mode: static
+    mode6: static
+    resolvermode: static
+    resolvermode6: static
+    addresses:
+      - 95.216.76.97/26
+    resolvers:
+      - 213.133.98.98
+      - 213.133.99.99
+      - 213.133.100.100
+    routers:
+      - 95.216.76.65
+    resolvers6:
+      - 2a01:4F8:0:1::add:1010
+      - 2a01:4F8:0:1::add:9999
+      - 2a01:4F8:0:1::add:9898
+    addresses6:
+      - 2a01:4f9:2b:c9e::2/64
+
+network_address_use_slaac: false
+
+sshd_AllowGroups:
+  - build-ops
+
+nginx_dhparam_bits: 2048
+
+buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.org/fullchain
+buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.org/privkey
+
+sources_site_cert_path: /var/lib/acme/live/sources.voidlinux.org/fullchain
+sources_site_key_path: /var/lib/acme/live/sources.voidlinux.org/privkey
+
+buildslave_zone: DE-1
+buildslave_master: localhost
+buildslave_isremote: false
+
+buildslave_groups:
+  - xbuilder
+  - void-repo
+
+buildslave_hostdir_group: void-repo
+
+live_mirror_bind6: true
+live_mirror_servernames:
+  - a-hel-fi.m.voidlinux.org
+  - alpha.de.repo.voidlinux.org
+
+live_mirror_srvdir: /srv/www/void-repo
+live_mirror_secure_sync: true
+live_mirror_isroot: true
+
+live_mirror_ssl: true
+live_mirror_cert_path: /var/lib/acme/live/a-hel-fi.m.voidlinux.org/fullchain
+live_mirror_certkey_path: /var/lib/acme/live/a-hel-fi.m.voidlinux.org/privkey
+
+acmetool:
+  sites:
+    - site: build.voidlinux.org
+      names:
+        - build.voidlinux.org
+    - site: sources.voidlinux.org
+      names:
+        - sources.voidlinux.org
+    - site: a-hel-fi.m.voidlinux.org
+      names:
+        - a-hel-fi.m.voidlinux.org
+        - alpha.de.repo.voidlinux.org
+  hostmaster_email: postmaster@voidlinux.org
+  services:
+    - nginx

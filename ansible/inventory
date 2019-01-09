@@ -1,9 +1,12 @@
 [buildmaster]
 vm1.a-lej-de.m.voidlinux.org
+a-hel-fi.m.voidlinux.org
 
 [buildslave]
 vm1.a-lej-de.m.voidlinux.org
+a-hel-fi.m.voidlinux.org
 c-lej-de.m.voidlinux.org
+d-lej.de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
 
 [build:children]
@@ -46,6 +49,7 @@ vm2.a-lej-de.m.voidlinux.org
 vm1.a-lej-de.m.voidlinux.org
 vm2.a-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
+a-hel-fi.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 c-lej-de.m.voidlinux.org
 d-lej-de.m.voidlinux.org
@@ -58,6 +62,7 @@ a-mci-us.m.voidlinux.org
 a-lej-de.m.voidlinux.org
 
 [prod]
+a-hel-fi.m.voidlinux.org
 a-mci-us.m.voidlinux.org
 a-lej-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
