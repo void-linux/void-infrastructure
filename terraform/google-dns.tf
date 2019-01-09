@@ -20,6 +20,15 @@ resource "google_dns_managed_zone" "voidlinux-org" {
 # should be its VMs.                                                 #
 ######################################################################
 
+resource "google_dns_record_set" "a-hel-fi" {
+  name = "a-hel-fi.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "A"
+  ttl     = 300
+  rrdatas = ["95.216.76.97"]
+}
+
 resource "google_dns_record_set" "a-lej-de" {
   name = "a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
   managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
@@ -202,7 +211,7 @@ resource "google_dns_record_set" "service-build" {
 
   type    = "CNAME"
   ttl     = 300
-  rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
+  rrdatas = ["a-hel-fi.m.voidlinux.org."]
 }
 
 resource "google_dns_record_set" "service-docs" {
@@ -212,7 +221,7 @@ resource "google_dns_record_set" "service-docs" {
 
   type    = "CNAME"
   ttl     = 300
-  rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
+  rrdatas = ["a-hel-fi.m.voidlinux.org."]
 }
 
 resource "google_dns_record_set" "service-infradocs" {
@@ -262,7 +271,7 @@ resource "google_dns_record_set" "service-sources" {
 
   type    = "CNAME"
   ttl     = 300
-  rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
+  rrdatas = ["a-hel-fi.m.voidlinux.org."]
 }
 
 resource "google_dns_record_set" "service-terraform" {
@@ -288,7 +297,7 @@ resource "google_dns_record_set" "mirror-de-1" {
 
   type    = "CNAME"
   ttl     = 300
-  rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
+  rrdatas = ["a-hel-fi.m.voidlinux.org."]
 }
 
 resource "google_dns_record_set" "mirror-de-2" {
