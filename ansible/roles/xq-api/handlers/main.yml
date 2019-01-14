@@ -1,0 +1,10 @@
+---
+- name: xq-api
+  runit:
+    name: xq-api
+    state: restarted
+
+- name: xq-api-hup
+  runit:
+    name: xq-api-hup
+    state: restarted
