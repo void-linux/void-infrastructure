@@ -10,6 +10,7 @@
     - void-updates
     - live-mirror
     - sources_site
+    - xq-api
 
 - hosts: buildslave
   become: yes

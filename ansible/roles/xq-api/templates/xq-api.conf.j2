@@ -1,0 +1,8 @@
+NET={{ xqapi.listen_net | default('tcp') }}
+ADDR={{ xqapi.listen_addr | default('127.0.0.1:8197') }}
+MAX_QUERIES={{ xqapi.max_queries | default(16) }}
+LOG_V={{ xqapi.log_v | default(None) }}
+LOG_ACCESS={{ 't' if (xqapi.log_access | default(False)) else 'f' }}
+LOG_TO_STDERR={{ 't' if (xqapi.log_to_stderr | default(False)) else 'f' }}
+LOG_DIR={{ xqapi.log_dir | default(None) }}
+REPODATA={{ xqapi.repodata | default('/var/db/xbps') }}

@@ -36,6 +36,9 @@ buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.org/privkey
 sources_site_cert_path: /var/lib/acme/live/sources.voidlinux.org/fullchain
 sources_site_key_path: /var/lib/acme/live/sources.voidlinux.org/privkey
 
+xqapi_site_cert_path: /var/lib/acme/live/xq-api.voidlinux.org/fullchain
+xqapi_site_key_path: /var/lib/acme/live/xq-api.voidlinux.org/privkey
+
 buildslave_zone: DE-1
 buildslave_master: localhost
 buildslave_isremote: false
@@ -67,6 +70,9 @@ acmetool:
     - site: sources.voidlinux.org
       names:
         - sources.voidlinux.org
+    - site: xq-api.voidlinux.org
+      names:
+        - xq-api.voidlinux.org
     - site: a-hel-fi.m.voidlinux.org
       names:
         - a-hel-fi.m.voidlinux.org
