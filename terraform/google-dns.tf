@@ -284,6 +284,16 @@ resource "google_dns_record_set" "service-terraform" {
   rrdatas = ["vm2.a-lej-de.m.voidlinux.org."]
 }
 
+resource "google_dns_record_set" "service-xqapi" {
+  # XBPS repodata API (xq-api)
+  name = "xq-api.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+
+  type    = "CNAME"
+  ttl     = 300
+  rrdatas = ["a-hel-fi.m.voidlinux.org."]
+}
+
 #######################################################################
 # Mirror Records                                                      #
 #                                                                     #
