@@ -95,3 +95,6 @@ mdbook_sites:
     ssl_stapling: true
     ssl_certificate_path: /var/lib/acme/live/docs.voidlinux.org/fullchain
     ssl_key_path: /var/lib/acme/live/docs.voidlinux.org/privkey
+
+xqapi:
+  repodata: /hostdir/binpkgs
