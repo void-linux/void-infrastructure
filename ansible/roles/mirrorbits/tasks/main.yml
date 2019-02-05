@@ -3,7 +3,39 @@
   xbps:
     pkg:
       - mirrorbits
+      - geoipupdate
+      - snooze
     state: present
+
+- name: Configure geoipupdate service
+  copy:
+    src: GeoIP.conf
+    dest: /etc/GeoIP.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install geoipupdate service (1/2)
+  file:
+    path: /etc/sv/geoipupdate
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install geoipupdate service (2/2)
+  copy:
+    src: geoipupdate.run
+    dest: /etc/sv/geoipupdate/run
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Enable geoipupdate
+  service:
+    name: geoipupdate
+    state: started
+    enabled: true
 
 - name: Create config directory
   file:
