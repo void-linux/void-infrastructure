@@ -67,6 +67,28 @@ resource "github_team_membership" "void-ops_the-maldridge" {
   username = "the-maldridge"
 }
 
+####################
+# Document Writers #
+####################
+
+resource "github_team_membership" "doc-writers_the-maldridge" {
+  team_id = "${github_team.doc-writers.id}"
+  role = "maintainer"
+  username = "the-maldridge"
+}
+
+resource "github_team_membership" "doc-writers_bobertlo" {
+  team_id = "${github_team.doc-writers.id}"
+  role = "member"
+  username = "bobertlo"
+}
+
+resource "github_team_membership" "doc-writers_nilium" {
+  team_id = "${github_team.doc-writers.id}"
+  role = "member"
+  username = "Nilium"
+}
+
 ######################
 # Package Committers #
 ######################
