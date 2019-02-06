@@ -31,7 +31,7 @@ resource "github_repository" "void-docs" {
   name = "void-docs"
   description = "mdbook source for docs.voidlinux.org"
   has_issues = true
-  homepage_url = "https://voidlinux.org"
+  homepage_url = "https://docs.voidlinux.org"
   allow_merge_commit = false
   allow_squash_merge = false
 }
@@ -148,6 +148,12 @@ resource "github_team" "void-ops" {
   privacy = "closed"
 }
 
+resource "github_team" "doc-writers" {
+  name = "doc-writers"
+  description = "Document Writers"
+  privacy = "closed"
+}
+
 ###############
 # Memberships #
 ###############
@@ -181,6 +187,14 @@ resource "github_team_repository" "void-mklive" {
 
 resource "github_team_repository" "void-docs" {
   team_id    = "${github_team.pkg-committers.id}"
+  repository = "${github_repository.void-docs.name}"
+  permission = "push"
+}
+
+resource "github_team_repository" "void-docs-dedicated" {
+  # Document writers are also allowed to merge to the void-docs
+  # repository.
+  team_id    = "${github_team.doc-writers.id}"
   repository = "${github_repository.void-docs.name}"
   permission = "push"
 }
