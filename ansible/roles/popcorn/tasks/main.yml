@@ -43,7 +43,6 @@
         name: popcorn
         urls:
           - popcorn.voidlinux.org
-        use_ssl: false
         root_path: /srv/www/popcorn
         autoindex: true
 

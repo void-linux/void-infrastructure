@@ -99,7 +99,6 @@
         name: auto-mirror
         urls:
           - auto.voidlinux.org
-        use_ssl: false
         static_root: false
 
 - name: Configure webserver root location

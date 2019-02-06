@@ -10,3 +10,5 @@ void_aquire_certs: true
 
 sshd_passwords: false
 sshd_challengeresponse: false
+
+nginx_acme_challenge_path: /var/run/acme/acme-challenge/

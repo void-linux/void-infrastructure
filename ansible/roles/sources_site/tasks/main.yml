@@ -16,7 +16,7 @@
           - sources.voidlinux.org
         root_path: /srv/www/sources
         autoindex: true
-        use_ssl: "{{ void_aquire_certs }}"
-        ssl_certificate_path: "{{ sources_site_cert_path | default('/dev/null') }}"
-        ssl_key_path: "{{ sources_site_key_path | default('/dev/null') }}"
-        ssl_stapling: yes
+        tls:
+          certificate: "{{ sources_site_cert_path | default('/dev/null') }}"
+          key: "{{ sources_site_key_path | default('/dev/null') }}"
+          stapling: yes

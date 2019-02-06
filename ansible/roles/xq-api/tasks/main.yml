@@ -59,11 +59,11 @@
         name: xq-api
         urls:
           - xq-api.voidlinux.org
-        use_ssl: "{{ void_aquire_certs }}"
-        ssl_certificate_path: "{{ xqapi_site_cert_path | default('/dev/null') }}"
-        ssl_key_path: "{{ xqapi_site_key_path | default('/dev/null') }}"
-        ssl_stapling: yes
         static_root: no
+        tls:
+          certificate: "{{ xqapi_site_cert_path | default('/dev/null') }}"
+          key: "{{ xqapi_site_key_path | default('/dev/null') }}"
+          stapling: yes
 
 - name: Install location file
   copy:

@@ -14,10 +14,10 @@
         static_root: false
         urls:
           - terraform.voidlinux.org
-        use_ssl: "{{ void_aquire_certs }}"
-        ssl_certificate_path: "{{ terrastate_ssl_cert_path | default('/dev/null') }}"
-        ssl_key_path: "{{ terrastate_ssl_certkey_path | default('/dev/null') }}"
-        ssl_stapling: yes
+        tls:
+          certificate: "{{ terrastate_ssl_cert_path | default('/dev/null') }}"
+          key: "{{ terrastate_ssl_certkey_path | default('/dev/null') }}"
+          stapling: yes
 
 - name: Install root location block
   copy:

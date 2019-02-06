@@ -91,10 +91,10 @@ mdbook_sites:
       - docs.voidlinux.org
     source_url: https://github.com/void-linux/void-docs
     source_port: 443
-    use_ssl: true
-    ssl_stapling: true
-    ssl_certificate_path: /var/lib/acme/live/docs.voidlinux.org/fullchain
-    ssl_key_path: /var/lib/acme/live/docs.voidlinux.org/privkey
+    tls:
+      certificate: /var/lib/acme/live/docs.voidlinux.org/fullchain
+      key: /var/lib/acme/live/docs.voidlinux.org/privkey
+      stapling: true
 
 xqapi:
   repodata: /hostdir/binpkgs
