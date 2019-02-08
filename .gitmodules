@@ -31,3 +31,6 @@
 [submodule "ansible/roles/dxpb"]
 	path = ansible/roles/dxpb
 	url = git@github.com:void-ansible-roles/dxpb.git
+[submodule "ansible/roles/node_exporter"]
+	path = ansible/roles/node_exporter
+	url = git@github.com:void-ansible-roles/node_exporter.git

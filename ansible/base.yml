@@ -8,3 +8,4 @@
     - sshd
     - mosh
     - netlogon
+    - node_exporter
