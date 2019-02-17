@@ -6,14 +6,6 @@ xbps_repository_multilib_nonfree: https://alpha.de.repo.voidlinux.org/current/mu
 xbps_repository_address: alpha.de.repo.voidlinux.org
 xbps_repository_port: 443
 
-telegraf:
-  remotes:
-    - host: "{{ influxdb_host }}"
-  output:
-    influxdb:
-      url: "http://{{ influxdb_host }}:8086"
-  agent:
-
 metal_domain_root: '.m.voidlinux.org'
 network_hostname: '{{ inventory_hostname | regex_replace(metal_domain_root, "") | regex_replace("\.", "-") }}'
 network_fqdn: '{{ inventory_hostname }}'

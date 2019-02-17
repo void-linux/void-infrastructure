@@ -1,11 +1,19 @@
 ---
-telegraf:
-  remotes:
-    - host: localhost
-  output:
-    influxdb:
-      url: http://localhost:8086
-  agent:
+grafana:
+  site:
+    name: grafana
+    urls:
+      - monitoring.voidlinux.org
+    static_root: no
+    tls:
+      certificate: /var/lib/acme/live/monitoring.voidlinux.org/fullchain
+      key: /var/lib/acme/live/monitoring.voidlinux.org/privkey
 
-influxdb:
-  remote_sources: '{{ telegraf_remotes }}'
+acmetool:
+  sites:
+    - site: monitoring.voidlinux.org
+      names:
+        - monitoring.voidlinux.org
+  hostmaster_email: postmaster@voidlinux.org
+  services:
+    - nginx

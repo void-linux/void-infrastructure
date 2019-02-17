@@ -6,7 +6,7 @@
   roles:
     - sshd
     - xbps-repoconf
+    - prometheus
     - acmetool
     - nginx
-    - influxdb
     - grafana

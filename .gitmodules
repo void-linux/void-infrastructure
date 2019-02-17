@@ -34,3 +34,6 @@
 [submodule "ansible/roles/node_exporter"]
 	path = ansible/roles/node_exporter
 	url = git@github.com:void-ansible-roles/node_exporter.git
+[submodule "ansible/roles/prometheus"]
+	path = ansible/roles/prometheus
+	url = git@github.com:void-ansible-roles/prometheus.git

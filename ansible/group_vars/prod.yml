@@ -1,14 +1,26 @@
 ---
-influxdb_host: monitor.voidlinux.org
-
-telegraf_remotes:
-  - vm1.a-lej-de.m.voidlinux.org
-  - vm1.a-mci-us.m.voidlinux.org
-  - c-lej-de.m.voidlinux.org
-
 void_aquire_certs: true
 
 sshd_passwords: false
 sshd_challengeresponse: false
 
 nginx_acme_challenge_path: /var/run/acme/acme-challenge/
+
+prometheus:
+  jobs:
+    - name: prometheus
+      targets:
+        - host: b-lej-de.m.voidlinux.org
+          port: 9090
+    - name: prod-fleet
+      targets:
+        - host: b-lej-de.m.voidlinux.org
+          port: 9100
+        - host: vm1.a-mci-us.m.voidlinux.org
+          port: 9100
+        - host: vm2.a-lej-de.m.voidlinux.org
+          port: 9100
+        - host: c-lej-de.m.voidlinux.org
+          port: 9100
+        - host: a-hel-fi.m.voidlinux.org
+          port: 9100
