@@ -25,3 +25,5 @@
   - [Onboarding](./org/onboarding.md)
   - [Offboarding](./org/offboarding.md)
   - [Forum Moderation](./org/forum-moderation.md)
+- [Manual Tasks](./upkeep/index.md)
+  - [Image Building](./upkeep/images.md)
