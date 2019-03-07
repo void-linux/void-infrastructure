@@ -27,6 +27,13 @@ resource "github_repository" "void-mklive" {
   homepage_url = "https://voidlinux.org"
 }
 
+resource "github_repository" "void-docker" {
+  name = "void-docker"
+  description = "Dockerfile for building images"
+  has_issues = true
+  homepage_url = "https://hub.docker.com/u/voidlinux"
+}
+
 resource "github_repository" "void-docs" {
   name = "void-docs"
   description = "mdbook source for docs.voidlinux.org"
