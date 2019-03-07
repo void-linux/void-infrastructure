@@ -8,7 +8,7 @@ users and groups.
 
 ## Groups
 
-There are currently two groups that gate access into GitHub resources:
+There are currently three groups that gate access into GitHub resources:
 
 ### pkg-committers
 
@@ -26,6 +26,13 @@ not be authorized without a signoff from an infrastructure lead or
 itself, and is restricted to prevent accidental breakage from pushing
 something that is later pushed by automation that performs change
 detection against the state of the repo.
+
+### doc-writers
+
+Members of this group have access to push changes into the
+[void-docs](https://github.com/void-linux/void-docs)
+repository which is responsible for holding all content that appears
+on our [handbook](docs.voidlinux.org).
 
 ## Adding and Removing Members
 
