@@ -86,7 +86,7 @@ resource "github_team_membership" "doc-writers_bobertlo" {
 resource "github_team_membership" "doc-writers_nilium" {
   team_id = "${github_team.doc-writers.id}"
   role = "member"
-  username = "Nilium"
+  username = "nilium"
 }
 
 ######################
@@ -131,10 +131,10 @@ resource "github_team_membership" "pkg-committers_asergi" {
   username = "asergi"
 }
 
-resource "github_team_membership" "pkg-committers_chneukirchen" {
+resource "github_team_membership" "pkg-committers_leahneukirchen" {
   team_id = "${github_team.pkg-committers.id}"
   role = "member"
-  username = "chneukirchen"
+  username = "leahneukirchen"
 }
 
 resource "github_team_membership" "pkg-committers_hoshpak" {
