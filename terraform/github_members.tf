@@ -131,12 +131,6 @@ resource "github_team_membership" "pkg-committers_asergi" {
   username = "asergi"
 }
 
-resource "github_team_membership" "pkg-committers_leahneukirchen" {
-  team_id = "${github_team.pkg-committers.id}"
-  role = "member"
-  username = "leahneukirchen"
-}
-
 resource "github_team_membership" "pkg-committers_hoshpak" {
   team_id = "${github_team.pkg-committers.id}"
   role = "member"
@@ -153,6 +147,12 @@ resource "github_team_membership" "pkg-committers_johnnynator" {
   team_id = "${github_team.pkg-committers.id}"
   role = "member"
   username = "Johnnynator"
+}
+
+resource "github_team_membership" "pkg-committers_leahneukirchen" {
+  team_id = "${github_team.pkg-committers.id}"
+  role = "member"
+  username = "leahneukirchen"
 }
 
 resource "github_team_membership" "pkg-committers_lemmi" {
