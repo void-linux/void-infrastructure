@@ -21,8 +21,10 @@
     group: root
     mode: 0644
 
-- name: Link Results
-  file:
-    src: "{{ void_updates_homedir }}/result"
-    dest: "{{ void_updates_srvdir }}/void-updates"
-    state: link
+- name: Mount the results into the mirror
+  mount:
+    fstype: none
+    src: /var/cache/void-updates/result
+    path: /srv/www/void-repo/void-updates
+    state: mounted
+    opts: defaults,bind,ro
