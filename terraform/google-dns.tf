@@ -261,7 +261,7 @@ resource "google_dns_record_set" "service-popcorn" {
 
   type    = "CNAME"
   ttl     = 300
-  rrdatas = ["vm1.a-lej-de.m.voidlinux.org."]
+  rrdatas = ["a-hel-fi.m.voidlinux.org."]
 }
 
 resource "google_dns_record_set" "service-sources" {
