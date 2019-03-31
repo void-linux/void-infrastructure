@@ -2,18 +2,4 @@
 
 cd /var/lib/netauthd || exit 1
 
-exec chpst -u _netauthd:_netauthd netauthd \
-     --bind "" \
-     --port 8443 \
-     --key_file security/netauth_tls_certificate.key \
-     --cert_file security/netauth_tls_certificate.pem \
-     --db ProtoDB \
-     --protodb_root ./data \
-     --crypto bcrypt \
-     --bcrypt_cost 10 \
-     --token_lifetime 20m \
-     --token_renewals 0 \
-     --token_impl jwt-rsa \
-     --jwt_rsa_privatekey security/netauth_token.key \
-     --jwt_rsa_publickey security/netauth_token.pem \
-     2>&1
+exec chpst -u _netauthd:_netauthd netauthd 2>&1

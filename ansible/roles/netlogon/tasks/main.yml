@@ -99,3 +99,11 @@
     owner: root
     group: root
     mode: 0640
+
+- name: Install maintenance sudo policy
+  template:
+    src: maintenance.sudoers
+    dest: /etc/sudoers.d/maintenance
+    owner: root
+    group: root
+    mode: 0640

@@ -22,40 +22,33 @@
 
 - name: Create data directories
   file:
-    path: "/var/lib/netauthd/{{ item }}"
+    path: "/var/lib/netauth/{{ item }}"
     state: directory
     owner: _netauthd
     group: _netauthd
     mode: 0750
   with_items:
-    - data
-    - security
+    - pdb
 
 - name: Install TLS Certificate
   copy:
-    src: "{{ item }}"
-    dest: /var/lib/netauthd/security/
+    src: secret/netauth_tls_certificate.key
+    dest: /var/lib/netauth/keys/tls.key
     owner: root
     group: _netauthd
     mode: 0640
   no_log: true
-  with_items:
-    - secret/netauth_tls_certificate.pem
-    - secret/netauth_tls_certificate.key
   notify:
     - netauthd
 
 - name: Install Token Keys
   copy:
-    src: "{{ item }}"
-    dest: /var/lib/netauthd/security
+    src: secret/netauth_token.key
+    dest: /var/lib/netauth/keys/token.key
     owner: root
     group: _netauthd
-    mode: 0640
+    mode: 0400
   no_log: true
-  with_items:
-    - secret/netauth_token.key
-    - secret/netauth_token.pem
   notify:
     - netauthd
 

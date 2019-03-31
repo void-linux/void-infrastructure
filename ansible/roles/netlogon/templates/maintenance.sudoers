@@ -1,0 +1,1 @@
+{{ netlogon_maintenance_user }} ALL=(ALL) NOPASSWD:ALL

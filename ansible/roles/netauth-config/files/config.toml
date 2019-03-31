@@ -8,8 +8,8 @@
   port=1729
 
 [tls]
-  key="keys/tls.key"
-  cert="keys/tls.pem"
+  key="/var/lib/netauth/keys/tls.key"
+  certificate="/var/lib/netauth/keys/tls.pem"
 
 [token]
   backend = "jwt-rsa"
