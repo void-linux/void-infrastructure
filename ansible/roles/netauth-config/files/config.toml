@@ -1,0 +1,26 @@
+[core]
+  home="/var/lib/netauth"
+  server="netauth.voidlinux.org"
+  port=1729
+
+[server]
+  bind=""
+  port=1729
+
+[tls]
+  key="keys/tls.key"
+  cert="keys/tls.pem"
+
+[token]
+  backend = "jwt-rsa"
+  lifetime = "20m"
+  renewals = 0
+
+[db]
+  backend = "ProtoDB"
+
+[crypto]
+  backend = "bcrypt"
+
+  [crypto.bcrypt]
+    cost = 10

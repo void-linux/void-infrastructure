@@ -1,3 +1,0 @@
-Server="netauth.voidlinux.org"
-Port=8443
-ServerCert="/usr/share/netauth/netauth.pem"

@@ -1,15 +1,31 @@
 ---
+- name: Create config directory
+  file:
+    path: /etc/netauth
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Configure NetAuth library
   copy:
-    src: netauth.toml
-    dest: /etc/netauth.toml
+    src: config.toml
+    dest: /etc/netauth/config.toml
     owner: root
     group: root
     mode: 0644
 
 - name: Ensure data directory
   file:
-    path: /usr/share/netauth/
+    path: /var/lib/netauth
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Ensure key directory
+  file:
+    path: /var/lib/netauth/keys
     state: directory
     owner: root
     group: root
@@ -18,7 +34,7 @@
 - name: Install NetAuth Certificate
   copy:
     src: secret/netauth_tls_certificate.pem
-    dest: /usr/share/netauth/netauth.pem
+    dest: /var/lib/netauth/keys/tls.pem
     owner: root
     group: root
     mode: 0644
@@ -26,7 +42,7 @@
 - name: Install Token Verification Key
   copy:
     src: secret/netauth_token.pem
-    dest: /usr/share/netauth/token.pem
+    dest: /var/lib/netauth/keys/token.pem
     owner: root
     group: root
     mode: 0644
