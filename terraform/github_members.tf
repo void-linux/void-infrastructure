@@ -172,3 +172,19 @@ resource "github_team_membership" "pkg-committers_thypon" {
   role = "member"
   username = "thypon"
 }
+
+###################
+# XBPS Developers #
+###################
+
+# These memberships belong to groups defined in github.tf.  These are
+# sorted by lexical sort order keyed on the username.  This order is
+# manually preserved, please be careful when editing.
+
+# Maintainers
+
+resource "github_team_membership" "xbps-developers_duncaen" {
+  team_id = "${github_team.xbps-developers.id}"
+  role = "maintainer"
+  username = "Duncaen"
+}
