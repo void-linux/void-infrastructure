@@ -142,6 +142,12 @@ resource "github_team" "pkg-committers" {
   privacy = "closed"
 }
 
+resource "github_team" "xbps-developers" {
+  name = "xbps-developers"
+  description = "The people that build XBPS"
+  privacy = "closed"
+}
+
 resource "github_team" "void-ops" {
   name = "void-ops"
   description = "Infrastructure Operators"
@@ -236,7 +242,7 @@ resource "github_team_repository" "socklog-void" {
 }
 
 resource "github_team_repository" "xbps" {
-  team_id    = "${github_team.pkg-committers.id}"
+  team_id    = "${github_team.xbps-developers.id}"
   repository = "${github_repository.xbps.name}"
   permission = "push"
 }
