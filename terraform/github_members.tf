@@ -161,12 +161,6 @@ resource "github_team_membership" "pkg-committers_lemmi" {
   username = "lemmi"
 }
 
-resource "github_team_membership" "pkg-committers_maxice8" {
-  team_id = "${github_team.pkg-committers.id}"
-  role = "member"
-  username = "maxice8"
-}
-
 resource "github_team_membership" "pkg-committers_pullmoll" {
   team_id = "${github_team.pkg-committers.id}"
   role = "member"
