@@ -160,6 +160,12 @@ resource "github_team" "doc-writers" {
   privacy = "closed"
 }
 
+resource "github_team" "webmasters" {
+  name = "webmasters"
+  description = "Reviewers for voidlinux.org"
+  privacy = "closed"
+}
+
 ###############
 # Memberships #
 ###############
@@ -230,7 +236,7 @@ resource "github_team_repository" "void-updates" {
 }
 
 resource "github_team_repository" "void-linux-website" {
-  team_id    = "${github_team.pkg-committers.id}"
+  team_id    = "${github_team.webmasters.id}"
   repository = "${github_repository.void-linux-website.name}"
   permission = "push"
 }
