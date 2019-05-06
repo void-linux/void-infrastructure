@@ -211,86 +211,14 @@ resource "github_team_repository" "void-docs-dedicated" {
   permission = "push"
 }
 
-resource "github_team_repository" "void-wiki" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-wiki.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "void-texlive" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-texlive.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "void-runit" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-runit.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "void-updates" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-updates.name}"
-  permission = "push"
-}
-
 resource "github_team_repository" "void-linux-website" {
   team_id    = "${github_team.webmasters.id}"
   repository = "${github_repository.void-linux-website.name}"
   permission = "push"
 }
 
-resource "github_team_repository" "socklog-void" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.socklog-void.name}"
-  permission = "push"
-}
-
 resource "github_team_repository" "xbps" {
   team_id    = "${github_team.xbps-developers.id}"
   repository = "${github_repository.xbps.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "xbps-bulk" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.xbps-bulk.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "netbsd-wtf" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.netbsd-wtf.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "libglob" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.libglob.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "jbigkit-shared" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.jbigkit-shared.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "musl-obstack" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.musl-obstack.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "musl-fts" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.musl-fts.name}"
-  permission = "push"
-}
-
-resource "github_team_repository" "openbsd-man" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.openbsd-man.name}"
   permission = "push"
 }
