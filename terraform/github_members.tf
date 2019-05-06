@@ -67,6 +67,38 @@ resource "github_team_membership" "void-ops_the-maldridge" {
   username = "the-maldridge"
 }
 
+##############
+# Webmasters #
+##############
+
+# Maintainers
+
+resource "github_team_membership" "webmasters_duncaen" {
+  team_id = "${github_team.webmasters.id}"
+  role = "maintainer"
+  username = "Duncaen"
+}
+
+resource "github_team_membership" "webmasters_gottox" {
+  team_id = "${github_team.webmasters.id}"
+  role = "maintainer"
+  username = "Gottox"
+}
+
+resource "github_team_membership" "webmasters_the-maldridge" {
+  team_id = "${github_team.webmasters.id}"
+  role = "maintainer"
+  username = "the-maldridge"
+}
+
+# Members
+
+resource "github_team_membership" "webmasters_vaelatern" {
+  team_id = "${github_team.webmasters.id}"
+  role = "member"
+  username = "Vaelatern"
+}
+
 ####################
 # Document Writers #
 ####################
