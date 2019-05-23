@@ -119,6 +119,12 @@ resource "github_team_membership" "pkg-committers_the-maldridge" {
 
 # Members
 
+resource "github_team_membership" "pkg-committers_chocimier" {
+  team_id = "${github_team.pkg-committers.id}"
+  role = "member"
+  username = "Chocimier"
+}
+
 resource "github_team_membership" "pkg-committers_vaelatern" {
   team_id = "${github_team.pkg-committers.id}"
   role = "member"
