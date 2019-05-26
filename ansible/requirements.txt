@@ -1,4 +1,4 @@
-ansible==2.5.5
+ansible>=2.5.15,<2.8.0
 jmespath
 netaddr
 mitogen
