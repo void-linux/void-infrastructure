@@ -6,6 +6,7 @@ grafana:
       - monitoring.voidlinux.org
     static_root: no
     tls:
+      stapling: yes
       certificate: /var/lib/acme/live/monitoring.voidlinux.org/fullchain
       key: /var/lib/acme/live/monitoring.voidlinux.org/privkey
 
