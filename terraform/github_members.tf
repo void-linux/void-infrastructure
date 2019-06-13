@@ -226,3 +226,11 @@ resource "github_team_membership" "xbps-developers_duncaen" {
   role = "maintainer"
   username = "Duncaen"
 }
+
+# Members
+
+resource "github_team_membership" "xbps-developers_xtraeme" {
+  team_id = "${github_team.xbps-developers.id}"
+  role = "member"
+  username = "xtraeme"
+}
