@@ -18,6 +18,8 @@ resource "github_repository" "void-packages" {
   description = "The Void source packages collection"
   has_issues = true
   homepage_url = "https://voidlinux.org"
+  allow_merge_commit = false
+  allow_squash_merge = false
 }
 
 resource "github_repository" "void-mklive" {
