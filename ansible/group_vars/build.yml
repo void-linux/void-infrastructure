@@ -68,9 +68,9 @@ buildslave_zones:
     xbps:
   DE-2:
     admin:
-      nick: chris2
-      name: Christian Neukirchen
-      mail: chneukirchen@gmail.com
+      nick: leah2
+      name: Leah Neukirchen
+      mail: leah@vuxu.org
     xbps:
   US-MCI:
     admin:
