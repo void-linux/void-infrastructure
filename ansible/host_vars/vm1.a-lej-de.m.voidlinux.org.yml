@@ -24,10 +24,12 @@ network_interfaces:
 
 network_address_use_slaac: false
 
-xbps_repository_main: /hostdir/binpkgs
-xbps_repository_nonfree: /hostdir/binpkgs/nonfree
-xbps_repository_multilib: /hostdir/binpkgs/multilib
-xbps_repository_multilib_nonfree: /hostdir/binpkgs/multilib/nonfree
+xbps_repository_address: a-hel-fi.m.voidlinux.org
+xbps_repository_main: http://{{ xbps_repository_address }}/current
+xbps_repository_nonfree: http://{{ xbps_repository_address }}/current/nonfree
+xbps_repository_multilib: http://{{ xbps_repository_address }}/current/multilib
+xbps_repository_multilib_nonfree: http://{{ xbps_repository_address }}/current/multilib/nonfree
+xbps_repository_port: 443
 
 sshd_AllowGroups:
   - build-ops
