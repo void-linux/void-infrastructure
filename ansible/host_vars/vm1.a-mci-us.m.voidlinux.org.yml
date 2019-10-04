@@ -30,10 +30,22 @@ live_mirror_srvdir: /repo
 live_mirror_syncdstdir: /repo
 live_mirror_sharename: repo
 live_mirror_nodebug: true
-live_mirror_use_ssl: false
+live_mirror_use_ssl: true
+live_mirror_cert_path: /var/lib/acme/live/vm1.a-mci-us.m.voidlinux.org/fullchain
+live_mirror_certkey_path: /var/lib/acme/live/vm1.a-mci-us.m.voidlinux.org/privkey
 
 buildslave_user: buildbot
 buildslave_hostdir_owner: buildbot
 buildslave_sync_user: xbps-master
 buildslave_rootdir: /home/buildbot
 buildslave_zone: US-MCI
+
+acmetool:
+  sites:
+    - site: vm1.a-mci-us.m.voidlinux.org
+      names:
+        - vm1.a-mci-us.m.voidlinux.org
+        - alpha.us.repo.voidlinux.org
+  hostmaster_email: postmaster@voidlinux.org
+  services:
+    - nginx

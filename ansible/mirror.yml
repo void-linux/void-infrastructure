@@ -7,3 +7,5 @@
     - sshd
     - rsyncd
     - live-mirror
+    - crond
+    - acmetool
