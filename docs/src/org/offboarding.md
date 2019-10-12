@@ -66,7 +66,6 @@ which can be copy/pasted into a markdown aware ticket.
   * Remove access from the GitHub organization via TerraForm
   * Remove all memberships in NetAuth, removing the NetAuth principal
     is optional, but discouraged.
-  * Remove any moderator bits in the forum
   * Remove any moderator bits in the wiki
   * Remove any existing manually provisioned mail aliases
 
