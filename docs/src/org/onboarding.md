@@ -54,7 +54,6 @@ delegated.  This should be discussed in the PR that added the
 individual to the organization.
 
 Additional powers include:
-  * Forum Moderator status
   * NetAuth system account
   * NetAuth mail account
   * NetAuth group memberships
