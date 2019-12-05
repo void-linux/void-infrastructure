@@ -217,6 +217,12 @@ resource "github_team_membership" "pkg-committers_thypon" {
   username = "thypon"
 }
 
+resource "github_team_membership" "pkg-committers_q66" {
+  team_id = "${github_team.pkg-committers.id}"
+  role = "member"
+  username = "q66"
+}
+
 resource "github_team_membership" "pkg-committers_xtraeme" {
   team_id = "${github_team.pkg-committers.id}"
   role = "member"
