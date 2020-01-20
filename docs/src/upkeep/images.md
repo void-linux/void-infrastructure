@@ -194,6 +194,36 @@ Generate the sha256sums:
 
 ```
 $ cd <date>
-$ sha256sum * > sha256sums.txt
+$ sha256 * > sha256.txt
 ```
 
+## Signing the Images
+
+Signing the images is done after all the images have been checked and
+validated, and after the decision has been made to promote the set to
+`current`.
+
+Generate a new signing key:
+
+```
+$ pwgen -cny 25 1 > void-release-<date>.key
+$ signify -G -p void-release-<date>.pub -s void-release-<date>.sec -c "This key is only valid for images with date <date>."
+```
+
+Copy the public half of this key to the void-release-keys package in
+void-packages and make a release.  Copy all key material to the
+owner's team in keybase and ensure that the copy has been completed
+successfully.
+
+Copy the `sha256.txt` file to your local workstation and sign it with the appropriate key.
+
+```
+$ signify -S -e -s void-release-<date>.sec -m sha256.txt -x sha256sum.sig
+```
+
+Copy the signed file back up to the master mirror and change the
+current symlink to point to the now signed ISOs.
+
+Once you have confirmed that the link has updated, post an update to
+the website and arrange for the new key to be distributed as widely as
+possible.
