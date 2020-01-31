@@ -8,93 +8,93 @@ provider "github" {
 # Core Repositories #
 #####################
 resource "github_repository" "void-infrastructure" {
-  name        = "void-infrastructure"
-  description = "Infrastructure configuration data for Void systems"
-  has_issues = true
-  homepage_url = "https://voidlinux.org"
+  name               = "void-infrastructure"
+  description        = "Infrastructure configuration data for Void systems"
+  has_issues         = true
+  homepage_url       = "https://voidlinux.org"
   allow_merge_commit = false
 }
 
 resource "github_repository" "void-packages" {
-  name        = "void-packages"
-  description = "The Void source packages collection"
-  has_issues = true
-  homepage_url = "https://voidlinux.org"
+  name               = "void-packages"
+  description        = "The Void source packages collection"
+  has_issues         = true
+  homepage_url       = "https://voidlinux.org"
   allow_merge_commit = false
   allow_squash_merge = false
 }
 
 resource "github_repository" "void-mklive" {
-  name = "void-mklive"
-  description = "The Void Linux live image maker"
-  has_issues = true
-  homepage_url = "https://voidlinux.org"
+  name               = "void-mklive"
+  description        = "The Void Linux live image maker"
+  has_issues         = true
+  homepage_url       = "https://voidlinux.org"
   allow_merge_commit = false
   allow_squash_merge = false
 }
 
 resource "github_repository" "void-docs" {
-  name = "void-docs"
-  description = "mdbook source for docs.voidlinux.org"
-  has_issues = true
-  homepage_url = "https://docs.voidlinux.org"
+  name               = "void-docs"
+  description        = "mdbook source for docs.voidlinux.org"
+  has_issues         = true
+  homepage_url       = "https://docs.voidlinux.org"
   allow_merge_commit = false
   allow_squash_merge = false
 }
 
 resource "github_repository" "void-wiki" {
-  name = "void-wiki"
-  description = "Components for wiki.voidlinux.org"
-  has_issues = true
+  name         = "void-wiki"
+  description  = "Components for wiki.voidlinux.org"
+  has_issues   = true
   homepage_url = "https://voidlinux.org"
 }
 
 resource "github_repository" "void-texlive" {
-  name = "void-texlive"
-  description = "Components for packaging TeX into XBPS"
-  has_issues = true
+  name         = "void-texlive"
+  description  = "Components for packaging TeX into XBPS"
+  has_issues   = true
   homepage_url = "https://voidlinux.org"
 }
 
 resource "github_repository" "void-runit" {
-  name = "void-runit"
-  description = "runit init scripts for Void"
-  has_issues = true
+  name         = "void-runit"
+  description  = "runit init scripts for Void"
+  has_issues   = true
   homepage_url = "https://voidlinux.org"
 }
 
 resource "github_repository" "void-updates" {
-  name = "void-updates"
-  description = "Update check system for void-packages"
-  has_issues = true
+  name         = "void-updates"
+  description  = "Update check system for void-packages"
+  has_issues   = true
   homepage_url = "https://voidlinux.org"
 }
 
 resource "github_repository" "void-linux-website" {
-  name = "void-linux.github.io"
-  description = "Void Linux website"
-  has_issues = true
+  name         = "void-linux.github.io"
+  description  = "Void Linux website"
+  has_issues   = true
   homepage_url = "https://voidlinux.org"
 }
 
 resource "github_repository" "socklog-void" {
-  name = "socklog-void"
-  description = "SockLog configuration for Void Linux"
-  has_issues = true
+  name         = "socklog-void"
+  description  = "SockLog configuration for Void Linux"
+  has_issues   = true
   homepage_url = "https://voidlinux.org"
 }
 
 resource "github_repository" "xbps" {
-  name = "xbps"
-  description = "The X Binary Package System"
-  has_issues = true
+  name         = "xbps"
+  description  = "The X Binary Package System"
+  has_issues   = true
   homepage_url = "https://voidlinux.org/xbps/"
 }
 
 resource "github_repository" "xbps-bulk" {
-  name = "xbps-bulk"
-  description = "Builds a set of packages that need to be updated with inter-dependencies."
-  has_issues = true
+  name         = "xbps-bulk"
+  description  = "Builds a set of packages that need to be updated with inter-dependencies."
+  has_issues   = true
   homepage_url = "https://voidlinux.org"
 }
 
@@ -103,39 +103,39 @@ resource "github_repository" "xbps-bulk" {
 ###########################
 
 resource "github_repository" "netbsd-wtf" {
-  name = "netbsd-wtf"
+  name        = "netbsd-wtf"
   description = "NetBSD's wtf(6) adapted for Void Linux"
-  has_issues = true
+  has_issues  = true
 }
 
 resource "github_repository" "libglob" {
-  name = "libglob"
+  name        = "libglob"
   description = "BSD glob(3) implementation with non-POSIX features"
-  has_issues = true
+  has_issues  = true
 }
 
 resource "github_repository" "jbigkit-shared" {
-  name = "jbigkit-shared"
+  name        = "jbigkit-shared"
   description = "Autotools and libtool for JBIG-KIT version 2.1"
-  has_issues = true
+  has_issues  = true
 }
 
 resource "github_repository" "musl-obstack" {
-  name = "musl-obstack"
+  name        = "musl-obstack"
   description = "A standalone library to implement GNU libc's obstack"
-  has_issues = true
+  has_issues  = true
 }
 
 resource "github_repository" "musl-fts" {
-  name = "musl-fts"
+  name        = "musl-fts"
   description = "Implementation of fts(3) for musl libc packages in Void Linux"
-  has_issues = true
+  has_issues  = true
 }
 
 resource "github_repository" "openbsd-man" {
-  name = "openbsd-man"
+  name        = "openbsd-man"
   description = "The OpenBSD man(1) utility for Linux"
-  has_issues = true
+  has_issues  = true
 }
 
 #########
@@ -143,33 +143,33 @@ resource "github_repository" "openbsd-man" {
 #########
 
 resource "github_team" "pkg-committers" {
-  name = "pkg-committers"
+  name        = "pkg-committers"
   description = "The people with push access"
-  privacy = "closed"
+  privacy     = "closed"
 }
 
 resource "github_team" "xbps-developers" {
-  name = "xbps-developers"
+  name        = "xbps-developers"
   description = "The people that build XBPS"
-  privacy = "closed"
+  privacy     = "closed"
 }
 
 resource "github_team" "void-ops" {
-  name = "void-ops"
+  name        = "void-ops"
   description = "Infrastructure Operators"
-  privacy = "closed"
+  privacy     = "closed"
 }
 
 resource "github_team" "doc-writers" {
-  name = "doc-writers"
+  name        = "doc-writers"
   description = "Document Writers"
-  privacy = "closed"
+  privacy     = "closed"
 }
 
 resource "github_team" "webmasters" {
-  name = "webmasters"
+  name        = "webmasters"
   description = "Reviewers for voidlinux.org"
-  privacy = "closed"
+  privacy     = "closed"
 }
 
 ###############
