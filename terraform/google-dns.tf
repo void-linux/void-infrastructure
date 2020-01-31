@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = "${file("account.json")}"
+  credentials = file("account.json")
   project     = "void-linux-175807"
   region      = "us-central1"
 }
@@ -22,7 +22,7 @@ resource "google_dns_managed_zone" "voidlinux-org" {
 
 resource "google_dns_record_set" "a-hel-fi" {
   name         = "a-hel-fi.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -31,7 +31,7 @@ resource "google_dns_record_set" "a-hel-fi" {
 
 resource "google_dns_record_set" "a-lej-de" {
   name         = "a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -40,7 +40,7 @@ resource "google_dns_record_set" "a-lej-de" {
 
 resource "google_dns_record_set" "vm1-a-lej-de" {
   name         = "vm1.a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -49,7 +49,7 @@ resource "google_dns_record_set" "vm1-a-lej-de" {
 
 resource "google_dns_record_set" "vm2-a-lej-de" {
   name         = "vm2.a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -58,7 +58,7 @@ resource "google_dns_record_set" "vm2-a-lej-de" {
 
 resource "google_dns_record_set" "vm3-a-lej-de" {
   name         = "vm3.a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -67,7 +67,7 @@ resource "google_dns_record_set" "vm3-a-lej-de" {
 
 resource "google_dns_record_set" "b-lej-de" {
   name         = "b-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -76,7 +76,7 @@ resource "google_dns_record_set" "b-lej-de" {
 
 resource "google_dns_record_set" "c-lej-de" {
   name         = "c-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -85,7 +85,7 @@ resource "google_dns_record_set" "c-lej-de" {
 
 resource "google_dns_record_set" "d-lej-de" {
   name         = "d-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -94,7 +94,7 @@ resource "google_dns_record_set" "d-lej-de" {
 
 resource "google_dns_record_set" "a-mci-us" {
   name         = "a-mci-us.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -103,7 +103,7 @@ resource "google_dns_record_set" "a-mci-us" {
 
 resource "google_dns_record_set" "vm1-a-mci-us" {
   name         = "vm1.a-mci-us.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -119,7 +119,7 @@ resource "google_dns_record_set" "vm1-a-mci-us" {
 
 resource "google_dns_record_set" "wiki-legacy" {
   name         = "wiki.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -128,7 +128,7 @@ resource "google_dns_record_set" "wiki-legacy" {
 
 resource "google_dns_record_set" "forum-legacy" {
   name         = "forum.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -140,8 +140,8 @@ resource "google_dns_record_set" "forum-legacy" {
 #######################
 
 resource "google_dns_record_set" "homepage-github" {
-  name         = "${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  name         = google_dns_managed_zone.voidlinux-org.dns_name
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -150,7 +150,7 @@ resource "google_dns_record_set" "homepage-github" {
 
 resource "google_dns_record_set" "homepage-github-www" {
   name         = "www.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "A"
   ttl     = 300
@@ -163,7 +163,7 @@ resource "google_dns_record_set" "homepage-github-www" {
 
 resource "google_dns_record_set" "forum-mailkey1" {
   name         = "forum.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "TXT"
   ttl     = 300
@@ -172,7 +172,7 @@ resource "google_dns_record_set" "forum-mailkey1" {
 
 resource "google_dns_record_set" "forum-mailkey2" {
   name         = "mailo._domainkey.forum.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "TXT"
   ttl     = 300
@@ -181,7 +181,7 @@ resource "google_dns_record_set" "forum-mailkey2" {
 
 resource "google_dns_record_set" "forum-mailkey3" {
   name         = "pic._domainkey.forum.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "TXT"
   ttl     = 300
@@ -197,7 +197,7 @@ resource "google_dns_record_set" "forum-mailkey3" {
 resource "google_dns_record_set" "service-auto" {
   # Automatic Mirror directory
   name         = "auto.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -207,7 +207,7 @@ resource "google_dns_record_set" "service-auto" {
 resource "google_dns_record_set" "service-build" {
   # Builder web page
   name         = "build.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -217,7 +217,7 @@ resource "google_dns_record_set" "service-build" {
 resource "google_dns_record_set" "service-docs" {
   # Documentation
   name         = "docs.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -227,7 +227,7 @@ resource "google_dns_record_set" "service-docs" {
 resource "google_dns_record_set" "service-infradocs" {
   # Infrastructure Documentation
   name         = "infradocs.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -237,7 +237,7 @@ resource "google_dns_record_set" "service-infradocs" {
 resource "google_dns_record_set" "service-monitoring" {
   # Monitoring Site
   name         = "monitoring.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -247,7 +247,7 @@ resource "google_dns_record_set" "service-monitoring" {
 resource "google_dns_record_set" "service-netauth" {
   # Authentication Service
   name         = "netauth.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -257,7 +257,7 @@ resource "google_dns_record_set" "service-netauth" {
 resource "google_dns_record_set" "service-popcorn" {
   # PopCorn XBPS Stats system
   name         = "popcorn.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -267,7 +267,7 @@ resource "google_dns_record_set" "service-popcorn" {
 resource "google_dns_record_set" "service-sources" {
   # Sources site
   name         = "sources.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -277,7 +277,7 @@ resource "google_dns_record_set" "service-sources" {
 resource "google_dns_record_set" "service-terraform" {
   # Terraform service
   name         = "terraform.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -287,7 +287,7 @@ resource "google_dns_record_set" "service-terraform" {
 resource "google_dns_record_set" "service-xqapi" {
   # XBPS repodata API (xq-api)
   name         = "xq-api.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -303,7 +303,7 @@ resource "google_dns_record_set" "service-xqapi" {
 
 resource "google_dns_record_set" "mirror-de-1" {
   name         = "alpha.de.repo.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -312,7 +312,7 @@ resource "google_dns_record_set" "mirror-de-1" {
 
 resource "google_dns_record_set" "mirror-de-2" {
   name         = "beta.de.repo.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -321,7 +321,7 @@ resource "google_dns_record_set" "mirror-de-2" {
 
 resource "google_dns_record_set" "mirror-us-1" {
   name         = "alpha.us.repo.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "CNAME"
   ttl     = 300
@@ -334,8 +334,8 @@ resource "google_dns_record_set" "mirror-us-1" {
 #######################################################################
 
 resource "google_dns_record_set" "mx-mail-host" {
-  name         = "${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = "${google_dns_managed_zone.voidlinux-org.name}"
+  name         = google_dns_managed_zone.voidlinux-org.dns_name
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
 
   type    = "MX"
   ttl     = 300

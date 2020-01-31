@@ -186,117 +186,117 @@ resource "github_team_repository" "repo-void-infrastructure" {
   # The infrastructure repo is special and has restricted push so that
   # its harder to accidentally break systems that are subscribed to
   # it.
-  team_id    = "${github_team.void-ops.id}"
-  repository = "${github_repository.void-infrastructure.name}"
+  team_id    = github_team.void-ops.id
+  repository = github_repository.void-infrastructure.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-packages" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-packages.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.void-packages.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-mklive" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-mklive.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.void-mklive.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-docs" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-docs.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.void-docs.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-docs-dedicated" {
   # Document writers are also allowed to merge to the void-docs
   # repository.
-  team_id    = "${github_team.doc-writers.id}"
-  repository = "${github_repository.void-docs.name}"
+  team_id    = github_team.doc-writers.id
+  repository = github_repository.void-docs.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-wiki" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-wiki.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.void-wiki.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-texlive" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-texlive.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.void-texlive.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-runit" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-runit.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.void-runit.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-updates" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.void-updates.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.void-updates.name
   permission = "push"
 }
 
 resource "github_team_repository" "void-linux-website" {
-  team_id    = "${github_team.webmasters.id}"
-  repository = "${github_repository.void-linux-website.name}"
+  team_id    = github_team.webmasters.id
+  repository = github_repository.void-linux-website.name
   permission = "push"
 }
 
 resource "github_team_repository" "socklog-void" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.socklog-void.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.socklog-void.name
   permission = "push"
 }
 
 resource "github_team_repository" "xbps" {
-  team_id    = "${github_team.xbps-developers.id}"
-  repository = "${github_repository.xbps.name}"
+  team_id    = github_team.xbps-developers.id
+  repository = github_repository.xbps.name
   permission = "push"
 }
 
 resource "github_team_repository" "xbps-bulk" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.xbps-bulk.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.xbps-bulk.name
   permission = "push"
 }
 
 resource "github_team_repository" "netbsd-wtf" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.netbsd-wtf.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.netbsd-wtf.name
   permission = "push"
 }
 
 resource "github_team_repository" "libglob" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.libglob.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.libglob.name
   permission = "push"
 }
 
 resource "github_team_repository" "jbigkit-shared" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.jbigkit-shared.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.jbigkit-shared.name
   permission = "push"
 }
 
 resource "github_team_repository" "musl-obstack" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.musl-obstack.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.musl-obstack.name
   permission = "push"
 }
 
 resource "github_team_repository" "musl-fts" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.musl-fts.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.musl-fts.name
   permission = "push"
 }
 
 resource "github_team_repository" "openbsd-man" {
-  team_id    = "${github_team.pkg-committers.id}"
-  repository = "${github_repository.openbsd-man.name}"
+  team_id    = github_team.pkg-committers.id
+  repository = github_repository.openbsd-man.name
   permission = "push"
 }
