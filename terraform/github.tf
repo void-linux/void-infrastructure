@@ -1,4 +1,6 @@
 provider "github" {
+  version = "2.3.1"
+
   organization = "void-linux"
 }
 
@@ -27,6 +29,8 @@ resource "github_repository" "void-mklive" {
   description = "The Void Linux live image maker"
   has_issues = true
   homepage_url = "https://voidlinux.org"
+  allow_merge_commit = false
+  allow_squash_merge = false
 }
 
 resource "github_repository" "void-docs" {
