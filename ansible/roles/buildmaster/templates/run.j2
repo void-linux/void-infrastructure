@@ -2,4 +2,4 @@
 
 . /{{ buildmaster_rootdir}}/virtual_builder/bin/activate
 
-chpst -u {{ buildmaster_user }}:{{ buildmaster_user }} buildbot start --nodaemon /{{ buildmaster_rootdir }}/buildmaster
+exec chpst -u {{ buildmaster_user }}:{{ buildmaster_user }} buildbot start --nodaemon /{{ buildmaster_rootdir }}/buildmaster
