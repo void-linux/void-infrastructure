@@ -6,6 +6,7 @@
   roles:
     - sshd
     - xbps-repoconf
+    - ssl_exporter
     - prometheus
     - acmetool
     - nginx

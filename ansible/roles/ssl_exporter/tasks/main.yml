@@ -1,0 +1,11 @@
+---
+- name: Install package
+  xbps:
+    pkg: ssl_exporter
+    state: present
+
+- name: Enable Service
+  service:
+    name: ssl_exporter
+    enabled: true
+    state: started

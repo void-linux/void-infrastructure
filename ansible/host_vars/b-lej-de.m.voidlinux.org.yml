@@ -5,7 +5,7 @@ network_output_policy: ACCEPT
 network_interfaces:
   - name: eth0
     mode: static
-    mode6: static
+    mode6: disabled
     resolvermode: static
     resolvermode6: static
     addresses:
@@ -20,3 +20,12 @@ network_interfaces:
     resolvers6:
       - 2001:4860:4860::8888
       - 2001:4860:4860::8844
+
+acmetool:
+  sites:
+    - site: monitoring.voidlinux.org
+      names:
+        - monitoring.voidlinux.org
+  hostmaster_email: postmaster@voidlinux.org
+  services:
+    - nginx

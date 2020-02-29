@@ -9,12 +9,3 @@ grafana:
       stapling: yes
       certificate: /var/lib/acme/live/monitoring.voidlinux.org/fullchain
       key: /var/lib/acme/live/monitoring.voidlinux.org/privkey
-
-acmetool:
-  sites:
-    - site: monitoring.voidlinux.org
-      names:
-        - monitoring.voidlinux.org
-  hostmaster_email: postmaster@voidlinux.org
-  services:
-    - nginx

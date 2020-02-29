@@ -12,3 +12,5 @@ network_fqdn: '{{ inventory_hostname }}'
 network_boot_hosts:
   - addr: 148.251.199.117
     name: netauth.voidlinux.org
+
+nginx_bind_443: "{{void_aquire_certs}}"
