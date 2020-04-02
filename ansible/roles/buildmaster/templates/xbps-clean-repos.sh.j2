@@ -8,6 +8,7 @@ REPOS_AARCH64="$MAINREPO/aarch64 $MAINREPO/aarch64/debug $MAINREPO/aarch64/nonfr
 ARCHS_GLIBC="i686 x86_64 armv6l armv7l"
 ARCHS_MUSL="x86_64-musl armv6l-musl armv7l-musl"
 ARCHS_AARCH64="aarch64 aarch64-musl"
+ARCHS="{{ xbps_clean_archs }}"
 
 : ${XBPS_DISTDIR:=/void-packages}
 
