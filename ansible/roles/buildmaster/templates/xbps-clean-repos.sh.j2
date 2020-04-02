@@ -10,8 +10,6 @@ ARCHS_MUSL="x86_64-musl armv6l-musl armv7l-musl"
 ARCHS_AARCH64="aarch64 aarch64-musl"
 ARCHS="{{ xbps_clean_archs }}"
 
-: ${XBPS_DISTDIR:=/void-packages}
-
 usage() {
 	echo "Usage: $0 <glibc|musl|aarch64> [remove-unexistent-pkgs]"
 	exit 1
