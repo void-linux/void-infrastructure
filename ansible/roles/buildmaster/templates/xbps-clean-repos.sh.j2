@@ -1,14 +1,26 @@
 #!/bin/bash
 
 MAINREPO="/hostdir/binpkgs"
-REPOS="$MAINREPO $MAINREPO/nonfree $MAINREPO/debug"
-REPOS64="$MAINREPO/multilib $MAINREPO/multilib/nonfree"
-ARCHS="i686 x86_64 armv6l armv7l"
+REPOS_GLIBC="$MAINREPO $MAINREPO/nonfree $MAINREPO/multilib $MAINREPO/multilib/nonfree $MAINREPO/debug"
+REPOS_MUSL="$MAINREPO/musl $MAINREPO/musl/nonfree $MAINREPO/musl/debug"
+REPOS_AARCH64="$MAINREPO/aarch64 $MAINREPO/aarch64/debug $MAINREPO/aarch64/nonfree"
+
+ARCHS_GLIBC="i686 x86_64 armv6l armv7l"
+ARCHS_MUSL="x86_64 armv6l-musl armv7l-musl"
+ARCHS_AARCH64="aarch64 aarch64-musl"
+
+usage() {
+	echo "$0 <glibc|musl|aarch64>"
+	exit 1
+}
 
 add() {
 	local _arch="$1"
 	local _repo="$2"
 
+	[ ! -d ${_repo} ] && return
+
+	echo "Registering pkgs for $_arch in $_repo"
 	for f in ${_repo}/*.{${_arch},noarch}.xbps; do
 		$XBPS_TARGET_ARCH=${_arch} xbps-rindex -a ${f} 2>/dev/null
 	done
@@ -18,54 +30,64 @@ clean() {
 	local _arch="$1"
 	local _repo="$2"
 	
+	[ ! -d ${_repo} ] && return
+
+	echo "Cleaning repo $_repo for $_arch"
 	XBPS_TARGET_ARCH=${_arch} xbps-rindex -c ${_repo} 2>/dev/null
 }
 
 remove() {
 	local _arch="$1"
 	local _repo="$2"
-	
-	XBPS_TARGET_ARCH=${_arch} xbps-rindex -c ${_repo} 2>/dev/null
+
+	[ ! -d ${_repo} ] && return
+
+	# do not delete packages if there are staged packages
+	[ -e "${_repo}/${_arch}-stagedata" ] && exit 0
+	echo "Removing obsolete pkgs for $arch in $_repo"
+	XBPS_TARGET_ARCH=${_arch} xbps-rindex -r ${_repo} 2>/dev/null
 }
 
-# Register binpkgs just in case...
-for f in ${REPOS}; do
-	for x in ${ARCHS}; do
-		( XBPS_TARGET_ARCH=$x xbps-rindex -a ${f}/*.{${x},noarch}.xbps 2>/dev/null ) &
+if [ "$1" = "glibc" ]; then
+	for repo in ${REPOS_GLIBC}; do
+		for arch in ${ARCHS_GLIBC}; do
+			add $arch $repo
+		done
 	done
-done
-wait
-for f in ${REPOS64}; do
-	( xbps-rindex -a ${f}/*.{x86_64,noarch}.xbps 2>/dev/null ) &
-done
-wait
-for f in ${REPOS64}; do
-	( xbps-rindex -c ${f} 2>/dev/null ) &
-done
-wait
-for f in ${REPOS}; do
-	for x in ${ARCHS}; do
-		XBPS_TARGET_ARCH=$x xbps-rindex -c ${f} 2>/dev/null
+	for repo in ${REPOS_GLIBC}; do
+		for arch in ${ARCHS_GLIBC}; do
+			clean $arch $repo
+			remove $arch $repo
+		done
 	done
-done
-wait
-
-# do not delete packages if there are staged packages
-for f in ${REPOS} ${REPOS64}; do
-	for x in ${ARCHS}; do
-		[ -e "$f/${x}-stagedata" ] && exit 0
+elif [ "$1" = "musl" ]; then
+	for repo in ${REPOS_MUSL}; do
+		for arch in ${ARCHS_MUSL}; do
+			add $arch $repo
+		done
 	done
-done
-
-for f in ${REPOS}; do
-	for x in ${ARCHS}; do
-		XBPS_TARGET_ARCH=$x xbps-rindex -r ${f} 2>/dev/null
+	for repo in ${REPOS_MUSL}; do
+		for arch in ${ARCHS_MUSL}; do
+			echo "cleaning $repo $arch"
+			clean $arch $repo
+			remove $arch $repo
+		done
 	done
-done
-wait
-for f in ${REPOS64}; do
-	( xbps-rindex -r ${f} 2>/dev/null ) &
-done
-wait
+elif [ "$1" = "aarch64" ]; then
+	for repo in ${REPOS_AARCH64}; do
+		for arch in ${ARCHS_AARCH64}; do
+			add $arch $repo
+		done
+	done
+	for repo in ${REPOS_AARCH64}; do
+		for arch in ${ARCHS_AARCH64}; do
+			clean $arch $repo
+			remove $arch $repo
+		done
+	done
+else
+	usage
+	exit 1
+fi
 
 exit 0
