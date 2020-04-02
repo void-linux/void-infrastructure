@@ -1,0 +1,10 @@
+---
+- name: Install repo cleaner
+  template:
+    src: xbps-clean-repos.j2
+    dest: /usr/local/bin/xbps-clean-repos
+    owner: root
+    group: root
+    mode: 0755
+  vars:
+    - xbps_clean_archs: "{{ buildslave_buildslaves | json_query(\"[?zone=='\"+buildslave_zone+\"'].mach\") | join(' ') }}"

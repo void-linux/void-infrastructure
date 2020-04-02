@@ -1,9 +1,7 @@
 [buildmaster]
-vm1.a-lej-de.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 
 [buildslave]
-vm1.a-lej-de.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 c-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org

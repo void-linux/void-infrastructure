@@ -1,0 +1,96 @@
+#!/bin/bash
+
+MAINREPO="/hostdir/binpkgs"
+REPOS_GLIBC="$MAINREPO $MAINREPO/nonfree $MAINREPO/multilib $MAINREPO/multilib/nonfree $MAINREPO/debug"
+REPOS_MUSL="$MAINREPO/musl $MAINREPO/musl/nonfree $MAINREPO/musl/debug"
+REPOS_AARCH64="$MAINREPO/aarch64 $MAINREPO/aarch64/debug $MAINREPO/aarch64/nonfree"
+
+ARCHS="{{ xbps_clean_archs }}"
+
+REPOS=""
+for _arch in $ARCHS ; do
+    # This is an ugly hack, but works because Ansible knows what archs
+    # are on what machines, not the uber-hacky way that we manage
+    # mirrors.
+    case $_arch in
+        x86_64) REPOS=$REPOS_GLIBC;;
+        x86_64_musl) REPOS=$REPOS_MUSL;;
+        aarch64) REPOS=$REPOS_AARCH64;;
+    esac
+done
+
+add() {
+        local _arch="$1"
+        local _repo="$2"
+
+        [ ! -d ${_repo} ] && return
+
+        echo "Registering pkgs for $_arch in $_repo"
+        for f in ${_repo}/*.{${_arch},noarch}.xbps; do
+                XBPS_TARGET_ARCH=${_arch} xbps-rindex -a ${f} 2>/dev/null
+        done
+}
+
+clean() {
+        local _arch="$1"
+        local _repo="$2"
+
+        [ ! -d ${_repo} ] && return
+
+        echo "Cleaning repo $_repo for $_arch"
+        XBPS_TARGET_ARCH=${_arch} xbps-rindex -c ${_repo} 2>/dev/null
+}
+
+remove() {
+        local _arch="$1"
+        local _repo="$2"
+
+        [ ! -d ${_repo} ] && return
+
+        # do not delete packages if there are staged packages
+        [ -e "${_repo}/${_arch}-stagedata" ] && exit 0
+        echo "Removing obsolete pkgs for $arch in $_repo"
+        XBPS_TARGET_ARCH=${_arch} xbps-rindex -r ${_repo} 2>/dev/null
+}
+
+remove_unexistent() {
+        local _arch="$1"
+        local _repo="$2"
+        local _distdir="$HOME/void-packages"
+
+        [ ! -d ${_repo} ] && return
+
+        if [ ! -d "${_distdir}" ]; then
+                cd $HOME
+                git clone https://github.com/void-linux/void-packages
+        else
+                cd "${_distdir}"
+                git pull
+        fi
+
+        echo "Removing unexistent pkgs for $_arch in $_repo"
+        for f in $(XBPS_TARGET_ARCH=${_arch} xbps-checkvers -i -R ${_repo} -D "${_distdir}" -e --format="%R/%n-%r.${_arch}.xbps"); do
+                [ ! -e "$f" ] && continue
+                rm -vf "$f"
+        done
+}
+
+if [ -n "$1" ]; then
+    for repo in ${REPOS}; do
+        for arch in ${ARCHS}; do
+            remove_unexistent $arch $repo
+        done
+    done
+fi
+
+for repo in ${REPOS}; do
+    for arch in ${ARCHS}; do
+        add $arch $repo
+    done
+done
+for repo in ${REPOS}; do
+    for arch in ${ARCHS}; do
+        clean $arch $repo
+        remove $arch $repo
+    done
+done

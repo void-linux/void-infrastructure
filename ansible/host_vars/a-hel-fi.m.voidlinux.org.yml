@@ -22,6 +22,8 @@ network_interfaces:
       - 2a01:4F8:0:1::add:9898
     addresses6:
       - 2a01:4f9:2b:c9e::2/64
+    routes6:
+      - fe80::1
 
 xbps_repository_main: /hostdir/current
 xbps_repository_nonfree: /hostdir/current/nonfree

@@ -39,7 +39,6 @@
     mode: 0755
   with_items:
     - xbps-sign-repos
-    - xbps-clean-repos
 
 - name: Install Signing Cronjob
   template:
