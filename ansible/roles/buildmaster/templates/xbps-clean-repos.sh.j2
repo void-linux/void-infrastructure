@@ -22,7 +22,7 @@ add() {
 
 	echo "Registering pkgs for $_arch in $_repo"
 	for f in ${_repo}/*.{${_arch},noarch}.xbps; do
-		$XBPS_TARGET_ARCH=${_arch} xbps-rindex -a ${f} 2>/dev/null
+		XBPS_TARGET_ARCH=${_arch} xbps-rindex -a ${f} 2>/dev/null
 	done
 }
 
