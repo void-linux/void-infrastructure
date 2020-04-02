@@ -9,8 +9,10 @@ ARCHS_GLIBC="i686 x86_64 armv6l armv7l"
 ARCHS_MUSL="x86_64-musl armv6l-musl armv7l-musl"
 ARCHS_AARCH64="aarch64 aarch64-musl"
 
+: ${XBPS_DISTDIR:=/void-packages}
+
 usage() {
-	echo "$0 <glibc|musl|aarch64>"
+	echo "Usage: $0 <glibc|musl|aarch64> [remove-unexistent-pkgs]"
 	exit 1
 }
 
@@ -48,7 +50,37 @@ remove() {
 	XBPS_TARGET_ARCH=${_arch} xbps-rindex -r ${_repo} 2>/dev/null
 }
 
+remove_unexistent() {
+	local _arch="$1"
+	local _repo="$2"
+	local _distdir="$HOME/void-packages"
+
+	[ ! -d ${_repo} ] && return
+
+	if [ ! -d "${_distdir}" ]; then
+		cd $HOME
+		git clone https://github.com/void-linux/void-packages
+	else
+		cd "${_distdir}"
+		git pull
+	fi
+
+	echo "Removing unexistent pkgs for $_arch in $_repo"
+	for f in $(XBPS_TARGET_ARCH=${_arch} xbps-checkvers -i -R ${_repo} -D "${_distdir}" -e --format="%R/%n-%r.${_arch}.xbps"); do
+		[ ! -e "$f" ] && continue
+		rm -vf "$f"
+	done
+}
+
 if [ "$1" = "glibc" ]; then
+	if [ -n "$2" ]; then
+		for repo in ${REPOS_GLIBC}; do
+			for arch in ${ARCHS_GLIBC}; do
+				remove_unexistent $arch $repo
+			done
+		done
+	fi
+
 	for repo in ${REPOS_GLIBC}; do
 		for arch in ${ARCHS_GLIBC}; do
 			add $arch $repo
@@ -61,6 +93,14 @@ if [ "$1" = "glibc" ]; then
 		done
 	done
 elif [ "$1" = "musl" ]; then
+	if [ -n "$2" ]; then
+		for repo in ${REPOS_MUSL}; do
+			for arch in ${ARCHS_MUSL}; do
+				remove_unexistent $arch $repo
+			done
+		done
+	fi
+
 	for repo in ${REPOS_MUSL}; do
 		for arch in ${ARCHS_MUSL}; do
 			add $arch $repo
@@ -74,6 +114,13 @@ elif [ "$1" = "musl" ]; then
 		done
 	done
 elif [ "$1" = "aarch64" ]; then
+	if [ -n "$2" ]; then
+		for repo in ${REPOS_AARCH64}; do
+			for arch in ${ARCHS_AARCH64}; do
+				remove_unexistent $arch $repo
+			done
+		done
+	fi
 	for repo in ${REPOS_AARCH64}; do
 		for arch in ${ARCHS_AARCH64}; do
 			add $arch $repo
