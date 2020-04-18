@@ -205,6 +205,12 @@ resource "github_team_membership" "pkg-committers_pullmoll" {
   username = "pullmoll"
 }
 
+resource "github_team_membership" "pkg-committers_sgn" {
+  team_id  = github_team.pkg-committers.id
+  role     = "member"
+  username = "sgn"
+}
+
 resource "github_team_membership" "pkg-committers_thypon" {
   team_id  = github_team.pkg-committers.id
   role     = "member"
