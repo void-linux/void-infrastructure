@@ -32,41 +32,32 @@
 - name: Install Packages
   xbps:
     pkg:
-      - NetAuth-nsscache
       - NetKeys
-      - libnss-cache
+      - NetAuth-localizer
       - pam_netauth
       - libpam-policycache
     state: present
 
-- name: Install nsscache Service (1/2)
+- name: Install localize Service (1/2)
   file:
-    path: /etc/sv/nsscache
+    path: /etc/sv/localize
     state: directory
     owner: root
     group: root
     mode: 0755
 
-- name: Install nsscache Service (2/2)
+- name: Install localize Service (2/2)
   copy:
-    src: nsscache.run
-    dest: /etc/sv/nsscache/run
+    src: localize.run
+    dest: /etc/sv/localize/run
     owner: root
     group: root
     mode: 0755
 
-- name: Enable nsscache Service
+- name: Enable localize Service
   runit:
-    name: nsscache
+    name: localize
     enabled: true
-
-- name: Configure NSS
-  copy:
-    src: nsswitch.conf
-    dest: /etc/nsswitch.conf
-    owner: root
-    group: root
-    mode: 0644
 
 - name: Install PAM Cache Policy
   copy:

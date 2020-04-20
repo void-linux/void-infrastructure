@@ -1,5 +1,5 @@
 #!/bin/sh
 
-nsscache --homedir "/home/{UID}"
+localize
 
 exec sleep $(( 30 * 60 ))
