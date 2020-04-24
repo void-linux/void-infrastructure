@@ -223,12 +223,6 @@ resource "github_team_membership" "pkg-committers_q66" {
   username = "q66"
 }
 
-resource "github_team_membership" "pkg-committers_xtraeme" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "xtraeme"
-}
-
 ###################
 # XBPS Developers #
 ###################
@@ -246,9 +240,4 @@ resource "github_team_membership" "xbps-developers_duncaen" {
 }
 
 # Members
-
-resource "github_team_membership" "xbps-developers_xtraeme" {
-  team_id  = github_team.xbps-developers.id
-  role     = "member"
-  username = "xtraeme"
-}
+# empty
