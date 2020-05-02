@@ -121,6 +121,12 @@ resource "github_team_membership" "doc-writers_ericonr" {
   username = "ericonr"
 }
 
+resource "github_team_membership" "doc-writers_flexibeast" {
+  team_id  = github_team.doc-writers.id
+  role     = "member"
+  username = "flexibeast"
+}
+
 ######################
 # Package Committers #
 ######################
