@@ -115,6 +115,12 @@ resource "github_team_membership" "doc-writers_bobertlo" {
   username = "bobertlo"
 }
 
+resource "github_team_membership" "doc-writers_ericonr" {
+  team_id  = github_team.doc-writers.id
+  role     = "member"
+  username = "ericonr"
+}
+
 ######################
 # Package Committers #
 ######################
