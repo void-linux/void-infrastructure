@@ -4,299 +4,184 @@ provider "github" {
   organization = "void-linux"
 }
 
-#####################
-# Core Repositories #
-#####################
-resource "github_repository" "void-infrastructure" {
-  name               = "void-infrastructure"
-  description        = "Infrastructure configuration data for Void systems"
+locals {
+  github_repos = {
+    #####################
+    # Core Repositories #
+    #####################
+    void-infrastructure = {
+      description        = "Infrastructure configuration data for Void systems"
+      homepage_url       = "https://voidlinux.org"
+      allow_merge_commit = false
+      # The infrastructure repo is special and has restricted push so that
+      # its harder to accidentally break systems that are subscribed to
+      # it.
+      teams = [
+        "void-ops",
+      ]
+    }
+
+
+    void-packages = {
+      description        = "The Void source packages collection"
+      homepage_url       = "https://voidlinux.org"
+      allow_merge_commit = false
+      allow_squash_merge = false
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    void-mklive = {
+      description        = "The Void Linux live image maker"
+      homepage_url       = "https://voidlinux.org"
+      allow_merge_commit = false
+      allow_squash_merge = false
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    void-docs = {
+      description        = "mdbook source for docs.voidlinux.org"
+      homepage_url       = "https://docs.voidlinux.org"
+      allow_merge_commit = false
+      allow_squash_merge = false
+      teams = [
+        "doc-writers",
+        "pkg-committers",
+      ]
+    }
+
+    void-wiki = {
+      description  = "Components for wiki.voidlinux.org"
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    void-texlive = {
+      description  = "Components for packaging TeX into XBPS"
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    void-runit = {
+      description  = "runit init scripts for Void"
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    void-updates = {
+      description  = "Update check system for void-packages"
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+
+    "void-linux.github.io" = {
+      description  = "Void Linux website"
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "webmasters",
+      ]
+    }
+
+    socklog-void = {
+      description  = "SockLog configuration for Void Linux"
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    xbps = {
+      description  = "The X Binary Package System"
+      homepage_url = "https://voidlinux.org/xbps/"
+      teams = [
+        "xbps-developers",
+      ]
+    }
+
+    xbps-bulk = {
+      description  = "Builds a set of packages that need to be updated with inter-dependencies."
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    ###########################
+    # Auxilliary Repositories #
+    ###########################
+    netbsd-wtf = {
+      description = "NetBSD's wtf(6) adapted for Void Linux"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    libglob = {
+      description = "BSD glob(3) implementation with non-POSIX features"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    jbigkit-shared = {
+      description = "Autotools and libtool for JBIG-KIT version 2.1"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    musl-obstack = {
+      description = "A standalone library to implement GNU libc's obstack"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    musl-fts = {
+      description = "Implementation of fts(3) for musl libc packages in Void Linux"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
+    openbsd-man = {
+      description = "The OpenBSD man(1) utility for Linux"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+  }
+}
+
+resource "github_repository" "repositories" {
+  for_each = local.github_repos
+
+  name               = each.key
+  description        = each.value.description
   has_issues         = true
-  homepage_url       = "https://voidlinux.org"
-  allow_merge_commit = false
+  homepage_url       = lookup(each.value, "homepage_url", null)
+  allow_merge_commit = lookup(each.value, "allow_merge_commit", null)
+  allow_squash_merge = lookup(each.value, "allow_squash_merge", null)
 }
 
-resource "github_repository" "void-packages" {
-  name               = "void-packages"
-  description        = "The Void source packages collection"
-  has_issues         = true
-  homepage_url       = "https://voidlinux.org"
-  allow_merge_commit = false
-  allow_squash_merge = false
-}
+resource "github_team_repository" "team_repositories" {
+  for_each = { for i in flatten([for repo_name, repo in local.github_repos :
+    [for team_name in repo.teams : { repo_name = repo_name, team_name = team_name }]
+  ]) : "${i.repo_name}_${i.team_name}" => i }
 
-resource "github_repository" "void-mklive" {
-  name               = "void-mklive"
-  description        = "The Void Linux live image maker"
-  has_issues         = true
-  homepage_url       = "https://voidlinux.org"
-  allow_merge_commit = false
-  allow_squash_merge = false
-}
-
-resource "github_repository" "void-docs" {
-  name               = "void-docs"
-  description        = "mdbook source for docs.voidlinux.org"
-  has_issues         = true
-  homepage_url       = "https://docs.voidlinux.org"
-  allow_merge_commit = false
-  allow_squash_merge = false
-}
-
-resource "github_repository" "void-wiki" {
-  name         = "void-wiki"
-  description  = "Components for wiki.voidlinux.org"
-  has_issues   = true
-  homepage_url = "https://voidlinux.org"
-}
-
-resource "github_repository" "void-texlive" {
-  name         = "void-texlive"
-  description  = "Components for packaging TeX into XBPS"
-  has_issues   = true
-  homepage_url = "https://voidlinux.org"
-}
-
-resource "github_repository" "void-runit" {
-  name         = "void-runit"
-  description  = "runit init scripts for Void"
-  has_issues   = true
-  homepage_url = "https://voidlinux.org"
-}
-
-resource "github_repository" "void-updates" {
-  name         = "void-updates"
-  description  = "Update check system for void-packages"
-  has_issues   = true
-  homepage_url = "https://voidlinux.org"
-}
-
-resource "github_repository" "void-linux-website" {
-  name         = "void-linux.github.io"
-  description  = "Void Linux website"
-  has_issues   = true
-  homepage_url = "https://voidlinux.org"
-}
-
-resource "github_repository" "socklog-void" {
-  name         = "socklog-void"
-  description  = "SockLog configuration for Void Linux"
-  has_issues   = true
-  homepage_url = "https://voidlinux.org"
-}
-
-resource "github_repository" "xbps" {
-  name         = "xbps"
-  description  = "The X Binary Package System"
-  has_issues   = true
-  homepage_url = "https://voidlinux.org/xbps/"
-}
-
-resource "github_repository" "xbps-bulk" {
-  name         = "xbps-bulk"
-  description  = "Builds a set of packages that need to be updated with inter-dependencies."
-  has_issues   = true
-  homepage_url = "https://voidlinux.org"
-}
-
-###########################
-# Auxilliary Repositories #
-###########################
-
-resource "github_repository" "netbsd-wtf" {
-  name        = "netbsd-wtf"
-  description = "NetBSD's wtf(6) adapted for Void Linux"
-  has_issues  = true
-}
-
-resource "github_repository" "libglob" {
-  name        = "libglob"
-  description = "BSD glob(3) implementation with non-POSIX features"
-  has_issues  = true
-}
-
-resource "github_repository" "jbigkit-shared" {
-  name        = "jbigkit-shared"
-  description = "Autotools and libtool for JBIG-KIT version 2.1"
-  has_issues  = true
-}
-
-resource "github_repository" "musl-obstack" {
-  name        = "musl-obstack"
-  description = "A standalone library to implement GNU libc's obstack"
-  has_issues  = true
-}
-
-resource "github_repository" "musl-fts" {
-  name        = "musl-fts"
-  description = "Implementation of fts(3) for musl libc packages in Void Linux"
-  has_issues  = true
-}
-
-resource "github_repository" "openbsd-man" {
-  name        = "openbsd-man"
-  description = "The OpenBSD man(1) utility for Linux"
-  has_issues  = true
-}
-
-#########
-# Teams #
-#########
-
-resource "github_team" "pkg-committers" {
-  name        = "pkg-committers"
-  description = "The people with push access"
-  privacy     = "closed"
-}
-
-resource "github_team" "xbps-developers" {
-  name        = "xbps-developers"
-  description = "The people that build XBPS"
-  privacy     = "closed"
-}
-
-resource "github_team" "void-ops" {
-  name        = "void-ops"
-  description = "Infrastructure Operators"
-  privacy     = "closed"
-}
-
-resource "github_team" "doc-writers" {
-  name        = "doc-writers"
-  description = "Document Writers"
-  privacy     = "closed"
-}
-
-resource "github_team" "webmasters" {
-  name        = "webmasters"
-  description = "Reviewers for voidlinux.org"
-  privacy     = "closed"
-}
-
-###############
-# Memberships #
-###############
-
-# See github_members.tf.
-
-##########################
-# Membership Permissions #
-##########################
-
-resource "github_team_repository" "repo-void-infrastructure" {
-  # The infrastructure repo is special and has restricted push so that
-  # its harder to accidentally break systems that are subscribed to
-  # it.
-  team_id    = github_team.void-ops.id
-  repository = github_repository.void-infrastructure.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-packages" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.void-packages.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-mklive" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.void-mklive.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-docs" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.void-docs.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-docs-dedicated" {
-  # Document writers are also allowed to merge to the void-docs
-  # repository.
-  team_id    = github_team.doc-writers.id
-  repository = github_repository.void-docs.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-wiki" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.void-wiki.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-texlive" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.void-texlive.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-runit" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.void-runit.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-updates" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.void-updates.name
-  permission = "push"
-}
-
-resource "github_team_repository" "void-linux-website" {
-  team_id    = github_team.webmasters.id
-  repository = github_repository.void-linux-website.name
-  permission = "push"
-}
-
-resource "github_team_repository" "socklog-void" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.socklog-void.name
-  permission = "push"
-}
-
-resource "github_team_repository" "xbps" {
-  team_id    = github_team.xbps-developers.id
-  repository = github_repository.xbps.name
-  permission = "push"
-}
-
-resource "github_team_repository" "xbps-bulk" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.xbps-bulk.name
-  permission = "push"
-}
-
-resource "github_team_repository" "netbsd-wtf" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.netbsd-wtf.name
-  permission = "push"
-}
-
-resource "github_team_repository" "libglob" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.libglob.name
-  permission = "push"
-}
-
-resource "github_team_repository" "jbigkit-shared" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.jbigkit-shared.name
-  permission = "push"
-}
-
-resource "github_team_repository" "musl-obstack" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.musl-obstack.name
-  permission = "push"
-}
-
-resource "github_team_repository" "musl-fts" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.musl-fts.name
-  permission = "push"
-}
-
-resource "github_team_repository" "openbsd-man" {
-  team_id    = github_team.pkg-committers.id
-  repository = github_repository.openbsd-man.name
+  team_id    = github_team.teams[each.value.team_name].id
+  repository = github_repository.repositories[each.value.repo_name].name
   permission = "push"
 }

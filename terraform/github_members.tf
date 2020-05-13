@@ -1,21 +1,3 @@
-######################
-# GitHub Memberships #
-######################
-
-# You might expect that this file would contain a bunch of loops that
-# compute what memberships people are supposed to have and then add
-# them to it.  No, that would require Terraform to support sane state
-# transitions which it doesn't.  In order to add or remove people in
-# github, terraform nukes the membership and then adds everyone back
-# as requested.
-
-# Yes, this includes the organization owners.
-
-# Literally the only thing that saved us while running this in setup
-# was that GitHub's API won't let you delete yourself from the
-# organization if you're the last man standing.  So now we have this
-# expanded monstrosity which puts people in groups the long way round.
-
 #######################
 # Organization Owners #
 #######################
@@ -35,227 +17,95 @@ resource "github_membership" "org-owner_the-maldridge" {
   role     = "admin"
 }
 
-###################
-# Void Operations #
-###################
-
-# These memberships belong to groups defined in github.tf.  These are
-# sorted by lexical sort order keyed on the username.  This order is
-# manually preserved, please be careful when editing.
-
-resource "github_team_membership" "void-ops_duncaen" {
-  team_id  = github_team.void-ops.id
-  role     = "maintainer"
-  username = "Duncaen"
-}
-
-resource "github_team_membership" "void-ops_gottox" {
-  team_id  = github_team.void-ops.id
-  role     = "maintainer"
-  username = "Gottox"
-}
-
-resource "github_team_membership" "void-ops_vaelatern" {
-  team_id  = github_team.void-ops.id
-  role     = "maintainer"
-  username = "Vaelatern"
-}
-
-resource "github_team_membership" "void-ops_the-maldridge" {
-  team_id  = github_team.void-ops.id
-  role     = "maintainer"
-  username = "the-maldridge"
-}
-
-##############
-# Webmasters #
-##############
-
-# Maintainers
-
-resource "github_team_membership" "webmasters_duncaen" {
-  team_id  = github_team.webmasters.id
-  role     = "maintainer"
-  username = "Duncaen"
-}
-
-resource "github_team_membership" "webmasters_gottox" {
-  team_id  = github_team.webmasters.id
-  role     = "maintainer"
-  username = "Gottox"
-}
-
-resource "github_team_membership" "webmasters_the-maldridge" {
-  team_id  = github_team.webmasters.id
-  role     = "maintainer"
-  username = "the-maldridge"
-}
-
-# Members
-
-resource "github_team_membership" "webmasters_vaelatern" {
-  team_id  = github_team.webmasters.id
-  role     = "member"
-  username = "Vaelatern"
-}
-
-####################
-# Document Writers #
-####################
-
-resource "github_team_membership" "doc-writers_the-maldridge" {
-  team_id  = github_team.doc-writers.id
-  role     = "maintainer"
-  username = "the-maldridge"
-}
-
-resource "github_team_membership" "doc-writers_bobertlo" {
-  team_id  = github_team.doc-writers.id
-  role     = "member"
-  username = "bobertlo"
-}
-
-resource "github_team_membership" "doc-writers_ericonr" {
-  team_id  = github_team.doc-writers.id
-  role     = "member"
-  username = "ericonr"
-}
-
-resource "github_team_membership" "doc-writers_flexibeast" {
-  team_id  = github_team.doc-writers.id
-  role     = "member"
-  username = "flexibeast"
-}
-
 ######################
-# Package Committers #
+# GitHub Memberships #
 ######################
 
-# These memberships belong to groups defined in github.tf.  These are
-# sorted by lexical sort order keyed on the username.  This order is
-# manually preserved, please be careful when editing.
+locals {
+  github_teams = {
+    pkg-committers = {
+      description = "The people with push access"
+      maintainers = [
+        "Duncaen",
+        "Gottox",
+        "the-maldridge",
+      ]
+      members = [
+        "Chocimier",
+        "Hoshpak",
+        "Johnnynator",
+        "Piraty",
+        "Vaelatern",
+        "abenson",
+        "asergi",
+        "jnbr",
+        "leahneukirchen",
+        "lemmi",
+        "pullmoll",
+        "q66",
+        "sgn",
+        "thypon",
+      ]
+    }
 
-# Maintainers
+    xbps-developers = {
+      description = "The people that build XBPS"
+      maintainers = [
+        "Duncaen",
+      ]
+    }
 
-resource "github_team_membership" "pkg-committers_duncaen" {
-  team_id  = github_team.pkg-committers.id
-  role     = "maintainer"
-  username = "Duncaen"
+    void-ops = {
+      description = "Infrastructure Operators"
+      maintainers = [
+        "Duncaen",
+        "Gottox",
+        "Vaelatern",
+        "the-maldridge",
+      ]
+    }
+
+    doc-writers = {
+      description = "Document Writers"
+      maintainers = [
+        "the-maldridge",
+      ]
+      members = [
+        "bobertlo",
+        "ericonr",
+        "flexibeast",
+      ]
+    }
+
+    webmasters = {
+      description = "Reviewers for voidlinux.org"
+      maintainers = [
+        "Duncaen",
+        "Gottox",
+        "the-maldridge",
+      ]
+      members = [
+        "Vaelatern",
+      ]
+    }
+  }
 }
 
-resource "github_team_membership" "pkg-committers_gottox" {
-  team_id  = github_team.pkg-committers.id
-  role     = "maintainer"
-  username = "Gottox"
+resource "github_team" "teams" {
+  for_each = local.github_teams
+
+  name        = each.key
+  description = each.value.description
+  privacy     = "closed"
 }
 
-resource "github_team_membership" "pkg-committers_the-maldridge" {
-  team_id  = github_team.pkg-committers.id
-  role     = "maintainer"
-  username = "the-maldridge"
+resource "github_team_membership" "team_membership" {
+  for_each = { for i in flatten([for team_name, team in local.github_teams : [
+    [for username in lookup(team, "maintainers", []) : { team_name = team_name, role = "maintainer", username = username }],
+    [for username in lookup(team, "members", []) : { team_name = team_name, role = "member", username = username }],
+  ]]) : "${i.team_name}_${i.username}" => i }
+
+  team_id  = github_team.teams[each.value.team_name].id
+  role     = each.value.role
+  username = each.value.username
 }
-
-# Members
-
-resource "github_team_membership" "pkg-committers_chocimier" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "Chocimier"
-}
-
-resource "github_team_membership" "pkg-committers_piraty" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "Piraty"
-}
-
-resource "github_team_membership" "pkg-committers_vaelatern" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "Vaelatern"
-}
-
-resource "github_team_membership" "pkg-committers_abenson" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "abenson"
-}
-
-resource "github_team_membership" "pkg-committers_asergi" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "asergi"
-}
-
-resource "github_team_membership" "pkg-committers_hoshpak" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "Hoshpak"
-}
-
-resource "github_team_membership" "pkg-committers_jnbr" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "jnbr"
-}
-
-resource "github_team_membership" "pkg-committers_johnnynator" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "Johnnynator"
-}
-
-resource "github_team_membership" "pkg-committers_leahneukirchen" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "leahneukirchen"
-}
-
-resource "github_team_membership" "pkg-committers_lemmi" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "lemmi"
-}
-
-resource "github_team_membership" "pkg-committers_pullmoll" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "pullmoll"
-}
-
-resource "github_team_membership" "pkg-committers_sgn" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "sgn"
-}
-
-resource "github_team_membership" "pkg-committers_thypon" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "thypon"
-}
-
-resource "github_team_membership" "pkg-committers_q66" {
-  team_id  = github_team.pkg-committers.id
-  role     = "member"
-  username = "q66"
-}
-
-###################
-# XBPS Developers #
-###################
-
-# These memberships belong to groups defined in github.tf.  These are
-# sorted by lexical sort order keyed on the username.  This order is
-# manually preserved, please be careful when editing.
-
-# Maintainers
-
-resource "github_team_membership" "xbps-developers_duncaen" {
-  team_id  = github_team.xbps-developers.id
-  role     = "maintainer"
-  username = "Duncaen"
-}
-
-# Members
-# empty
