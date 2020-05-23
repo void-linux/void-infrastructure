@@ -126,15 +126,6 @@ resource "google_dns_record_set" "wiki-legacy" {
   rrdatas = ["148.251.199.115"]
 }
 
-resource "google_dns_record_set" "forum-legacy" {
-  name         = "forum.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = google_dns_managed_zone.voidlinux-org.name
-
-  type    = "A"
-  ttl     = 300
-  rrdatas = ["174.138.52.96"]
-}
-
 #######################
 # GitHub Sites Record #
 #######################
@@ -155,37 +146,6 @@ resource "google_dns_record_set" "homepage-github-www" {
   type    = "A"
   ttl     = 300
   rrdatas = ["185.199.109.153"]
-}
-
-###################
-# Forum Mail Keys #
-###################
-
-resource "google_dns_record_set" "forum-mailkey1" {
-  name         = "forum.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = google_dns_managed_zone.voidlinux-org.name
-
-  type    = "TXT"
-  ttl     = 300
-  rrdatas = ["v=spf1 include:mailgun.org ~all"]
-}
-
-resource "google_dns_record_set" "forum-mailkey2" {
-  name         = "mailo._domainkey.forum.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = google_dns_managed_zone.voidlinux-org.name
-
-  type    = "TXT"
-  ttl     = 300
-  rrdatas = ["k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+l2MjKLTITnCaKL9Z8dM18OcnsbJuDp2+RPc7R3yKHgdV9axHIgeZV2ycn4dMesUJmLIMQKKSkNpULUwEvR2bN16UwcWTcbppP5K/ZL387TH6UL+OKqhXcfxJqIitzds88CPCrQqXrLL97jfycMbML3aZCc7MZ9zAkz0+Q+Wx3QIDAQAB"]
-}
-
-resource "google_dns_record_set" "forum-mailkey3" {
-  name         = "pic._domainkey.forum.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = google_dns_managed_zone.voidlinux-org.name
-
-  type    = "TXT"
-  ttl     = 300
-  rrdatas = ["k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC4DPi6hF1UPXxYv7giQzZSc3LGvN22jTWdN2pL+VNbAuFAYXpLjhdJGDPCRc3IRAYi/6SCDLBaNdlTx4yWWEnZ848RkrgKbxHVKz7UnEtS1ClSt4/6rD59TBXE4eaa/aneHHCGed2kWYYteXHDfn9+4kYYLn7SpjKrjIgND8ZVgwIDAQAB"]
 }
 
 ####################################################
