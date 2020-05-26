@@ -16,6 +16,9 @@ buildslave
 vm2.a-lej-de.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 
+[man]
+a-hel-fi.m.voidlinux.org
+
 [mirror]
 vm1.a-mci-us.m.voidlinux.org
 vm1.a-lej-de.m.voidlinux.org

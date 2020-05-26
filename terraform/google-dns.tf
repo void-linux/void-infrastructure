@@ -294,6 +294,15 @@ resource "google_dns_record_set" "service-xqapi" {
   rrdatas = ["a-hel-fi.m.voidlinux.org."]
 }
 
+resource "google_dns_record_set" "service-man" {
+  name         = "man.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
+
+  type    = "CNAME"
+  ttl     = 300
+  rrdatas = ["a-hel-fi.m.voidlinux.org."]
+}
+
 #######################################################################
 # Mirror Records                                                      #
 #                                                                     #
