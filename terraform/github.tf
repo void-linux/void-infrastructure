@@ -162,6 +162,15 @@ locals {
         "pkg-committers",
       ]
     }
+
+    xmandump = {
+      description        = "Dump all manpages in an XBPS package for use with man.cgi"
+      allow_merge_commit = false
+      allow_squash_merge = false
+      teams = [
+        "pkg-committers",
+      ]
+    }
   }
 }
 
