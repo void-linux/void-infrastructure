@@ -158,6 +158,7 @@ locals {
 
     openbsd-man = {
       description = "The OpenBSD man(1) utility for Linux"
+      archived    = true
       teams = [
         "pkg-committers",
       ]
@@ -183,6 +184,7 @@ resource "github_repository" "repositories" {
   homepage_url       = lookup(each.value, "homepage_url", null)
   allow_merge_commit = lookup(each.value, "allow_merge_commit", null)
   allow_squash_merge = lookup(each.value, "allow_squash_merge", null)
+  archived           = lookup(each.value, "archived", null)
 }
 
 resource "github_team_repository" "team_repositories" {
