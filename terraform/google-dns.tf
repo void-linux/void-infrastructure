@@ -38,15 +38,6 @@ resource "google_dns_record_set" "a-lej-de" {
   rrdatas = ["136.243.133.13"]
 }
 
-resource "google_dns_record_set" "vm1-a-lej-de" {
-  name         = "vm1.a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = google_dns_managed_zone.voidlinux-org.name
-
-  type    = "A"
-  ttl     = 300
-  rrdatas = ["148.251.199.112"]
-}
-
 resource "google_dns_record_set" "vm2-a-lej-de" {
   name         = "vm2.a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
   managed_zone = google_dns_managed_zone.voidlinux-org.name
