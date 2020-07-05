@@ -1,4 +1,3 @@
-ansible/secret/
 *venv*
 *pem
 *csr
