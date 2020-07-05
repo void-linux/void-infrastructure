@@ -1,0 +1,60 @@
+pki:
+  ca: /etc/nebula/ca.crt
+  cert: /etc/nebula/{{network_hostname}}.crt
+  key: /etc/nebula/{{network_hostname}}.key
+{% if not nebula_lighthouse %}
+
+static_host_map:
+  "192.168.99.100": ["vm2.a-lej-de.m.voidlinux.org:4242"]
+{% endif %}
+
+lighthouse:
+  am_lighthouse: {{nebula_lighthouse|bool|lower}}
+  interval: {{nebula_lighthouse|ternary('0', '60')}}
+{% if not nebula_lighthouse %}
+  hosts:
+    - "192.168.99.100"
+{% endif %}
+listen:
+  host: 0.0.0.0
+  port: 4242
+
+punchy:
+  punch: true
+  respond: true
+
+tun:
+  dev: void0
+  drop_local_broadcast: false
+  drop_multicast: false
+  tx_queue: 500
+  mtu: 1300
+
+logging:
+  level: info
+  format: text
+
+stats:
+  type: prometheus
+  listen: 0.0.0.0:4243
+  path: /metrics
+  namespace: prometheusns
+  subsystem: nebula
+  interval: 10s
+
+firewall:
+  conntrack:
+    tcp_timeout: 12m
+    udp_timeout: 3m
+    default_timeout: 10m
+    max_connections: 100000
+
+  outbound:
+    - port: any
+      proto: any
+      host: any
+
+  inbound:
+    - port: any
+      proto: any
+      host: any

@@ -24,6 +24,8 @@ network_interfaces:
 
 network_address_use_slaac: false
 
+nebula_lighthouse: true
+
 acmetool:
   sites:
     - site: terraform.voidlinux.org

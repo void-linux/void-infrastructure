@@ -1,0 +1,4 @@
+*filter
+-A INPUT -p udp --dport 4242 -j ACCEPT
+-A OUTPUT -p udp --dport 4242 -j ACCEPT
+COMMIT
