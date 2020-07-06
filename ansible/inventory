@@ -1,9 +1,7 @@
 [buildmaster]
-vm1.a-lej-de.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 
 [buildslave]
-vm1.a-lej-de.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 c-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
@@ -21,7 +19,6 @@ a-hel-fi.m.voidlinux.org
 
 [mirror]
 vm1.a-mci-us.m.voidlinux.org
-vm1.a-lej-de.m.voidlinux.org
 
 [md]
 b-lej-de.m.voidlinux.org
@@ -33,14 +30,12 @@ a-hel-fi.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
 
 [mirrormanager]
-vm1.a-lej-de.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 
 [netauth]
 vm2.a-lej-de.m.voidlinux.org
 
 [netlogon]
-vm1.a-lej-de.m.voidlinux.org
 vm2.a-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
@@ -61,6 +56,5 @@ a-lej-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 c-lej-de.m.voidlinux.org
 
-vm1.a-lej-de.m.voidlinux.org
 vm2.a-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
