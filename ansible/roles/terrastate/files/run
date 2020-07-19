@@ -1,7 +1,0 @@
-#!/bin/sh
-
-exec chpst -u _terrastate:_terrastate terrastate \
-     --state_file /var/lib/terrastate/state.dat \
-     --auth_backend NetAuth \
-     --required_group terraform \
-     2>&1

@@ -29,59 +29,15 @@
   notify:
     - nginx
 
-- name: Configure firewall rules
+- name: Configure Service
   copy:
-    src: terrastate.rules
-    dest: /etc/iptables.d/terrastate.rules
+    src: conf
+    dest: /etc/sv/terrastate/conf
     owner: root
     group: root
-    mode: 0640
-  notify:
-    - iptables
-  when:
-    - void_aquire_certs
-
-- name: Create Service Group
-  group:
-    name: _terrastate
-    state: present
-    system: yes
-
-- name: Create Service User
-  user:
-    name: _terrastate
-    group: _terrastate
-    state: present
-    system: yes
-    home: /var/lib/terrastate
-    create_home: yes
-
-- name: Install Service (1/3)
-  file:
-    path: /etc/sv/{{ item }}
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-  with_items:
-    - terrastate
-    - terrastate/log
-
-- name: Install Service (2/3)
-  copy:
-    src: run
-    dest: /etc/sv/terrastate/run
-    owner: root
-    group: root
-    mode: 0755
+    mode: 0644
   notify:
     - terrastate
-
-- name: Install Service (3/3)
-  file:
-    src: /usr/bin/rsvlog
-    dest: /etc/sv/terrastate/log/run
-    state: link
 
 - name: Enable Service
   runit:
