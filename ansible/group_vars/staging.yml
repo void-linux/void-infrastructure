@@ -1,5 +1,0 @@
----
-influxdb_host: localhost
-
-telegraf_remotes:
-  - localhost

@@ -1,6 +1,0 @@
----
-dxpb_master: d-lej-de.m.voidlinux.org
-dxpb_master_repo_giturl: git://github.com/void-linux/void-packages.git
-dxpb_repo_giturl: '{{ dxpb_master_repo_giturl }}'
-dxpb_slave_mirror: http://d-lej-de.m.voidlinux.org/current
-dxpb_master_dataroot: /srv/dxpb

@@ -1,7 +1,0 @@
----
-- hosts: mirrormanager
-  become: yes
-  become_method: sudo
-  become_user: root
-  roles:
-    - mirrorbits

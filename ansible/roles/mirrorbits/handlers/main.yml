@@ -1,5 +1,0 @@
----
-- name: mirrorbits
-  runit:
-    name: mirrorbits
-    state: restarted

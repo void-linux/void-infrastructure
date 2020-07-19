@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec snooze geoipupdate -f /etc/GeoIP.conf
