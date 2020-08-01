@@ -17,3 +17,5 @@ hostcert vm1-a-mci-us 192.168.99.101/24 base,nomad-client
 hostcert a-hel-fi 192.168.99.102/24 base,nomad-client
 hostcert b-lej-de 192.168.99.103/24 base,nomad-client
 hostcert c-lej-de 192.168.99.104/24 base,nomad-client
+
+hostcert a-sfo3-us 192.168.99.105/24 base,netauth

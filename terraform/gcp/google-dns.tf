@@ -101,6 +101,15 @@ resource "google_dns_record_set" "vm1-a-mci-us" {
   rrdatas = ["198.204.250.219"]
 }
 
+resource "google_dns_record_set" "a_sfo3_us" {
+  name         = "a-sfo3-us.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
+
+  type    = "A"
+  ttl     = 300
+  rrdatas = ["161.35.231.145"]
+}
+
 ######################################################################
 # Legacy Hosts                                                       #
 #                                                                    #

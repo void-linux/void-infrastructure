@@ -1,0 +1,12 @@
+---
+network_input_policy: DROP
+network_output_policy: ACCEPT
+
+nebula_lighthouse: true
+
+nebula_static_hosts:
+  - host: "192.168.99.100"
+    addrs: ["vm2.a-lej-de.m.voidlinux.org:4242"]
+
+nebula_lighthouses:
+  - 192.168.99.100

@@ -2,19 +2,19 @@ pki:
   ca: /etc/nebula/ca.crt
   cert: /etc/nebula/{{network_hostname}}.crt
   key: /etc/nebula/{{network_hostname}}.key
-{% if not nebula_lighthouse %}
 
 static_host_map:
-  "192.168.99.100": ["vm2.a-lej-de.m.voidlinux.org:4242"]
-{% endif %}
+{% for h in nebula_static_hosts %}
+  {{h.host}}: {{h.addrs}}
+{% endfor %}
 
 lighthouse:
   am_lighthouse: {{nebula_lighthouse|bool|lower}}
-  interval: {{nebula_lighthouse|ternary('0', '60')}}
-{% if not nebula_lighthouse %}
+  interval: 60
   hosts:
-    - "192.168.99.100"
-{% endif %}
+{% for l in nebula_lighthouses %}
+    - {{l}}
+{% endfor %}
 listen:
   host: 0.0.0.0
   port: 4242
