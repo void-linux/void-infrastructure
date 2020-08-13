@@ -6,36 +6,12 @@
       - sv-helper
     state: present
 
-- name: Create group
-  group:
-    name: _netauthd
-    state: present
-
-- name: Create unprivileged user
-  user:
-    name: _netauthd
-    group: _netauthd
-    create_home: yes
-    home: /var/lib/netauthd
-    system: yes
-    state: present
-
-- name: Create data directories
-  file:
-    path: "/var/lib/netauth/{{ item }}"
-    state: directory
-    owner: _netauthd
-    group: _netauthd
-    mode: 0750
-  with_items:
-    - pdb
-
 - name: Install TLS Certificate
   copy:
     src: secret/netauth_tls_certificate.key
     dest: /var/lib/netauth/keys/tls.key
     owner: root
-    group: _netauthd
+    group: _netauth
     mode: 0640
   no_log: true
   notify:
@@ -45,8 +21,8 @@
   copy:
     src: secret/netauth_token.key
     dest: /var/lib/netauth/keys/token.key
-    owner: root
-    group: _netauthd
+    owner: _netauth
+    group: _netauth
     mode: 0400
   no_log: true
   notify:
@@ -62,29 +38,8 @@
   notify:
     - iptables
 
-- name: Install Service (1/3)
-  file:
-    path: /etc/sv/{{ item }}
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-  with_items:
-    - netauthd
-    - netauthd/log
-
-- name: Install Service (2/3)
-  template:
-    src: run.j2
-    dest: /etc/sv/netauthd/run
-    owner: root
-    group: root
-    mode: 0755
-  notify:
-    - netauthd
-
-- name: Install Service (3/3)
-  file:
-    src: /usr/bin/rsvlog
-    dest: /etc/sv/netauthd/log/run
-    state: link
+- name: Enable Service
+  service:
+    name: netauthd
+    state: started
+    enabled: true
