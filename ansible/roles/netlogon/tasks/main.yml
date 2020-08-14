@@ -34,7 +34,7 @@
     pkg:
       - NetKeys
       - NetAuth-localizer
-      - pam_netauth
+      - NetAuth-pam-helper
       - libpam-policycache
     state: present
 

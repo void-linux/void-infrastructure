@@ -2,7 +2,7 @@
 
 auth    [success=4 default=ignore] pam_unix.so try_first_pass nullok
 auth    [success=3 default=ignore] pam_policycache.so try_first_pass action=check
-auth    [success=1 default=die] pam_netauth.so try_first_pass
+auth    [success=1 default=die] pam_exec.so expose_authtok quiet /usr/bin/pam-helper
 auth    required  pam_deny.so
 auth    [default=ignore] pam_policycache.so action=update
 auth    required  pam_env.so
