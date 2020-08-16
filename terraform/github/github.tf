@@ -118,6 +118,14 @@ locals {
       ]
     }
 
+    runit = {
+      description = "Void's copy of runit."
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "runit-devs",
+      ]
+    }
+
     ###########################
     # Auxilliary Repositories #
     ###########################

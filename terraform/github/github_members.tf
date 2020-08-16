@@ -89,6 +89,18 @@ locals {
         "Vaelatern",
       ]
     }
+
+    runit-devs = {
+      description = "Maintainers of runit"
+      maintainers = [
+        "Duncaen",
+        "Gottox",
+        "the-maldridge",
+      ]
+      members = [
+        "ericonr",
+      ]
+    }
   }
 }
 
