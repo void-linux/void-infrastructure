@@ -72,6 +72,8 @@ locals {
     void-runit = {
       description  = "runit init scripts for Void"
       homepage_url = "https://voidlinux.org"
+      allow_merge_commit = false
+      allow_squash_merge = false
       teams = [
         "pkg-committers",
       ]
@@ -121,6 +123,8 @@ locals {
     runit = {
       description = "Void's copy of runit."
       homepage_url = "https://voidlinux.org"
+      allow_merge_commit = false
+      allow_squash_merge = false
       teams = [
         "runit-devs",
       ]
