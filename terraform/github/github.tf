@@ -121,7 +121,7 @@ locals {
     }
 
     runit = {
-      description = "Void's copy of runit."
+      description = "The init system for Void Linux."
       homepage_url = "https://voidlinux.org"
       allow_merge_commit = false
       allow_squash_merge = false
