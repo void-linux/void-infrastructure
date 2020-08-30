@@ -211,7 +211,7 @@ resource "google_dns_record_set" "service-netauth" {
 
   type    = "CNAME"
   ttl     = 300
-  rrdatas = ["vm2.a-lej-de.m.voidlinux.org."]
+  rrdatas = ["a-sfo3-us.m.voidlinux.org."]
 }
 
 resource "google_dns_record_set" "service-popcorn" {
