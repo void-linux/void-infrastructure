@@ -39,6 +39,7 @@ locals {
         "abenson",
         "ahesford",
         "asergi",
+        "ericonr",
         "jnbr",
         "leahneukirchen",
         "lemmi",
