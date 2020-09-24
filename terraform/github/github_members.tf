@@ -75,7 +75,6 @@ locals {
       members = [
         "bobertlo",
         "ericonr",
-        "flexibeast",
       ]
     }
 
