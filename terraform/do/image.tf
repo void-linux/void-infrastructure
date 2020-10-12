@@ -1,5 +1,5 @@
 resource "digitalocean_spaces_bucket" "custom_images" {
-  name = "void-prod-s3-images"
+  name   = "void-prod-s3-images"
   region = "sfo2"
 }
 
