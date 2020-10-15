@@ -20,7 +20,6 @@
   - [void-updates](./services/void-updates.md)
   - [xlocate](./services/xlocate.md)
   - [xq-api](./services/xq-api.md)
-  - [vpn](./services/vpn.md)
 - [Organization](./org/index.md)
   - [Onboarding](./org/onboarding.md)
   - [Offboarding](./org/offboarding.md)

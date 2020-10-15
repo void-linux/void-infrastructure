@@ -24,15 +24,6 @@ network_interfaces:
 
 network_address_use_slaac: false
 
-nebula_lighthouse: true
-
-nebula_static_hosts:
-  - host: "192.168.99.105"
-    addrs: ["a-sfo3-us.m.voidlinux.org:4242"]
-
-nebula_lighthouses:
-  - 192.168.99.105
-
 acmetool:
   sites:
     - site: terraform.voidlinux.org

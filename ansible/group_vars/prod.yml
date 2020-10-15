@@ -61,13 +61,3 @@ prometheus:
             target_label: instance
           - target_label: __address__
             replacement: localhost:9219
-
-nebula_static_hosts:
-  - host: "192.168.99.100"
-    addrs: ["vm2.a-lej-de.m.voidlinux.org:4242"]
-  - host: "192.168.99.105"
-    addrs: ["a-sfo3-us.m.voidlinux.org:4242"]
-
-nebula_lighthouses:
-  - 192.168.99.100
-  - 192.168.99.105

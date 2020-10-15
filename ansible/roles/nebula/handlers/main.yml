@@ -1,5 +1,0 @@
----
-- name: nebula
-  service:
-    name: nebula
-    state: restarted
