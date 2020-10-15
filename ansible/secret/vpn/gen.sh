@@ -19,3 +19,6 @@ hostcert b-lej-de 192.168.99.103/24 base,nomad-client
 hostcert c-lej-de 192.168.99.104/24 base,nomad-client
 
 hostcert a-sfo3-us 192.168.99.105/24 base,netauth
+hostcert b-sfo3-us 192.168.99.106/24 base,nomad-server
+hostcert c-sfo3-us 192.168.99.107/24 base,nomad-server
+hostcert d-sfo3-us 192.168.99.108/24 base,nomad-server
