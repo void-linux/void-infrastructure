@@ -1,0 +1,10 @@
+---
+- name: Install Server Configuration
+  template:
+    src: 40-server.hcl.j2
+    dest: /etc/consul/40-server.hcl
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - consul

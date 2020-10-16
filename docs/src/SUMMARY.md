@@ -11,6 +11,8 @@
   - [Deploy a Playbook](./ansible/setup-deploy.md)
 - [Certificate Authority](./ca/index.md)
 - [Network Architecture](./network/index.md)
+- [Hashistack](./hashistack/index.md)
+  - [Consul](./hashistack/consul.md)
 - [Services](./services/index.md)
   - [acmetool](./services/acmetool.md)
   - [buildbot](./services/buildbot.md)

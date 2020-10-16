@@ -1,0 +1,7 @@
+---
+- hosts: hashimaster
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - consul-server

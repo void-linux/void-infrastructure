@@ -1,0 +1,7 @@
+encrypt = "{{lookup('file', 'secret/consul_gossip_key')}}"
+
+acl {
+  tokens {
+    agent = "{{lookup('file', 'secret/consul_agent_token')}}"
+  }
+}

@@ -1,0 +1,5 @@
+---
+- name: consul
+  service:
+    name: consul
+    state: restarted
