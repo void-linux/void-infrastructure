@@ -61,3 +61,14 @@ prometheus:
             target_label: instance
           - target_label: __address__
             replacement: localhost:9219
+
+void_mesh:
+  a-hel-fi.m.voidlinux.org: 192.168.99.100
+  b-lej-de.m.voidlinux.org: 192.168.99.101
+  c-lej-de.m.voidlinux.org: 192.168.99.102
+  a-sfo3-us.m.voidlinux.org: 192.168.99.103
+  b-sfo3-us.m.voidlinux.org: 192.168.99.104
+  c-sfo3-us.m.voidlinux.org: 192.168.99.105
+  d-sfo3-us.m.voidlinux.org: 192.168.99.106
+  vm2.a-lej-de.m.voidlinux.org: 192.168.99.107
+  vm1.a-mci-us.m.voidlinux.org: 192.168.99.108

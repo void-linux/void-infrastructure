@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Create secret directory
+      file:
+        path: secret/vpn
+        state: directory
+
+    - name: Create wireguard keys
+      shell: wg genkey | tee {{item}} | wg pubkey > {{item}}.pub
+      args:
+        creates: "{{item}}.pub"
+        chdir: secret/vpn
+      with_items: "{{ groups['prod'] | difference(groups['unmanaged']) }}"
+
+- hosts: prod:!unmanaged
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - void-mesh

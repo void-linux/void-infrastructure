@@ -1,0 +1,31 @@
+---
+- name: Install Wireguard
+  xbps:
+    pkg: wireguard-tools
+    state: present
+
+- name: Install Config
+  template:
+    src: void0.conf.j2
+    dest: /etc/wireguard/void0.conf
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - wireguard
+
+- name: Install Firewall Rules
+  copy:
+    src: void-mesh.rules
+    dest: /etc/iptables.d/void-mesh.rules
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables
+
+- name: Enable Tunnels
+  service:
+    name: wireguard
+    state: started
+    enabled: true

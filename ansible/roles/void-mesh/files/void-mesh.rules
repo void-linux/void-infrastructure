@@ -1,0 +1,7 @@
+*filter
+-A INPUT -p udp --dport 51820 -j ACCEPT
+-A OUTPUT -p udp --dport 51820 -j ACCEPT
+
+-A INPUT -i void0 -j ACCEPT
+-A OUTPUT -o void0 -j ACCEPT
+COMMIT

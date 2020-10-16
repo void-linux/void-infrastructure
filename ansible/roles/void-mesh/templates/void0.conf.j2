@@ -1,0 +1,14 @@
+[Interface]
+Address = {{void_mesh[inventory_hostname]}}/24
+PrivateKey = {{lookup('file', 'secret/vpn/'+inventory_hostname)}}
+ListenPort = 51820
+
+{% for peer in void_mesh %}
+{% if peer != inventory_hostname %}
+[Peer]
+PublicKey = {{lookup('file', 'secret/vpn/'+peer+'.pub')}}
+AllowedIPs = {{void_mesh[peer]}}/32
+Endpoint = {{peer}}:51820
+
+{% endif %}
+{% endfor %}

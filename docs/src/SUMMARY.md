@@ -10,6 +10,7 @@
   - [Secrets](./ansible/secrets.md)
   - [Deploy a Playbook](./ansible/setup-deploy.md)
 - [Certificate Authority](./ca/index.md)
+- [Network Architecture](./network/index.md)
 - [Services](./services/index.md)
   - [acmetool](./services/acmetool.md)
   - [buildbot](./services/buildbot.md)
