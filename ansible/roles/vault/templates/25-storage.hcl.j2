@@ -1,0 +1,6 @@
+storage "consul" {
+  address = "127.0.0.1:8500"
+  path    = "vault"
+
+  token = "{{lookup('file', 'secret/vault_consul_token')}}"
+}

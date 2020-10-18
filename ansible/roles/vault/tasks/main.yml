@@ -1,0 +1,31 @@
+---
+- name: Install Packages
+  xbps:
+    pkg: vault
+    state: present
+
+- name: Install Storage config
+  template:
+    src: 25-storage.hcl.j2
+    dest: /etc/vault/25-storage.hcl
+    owner: root
+    group: _vault
+    mode: 0640
+  notify:
+    - vault
+
+- name: Install Listener config
+  copy:
+    src: 30-listeners.hcl
+    dest: /etc/vault/30-listeners.hcl
+    owner: root
+    group: _vault
+    mode: 0640
+  notify:
+    - vault
+
+- name: Enable Service
+  service:
+    name: vault
+    state: started
+    enabled: true

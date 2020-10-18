@@ -24,3 +24,6 @@
 
   [crypto.bcrypt]
     cost = 10
+
+[ldap]
+  domain = "voidlinux.org"

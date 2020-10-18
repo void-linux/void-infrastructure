@@ -1,0 +1,10 @@
+- name: Install Packages
+  xbps:
+    pkg: NetAuth-ldap
+    state: present
+
+- name: Enable Service
+  service:
+    name: netauth-ldap
+    state: started
+    enabled: true
