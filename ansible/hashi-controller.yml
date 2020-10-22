@@ -6,3 +6,4 @@
   roles:
     - consul-server
     - vault
+    - nomad-server
