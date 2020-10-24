@@ -7,3 +7,4 @@
     - consul-server
     - vault
     - nomad-server
+    - nomad-client

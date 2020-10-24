@@ -1,0 +1,10 @@
+---
+- name: Install Configuration
+  copy:
+    src: 40-client.hcl
+    dest: /etc/nomad/40-client.hcl
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nomad

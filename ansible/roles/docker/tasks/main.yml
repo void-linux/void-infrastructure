@@ -1,0 +1,11 @@
+---
+- name: Install Packages
+  xbps:
+    pkg: docker
+    state: present
+
+- name: Enable Service
+  service:
+    name: docker
+    state: started
+    enabled: true
