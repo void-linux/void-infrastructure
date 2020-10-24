@@ -1,0 +1,1 @@
+datacenter = "{{nomad_datacenter}}"

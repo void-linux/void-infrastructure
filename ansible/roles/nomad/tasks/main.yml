@@ -30,6 +30,16 @@
   notify:
     - nomad
 
+- name: Set Datacenter
+  template:
+    src: 25-dc.hcl
+    dest: /etc/nomad/25-dc.hcl
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nomad
+
 - name: Install Service (1/3)
   file:
     path: /etc/sv/{{item}}

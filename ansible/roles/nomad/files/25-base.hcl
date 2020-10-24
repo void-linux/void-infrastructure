@@ -1,5 +1,4 @@
 data_dir = "/var/lib/nomad"
-datacenter = "void"
 
 advertise {
   http = "{{ GetInterfaceIP \"void0\" }}"
