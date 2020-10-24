@@ -1,0 +1,30 @@
+#jinja2: trim_blocks: "true", lstrip_blocks: "true"
+server:
+  use-syslog: yes
+
+  access-control: 0.0.0.0/0 deny
+  access-control: 127.0.0.0/8 allow
+
+  hide-identity: yes
+  hide-version: yes
+  harden-below-nxdomain: no
+  harden-referral-path: yes
+  use-caps-for-id: no
+  ignore-cd-flag: yes
+
+  do-not-query-localhost: no
+  extended-statistics: yes
+
+{% if unbound_stub_consul|default(false) %}
+  private-domain: consul.
+{% endif %}
+
+remote-control:
+  control-enable: yes
+
+{% if unbound_stub_consul|default(false) %}
+stub-zone:
+  name: consul
+  stub-addr: 127.0.0.1@8600
+  stub-first: yes
+{% endif %}

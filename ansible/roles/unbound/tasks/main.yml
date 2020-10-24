@@ -1,0 +1,39 @@
+---
+- name: Install packages
+  xbps:
+    pkg: unbound
+    state: present
+
+- name: Install config file
+  template:
+    src: unbound.conf.j2
+    dest: /etc/unbound/unbound.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - unbound
+
+- name: Set up control keys
+  command: unbound-control-setup
+  args:
+    creates: /etc/unbound/unbound_control.key
+
+- name: Disable network DNS management
+  file:
+    path: /var/libexec/dhcpcd-hooks/20-resolv.conf
+    state: absent
+
+- name: Install /etc/resolv.conf
+  copy:
+    src: resolv.conf
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable Service
+  service:
+    name: unbound
+    state: started
+    enabled: true

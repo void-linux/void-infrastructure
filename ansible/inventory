@@ -49,6 +49,10 @@ d-sfo3-us.m.voidlinux.org
 [automation]
 vm2.a-lej-de.m.voidlinux.org
 
+[hashi:children]
+hashimaster
+hashiworker
+
 [hashimaster]
 b-sfo3-us.m.voidlinux.org
 c-sfo3-us.m.voidlinux.org

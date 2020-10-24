@@ -7,5 +7,6 @@
     - xbps-repoconf
     - sshd
     - mosh
+    - unbound
     - netlogon
     - node_exporter
