@@ -5,3 +5,10 @@ server {
 consul {
   token = "{{lookup('file', 'secret/nomad_consul_token')}}"
 }
+
+vault {
+  enabled = true
+  create_from_role = "resin-nomad-server"
+  address = "http://active.vault.service.consul:8200"
+  token = "{{lookup('file', 'secret/nomad_vault_token')}}"
+}

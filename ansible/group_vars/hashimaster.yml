@@ -1,2 +1,6 @@
 ---
+network_input_policy: DROP
+network_output_policy: ACCEPT
+
+
 nomad_datacenter: VOID-CONTROL
