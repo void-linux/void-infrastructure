@@ -29,3 +29,9 @@ acmetool:
   hostmaster_email: postmaster@voidlinux.org
   services:
     - nginx
+
+
+nomad_host_volumes:
+  - name: prometheus
+    path: /data/prometheus
+    read_only: false

@@ -1,6 +1,6 @@
 ---
 - name: Install Configuration
-  copy:
+  template:
     src: 40-client.hcl
     dest: /etc/nomad/40-client.hcl
     owner: root
@@ -8,3 +8,11 @@
     mode: 0644
   notify:
     - nomad
+
+- name: Create any missing directories
+  file:
+    path: "{{item.path}}"
+    state: directory
+  with_items: "{{nomad_host_volumes|default([])}}"
+  loop_control:
+    label: "{{item.name}}"
