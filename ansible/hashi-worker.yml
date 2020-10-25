@@ -1,5 +1,5 @@
 ---
-- hosts: hashiworker
+- hosts: hashiworker,hashiproxy
   become: yes
   become_user: root
   become_method: sudo

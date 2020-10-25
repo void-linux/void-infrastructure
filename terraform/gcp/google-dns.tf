@@ -137,6 +137,15 @@ resource "google_dns_record_set" "d_sfo3_us" {
   rrdatas = ["143.110.155.124"]
 }
 
+resource "google_dns_record_set" "e_sfo3_us" {
+  name         = "e-sfo3-us.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
+
+  type    = "A"
+  ttl     = 300
+  rrdatas = ["161.35.228.17"]
+}
+
 ######################################################################
 # Legacy Hosts                                                       #
 #                                                                    #
@@ -289,6 +298,19 @@ resource "google_dns_record_set" "service-man" {
   ttl     = 300
   rrdatas = ["a-hel-fi.m.voidlinux.org."]
 }
+
+# This is a special service record which points ot the load balancer
+# on e-sfo3-us. This in-turn ingresses to the rest of the fleet via
+# the mesh network and Nomad.
+resource "google_dns_record_set" "service-catchall" {
+  name         = "*.s.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
+
+  type    = "CNAME"
+  ttl     = 300
+  rrdatas = ["e-sfo3-us.m.voidlinux.org."]
+}
+
 
 #######################################################################
 # Mirror Records                                                      #

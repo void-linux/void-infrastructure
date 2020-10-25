@@ -45,6 +45,7 @@ a-sfo3-us.m.voidlinux.org
 b-sfo3-us.m.voidlinux.org
 c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
+e-sfo3-us.m.voidlinux.org
 
 [automation]
 vm2.a-lej-de.m.voidlinux.org
@@ -52,6 +53,7 @@ vm2.a-lej-de.m.voidlinux.org
 [hashi:children]
 hashimaster
 hashiworker
+hashiproxy
 
 [hashimaster]
 b-sfo3-us.m.voidlinux.org
@@ -62,6 +64,9 @@ d-sfo3-us.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 c-lej-de.m.voidlinux.org
+
+[hashiproxy]
+e-sfo3-us.m.voidlinux.org
 
 [unmanaged]
 a-mci-us.m.voidlinux.org
@@ -77,6 +82,7 @@ a-sfo3-us.m.voidlinux.org
 b-sfo3-us.m.voidlinux.org
 c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
+e-sfo3-us.m.voidlinux.org
 
 vm2.a-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
