@@ -19,6 +19,7 @@ resource "vault_ldap_auth_backend_group" "dante" {
     "resin-root",
     "resin-consul-root",
     "resin-nomad-root",
+    "void-secrets-admin",
   ]
   backend = vault_ldap_auth_backend.ldap.path
 }

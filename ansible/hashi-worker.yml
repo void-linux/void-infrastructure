@@ -6,3 +6,23 @@
   roles:
     - consul
     - nomad-client
+
+
+- hosts: hashiproxy
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Accept web traffic
+      lineinfile:
+        line: "{{item}}"
+        path: /etc/iptables.d/proxy.rules
+        create: yes
+        owner: root
+        group: root
+        mode: 0640
+      with_items:
+        - "*filter"
+        - "-A INPUT -p tcp --dport 80 -j ACCEPT"
+        - "-A INPUT -p tcp --dport 443 -j ACCEPT"
+        - "COMMIT"
