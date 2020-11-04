@@ -3,6 +3,8 @@
   become: yes
   become_user: root
   become_method: sudo
+  vars:
+    nomad_role: client
   roles:
     - consul
     - nomad-client

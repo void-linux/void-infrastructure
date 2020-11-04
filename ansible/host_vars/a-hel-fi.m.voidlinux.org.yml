@@ -1,7 +1,4 @@
 ---
-network_input_policy: DROP
-network_output_policy: ACCEPT
-
 network_interfaces:
   - name: enp0s31f6
     mode: static

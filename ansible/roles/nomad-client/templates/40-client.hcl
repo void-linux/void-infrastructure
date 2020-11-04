@@ -2,6 +2,7 @@
 client {
   enabled = true
   network_interface = "void0"
+  cni_path = "/usr/libexec/cni"
 {% for volume in nomad_host_volumes|default([]) %}
 
   host_volume "{{volume.name}}" {

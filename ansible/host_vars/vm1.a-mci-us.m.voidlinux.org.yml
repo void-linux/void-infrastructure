@@ -1,7 +1,4 @@
 ---
-network_input_policy: ACCEPT
-network_output_policy: ACCEPT
-
 xbps_repository_address: alpha.de.repo.voidlinux.org
 xbps_repository_main: http://{{ xbps_repository_address }}/current
 xbps_repository_nonfree: http://{{ xbps_repository_address }}/current/nonfree

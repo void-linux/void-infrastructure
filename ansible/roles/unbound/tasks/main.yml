@@ -37,3 +37,10 @@
     name: unbound
     state: started
     enabled: true
+
+- name: Ensure resolv.conf is immutable.
+  file:
+    path: /etc/resolv.conf
+    attr: +i
+  register: resolv_file
+  changed_when: "'i' not in resolv_file.diff.before.attributes"

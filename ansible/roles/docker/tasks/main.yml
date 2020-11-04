@@ -4,6 +4,26 @@
     pkg: docker
     state: present
 
+- name: Install daemon.json
+  template:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - docker
+
+- name: Install Firewall Rules
+  copy:
+    src: docker-dns.rules
+    dest: /etc/iptables.d/docker-dns.rules
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables
+
 - name: Enable Service
   service:
     name: docker

@@ -13,4 +13,13 @@ network_boot_hosts:
   - addr: 161.35.231.145
     name: netauth.voidlinux.org
 
+network_input_policy: DROP
+network_output_policy: ACCEPT
+
+# We need to allow arbitrary network forwarding due to the requirement
+# that we pass traffic between two different overlay networks.  This
+# also technically requires net.ipv4.ip_forward, wich is enabled on
+# hosts that require this functionality.
+network_forward_policy: ACCEPT
+
 nginx_bind_443: "{{void_aquire_certs}}"

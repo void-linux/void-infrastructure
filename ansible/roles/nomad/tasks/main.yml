@@ -30,6 +30,16 @@
   notify:
     - nomad
 
+- name: Install Consul Token
+  template:
+    src: 30-consul.hcl
+    dest: /etc/nomad/30-consul.hcl
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - nomad
+
 - name: Set Datacenter
   template:
     src: 25-dc.hcl

@@ -1,4 +1,11 @@
 ---
+- name: Install Packages
+  xbps:
+    pkg:
+      - cni
+      - cni-plugins
+    state: present
+
 - name: Install Configuration
   template:
     src: 40-client.hcl

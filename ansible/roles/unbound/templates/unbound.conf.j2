@@ -2,8 +2,10 @@
 server:
   use-syslog: yes
 
+  interface: 0.0.0.0
   access-control: 0.0.0.0/0 deny
   access-control: 127.0.0.0/8 allow
+  access-control: 172.17.0.0/16 allow
 
   hide-identity: yes
   hide-version: yes

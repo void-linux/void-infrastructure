@@ -24,6 +24,12 @@
   notify:
     - iptables
 
+- name: Enable IPv4 Forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    sysctl_set: yes
+
 - name: Enable Tunnels
   service:
     name: wireguard
