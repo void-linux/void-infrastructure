@@ -1,10 +1,10 @@
 data "vault_policy_document" "secrets_traefik" {
   rule {
-    path         = "secret/traefik/*"
+    path = "secret/traefik/*"
     capabilities = [
       "read",
     ]
-    description  = "Read Traefik Secrets"
+    description = "Read Traefik Secrets"
   }
 }
 

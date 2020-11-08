@@ -1,6 +1,6 @@
 data "vault_policy_document" "secrets_admin" {
   rule {
-    path         = "secret/*"
+    path = "secret/*"
     capabilities = [
       "create",
       "read",
@@ -8,7 +8,7 @@ data "vault_policy_document" "secrets_admin" {
       "delete",
       "list",
     ]
-    description  = "allow all on secrets"
+    description = "allow all on secrets"
   }
 }
 

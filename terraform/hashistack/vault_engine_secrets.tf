@@ -1,5 +1,5 @@
 resource "vault_mount" "secret" {
-  path = "secret"
-  type = "kv"
+  path        = "secret"
+  type        = "kv"
   description = "KV Secrets Store"
 }
