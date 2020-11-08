@@ -43,4 +43,3 @@
     path: /etc/resolv.conf
     attr: +i
   register: resolv_file
-  changed_when: "'i' not in resolv_file.diff.before.attributes"
