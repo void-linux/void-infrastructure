@@ -3,10 +3,13 @@
   become: yes
   become_method: sudo
   become_user: root
+  vars:
+    node_exporter_consul_token: "{{lookup('file', 'secret/node_exporter_consul_token')}}"
   roles:
     - xbps-repoconf
     - sshd
     - mosh
     - unbound
     - netlogon
+    - consul
     - node_exporter

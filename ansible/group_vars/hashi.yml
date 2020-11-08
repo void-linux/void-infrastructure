@@ -1,2 +1,3 @@
 ---
 unbound_stub_consul: true
+node_exporter_consul_service: true

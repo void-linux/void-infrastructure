@@ -230,16 +230,6 @@ resource "google_dns_record_set" "service-infradocs" {
   rrdatas = ["vm2.a-lej-de.m.voidlinux.org."]
 }
 
-resource "google_dns_record_set" "service-monitoring" {
-  # Monitoring Site
-  name         = "monitoring.${google_dns_managed_zone.voidlinux-org.dns_name}"
-  managed_zone = google_dns_managed_zone.voidlinux-org.name
-
-  type    = "CNAME"
-  ttl     = 300
-  rrdatas = ["b-lej-de.m.voidlinux.org."]
-}
-
 resource "google_dns_record_set" "service-netauth" {
   # Authentication Service
   name         = "netauth.${google_dns_managed_zone.voidlinux-org.dns_name}"

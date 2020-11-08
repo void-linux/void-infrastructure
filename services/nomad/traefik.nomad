@@ -24,6 +24,7 @@ job "traefik" {
       config {
         image = "traefik:2.3"
         network_mode = "host"
+        dns_servers = ["127.0.0.1"]
 
         args = [
           "--api.dashboard",
@@ -33,7 +34,7 @@ job "traefik" {
           "--entrypoints.traefik.address=:8080",
           "--metrics.prometheus",
           "--providers.file.filename=/local/dynamic.toml",
-          "--providers.consulcatalog.defaultrule=`Host({{normalize .Name}}.s.voidlinux.org)`",
+          "--providers.consulcatalog.defaultrule=Host(`{{normalize .Name}}.s.voidlinux.org`)",
           "--providers.consulcatalog.exposedbydefault=false",
           "--certificatesresolvers.gcp.acme.email=hostmaster@voidlinux.org",
           "--certificatesresolvers.gcp.acme.storage=/acme/acme.json",

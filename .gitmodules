@@ -13,9 +13,6 @@
 [submodule "roles/acmetool"]
 	path = ansible/roles/acmetool
 	url = git@github.com:void-ansible-roles/acmetool.git
-[submodule "roles/grafana"]
-	path = ansible/roles/grafana
-	url = git@github.com:void-ansible-roles/grafana.git
 [submodule "roles/mosh"]
 	path = ansible/roles/mosh
 	url = git@github.com:void-ansible-roles/mosh.git
@@ -23,8 +20,5 @@
 	path = ansible/roles/mdbook
 	url = git@github.com:void-ansible-roles/mdbook.git
 [submodule "ansible/roles/node_exporter"]
-	path = ansible/roles/node_exporter
-	url = git@github.com:void-ansible-roles/node_exporter.git
-[submodule "ansible/roles/prometheus"]
-	path = ansible/roles/prometheus
-	url = git@github.com:void-ansible-roles/prometheus.git
+        path = ansible/roles/node_exporter
+        url = git@github.com:void-ansible-roles/node_exporter.git

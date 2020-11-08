@@ -1,4 +1,5 @@
 *filter
 -A INPUT -i docker0 -p tcp --dport 53 -j ACCEPT
 -A INPUT -i docker0 -p udp --dport 53 -j ACCEPT
+-A INPUT -s 172.17.0.0/16 -j ACCEPT
 COMMIT
