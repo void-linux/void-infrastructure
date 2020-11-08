@@ -6,7 +6,8 @@ network_interfaces:
     mode6: dhcp
     resolvermode6: dhcp
 
-network_address_use_slaac: false
+network_address_use_slaac: true
+network_address_slaac_mode: hwaddr
 
 sshd_AllowGroups:
   - build-ops
