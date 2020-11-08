@@ -73,6 +73,9 @@ scrape_configs:
       - server: 172.17.0.1:8500
         datacenter: void
         services: ['node-exporter']
+    relabel_configs:
+      - source_labels: ['__meta_consul_node']
+        target_label: instance
   - job_name: 'ssl'
     metrics_path: /probe
     scrape_interval: 2m
@@ -108,6 +111,10 @@ EOT
 
       artifact {
         source = "https://raw.githubusercontent.com/void-linux/void-infrastructure/master/services/configs/prometheus/alerts/prometheus.yml"
+        destination = "local/alerts/"
+      }
+      artifact {
+        source = "https://raw.githubusercontent.com/void-linux/void-infrastructure/master/services/configs/prometheus/alerts/node_exporter.yml"
         destination = "local/alerts/"
       }
     }
