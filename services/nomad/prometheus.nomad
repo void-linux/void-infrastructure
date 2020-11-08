@@ -62,6 +62,10 @@ scrape_configs:
     static_configs:
       - targets:
         - localhost:9090
+  - job_name: traefik
+    static_configs:
+      - targets:
+        - e-sfo3-us.node.consul:8080
   - job_name: node
     consul_sd_configs:
       - server: 172.17.0.1:8500
@@ -96,6 +100,8 @@ scrape_configs:
 EOT
         destination = "local/prometheus.yml"
         perms = 644
+        change_mode   = "signal"
+        change_signal = "SIGHUP"
       }
     }
   }
