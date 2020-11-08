@@ -11,6 +11,8 @@ resource "vault_ldap_auth_backend" "ldap" {
   groupdn     = "ou=entities,dc=netauth,dc=voidlinux,dc=org"
   groupfilter = "(uid={{.Username}})"
   groupattr   = "memberOf"
+
+  token_explicit_max_ttl = 3600 * 12
 }
 
 resource "vault_ldap_auth_backend_group" "dante" {
