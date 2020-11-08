@@ -57,6 +57,8 @@ job "prometheus" {
 global:
   scrape_interval: 30s
   evaluation_interval: 30s
+rule_files:
+  - /local/alerts/*.yml
 scrape_configs:
   - job_name: prometheus
     static_configs:
@@ -102,6 +104,11 @@ EOT
         perms = 644
         change_mode   = "signal"
         change_signal = "SIGHUP"
+      }
+
+      artifact {
+        source = "https://raw.githubusercontent.com/void-linux/void-infrastructure/master/services/configs/prometheus/alerts/prometheus.yml"
+        destination = "local/alerts/"
       }
     }
   }
