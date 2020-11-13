@@ -1,0 +1,3 @@
+*filter
+-A INPUT -i nomad -j ACCEPT
+COMMIT

@@ -8,6 +8,22 @@ job "traefik" {
       source    = "acme_data"
     }
 
+    network {
+      mode = "bridge"
+      port "http" {
+        to = 80
+        static = 80
+      }
+      port "https" {
+        to = 443
+        static = 443
+      }
+      port "traefik" {
+        to = 8080
+        static = 8080
+      }
+    }
+
     task "traefik" {
       driver = "docker"
 
@@ -23,8 +39,6 @@ job "traefik" {
 
       config {
         image = "traefik:2.3"
-        network_mode = "host"
-        dns_servers = ["127.0.0.1"]
 
         args = [
           "--api.dashboard",
@@ -36,6 +50,7 @@ job "traefik" {
           "--providers.file.filename=/local/dynamic.toml",
           "--providers.consulcatalog.defaultrule=Host(`{{normalize .Name}}.s.voidlinux.org`)",
           "--providers.consulcatalog.exposedbydefault=false",
+          "--providers.consulcatalog.endpoint.address=${attr.unique.network.ip-address}:8500",
           "--certificatesresolvers.gcp.acme.email=hostmaster@voidlinux.org",
           "--certificatesresolvers.gcp.acme.storage=/acme/acme.json",
           "--certificatesresolvers.gcp.acme.dnschallenge.provider=gcloud",

@@ -82,3 +82,13 @@
     name: nomad
     enabled: true
     state: started
+
+- name: Install Firewall Rules
+  copy:
+    src: nomad.rules
+    dest: /etc/iptables.d/nomad.rules
+    owner: root
+    group: root
+    mode: 0640
+  notify:
+    - iptables

@@ -1,4 +1,4 @@
-job "ssl-exporter" {
+job "oldwiki" {
   datacenters = ["VOID"]
   type = "service"
 
@@ -8,14 +8,17 @@ job "ssl-exporter" {
     network {
       mode = "bridge"
       port "http" {
-        to = 9219
-        static = 9219
+        to = 2950
       }
     }
 
     service {
-      name = "ssl-exporter"
+      name = "oldwiki"
       port = "http"
+      tags = [
+        "traefik.enable=true",
+        "traefik.http.routers.oldwiki.tls=true",
+      ]
 
       check {
         type = "http"
@@ -26,11 +29,11 @@ job "ssl-exporter" {
       }
     }
 
-    task "ssl-exporter" {
+    task "httpd" {
       driver = "docker"
 
       config {
-        image = "ribbybibby/ssl-exporter:v2.1.1"
+        image = "voidlinux/oldwiki:2"
         ports = ["http"]
       }
     }

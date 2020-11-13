@@ -12,6 +12,7 @@ job "prometheus" {
     }
 
     network {
+      mode = "bridge"
       port "http" {
         to = 9090
         static = 9090

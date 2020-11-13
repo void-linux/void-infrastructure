@@ -1,3 +1,5 @@
 {
-    "dns": ["172.17.0.1"]
+    "iptables": false,
+    "bridge": "none",
+    "dns": ["172.26.64.1"]
 }

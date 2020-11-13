@@ -3,6 +3,16 @@ client {
   enabled = true
   network_interface = "void0"
   cni_path = "/usr/libexec/cni"
+
+  host_volume "netauth_config" {
+    path = "/etc/netauth"
+    read_only = true
+  }
+
+  host_volume "netauth_certificates" {
+    path = "/var/lib/netauth"
+    read_only = true
+  }
 {% for volume in nomad_host_volumes|default([]) %}
 
   host_volume "{{volume.name}}" {
