@@ -106,3 +106,8 @@ mdbook_sites:
 
 xqapi:
   repodata: /hostdir/binpkgs
+
+nomad_host_volumes:
+  - name: root_mirror
+    path: /srv/www/void-repo
+    read_only: true
