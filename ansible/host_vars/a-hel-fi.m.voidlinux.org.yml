@@ -111,3 +111,9 @@ nomad_host_volumes:
   - name: root_mirror
     path: /srv/www/void-repo
     read_only: true
+  - name: root_binpkgs
+    path: /hostdir/binpkgs
+    read_only: false
+  - name: debuginfod
+    path: /nomad/debuginfod
+    read_only: false
