@@ -112,18 +112,6 @@ groups:
           summary: Host high CPU load (instance {{ $labels.instance }})
           description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
     
-      # 1000 context switches is an arbitrary number.
-      # Alert threshold depends on nature of application.
-      # Please read: https://github.com/samber/awesome-prometheus-alerts/issues/58
-      - alert: HostContextSwitching
-        expr: (rate(node_context_switches_total[5m])) / (count without(cpu, mode) (node_cpu_seconds_total{mode="idle"})) > 1000
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: Host context switching (instance {{ $labels.instance }})
-          description: "Context switching is growing on node (> 1000 / s)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-    
       - alert: HostSwapIsFillingUp
         expr: (1 - (node_memory_SwapFree_bytes / node_memory_SwapTotal_bytes)) * 100 > 80
         for: 5m
@@ -132,24 +120,6 @@ groups:
         annotations:
           summary: Host swap is filling up (instance {{ $labels.instance }})
           description: "Swap is filling up (>80%)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-    
-      - alert: HostSystemdServiceCrashed
-        expr: node_systemd_unit_state{state="failed"} == 1
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: Host SystemD service crashed (instance {{ $labels.instance }})
-          description: "SystemD service crashed\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-    
-      - alert: HostPhysicalComponentTooHot
-        expr: node_hwmon_temp_celsius > 75
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: Host physical component too hot (instance {{ $labels.instance }})
-          description: "Physical hardware component too hot\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
     
       - alert: HostNodeOvertemperatureAlarm
         expr: node_hwmon_temp_alarm == 1
@@ -222,13 +192,3 @@ groups:
         annotations:
           summary: Host Network Transmit Errors (instance {{ $labels.instance }})
           description: "{{ $labels.instance }} interface {{ $labels.device }} has encountered {{ printf \"%.0f\" $value }} transmit errors in the last five minutes.\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-    
-      - alert: HostNetworkInterfaceSaturated
-        expr: (rate(node_network_receive_bytes_total{device!~"^tap.*"}[1m]) + rate(node_network_transmit_bytes_total{device!~"^tap.*"}[1m])) / node_network_speed_bytes{device!~"^tap.*"} > 0.8
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: Host Network Interface Saturated (instance {{ $labels.instance }})
-          description: "The network interface \"{{ $labels.interface }}\" on \"{{ $labels.instance }}\" is getting overloaded.\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-    
