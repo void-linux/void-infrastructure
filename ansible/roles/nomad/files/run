@@ -1,4 +1,6 @@
 #!/bin/sh
 
+modprobe bridge
+
 exec 2>&1
 exec nomad agent -config /etc/nomad/
