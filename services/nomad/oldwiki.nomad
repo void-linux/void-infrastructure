@@ -1,5 +1,6 @@
 job "oldwiki" {
   datacenters = ["VOID"]
+  namespace = "apps"
   type = "service"
 
   group "app" {

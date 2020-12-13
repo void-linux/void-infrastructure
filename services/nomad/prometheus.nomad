@@ -1,5 +1,6 @@
 job "prometheus" {
   datacenters = ["VOID"]
+  namespace = "monitoring"
   type = "service"
 
   group "app" {

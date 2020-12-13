@@ -1,5 +1,6 @@
 job "debuginfod" {
   datacenters = ["VOID"]
+  namespace = "apps"
   type = "service"
 
   group "app" {

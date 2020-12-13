@@ -1,5 +1,6 @@
 job "traefik" {
   datacenters = ["VOID-PROXY"]
+  namespace = "infrastructure"
   type = "system"
   group "lb" {
     volume "acme_data" {
@@ -38,7 +39,7 @@ job "traefik" {
       }
 
       config {
-        image = "traefik:2.3"
+        image = "traefik:2.3.5"
 
         args = [
           "--api.dashboard",
