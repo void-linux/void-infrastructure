@@ -25,3 +25,12 @@ resource "vault_ldap_auth_backend_group" "dante" {
   ]
   backend = vault_ldap_auth_backend.ldap.path
 }
+
+resource "vault_ldap_auth_backend_group" "nomad_apps_admin" {
+  groupname = "nomad-apps-admin"
+  policies = [
+    vault_policy.apps_admin.name,
+  ]
+
+  backend = vault_ldap_auth_backend.ldap.path
+}

@@ -9,6 +9,6 @@ resource "nomad_namespace" "infrastructure" {
 }
 
 resource "nomad_namespace" "apps" {
-  name = "apps"
+  name        = "apps"
   description = "Individual applications"
 }
