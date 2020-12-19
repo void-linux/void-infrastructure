@@ -82,3 +82,27 @@ the key comment should be sufficient to remove it if it is unique.
 ```shell
 $ netauth modify-keys --ID <username> --mode ADD --key "<key>"
 ```
+
+## Basic user interaction
+
+### Initial configuration
+
+An initial config file for NetAuth can be obtained from the [void-infrastructure
+repository](https://github.com/void-linux/void-infrastructure/blob/master/ansible/roles/netauth-config/files/config.toml).
+It can be stored in `~/.netauth/config.toml`, for example, and should be
+modified so that the `tls.certificate` key points to a file containing the
+certificate for the <netauth.voidlinux.org> domain.  The certificate can be
+obtained one of two ways shown below:
+
+```shell
+$ openssl s_client -showcerts -connect netauth.voidlinux.org:1729 </dev/null | openssl x509 -outform pem
+```
+
+or
+
+```shell
+$ cfssl certinfo -domain netauth.voidlinux.org:1729 | jq --raw-output .pem
+```
+
+At that point, the password can be set with [netauth auth
+change-secret](https://docs.netauth.org/commands/netauth_auth_change-secret.html).
