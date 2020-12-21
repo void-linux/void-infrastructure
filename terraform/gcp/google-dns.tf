@@ -349,3 +349,17 @@ resource "google_dns_record_set" "mx-mail-host" {
   ttl     = 300
   rrdatas = ["10 vm3.a-lej-de.m.voidlinux.org."]
 }
+
+#######################################################################
+# Verification and Validation                                         #
+#                                                                     #
+#######################################################################
+
+resource "google_dns_record_set" "github_verification" {
+  name         = "_github-challenge-void-linux.voidlinux.org."
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
+
+  type    = "TXT"
+  ttl     = 300
+  rrdatas = ["3dc3629c19"]
+}
