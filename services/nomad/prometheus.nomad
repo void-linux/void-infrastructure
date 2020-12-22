@@ -104,11 +104,6 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: ssl-exporter.service.consul:9219
-  - job_name: debuginfod
-    consul_sd_configs:
-      - server: 172.26.64.1:8500
-        datacenter: void
-        services: ['debuginfod']
 EOT
         destination = "local/prometheus.yml"
         perms = 644
