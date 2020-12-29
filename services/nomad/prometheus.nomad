@@ -61,6 +61,12 @@ global:
   evaluation_interval: 30s
 rule_files:
   - /local/alerts/*.yml
+alerting:
+  alertmanagers:
+    - consul_sd_configs:
+      - server: 172.26.64.1:8500
+        datacenter: void
+        services: ['alertmanager']
 scrape_configs:
   - job_name: prometheus
     static_configs:
@@ -104,6 +110,14 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: ssl-exporter.service.consul:9219
+  - job_name: alertmanager
+    consul_sd_configs:
+      - server: 172.26.64.1:8500
+        datacenter: void
+        services: ['alertmanager']
+    relabel_configs:
+      - source_labels: ['__meta_consul_node']
+        target_label: instance
 EOT
         destination = "local/prometheus.yml"
         perms = 644
