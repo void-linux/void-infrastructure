@@ -30,7 +30,7 @@ job "ircbot" {
       }
 
       config {
-        image = "ghcr.io/void-linux/ircbot:v0.1.0rc1"
+        image = "ghcr.io/void-linux/ircbot:v0.1.1"
         ports = ["http"]
         force_pull = true
       }
