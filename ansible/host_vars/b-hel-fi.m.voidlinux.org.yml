@@ -1,0 +1,5 @@
+---
+nomad_host_volumes:
+  - name: void-packages
+    path: /mnt/data/void-packages
+    read_only: false

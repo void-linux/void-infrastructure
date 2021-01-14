@@ -73,6 +73,7 @@ void_mesh:
   e-sfo3-us.m.voidlinux.org: 192.168.99.109
   vm2.a-lej-de.m.voidlinux.org: 192.168.99.107
   vm1.a-mci-us.m.voidlinux.org: 192.168.99.108
+  b-hel-fi.m.voidlinux.org: 192.168.99.110
 
 consul_servers:
   - 192.168.99.104

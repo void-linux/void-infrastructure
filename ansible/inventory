@@ -36,6 +36,7 @@ a-sfo3-us.m.voidlinux.org
 vm2.a-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
+b-hel-fi.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 c-lej-de.m.voidlinux.org
 a-sfo3-us.m.voidlinux.org
@@ -59,6 +60,7 @@ d-sfo3-us.m.voidlinux.org
 
 [hashiworker]
 a-hel-fi.m.voidlinux.org
+b-hel-fi.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 c-lej-de.m.voidlinux.org
 
@@ -71,6 +73,7 @@ a-lej-de.m.voidlinux.org
 
 [prod]
 a-hel-fi.m.voidlinux.org
+b-hel-fi.m.voidlinux.org
 a-mci-us.m.voidlinux.org
 a-lej-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
