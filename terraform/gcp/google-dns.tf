@@ -29,6 +29,15 @@ resource "google_dns_record_set" "a-hel-fi" {
   rrdatas = ["95.216.76.97"]
 }
 
+resource "google_dns_record_set" "b-hel-fi" {
+  name         = "b-hel-fi.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
+  managed_zone = google_dns_managed_zone.voidlinux-org.name
+
+  type    = "A"
+  ttl     = 300
+  rrdatas = ["135.181.132.139"]
+}
+
 resource "google_dns_record_set" "a-lej-de" {
   name         = "a-lej-de.m.${google_dns_managed_zone.voidlinux-org.dns_name}"
   managed_zone = google_dns_managed_zone.voidlinux-org.name
