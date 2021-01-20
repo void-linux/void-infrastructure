@@ -3,16 +3,7 @@ resource "nomad_acl_policy" "guest" {
   description = "View and Examine in a read-only context"
 
   rules_hcl = <<EOT
-namespace "default" {
-  policy = "read"
-}
-namespace "monitoring" {
-  policy = "read"
-}
-namespace "infrastructure" {
-  policy = "read"
-}
-namespace "apps" {
+namespace "*" {
   policy = "read"
 }
 node {
