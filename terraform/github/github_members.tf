@@ -38,7 +38,6 @@ locals {
         "Vaelatern",
         "abenson",
         "ahesford",
-        "asergi",
         "ericonr",
         "jnbr",
         "leahneukirchen",
