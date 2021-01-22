@@ -3,3 +3,6 @@ nomad_host_volumes:
   - name: void-packages
     path: /mnt/data/void-packages
     read_only: false
+  - name: minio-data
+    path: /mnt/data/minio
+    read_only: false
