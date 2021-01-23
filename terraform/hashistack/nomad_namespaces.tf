@@ -14,6 +14,6 @@ resource "nomad_namespace" "apps" {
 }
 
 resource "nomad_namespace" "build" {
-  name = "build"
+  name        = "build"
   description = "Home of build related tasks"
 }
