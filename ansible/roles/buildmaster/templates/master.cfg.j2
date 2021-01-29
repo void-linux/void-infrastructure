@@ -158,13 +158,6 @@ c['status'] = [
 					}
 				},
 		change_hook_auth=["file:/{{ buildmaster_rootdir}}/github-webhook.passwd"]
-	),
-	words.IRC(
-		host='chat.freenode.net',
-		nick='xbps-builder',
-		channels=[{'channel': '#xbps'}],
-		notify_events={ 'failure' : 1 },
-		noticeOnChannel=True, useRevisions=True
 	)
 ]
 
