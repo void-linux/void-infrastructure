@@ -1,6 +1,6 @@
 resource "digitalocean_project" "void_prod" {
-  name        = "Void Prod"
-  description = "Void's DigitalOcean Infrastructure"
+  name        = "Production"
+  description = "Production Infrastructure"
   purpose     = "Host Void"
   environment = "Production"
 }
