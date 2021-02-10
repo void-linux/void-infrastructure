@@ -209,7 +209,7 @@ resource "digitalocean_record" "wiki" {
 resource "digitalocean_record" "www" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
-  name   = "wiki"
+  name   = "www"
   value  = "185.199.109.153"
 }
 
