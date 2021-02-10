@@ -2,9 +2,13 @@
 
 cd /var/lib/man-cgi || exit 1
 
-for arch in x86_64 musl/x86_64-musl armv7l musl/armv7l-musl; do
-    cd ./${arch#musl/} || exit 1
-    xmandump -c cache.json /hostdir/binpkgs/${arch}-repodata
+for arch in x86_64 armv7l; do
+    cd ./${arch} || exit 1
+    xmandump -c cache.json /hostdir/binpkgs/${arch}-repodata /hostdir/binpkgs/nonfree/${arch}-repodata
+    cd ../ || exit 1
+
+    cd ./${arch}-musl || exit 1
+    xmandump -c cache.json /hostdir/binpkgs/musl/${arch}-musl-repodata /hostdir/binpkgs/musl/nonfree/${arch}-musl-repodata
     cd ../ || exit 1
 done
 
