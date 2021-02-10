@@ -168,7 +168,7 @@ resource "digitalocean_record" "man" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
   name   = "man"
-  value  = "a-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
+  value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "netauth" {
