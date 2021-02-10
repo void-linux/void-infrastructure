@@ -22,7 +22,7 @@ resource "digitalocean_record" "apex_mx" {
   domain   = digitalocean_domain.voidlinux_org.name
   type     = "MX"
   name     = "@"
-  value    = "vm3.a-lej-de.${digitalocean_domain.voidlinux_org.name}."
+  value    = "vm3.a-lej-de.m.${digitalocean_domain.voidlinux_org.name}."
   priority = 10
 }
 
