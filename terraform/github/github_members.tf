@@ -72,7 +72,6 @@ locals {
         "the-maldridge",
       ]
       members = [
-        "bobertlo",
         "ericonr",
       ]
     }
