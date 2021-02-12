@@ -52,10 +52,10 @@ job "traefik" {
           "--providers.consulcatalog.defaultrule=Host(`{{normalize .Name}}.s.voidlinux.org`)",
           "--providers.consulcatalog.exposedbydefault=false",
           "--providers.consulcatalog.endpoint.address=${attr.unique.network.ip-address}:8500",
-          "--certificatesresolvers.gcp.acme.email=hostmaster@voidlinux.org",
-          "--certificatesresolvers.gcp.acme.storage=/acme/acme.json",
-          "--certificatesresolvers.gcp.acme.dnschallenge.provider=gcloud",
-          "--certificatesresolvers.gcp.acme.dnschallenge.resolvers=8.8.8.8",
+          "--certificatesresolvers.do.acme.email=hostmaster@voidlinux.org",
+          "--certificatesresolvers.do.acme.storage=/acme/acme.json",
+          "--certificatesresolvers.do.acme.dnschallenge.provider=digitalocean",
+          "--certificatesresolvers.do.acme.dnschallenge.resolvers=8.8.8.8",
         ]
       }
 
@@ -76,9 +76,10 @@ job "traefik" {
       service = "noop@internal"
       rule = "Host(`noop.s.voidlinux.org`)"
       [http.routers.wildcard-cert.tls]
-        certResolver = "gcp"
+        certResolver = "do"
         [[http.routers.wildcard-cert.tls.domains]]
-          main = "*.s.voidlinux.org"
+          main = "*.voidlinux.org"
+          sans = ["*.s.voidlinux.org"]
     [http.routers.nomad]
       entryPoints = ["https"]
       service = "nomad"
@@ -113,17 +114,13 @@ EOF
 
       template {
         data=<<EOF
-{{- with secret "secret/traefik/gcp-svc-account" }}
-{{.Data.value}}
+{{- with secret "secret/traefik/do-api" }}
+DO_AUTH_TOKEN={{.Data.api_key}}
 {{- end }}
 EOF
-        destination = "secrets/account.json"
+        destination = "secrets/env"
         perms = 400
-      }
-
-      env {
-        GCE_PROJECT="void-linux-175807"
-        GCE_SERVICE_ACCOUNT_FILE="/secrets/account.json"
+        env = true
       }
 
       resources {
