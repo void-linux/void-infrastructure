@@ -1,9 +1,3 @@
-provider "github" {
-  version = "2.3.1"
-
-  organization = "void-linux"
-}
-
 locals {
   github_repos = {
     #####################
@@ -70,8 +64,8 @@ locals {
     }
 
     void-runit = {
-      description  = "runit init scripts for Void"
-      homepage_url = "https://voidlinux.org"
+      description        = "runit init scripts for Void"
+      homepage_url       = "https://voidlinux.org"
       allow_merge_commit = false
       allow_squash_merge = false
       teams = [
@@ -84,15 +78,6 @@ locals {
       homepage_url = "https://voidlinux.org"
       teams = [
         "pkg-committers",
-      ]
-    }
-
-
-    "void-linux.github.io" = {
-      description  = "Void Linux website"
-      homepage_url = "https://voidlinux.org"
-      teams = [
-        "webmasters",
       ]
     }
 
@@ -121,8 +106,8 @@ locals {
     }
 
     runit = {
-      description = "The init system for Void Linux."
-      homepage_url = "https://voidlinux.org"
+      description        = "The init system for Void Linux."
+      homepage_url       = "https://voidlinux.org"
       allow_merge_commit = false
       allow_squash_merge = false
       teams = [
@@ -133,6 +118,15 @@ locals {
     ###########################
     # Auxilliary Repositories #
     ###########################
+    ircbot = {
+      description        = "Void's IRC Notification Bot"
+      allow_merge_commit = false
+      allow_squash_merge = false
+      teams = [
+        "void-ops",
+      ]
+    }
+
     netbsd-wtf = {
       description = "NetBSD's wtf(6) adapted for Void Linux"
       teams = [
@@ -197,6 +191,8 @@ resource "github_repository" "repositories" {
   allow_merge_commit = lookup(each.value, "allow_merge_commit", null)
   allow_squash_merge = lookup(each.value, "allow_squash_merge", null)
   archived           = lookup(each.value, "archived", null)
+
+  vulnerability_alerts = true
 }
 
 resource "github_team_repository" "team_repositories" {
@@ -206,5 +202,29 @@ resource "github_team_repository" "team_repositories" {
 
   team_id    = github_team.teams[each.value.team_name].id
   repository = github_repository.repositories[each.value.repo_name].name
+  permission = "push"
+}
+
+# The website is special, it needs a pages block and generally other
+# stuff that nothing else needs.
+resource "github_repository" "void_linux_github_io" {
+  name                 = "void-linux.github.io"
+  description          = "Void Linux website"
+  homepage_url         = "https://voidlinux.org"
+  vulnerability_alerts = true
+
+  pages {
+    cname = "voidlinux.org"
+
+    source {
+      branch = "master"
+      path   = "/"
+    }
+  }
+}
+
+resource "github_team_repository" "void_linux_github_io_webmasters" {
+  team_id    = github_team.teams["webmasters"].id
+  repository = github_repository.void_linux_github_io.name
   permission = "push"
 }
