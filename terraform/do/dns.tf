@@ -161,7 +161,7 @@ resource "digitalocean_record" "infradocs" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
   name   = "infradocs"
-  value  = "vm2.a-lej-de.m.${digitalocean_domain.voidlinux_org.name}."
+  value  = "${digitalocean_record.e_sfo3_us.fqdn}."
 }
 
 resource "digitalocean_record" "man" {
