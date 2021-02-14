@@ -1,2 +1,0 @@
-export TS_BIND=127.0.0.1:8081
-export TS_AUTH=netauth

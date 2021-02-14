@@ -1,8 +1,0 @@
----
-- hosts: automation
-  become: yes
-  become_method: sudo
-  roles:
-    - acmetool
-    - terrastate
-    - mdbook

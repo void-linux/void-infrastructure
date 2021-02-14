@@ -59,13 +59,6 @@ resource "digitalocean_record" "a_lej_de" {
   value  = "136.243.133.13"
 }
 
-resource "digitalocean_record" "vm2_a_lej_de" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "vm2.a-lej-de.m"
-  value  = "148.251.199.117"
-}
-
 resource "digitalocean_record" "vm3_a_lej_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
@@ -190,13 +183,6 @@ resource "digitalocean_record" "sources" {
   type   = "CNAME"
   name   = "sources"
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
-resource "digitalocean_record" "terraform" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "terraform"
-  value  = "vm2.a-lej-de.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "wiki" {

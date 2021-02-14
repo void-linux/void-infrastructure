@@ -11,7 +11,6 @@ buildmaster
 buildslave
 
 [docs]
-vm2.a-lej-de.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 
 [man]
@@ -33,7 +32,6 @@ a-hel-fi.m.voidlinux.org
 a-sfo3-us.m.voidlinux.org
 
 [netlogon]
-vm2.a-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 b-hel-fi.m.voidlinux.org
@@ -44,9 +42,6 @@ b-sfo3-us.m.voidlinux.org
 c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
 e-sfo3-us.m.voidlinux.org
-
-[automation]
-vm2.a-lej-de.m.voidlinux.org
 
 [hashi:children]
 hashimaster
@@ -84,5 +79,4 @@ c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
 e-sfo3-us.m.voidlinux.org
 
-vm2.a-lej-de.m.voidlinux.org
 vm1.a-mci-us.m.voidlinux.org
