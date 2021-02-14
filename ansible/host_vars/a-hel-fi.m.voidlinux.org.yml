@@ -117,3 +117,6 @@ nomad_host_volumes:
   - name: debuginfod
     path: /nomad/debuginfod
     read_only: false
+  - name: terrastate
+    path: /nomad/terrastate
+    read_only: false

@@ -105,7 +105,7 @@ resource "digitalocean_record" "a_sfo3_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
   name   = "a-sfo3-us.m"
-  value  = "198.204.250.218"
+  value  = "161.35.231.145"
 }
 
 resource "digitalocean_record" "b_sfo3_us" {

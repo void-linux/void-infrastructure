@@ -1,6 +1,3 @@
-provider "consul" {}
-provider "vault" {}
-
 module "consul_base" {
   source  = "resinstack/base/consul"
   version = "0.3.0"
