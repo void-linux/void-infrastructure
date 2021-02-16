@@ -1,0 +1,5 @@
+---
+nomad_host_volumes:
+  - name: maddy_data
+    path: /nomad/maddy_data
+    read_only: false

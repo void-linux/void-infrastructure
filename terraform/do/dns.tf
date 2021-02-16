@@ -98,35 +98,42 @@ resource "digitalocean_record" "a_sfo3_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
   name   = "a-sfo3-us.m"
-  value  = "161.35.231.145"
+  value  = digitalocean_droplet.a_sfo3_us.ipv4_address
 }
 
 resource "digitalocean_record" "b_sfo3_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
   name   = "b-sfo3-us.m"
-  value  = "143.110.155.135"
+  value  = digitalocean_droplet.b_sfo3_us.ipv4_address
 }
 
 resource "digitalocean_record" "c_sfo3_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
   name   = "c-sfo3-us.m"
-  value  = "143.110.147.196"
+  value  = digitalocean_droplet.c_sfo3_us.ipv4_address
 }
 
 resource "digitalocean_record" "d_sfo3_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
   name   = "d-sfo3-us.m"
-  value  = "143.110.155.124"
+  value  = digitalocean_droplet.d_sfo3_us.ipv4_address
 }
 
 resource "digitalocean_record" "e_sfo3_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
   name   = "e-sfo3-us.m"
-  value  = "161.35.228.17"
+  value  = digitalocean_droplet.e_sfo3_us.ipv4_address
+}
+
+resource "digitalocean_record" "f_sfo3_us" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "f-sfo3-us.m"
+  value  = digitalocean_droplet.f_sfo3_us.ipv4_address
 }
 
 #######################################################################
@@ -247,4 +254,29 @@ resource "digitalocean_record" "verification_github" {
   type   = "TXT"
   name   = "_github-challenge-void-linux"
   value  = "3dc3629c19"
+}
+
+
+
+
+resource "digitalocean_record" "mtmp_mx" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "MX"
+  name = "mtmp"
+  value = "${digitalocean_record.f_sfo3_us.fqdn}."
+  priority = 10
+}
+
+resource "digitalocean_record" "mtmp" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "A"
+  name = "mtmp"
+  value = digitalocean_droplet.f_sfo3_us.ipv4_address
+}
+
+resource "digitalocean_record" "mtmp_spf" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "TXT"
+  name = "mtmp"
+  value = "v=spf1 mx -all"
 }

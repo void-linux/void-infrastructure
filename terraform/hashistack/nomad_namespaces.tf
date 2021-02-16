@@ -13,6 +13,11 @@ resource "nomad_namespace" "apps" {
   description = "Individual applications"
 }
 
+resource "nomad_namespace" "apps_restricted" {
+  name = "apps-restricted"
+  description = "High privilege applications"
+}
+
 resource "nomad_namespace" "build" {
   name        = "build"
   description = "Home of build related tasks"
