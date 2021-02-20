@@ -81,6 +81,14 @@ locals {
       ]
     }
 
+    void-docker = {
+      description  = "Docker images for Void Linux"
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
     socklog-void = {
       description  = "SockLog configuration for Void Linux"
       homepage_url = "https://voidlinux.org"
