@@ -14,7 +14,7 @@ resource "nomad_namespace" "apps" {
 }
 
 resource "nomad_namespace" "apps_restricted" {
-  name = "apps-restricted"
+  name        = "apps-restricted"
   description = "High privilege applications"
 }
 
