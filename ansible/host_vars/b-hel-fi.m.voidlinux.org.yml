@@ -6,3 +6,6 @@ nomad_host_volumes:
   - name: minio-data
     path: /mnt/data/minio
     read_only: false
+  - name: root-pkgs
+    path: /mnt/data/pkgs
+    read_only: false
