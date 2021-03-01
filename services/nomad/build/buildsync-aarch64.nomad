@@ -1,7 +1,12 @@
-job "buildsync-musl" {
+job "buildsync-aarch64" {
   type = "batch"
   datacenters = ["VOID"]
   namespace = "build"
+
+  periodic {
+    cron             = "*/15 * * * * *"
+    prohibit_overlap = true
+  }
 
   group "rsync" {
     network { mode = "bridge" }
@@ -22,15 +27,16 @@ job "buildsync-musl" {
       config {
         image = "eeacms/rsync"
         args = [
-          "rsync", "-avzurk",
+          "rsync", "-vurk",
           "-e", "ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts",
           "--exclude", "'*.sig'",
           "--delete-after",
           "-f", "+ */",
-          "-f", "+ *-repodata",
-          "-f", "+ *.xbps",
+          "-f", "+ aarch64*-repodata",
+          "-f", "+ aarch64*.xbps",
+          "-f", "+ *.noarch*.xbps",
           "-f", "- *",
-          "xbps-master@198.204.250.219:/hostdir/binpkgs/", "/pkgs/musl"
+          "xbps-master@c-lej-de.node.consul:/hostdir/binpkgs/", "/pkgs/aarch64"
         ]
       }
 
@@ -51,7 +57,7 @@ EOF
 
       template {
         data = <<EOF
-198.204.250.219 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/m4r1s3RWBDSUn3ZK0ZfXbzuvxKZPQMgvuhNXpvxFY
+c-lej-de.node.consul ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHS8zm2q6zhddkYBeoiBH1vXTkPqT3M3UeutauT/G4Ms
 EOF
         destination = "local/known_hosts"
       }

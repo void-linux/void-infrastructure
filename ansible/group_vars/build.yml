@@ -71,6 +71,7 @@ buildslave_zones:
       nick: maldridge
       name: maldridge
       mail: maldridge@voidlinux.org
+    makejobs: 12
   US-MCI:
     admin:
       nick: maldridge

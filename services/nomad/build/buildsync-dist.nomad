@@ -1,14 +1,19 @@
-job "buildsync-aarch64" {
+job "buildsync-dist" {
   type = "batch"
   datacenters = ["VOID"]
   namespace = "build"
 
+  periodic {
+    cron             = "*/2 * * * * *"
+    prohibit_overlap = true
+  }
+
   group "rsync" {
     network { mode = "bridge" }
 
-    volume "root-pkgs" {
+    volume "root-binpkgs" {
       type = "host"
-      source = "root-pkgs"
+      source = "root_binpkgs"
       read_only = false
     }
 
@@ -22,20 +27,15 @@ job "buildsync-aarch64" {
       config {
         image = "eeacms/rsync"
         args = [
-          "rsync", "-avzurk",
-          "-e", "ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts",
-          "--exclude", "'*.sig'",
+          "rsync", "-vurk",
           "--delete-after",
-          "-f", "+ */",
-          "-f", "+ *-repodata",
-          "-f", "+ *.xbps",
-          "-f", "- *",
-          "xbps-master@c-lej-de.node.consul:/hostdir/binpkgs/", "/pkgs/aarch64"
+          "-e", "ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts",
+          "void-buildsync@b-hel-fi.node.consul:/mnt/data/pkgs/", "/pkgs/"
         ]
       }
 
       volume_mount {
-        volume = "root-pkgs"
+        volume = "root-binpkgs"
         destination = "/pkgs"
       }
 
@@ -51,7 +51,7 @@ EOF
 
       template {
         data = <<EOF
-c-lej-de.node.consul ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHS8zm2q6zhddkYBeoiBH1vXTkPqT3M3UeutauT/G4Ms
+b-hel-fi.node.consul ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMU4d2VBQ3GYGdPOFlvjsJupPnnCk+42hLhrGuCrGLgT
 EOF
         destination = "local/known_hosts"
       }
