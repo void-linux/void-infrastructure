@@ -1,4 +1,9 @@
 ---
+void_aquire_certs: false
+
+buildslave_zone: FI-2
+buildslave_isremote: false
+
 nomad_host_volumes:
   - name: void-packages
     path: /mnt/data/void-packages

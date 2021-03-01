@@ -11,6 +11,7 @@
     name: "{{ buildslave_user }}"
     state: present
     createhome: yes
+    system: yes
     groups: "{{ buildslave_groups | join(',') }}"
 
 - name: Create Buildsync user ({{ buildslave_sync_user }})
@@ -18,6 +19,7 @@
     name: "{{ buildslave_sync_user }}"
     state: present
     createhome: yes
+    system: yes
   when: buildslave_isremote
 
 - name: Create {{ buildslave_sync_user }} .ssh

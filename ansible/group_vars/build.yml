@@ -5,22 +5,22 @@ buildslave_buildslaves:
   - name: x86_64-primary
     sname: x86_64_void
     mach: x86_64
-    zone: DE-1
+    zone: FI-2
 
   - name: i686-primary
     sname: i686_void
     mach: i686
-    zone: DE-1
+    zone: FI-2
 
   - name: armv6l-primary
     sname: cross-rpi_void
     mach: armv6l
-    zone: DE-1
+    zone: FI-2
 
   - name: armv7l-primary
     sname: cross-armv7l_void
     mach: armv7l
-    zone: DE-1
+    zone: FI-2
 
   - name: x86_64-musl-primary
     sname: x86_64-musl_void
@@ -60,18 +60,17 @@ buildslave_buildslaves:
     zone: DE-2
 
 buildslave_zones:
-  DE-1:
-    admin:
-      nick: gottox
-      name: Enno Boland
-      mail: gottox@voidlinux.org
-    xbps:
   DE-2:
     admin:
       nick: leah2
       name: Leah Neukirchen
       mail: leah@vuxu.org
     xbps:
+  FI-2:
+    admin:
+      nick: maldridge
+      name: maldridge
+      mail: maldridge@voidlinux.org
   US-MCI:
     admin:
       nick: maldridge
