@@ -20,10 +20,10 @@ network_interfaces:
     addresses6:
       - 2a01:4f9:2b:c9e::2/64
 
-xbps_repository_main: /hostdir/current
-xbps_repository_nonfree: /hostdir/current/nonfree
-xbps_repository_multilib: /hostdir/current/multilib
-xbps_repository_multilib_nonfree: /hostdir/current/multilib/nonfree
+xbps_repository_main: /mnt/data/pkgs/binpkgs
+xbps_repository_nonfree: /mnt/data/pkgs/binpkgs/nonfree
+xbps_repository_multilib: /mnt/data/pkgs/binpkgs/multilib
+xbps_repository_multilib_nonfree: /mnt/data/pkgs/binpkgs/multilib/nonfree
 
 network_address_use_slaac: false
 
