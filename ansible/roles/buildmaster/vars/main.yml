@@ -1,3 +1,2 @@
 ---
 buildmaster_github_secret: "{{ lookup('file', 'secret/buildmaster_github_secret') }}"
-buildmaster_signing_keyphrase: "{{ lookup('file', 'secret/buildmaster_signing_keyphrase') }}"

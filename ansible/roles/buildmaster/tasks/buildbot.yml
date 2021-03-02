@@ -5,7 +5,6 @@
       - acl-progs
       - base-devel
       - python-devel
-      - python-virtualenv
     state: present
 
 - name: Create the BuildBot Master user

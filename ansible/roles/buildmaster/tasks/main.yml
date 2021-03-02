@@ -2,5 +2,3 @@
 - import_tasks: pre.yml
 - import_tasks: buildbot.yml
 - import_tasks: www.yml
-- import_tasks: signing.yml
-- import_tasks: sync.yml
