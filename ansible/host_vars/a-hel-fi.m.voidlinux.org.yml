@@ -44,9 +44,8 @@ xqapi_site_key_path: /var/lib/acme/live/xq-api.voidlinux.org/privkey
 man_cert_path: /var/lib/acme/live/man.voidlinux.org/fullchain
 man_key_path: /var/lib/acme/live/man.voidlinux.org/privkey
 
-buildslave_zone: DE-1
+buildslave_zone: FI-1
 buildslave_master: localhost
-buildslave_isremote: false
 
 buildslave_groups:
   - xbuilder

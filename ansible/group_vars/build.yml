@@ -39,9 +39,26 @@ buildslave_buildslaves:
   - name: armv7l-musl-primary
     sname: cross-armv7-musl_void
     mach: armv7l-musl
-    directory: slave-cross-armv7l-musl
     service_name: buildslave-cross-armv7l-musl
     zone: US-MCI
+
+  - name: x86_64-musl-primary
+    sname: x86_64-musl_void
+    mach: x86_64-musl
+    service_name: buildslave-x86_64-musl
+    zone: FI-1
+
+  - name: armv6l-musl-primary
+    sname: cross-armv6-musl_void
+    mach: armv6l-musl
+    service_name: buildslave-cross-armv6l-musl
+    zone: FI-1
+
+  - name: armv7l-musl-primary
+    sname: cross-armv7-musl_void
+    mach: armv7l-musl
+    service_name: buildslave-cross-armv7l-musl
+    zone: FI-1
 
   - name: aarch64-primary
     sname: cross-aarch64_builder
@@ -66,6 +83,13 @@ buildslave_zones:
       name: Leah Neukirchen
       mail: leah@vuxu.org
     xbps:
+  FI-1:
+    admin:
+      nick: maldridge
+      name: maldridge
+      mail: maldridge@voidlinux.org
+    xbps:
+      makejobs: 6
   FI-2:
     admin:
       nick: maldridge
@@ -84,3 +108,4 @@ buildslave_zones:
 buildmaster_remote_zones:
   - DE-2
   - US-MCI
+  - FI-1

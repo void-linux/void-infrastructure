@@ -25,19 +25,8 @@
     - name: logos
     - name: static
     - name: current
-      owner: void-buildslave
-      group: void-repo
-      mode: '0775'
     - name: xlocate
       group: xlocate
       mode: '0775'
   loop_control:
     label: "{{ item.name }}"
-
-- name: Mount the package filesystem into the mirror
-  mount:
-    fstype: none
-    src: /hostdir/binpkgs
-    path: /srv/www/void-repo/current
-    state: mounted
-    opts: defaults,bind,ro
