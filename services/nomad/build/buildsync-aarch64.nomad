@@ -33,7 +33,7 @@ job "buildsync-aarch64" {
           "--delete-after",
           "-f", "+ */",
           "-f", "+ aarch64*-repodata",
-          "-f", "+ aarch64*.xbps",
+          "-f", "+ *.aarch64*.xbps",
           "-f", "+ *.noarch*.xbps",
           "-f", "- *",
           "xbps-master@c-lej-de.node.consul:/hostdir/binpkgs/", "/pkgs/aarch64"
