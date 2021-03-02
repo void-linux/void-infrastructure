@@ -1,11 +1,14 @@
 ---
-void_aquire_certs: false
-
-buildslave_zone: FI-2
+xbps_repository_main: /mnt/data/pkgs
+xbps_repository_nonfree: /mnt/data/pkgs/nonfree
+xbps_repository_multilib: /mnt/data/pkgs/multilib
+xbps_repository_multilib_nonfree: /mnt/data/pkgs/multilib/nonfree
 
 sshd_AllowGroups:
   - build-ops
   - syncpeers
+
+buildslave_zone: FI-2
 
 nomad_host_volumes:
   - name: void-packages

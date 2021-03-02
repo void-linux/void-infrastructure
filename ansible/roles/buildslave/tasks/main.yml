@@ -53,19 +53,6 @@
   loop_control:
     label: "{{ item.mach }}"
 
-- name: Enforce permissions on hostdir
-  file:
-    path: "{{ buildslave_zones[item.zone].hostdir | default('/hostdir') }}"
-    state: directory
-    owner: "{{ buildslave_hostdir_owner | default('root') }}"
-    group: "{{ buildslave_hostdir_group | default('root') }}"
-    mode: 0775
-  with_items: "{{ buildslave_buildslaves | json_query(query) | unique }}"
-  vars:
-    query: "[?zone=='{{ buildslave_zone }}']"
-  loop_control:
-    label: "{{ item.zone }}"
-
 - include_vars: secret/buildslave_credentials.yml
 
 - name: Configure buildbot-slave
