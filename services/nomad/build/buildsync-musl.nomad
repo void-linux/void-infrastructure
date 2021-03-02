@@ -35,7 +35,7 @@ job "buildsync-musl" {
           "-f", "+ *-repodata",
           "-f", "+ *.xbps",
           "-f", "- *",
-          "xbps-master@198.204.250.219:/hostdir/binpkgs/", "/pkgs/musl"
+          "void-buildsync@a-hel-fi.node.consul:/hostdir/binpkgs/", "/pkgs/musl"
         ]
       }
 
@@ -56,7 +56,7 @@ EOF
 
       template {
         data = <<EOF
-198.204.250.219 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/m4r1s3RWBDSUn3ZK0ZfXbzuvxKZPQMgvuhNXpvxFY
+a-hel-fi.node.consul ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIW8voCZh9nQpdx3fAsvfZO4mCYv0/OUVNPF9A/GsHtX
 EOF
         destination = "local/known_hosts"
       }

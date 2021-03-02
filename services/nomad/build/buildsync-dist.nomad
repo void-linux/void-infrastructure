@@ -11,9 +11,9 @@ job "buildsync-dist" {
   group "rsync" {
     network { mode = "bridge" }
 
-    volume "root-binpkgs" {
+    volume "dist-pkgs" {
       type = "host"
-      source = "root_binpkgs"
+      source = "dist_pkgs"
       read_only = false
     }
 
@@ -35,7 +35,7 @@ job "buildsync-dist" {
       }
 
       volume_mount {
-        volume = "root-binpkgs"
+        volume = "dist-pkgs"
         destination = "/pkgs"
       }
 

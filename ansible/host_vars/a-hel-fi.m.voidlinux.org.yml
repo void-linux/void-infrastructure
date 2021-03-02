@@ -29,6 +29,7 @@ network_address_use_slaac: false
 
 sshd_AllowGroups:
   - build-ops
+  - syncpeers
 
 nginx_dhparam_bits: 2048
 
@@ -110,8 +111,11 @@ nomad_host_volumes:
   - name: root_mirror
     path: /srv/www/void-repo
     read_only: true
-  - name: root_binpkgs
-    path: /hostdir/binpkgs
+  - name: dist_pkgs
+    path: /mnt/data/pkgs/binpkgs
+    read_only: false
+  - name: dist_sources
+    path: /mnt/data/pkgs/sources
     read_only: false
   - name: debuginfod
     path: /nomad/debuginfod
