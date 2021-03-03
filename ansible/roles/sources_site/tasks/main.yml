@@ -1,10 +1,4 @@
 ---
-- name: Create sources link
-  file:
-    src: /hostdir/sources
-    dest: /srv/www/sources
-    state: link
-
 - name: Configure webserver
   include_role:
     name: nginx

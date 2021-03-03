@@ -105,7 +105,7 @@ mdbook_sites:
       stapling: true
 
 xqapi:
-  repodata: /hostdir/binpkgs
+  repodata: /mnt/data/pkgs/binpkgs
 
 nomad_host_volumes:
   - name: root_mirror
