@@ -34,6 +34,10 @@ job "buildsync-dist" {
         ]
       }
 
+      resources {
+        memory = 1000
+      }
+
       volume_mount {
         volume = "dist-pkgs"
         destination = "/pkgs"
