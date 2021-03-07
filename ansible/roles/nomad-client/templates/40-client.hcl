@@ -13,6 +13,11 @@ client {
     path = "/var/lib/netauth"
     read_only = true
   }
+
+  host_volume "hostlogs" {
+    path = "/var/log"
+    read_only = false
+  }
 {% for volume in nomad_host_volumes|default([]) %}
 
   host_volume "{{volume.name}}" {
