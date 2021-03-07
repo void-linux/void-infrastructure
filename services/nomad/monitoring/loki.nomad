@@ -14,6 +14,10 @@ job "loki" {
     service {
       name = "loki"
       port = "http"
+      tags = [
+        "traefik.enable=true",
+        "traefik.http.routers.loki.tls=true",
+      ]
     }
 
     volume "loki-data" {
