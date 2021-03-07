@@ -123,3 +123,6 @@ nomad_host_volumes:
   - name: terrastate
     path: /nomad/terrastate
     read_only: false
+  - name: musl_hostdir
+    path: /hostdir
+    read_only: false

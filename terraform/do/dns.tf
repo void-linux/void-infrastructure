@@ -243,6 +243,13 @@ resource "digitalocean_record" "repo_alpha_us" {
   value  = "vm1.a-mci-us.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
+resource "digitalocean_record" "repo_shadow" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "CNAME"
+  name = "shadow.repo"
+  value = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+}
+
 ###################################################################
 # Verification Records                                            #
 #                                                                 #

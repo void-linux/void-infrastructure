@@ -25,26 +25,6 @@ buildslave_buildslaves:
   - name: x86_64-musl-primary
     sname: x86_64-musl_void
     mach: x86_64-musl
-    directory: slave-x86_64-musl
-    service_name: buildslave-x86_64-musl
-    zone: US-MCI
-
-  - name: armv6l-musl-primary
-    sname: cross-armv6-musl_void
-    mach: armv6l-musl
-    directory: slave-cross-armv6l-musl
-    service_name: buildslave-cross-armv6l-musl
-    zone: US-MCI
-
-  - name: armv7l-musl-primary
-    sname: cross-armv7-musl_void
-    mach: armv7l-musl
-    service_name: buildslave-cross-armv7l-musl
-    zone: US-MCI
-
-  - name: x86_64-musl-primary
-    sname: x86_64-musl_void
-    mach: x86_64-musl
     service_name: buildslave-x86_64-musl
     zone: FI-1
 
@@ -97,13 +77,6 @@ buildslave_zones:
       mail: maldridge@voidlinux.org
     xbps:
       makejobs: 14
-  US-MCI:
-    admin:
-      nick: maldridge
-      name: maldridge
-      mail: maldridge@voidlinux.org
-    xbps:
-      makejobs: 6
 
 buildmaster_remote_zones:
   - DE-2

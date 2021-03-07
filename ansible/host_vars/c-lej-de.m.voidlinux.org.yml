@@ -24,3 +24,8 @@ buildslave_user: buildbot
 buildslave_sync_user: xbps-master
 buildslave_rootdir: /home/buildbot
 buildslave_zone: DE-2
+
+nomad_host_volumes:
+  - name: aarch64_hostdir
+    path: /hostdir
+    read_only: false

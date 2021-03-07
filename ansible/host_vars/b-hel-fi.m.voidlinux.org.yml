@@ -20,3 +20,6 @@ nomad_host_volumes:
   - name: root-pkgs
     path: /mnt/data/pkgs
     read_only: false
+  - name: glibc_hostdir
+    path: /hostdir
+    read_only: false
