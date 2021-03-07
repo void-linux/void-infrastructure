@@ -118,6 +118,11 @@ scrape_configs:
     relabel_configs:
       - source_labels: ['__meta_consul_node']
         target_label: instance
+  - job_name: loki
+    consul_sd_configs:
+      - server: 172.26.64.1:8500
+        datacenter: void
+        services: ['loki']
 EOT
         destination = "local/prometheus.yml"
         perms = 644
