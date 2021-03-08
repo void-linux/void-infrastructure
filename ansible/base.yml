@@ -10,6 +10,7 @@
     - sshd
     - mosh
     - unbound
+    - chrony
     - netlogon
     - consul
     - node_exporter

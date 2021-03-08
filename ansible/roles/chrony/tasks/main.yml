@@ -1,0 +1,11 @@
+---
+- name: Install Packages
+  xbps:
+    name: chrony
+    state: present
+
+- name: Enable Service
+  runit:
+    name: ntpd
+    state: started
+    enabled: true
