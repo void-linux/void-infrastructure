@@ -18,6 +18,7 @@
 - [Services](./services/index.md)
   - [acmetool](./services/acmetool.md)
   - [buildbot](./services/buildbot.md)
+  - [loki](./services/loki.md)
   - [netauth](./services/netauth.md)
   - [nginx](./services/nginx.md)
   - [popcorn](./services/popcorn.md)
