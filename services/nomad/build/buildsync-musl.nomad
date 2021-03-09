@@ -1,12 +1,7 @@
 job "buildsync-musl" {
-  type = "batch"
+  type = "service"
   datacenters = ["VOID"]
   namespace = "build"
-
-  periodic {
-    cron             = "*/15 * * * * *"
-    prohibit_overlap = true
-  }
 
   group "rsync" {
     network { mode = "bridge" }
@@ -27,17 +22,11 @@ job "buildsync-musl" {
 
       config {
         image = "eeacms/rsync"
-        args = [
-          "rsync", "-vurk",
-          "-e", "ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts",
-          "--exclude", "'*.sig'",
-          "--delete-after",
-          "-f", "+ */",
-          "-f", "+ *-repodata",
-          "-f", "+ *.xbps",
-          "-f", "- *",
-          "void-buildsync@a-hel-fi.node.consul:/hostdir/binpkgs/", "/pkgs/musl"
-        ]
+        args = ["client"]
+      }
+
+      env {
+        CRON_TASK_1="*/5 * * * * flock -n /run/rsync.lock rsync -vurk -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' --exclude '*.sig' --delete-after -f '+ */' -f '+ *-repodata' -f '+ *.xbps' -f '- *' void-buildsync@a-hel-fi.node.consul:/hostdir/binpkgs/ /pkgs/musl/"
       }
 
       volume_mount {
