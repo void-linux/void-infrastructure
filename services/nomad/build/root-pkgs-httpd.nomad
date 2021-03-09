@@ -15,10 +15,6 @@ job "build-mirror" {
     service {
       name = "root-pkgs-internal"
       port = "http"
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.root-pkgs-internal.tls=true",
-      ]
 
       check {
         type = "http"
