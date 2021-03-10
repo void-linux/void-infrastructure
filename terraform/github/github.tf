@@ -135,6 +135,15 @@ locals {
       ]
     }
 
+    repo-exporter = {
+      description = "Prometheus exporter for XBPS Repos"
+      allow_merge_commit = false
+      allow_squash_merge = false
+      teams = [
+        "void-ops",
+      ]
+    }
+
     netbsd-wtf = {
       description = "NetBSD's wtf(6) adapted for Void Linux"
       teams = [

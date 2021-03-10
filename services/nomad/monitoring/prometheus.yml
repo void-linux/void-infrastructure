@@ -1,0 +1,230 @@
+---
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+rule_files:
+  - /local/alerts/*.yml
+alerting:
+  alertmanagers:
+    - consul_sd_configs:
+      - server: 172.26.64.1:8500
+        datacenter: void
+        services: ['alertmanager']
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+        - localhost:9090
+  - job_name: traefik
+    static_configs:
+      - targets:
+        - e-sfo3-us.node.consul:8080
+  - job_name: node
+    consul_sd_configs:
+      - server: 172.26.64.1:8500
+        datacenter: void
+        services: ['node-exporter']
+    relabel_configs:
+      - source_labels: ['__meta_consul_node']
+        target_label: instance
+  - job_name: 'ssl'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      module: ["https"]
+    static_configs:
+      - targets:
+          - a-hel-fi.m.voidlinux.org
+          - alpha.de.repo.voidlinux.org
+          - alpha.us.repo.voidlinux.org
+          - build.voidlinux.org
+          - docs.voidlinux.org
+          - infradocs.voidlinux.org
+          - sources.voidlinux.org
+          - terraform.voidlinux.org
+          - vm1.a-mci-us.m.voidlinux.org
+          - voidlinux.org
+          - www.voidlinux.org
+          - xq-api.voidlinux.org
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: ssl-exporter.service.consul:9219
+  - job_name: alertmanager
+    consul_sd_configs:
+      - server: 172.26.64.1:8500
+        datacenter: void
+        services: ['alertmanager']
+    relabel_configs:
+      - source_labels: ['__meta_consul_node']
+        target_label: instance
+  - job_name: loki
+    consul_sd_configs:
+      - server: 172.26.64.1:8500
+        datacenter: void
+        services: ['loki']
+  - job_name: 'sync-x86_64-glibc'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [x86_64]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul
+          - alpha.de.repo.voidlinux.org/current
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+  - job_name: 'sync-i686-glibc'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [i686]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul
+          - alpha.de.repo.voidlinux.org/current
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+  - job_name: 'sync-armv7l-glibc'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [armv7l]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul
+          - alpha.de.repo.voidlinux.org/current
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+  - job_name: 'sync-armv6l-glibc'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [armv6l]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul
+          - alpha.de.repo.voidlinux.org/current
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+  - job_name: 'sync-x86_64-musl'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [x86_4-musl]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul/musl
+          - alpha.de.repo.voidlinux.org/current/musl
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+  - job_name: 'sync-armv7l-musl'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [armv7l-musl]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul/musl
+          - alpha.de.repo.voidlinux.org/current/musl
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+  - job_name: 'sync-armv6l-musl'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [armv6l-musl]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul/musl
+          - alpha.de.repo.voidlinux.org/current/musl
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+  - job_name: 'sync-aarch64-glibc'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [aarch64]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul/aarch64
+          - alpha.de.repo.voidlinux.org/current/aarch64
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+  - job_name: 'sync-aarch64-musl'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [aarch64-musl]
+    static_configs:
+      - targets:
+          - root-pkgs-internal.service.consul/aarch64
+          - alpha.de.repo.voidlinux.org/current/aarch64
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213

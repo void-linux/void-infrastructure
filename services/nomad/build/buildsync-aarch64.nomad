@@ -26,7 +26,7 @@ job "buildsync-aarch64" {
       }
 
       env {
-        CRON_TASK_1="*/5 * * * * flock -n /run/rsync.lock rsync -vurk -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' --exclude '*.sig' --delete-after -f '+ */' -f '+ aarch64*-repodata' -f '+ *.aarch64*.xbps' -f '+ *.noarch*.xbps' -f '- *' xbps-master@c-lej-de.node.consul:/hostdir/binpkgs/ /pkgs/aarch64"
+        CRON_TASK_1="*/5 * * * * flock -n /run/rsync.lock rsync -vurk -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' --exclude '*.sig' --delete-after -f '+ */' -f '+ aarch64*-repodata' -f '+ *.aarch64*.xbps' -f '+ *.noarch*.xbps' -f '+ otime' -f '- *' xbps-master@c-lej-de.node.consul:/hostdir/binpkgs/ /pkgs/aarch64"
       }
 
       volume_mount {

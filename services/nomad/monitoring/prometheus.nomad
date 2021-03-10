@@ -55,75 +55,7 @@ job "prometheus" {
       }
 
       template {
-        data = <<EOT
-global:
-  scrape_interval: 30s
-  evaluation_interval: 30s
-rule_files:
-  - /local/alerts/*.yml
-alerting:
-  alertmanagers:
-    - consul_sd_configs:
-      - server: 172.26.64.1:8500
-        datacenter: void
-        services: ['alertmanager']
-scrape_configs:
-  - job_name: prometheus
-    static_configs:
-      - targets:
-        - localhost:9090
-  - job_name: traefik
-    static_configs:
-      - targets:
-        - e-sfo3-us.node.consul:8080
-  - job_name: node
-    consul_sd_configs:
-      - server: 172.26.64.1:8500
-        datacenter: void
-        services: ['node-exporter']
-    relabel_configs:
-      - source_labels: ['__meta_consul_node']
-        target_label: instance
-  - job_name: 'ssl'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      module: ["https"]
-    static_configs:
-      - targets:
-          - a-hel-fi.m.voidlinux.org
-          - alpha.de.repo.voidlinux.org
-          - alpha.us.repo.voidlinux.org
-          - build.voidlinux.org
-          - docs.voidlinux.org
-          - infradocs.voidlinux.org
-          - sources.voidlinux.org
-          - terraform.voidlinux.org
-          - vm1.a-mci-us.m.voidlinux.org
-          - voidlinux.org
-          - www.voidlinux.org
-          - xq-api.voidlinux.org
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: ssl-exporter.service.consul:9219
-  - job_name: alertmanager
-    consul_sd_configs:
-      - server: 172.26.64.1:8500
-        datacenter: void
-        services: ['alertmanager']
-    relabel_configs:
-      - source_labels: ['__meta_consul_node']
-        target_label: instance
-  - job_name: loki
-    consul_sd_configs:
-      - server: 172.26.64.1:8500
-        datacenter: void
-        services: ['loki']
-EOT
+        data = file("./prometheus.yml")
         destination = "local/prometheus.yml"
         perms = 644
         change_mode   = "signal"

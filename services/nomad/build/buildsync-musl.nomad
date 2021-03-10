@@ -26,7 +26,7 @@ job "buildsync-musl" {
       }
 
       env {
-        CRON_TASK_1="*/5 * * * * flock -n /run/rsync.lock rsync -vurk -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' --exclude '*.sig' --delete-after -f '+ */' -f '+ *-repodata' -f '+ *.xbps' -f '- *' void-buildsync@a-hel-fi.node.consul:/hostdir/binpkgs/ /pkgs/musl/"
+        CRON_TASK_1="*/5 * * * * flock -n /run/rsync.lock rsync -vurk -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' --exclude '*.sig' --delete-after -f '+ */' -f '+ *-repodata' -f '+ *.xbps' -f '+ otime' -f '- *' void-buildsync@a-hel-fi.node.consul:/hostdir/binpkgs/ /pkgs/musl/"
       }
 
       volume_mount {

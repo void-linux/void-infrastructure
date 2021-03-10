@@ -76,7 +76,7 @@ buildslave_zones:
       name: maldridge
       mail: maldridge@voidlinux.org
     xbps:
-      makejobs: 14
+      makejobs: 16
 
 buildmaster_remote_zones:
   - DE-2
