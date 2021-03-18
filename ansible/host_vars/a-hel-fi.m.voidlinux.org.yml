@@ -117,9 +117,6 @@ nomad_host_volumes:
   - name: dist_sources
     path: /mnt/data/pkgs/sources
     read_only: false
-  - name: debuginfod
-    path: /nomad/debuginfod
-    read_only: false
   - name: terrastate
     path: /nomad/terrastate
     read_only: false
