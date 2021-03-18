@@ -9,13 +9,13 @@ job "debuginfod" {
     volume "binpkgs" {
       type = "host"
       read_only = true
-      source = "root_binpkgs"
+      source = "root-pkgs"
     }
 
     volume "debuginfod" {
       type = "host"
       read_only = false
-      source = "debuginfod"
+      source = "debuginfod-data"
     }
 
     network {
@@ -58,13 +58,59 @@ job "debuginfod" {
       }
 
       config {
-        image = "voidlinux/debuginfod:20201118RC01"
+        image = "voidlinux/debuginfod:20210316RC02"
         ports = ["http"]
+        args = [
+          "-vvv",
+          "-d", "/debuginfod/db.sqlite",
+          "-I", ".*-dbg-.*",
+          "-X", "^linux.*",
+          "-Z", ".xbps",
+          "-c", "2",
+          "/binpkgs",
+        ]
       }
 
       resources {
-        memory = 4000
-        cpu = 10000
+        memory = 8000
+        cpu = 6000
+      }
+
+      restart {
+        attempts = 100
+        delay = "30s"
+      }
+    }
+    task "promtail" {
+      driver = "docker"
+
+      config {
+        image = "grafana/promtail:2.1.0"
+        args = ["-config.file=/local/promtail.yml"]
+      }
+
+      template {
+                data = <<EOT
+---
+server:
+  disable: true
+clients:
+  - url: http://loki.service.consul:3100/loki/api/v1/push
+positions:
+  filename: /alloc/positions.yaml
+scrape_configs:
+  - job_name: debuginfod
+    static_configs:
+      - targets:
+        - localhost
+        labels:
+          __path__: /alloc/logs/debuginfod*
+          nomad_namespace: "{{ env "NOMAD_NAMESPACE" }}"
+          nomad_job: "debuginfod"
+          nomad_group: "{{ env "NOMAD_GROUP_NAME" }}"
+          nomad_task: "{{ env "NOMAD_TASK_NAME" }}"
+EOT
+        destination = "local/promtail.yml"
       }
     }
   }
