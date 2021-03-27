@@ -42,7 +42,6 @@ locals {
         "jnbr",
         "leahneukirchen",
         "lemmi",
-        "pullmoll",
         "q66",
         "sgn",
         "thypon",
