@@ -7,17 +7,13 @@
   bind=""
   port=1729
 
-[tls]
-  key="/var/lib/netauth/keys/tls.key"
-  certificate="/var/lib/netauth/keys/tls.pem"
-
 [token]
   backend = "jwt-rsa"
   lifetime = "20m"
   renewals = 0
 
 [db]
-  backend = "ProtoDB"
+  backend = "filesystem"
 
 [crypto]
   backend = "bcrypt"

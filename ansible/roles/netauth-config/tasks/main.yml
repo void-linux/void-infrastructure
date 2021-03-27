@@ -15,23 +15,9 @@
     group: root
     mode: 0644
 
-- name: Check for data directory
-  stat:
-    path: /var/lib/netauth
-  register: p
-
-- name: Ensure data directory
-  file:
-    path: /var/lib/netauth
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-  when: p.stat.isdir is defined and not p.stat.isdir
-
 - name: Ensure key directory
   file:
-    path: /var/lib/netauth/keys
+    path: /etc/netauth/keys
     state: directory
     owner: root
     group: root
@@ -40,7 +26,7 @@
 - name: Install NetAuth Certificate
   copy:
     src: secret/netauth_tls_certificate.pem
-    dest: /var/lib/netauth/keys/tls.pem
+    dest: /etc/netauth/keys/tls.pem
     owner: root
     group: root
     mode: 0644
@@ -48,7 +34,7 @@
 - name: Install Token Verification Key
   copy:
     src: secret/netauth_token.pem
-    dest: /var/lib/netauth/keys/token.pem
+    dest: /etc/netauth/keys/token.pem
     owner: root
     group: root
     mode: 0644

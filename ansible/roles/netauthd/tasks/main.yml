@@ -9,7 +9,7 @@
 - name: Install TLS Certificate
   copy:
     src: secret/netauth_tls_certificate.key
-    dest: /var/lib/netauth/keys/tls.key
+    dest: /etc/netauth/keys/tls.key
     owner: root
     group: _netauth
     mode: 0640
@@ -20,7 +20,7 @@
 - name: Install Token Keys
   copy:
     src: secret/netauth_token.key
-    dest: /var/lib/netauth/keys/token.key
+    dest: /etc/netauth/keys/token.key
     owner: _netauth
     group: _netauth
     mode: 0400

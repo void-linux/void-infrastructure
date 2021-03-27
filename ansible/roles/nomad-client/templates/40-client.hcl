@@ -9,11 +9,6 @@ client {
     read_only = true
   }
 
-  host_volume "netauth_certificates" {
-    path = "/var/lib/netauth"
-    read_only = true
-  }
-
   host_volume "hostlogs" {
     path = "/var/log"
     read_only = false

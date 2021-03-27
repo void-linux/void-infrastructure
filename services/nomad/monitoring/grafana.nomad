@@ -18,12 +18,6 @@ job "grafana" {
       source = "netauth_config"
     }
 
-    volume "netauth_certificates" {
-      type = "host"
-      read_only = true
-      source = "netauth_certificates"
-    }
-
     network {
       mode = "bridge"
       port "http" { to = 3000 }
@@ -110,14 +104,8 @@ EOT
         read_only = true
       }
 
-      volume_mount {
-        volume = "netauth_certificates"
-        destination = "/var/lib/netauth"
-        read_only = true
-      }
-
       config {
-        image = "netauth/ldap:v0.2.0"
+        image = "ghcr.io/netauth/ldap:v0.2.3"
       }
 
       env {
