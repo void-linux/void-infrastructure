@@ -16,12 +16,6 @@ job "terrastate" {
       source = "netauth_config"
     }
 
-    volume "netauth_certificates" {
-      type = "host"
-      read_only = true
-      source = "netauth_certificates"
-    }
-
     network {
       mode = "bridge"
       port "http" {
@@ -60,14 +54,8 @@ job "terrastate" {
         read_only = true
       }
 
-      volume_mount {
-        volume = "netauth_certificates"
-        destination = "/var/lib/netauth"
-        read_only = true
-      }
-
       config {
-        image = "ghcr.io/the-maldridge/terrastate:v1.0.4"
+        image = "ghcr.io/the-maldridge/terrastate:v1.0.6"
       }
     }
   }
