@@ -26,7 +26,7 @@ job "buildsync-dist" {
       }
 
       env {
-        CRON_TASK_1="*/2 * * * * flock -n /run/sync.lock rsync -vurk --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@b-hel-fi.node.consul:/mnt/data/pkgs/ /pkgs/"
+        CRON_TASK_1="* * * * * flock -n /run/sync.lock rsync -vurk --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@b-hel-fi.node.consul:/mnt/data/pkgs/ /pkgs/"
       }
 
       resources {
