@@ -4,7 +4,7 @@ job "reposigner" {
   datacenters = ["VOID"]
 
   periodic {
-    cron             = "*/2 * * * * *"
+    cron             = "* * * * * *"
     prohibit_overlap = true
   }
 
