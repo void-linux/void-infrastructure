@@ -9,7 +9,7 @@ job "oldwiki" {
     network {
       mode = "bridge"
       port "http" {
-        to = 2950
+        to = 80
       }
     }
 
@@ -34,7 +34,7 @@ job "oldwiki" {
       driver = "docker"
 
       config {
-        image = "voidlinux/oldwiki:2"
+        image = "voidlinux/oldwiki:3"
         ports = ["http"]
       }
     }
