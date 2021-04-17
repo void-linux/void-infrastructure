@@ -24,7 +24,6 @@
     - name: live
     - name: logos
     - name: static
-    - name: current
     - name: xlocate
       group: xlocate
       mode: '0775'
