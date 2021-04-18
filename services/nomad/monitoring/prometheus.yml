@@ -84,6 +84,8 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
   - job_name: 'sync-i686-glibc'
     metrics_path: /probe
     scrape_interval: 2m
@@ -102,6 +104,8 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
   - job_name: 'sync-armv7l-glibc'
     metrics_path: /probe
     scrape_interval: 2m
@@ -120,6 +124,8 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
   - job_name: 'sync-armv6l-glibc'
     metrics_path: /probe
     scrape_interval: 2m
@@ -138,6 +144,8 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
   - job_name: 'sync-x86_64-musl'
     metrics_path: /probe
     scrape_interval: 2m
@@ -156,6 +164,8 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
   - job_name: 'sync-armv7l-musl'
     metrics_path: /probe
     scrape_interval: 2m
@@ -174,6 +184,8 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
   - job_name: 'sync-armv6l-musl'
     metrics_path: /probe
     scrape_interval: 2m
@@ -192,6 +204,8 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
   - job_name: 'sync-aarch64-glibc'
     metrics_path: /probe
     scrape_interval: 2m
@@ -210,6 +224,8 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
   - job_name: 'sync-aarch64-musl'
     metrics_path: /probe
     scrape_interval: 2m
@@ -228,3 +244,45 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: internal
+  - job_name: 'mirror-sync'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      arch: [x86_64]
+    static_configs:
+      - targets:
+        - alpha.us.repo.voidlinux.org/current
+        - cdimage.debian.org/mirror/voidlinux/current
+        - ftp.acc.umu.se/mirror/voidlinux/current
+        - ftp.debian.ru/mirrors/voidlinux/current
+        - ftp.dk.xemacs.org/voidlinux/current
+        - ftp.lysator.liu.se/pub/voidlinux/current
+        - ftp.sunet.se/mirror/voidlinux/current
+        - ftp.swin.edu.au/voidlinux/current
+        - mirror.aarnet.edu.au/pub/voidlinux/current
+        - mirror.clarkson.edu/voidlinux/current
+        - mirror.maakpain.kro.kr/void/current
+        - mirror.ps.kz/voidlinux/current
+        - mirror.sjtu.edu.cn/voidlinux/current
+        - mirror.yandex.ru/mirrors/voidlinux/current
+        - mirrors.bfsu.edu.cn/voidlinux/current
+        - mirrors.cnnic.cn/voidlinux/current
+        - mirrors.dotsrc.org/voidlinux/current
+        - mirrors.servercentral.com/voidlinux/current
+        - mirrors.tuna.tsinghua.edu.cn/voidlinux/current
+        - quantum-mirror.hu/mirrors/pub/voidlinux/current
+        - void.cijber.net/current
+        - void.webconverger.org/current
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_arch]
+        target_label: arch
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: repo-exporter-exporter.service.consul:9213
+      - target_label: zone
+        replacement: external

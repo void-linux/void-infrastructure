@@ -21,7 +21,7 @@ job "repo-exporter" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/repo-exporter:v0.0.3"
+        image = "ghcr.io/void-linux/repo-exporter:v0.0.4"
       }
     }
   }
