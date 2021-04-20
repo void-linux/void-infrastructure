@@ -275,6 +275,7 @@ scrape_configs:
         - quantum-mirror.hu/mirrors/pub/voidlinux/current
         - void.cijber.net/current
         - void.webconverger.org/current
+        - mirror.easylee.nl/voidlinux/current
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
