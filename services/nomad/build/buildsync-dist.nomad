@@ -12,6 +12,12 @@ job "buildsync-dist" {
       read_only = false
     }
 
+    volume "dist-sources" {
+      type = "host"
+      source = "dist_sources"
+      read_only = false
+    }
+
     task "rsync" {
       leader = true
       driver = "docker"
@@ -27,6 +33,7 @@ job "buildsync-dist" {
 
       env {
         CRON_TASK_1="* * * * * flock -n /run/sync.lock rsync -vurk --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@b-hel-fi.node.consul:/mnt/data/pkgs/ /pkgs/"
+        CRON_TASK_2="* * * * * flock -n /run/srcs.lock rsync -vurk  --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@b-hel-fi.node.consul:/hostdir/sources/ /sources/"
       }
 
       resources {
@@ -36,6 +43,11 @@ job "buildsync-dist" {
       volume_mount {
         volume = "dist-pkgs"
         destination = "/pkgs"
+      }
+
+      volume_mount {
+        volume = "dist-sources"
+        destination = "/sources"
       }
 
       template {
