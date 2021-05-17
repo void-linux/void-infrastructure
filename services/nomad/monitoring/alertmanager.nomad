@@ -1,4 +1,4 @@
-Job "alertmanager" {
+job "alertmanager" {
   datacenters = ["VOID"]
   namespace = "monitoring"
   type = "service"
@@ -49,7 +49,7 @@ route:
 receivers:
   - name: infra-team
     webhook_configs:
-      - url: http://localhost:0
+      - url: http://alertrelay-irc.service.consul:21225/xbps
 EOT
         destination = "local/alertmanager.yml"
       }

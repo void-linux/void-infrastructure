@@ -62,13 +62,18 @@ job "prometheus" {
         change_signal = "SIGHUP"
       }
 
-      artifact {
-        source = "https://raw.githubusercontent.com/void-linux/void-infrastructure/master/services/configs/prometheus/alerts/prometheus.yml"
-        destination = "local/alerts/"
+      template {
+        data = file("./alerts/node_exporter.yml")
+        destination = "local/alerts/node_exporter_alerts.yml"
+        left_delimiter = "@@"
+        right_delimiter = "@@"
       }
-      artifact {
-        source = "https://raw.githubusercontent.com/void-linux/void-infrastructure/master/services/configs/prometheus/alerts/node_exporter.yml"
-        destination = "local/alerts/"
+
+      template {
+        data = file("./alerts/prometheus.yml")
+        destination = "local/alerts/prometheus_alerts.yml"
+        left_delimiter = "@@"
+        right_delimiter = "@@"
       }
     }
   }

@@ -265,7 +265,6 @@ scrape_configs:
         - mirror.clarkson.edu/voidlinux/current
         - mirror.maakpain.kro.kr/void/current
         - mirror.ps.kz/voidlinux/current
-        - mirror.sjtu.edu.cn/voidlinux/current
         - mirror.yandex.ru/mirrors/voidlinux/current
         - mirrors.bfsu.edu.cn/voidlinux/current
         - mirrors.cnnic.cn/voidlinux/current
