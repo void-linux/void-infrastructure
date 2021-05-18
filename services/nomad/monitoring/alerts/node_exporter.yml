@@ -49,15 +49,6 @@ groups:
           summary: Host out of inodes (instance {{ $labels.instance }})
           description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
-      - alert: HostHighCpuLoad
-        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: Host high CPU load (instance {{ $labels.instance }})
-          description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-
       - alert: HostSwapIsFillingUp
         expr: (1 - (node_memory_SwapFree_bytes / node_memory_SwapTotal_bytes)) * 100 > 80
         for: 5m
