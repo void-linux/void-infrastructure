@@ -3,3 +3,4 @@
   service:
     name: nomad
     state: restarted
+  throttle: 1
