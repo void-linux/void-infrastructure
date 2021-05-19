@@ -35,3 +35,6 @@ nomad_host_volumes:
   - name: grafana
     path: /data/grafana
     read_only: false
+  - name: loki-data
+    path: /data/loki
+    read_only: false

@@ -20,9 +20,6 @@ nomad_host_volumes:
   - name: glibc_hostdir
     path: /hostdir
     read_only: false
-  - name: loki-data
-    path: /mnt/data/loki
-    read_only: false
   - name: debuginfod-data
     path: /mnt/data/debuginfod
     read_only: false
