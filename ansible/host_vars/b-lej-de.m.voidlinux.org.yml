@@ -38,3 +38,6 @@ nomad_host_volumes:
   - name: loki-data
     path: /data/loki
     read_only: false
+  - name: etherpad-data
+    path: /data/etherpad
+    read_only: false
