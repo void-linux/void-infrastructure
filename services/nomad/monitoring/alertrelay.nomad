@@ -32,7 +32,7 @@ job "alertrelay" {
 http_host: 0.0.0.0
 http_port: 21225
 
-irc_host: chat.freenode.net
+irc_host: irc.libera.chat
 irc_port: 6697
 
 irc_nickname: void-fleet
