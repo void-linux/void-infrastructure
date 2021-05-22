@@ -36,7 +36,7 @@ job "ircbot" {
       }
 
       env {
-        IRC_SERVER="chat.freenode.net:6697"
+        IRC_SERVER="irc.libera.chat:6697"
         IRC_CHANNEL="#xbps"
         IRC_NICK="void-robot"
         IRC_SASL="true"
