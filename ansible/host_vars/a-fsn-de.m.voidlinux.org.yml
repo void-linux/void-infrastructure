@@ -1,0 +1,6 @@
+---
+sshd_AllowGroups:
+  - build-ops
+  - syncpeers
+
+buildslave_zone: FI-2
