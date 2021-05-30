@@ -15,14 +15,6 @@ job "build-mirror" {
     service {
       name = "root-pkgs-internal"
       port = "http"
-
-      check {
-        type = "http"
-        address_mode = "host"
-        path = "/"
-        timeout = "30s"
-        interval = "15s"
-      }
     }
 
     volume "root-pkgs" {

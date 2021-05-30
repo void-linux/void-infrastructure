@@ -15,13 +15,21 @@ job "repo-exporter" {
     service {
       port = "metrics"
       tags = ["traefik.enable=true", "traefik.http.routers.repo-exporter-exporter.tls=true"]
+      check {
+        type = "http"
+        port = "metrics"
+        path = "/"
+        address_mode = "host"
+        interval = "30s"
+        timeout = "2s"
+      }
     }
 
     task "exporter" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/repo-exporter:v0.0.4"
+        image = "ghcr.io/void-linux/repo-exporter:v0.0.5"
       }
     }
   }

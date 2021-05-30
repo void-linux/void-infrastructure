@@ -1,6 +1,22 @@
 ---
+xbps_repository_main: /data/pkgs
+xbps_repository_nonfree: /data/pkgs/nonfree
+xbps_repository_multilib: /data/pkgs/multilib
+xbps_repository_multilib_nonfree: /data/pkgs/multilib/nonfree
+
 sshd_AllowGroups:
   - build-ops
-  - syncpeers
+  - void-buildsync
 
-buildslave_zone: FI-2
+buildslave_zone: DE-1
+
+nomad_host_volumes:
+  - name: void-packages
+    path: /data/void-packages
+    read_only: false
+  - name: root-pkgs
+    path: /hostdir/binpkgs
+    read_only: false
+  - name: glibc_hostdir
+    path: /hostdir
+    read_only: false

@@ -149,7 +149,7 @@ bash -c 'for repo in {hostdir}/binpkgs/multilib {hostdir}/binpkgs/multilib/nonfr
 	m['bulk_factory_steps'] = [
 		bulk_clean_step, git_clean_step, bootinst_step,
 		bootup_step, conf_step, get_pkgs_step, make_step,
-		remove_obsoletes_step
+        remove_obsoletes_step
 	]
 
 	# since i686 writes the x86_64 multilib repository,

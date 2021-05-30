@@ -32,8 +32,8 @@ job "buildsync-dist" {
       }
 
       env {
-        CRON_TASK_1="* * * * * flock -n /run/sync.lock rsync -vurk --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@b-hel-fi.node.consul:/mnt/data/pkgs/ /pkgs/"
-        CRON_TASK_2="* * * * * flock -n /run/srcs.lock rsync -vurk  --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@b-hel-fi.node.consul:/hostdir/sources/ /sources/"
+        CRON_TASK_1="* * * * * flock -n /run/sync.lock rsync -vurk --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@a-fsn-de.node.consul:/data/pkgs/ /pkgs/"
+        CRON_TASK_2="* * * * * flock -n /run/srcs.lock rsync -vurk  --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@a-fsn-de.node.consul:/hostdir/sources/ /sources/"
       }
 
       resources {
@@ -62,7 +62,7 @@ EOF
 
       template {
         data = <<EOF
-b-hel-fi.node.consul ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMU4d2VBQ3GYGdPOFlvjsJupPnnCk+42hLhrGuCrGLgT
+a-fsn-de.node.consul ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDjnTyMBnRBQD6NXA5ejX1qV2u+rjuIpRHHBWLidJOjB
 EOF
         destination = "local/known_hosts"
       }

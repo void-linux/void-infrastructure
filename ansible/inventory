@@ -5,6 +5,7 @@ a-hel-fi.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 b-hel-fi.m.voidlinux.org
 c-lej-de.m.voidlinux.org
+a-fsn-de.m.voidlinux.org
 
 [build:children]
 buildmaster
