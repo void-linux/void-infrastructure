@@ -20,7 +20,7 @@ job "build-mirror" {
     volume "root-pkgs" {
       type = "host"
       source = "root-pkgs"
-      read_only = false
+      read_only = true
     }
 
     task "httpd" {

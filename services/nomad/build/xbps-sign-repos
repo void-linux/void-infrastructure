@@ -11,13 +11,13 @@ ARCHS="$ARCHS aarch64 aarch64-musl"
 for f in ${REPOS}; do
     for x in ${ARCHS}; do
        export XBPS_TARGET_ARCH=$x
-       xbps-rindex -v -s \
+       xbps-rindex -s \
 		       --signedby "Void Linux" --privkey /secrets/id_rsa ${f}
        find ${f} -maxdepth 1 -name '*.xbps' -print0 | \
-		       xargs -L 1000 -r0 xbps-rindex -v -S \
+		       xargs -L 1000 -r0 xbps-rindex -S \
 		       --signedby "Void Linux" --privkey /secrets/id_rsa
     done
-    xbps-rindex -v -S \
+    xbps-rindex -S \
 		   --signedby "Void Linux" --privkey /secrets/id_rsa ${f}/*.noarch.xbps
 done
 
