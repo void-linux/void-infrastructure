@@ -32,8 +32,8 @@ job "buildsync-dist" {
       }
 
       env {
-        CRON_TASK_1="* * * * * flock -n /run/sync.lock rsync -vurk --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@a-fsn-de.node.consul:/data/pkgs/ /pkgs/"
-        CRON_TASK_2="* * * * * flock -n /run/srcs.lock rsync -vurk  --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@a-fsn-de.node.consul:/hostdir/sources/ /sources/"
+        CRON_TASK_1="* * * * * flock -n /run/sync.lock rsync -vurk --filter '- .*' --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@a-fsn-de.node.consul:/data/pkgs/ /pkgs/"
+        CRON_TASK_2="* * * * * flock -n /run/srcs.lock rsync -vurk --delete-after -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' void-buildsync@a-fsn-de.node.consul:/hostdir/sources/ /sources/"
       }
 
       resources {
