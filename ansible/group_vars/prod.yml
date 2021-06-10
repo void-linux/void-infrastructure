@@ -72,7 +72,7 @@ void_mesh:
   d-sfo3-us.m.voidlinux.org: 192.168.99.106
   e-sfo3-us.m.voidlinux.org: 192.168.99.109
   f-sfo3-us.m.voidlinux.org: 192.168.99.111
-  a-fsn-de.m.voidlinux.org: 192.168.99.111
+  a-fsn-de.m.voidlinux.org: 192.168.99.112
 
 consul_servers:
   - 192.168.99.104
