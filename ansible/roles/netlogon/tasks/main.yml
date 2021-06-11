@@ -35,8 +35,14 @@
       - NetKeys
       - NetAuth-localizer
       - NetAuth-pam-helper
+    state: present
+
+- name: Install PAM Cache
+  xbps:
+    pkg:
       - libpam-policycache
     state: present
+  when: netlogon_use_cache
 
 - name: Install localize Service (1/2)
   file:
@@ -66,9 +72,10 @@
     owner: root
     group: root
     mode: 0644
+  when: netlogon_use_cache
 
 - name: Configure PAM
-  copy:
+  template:
     src: system-auth
     dest: /etc/pam.d/system-auth
     owner: root

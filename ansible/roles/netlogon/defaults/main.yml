@@ -1,2 +1,4 @@
 ---
 netlogon_maintenance_user: maintenance
+
+netlogon_use_cache: true

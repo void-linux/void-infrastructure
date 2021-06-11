@@ -1,0 +1,23 @@
+---
+network_interfaces:
+  - name: eth0
+    mode: static
+    mode6: static
+    resolvermode: static
+    resolvermode6: disabled
+    addresses:
+      - 65.21.160.177/32
+    resolvers:
+      - 8.8.8.8
+    routers:
+      - 135.181.18.178
+    addresses6:
+      - 2a01:4f9:4b:42dc::d01/64
+
+xbps_repository_address: alpha.de.repo.voidlinux.org
+xbps_repository_main: http://{{ xbps_repository_address }}/current/musl
+xbps_repository_nonfree: http://{{ xbps_repository_address }}/current/musl/nonfree
+xbps_repository_multilib: http://{{ xbps_repository_address }}/current/musl/multilib
+xbps_repository_multilib_nonfree: http://{{ xbps_repository_address }}/current/musl/multilib/nonfree
+
+netlogon_use_cache: false

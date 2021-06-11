@@ -45,6 +45,13 @@ resource "digitalocean_record" "a_hel_fi" {
   value  = "95.216.76.97"
 }
 
+resource "digitalocean_record" "b_hel_fi" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "b-hel-fi.m"
+  value  = "65.21.160.177"
+}
+
 resource "digitalocean_record" "a_fsn_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
@@ -245,9 +252,9 @@ resource "digitalocean_record" "repo_alpha_us" {
 
 resource "digitalocean_record" "repo_shadow" {
   domain = digitalocean_domain.voidlinux_org.name
-  type = "CNAME"
-  name = "shadow.repo"
-  value = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+  type   = "CNAME"
+  name   = "shadow.repo"
+  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 ###################################################################
@@ -267,23 +274,23 @@ resource "digitalocean_record" "verification_github" {
 
 
 resource "digitalocean_record" "mtmp_mx" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type = "MX"
-  name = "mtmp"
-  value = "${digitalocean_record.f_sfo3_us.fqdn}."
+  domain   = digitalocean_domain.voidlinux_org.name
+  type     = "MX"
+  name     = "mtmp"
+  value    = "${digitalocean_record.f_sfo3_us.fqdn}."
   priority = 10
 }
 
 resource "digitalocean_record" "mtmp" {
   domain = digitalocean_domain.voidlinux_org.name
-  type = "A"
-  name = "mtmp"
-  value = digitalocean_droplet.f_sfo3_us.ipv4_address
+  type   = "A"
+  name   = "mtmp"
+  value  = digitalocean_droplet.f_sfo3_us.ipv4_address
 }
 
 resource "digitalocean_record" "mtmp_spf" {
   domain = digitalocean_domain.voidlinux_org.name
-  type = "TXT"
-  name = "mtmp"
-  value = "v=spf1 mx -all"
+  type   = "TXT"
+  name   = "mtmp"
+  value  = "v=spf1 mx -all"
 }
