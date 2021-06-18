@@ -21,8 +21,8 @@
     mode: 0755
 
 - name: Install base configuration
-  copy:
-    src: 25-base.hcl
+  template:
+    src: 25-base.hcl.j2
     dest: /etc/nomad/25-base.hcl
     owner: root
     group: root

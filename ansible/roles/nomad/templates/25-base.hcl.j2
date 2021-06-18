@@ -1,0 +1,11 @@
+data_dir = "/var/lib/nomad"
+
+advertise {
+  http = "{{void_mesh[inventory_hostname]}}"
+  rpc  = "{{void_mesh[inventory_hostname]}}"
+  serf = "{{void_mesh[inventory_hostname]}}"
+}
+
+acl {
+  enabled = true
+}
