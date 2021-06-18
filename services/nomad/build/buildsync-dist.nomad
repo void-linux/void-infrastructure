@@ -4,7 +4,14 @@ job "buildsync-dist" {
   namespace = "build"
 
   group "rsync" {
+    count = 2
+
     network { mode = "bridge" }
+
+    constraint {
+      operator  = "distinct_hosts"
+      value     = "true"
+    }
 
     volume "dist-pkgs" {
       type = "host"

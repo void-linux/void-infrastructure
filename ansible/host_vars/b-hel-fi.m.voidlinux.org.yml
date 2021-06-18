@@ -21,3 +21,14 @@ xbps_repository_multilib: http://{{ xbps_repository_address }}/current/musl/mult
 xbps_repository_multilib_nonfree: http://{{ xbps_repository_address }}/current/musl/multilib/nonfree
 
 netlogon_use_cache: false
+
+nomad_host_volumes:
+  - name: root_mirror
+    path: /data/root_mirror
+    read_only: true
+  - name: dist_pkgs
+    path: /data/root_mirror/current
+    read_only: false
+  - name: dist_sources
+    path: /data/sources_mirror
+    read_only: false
