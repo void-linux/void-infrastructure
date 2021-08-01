@@ -98,7 +98,7 @@ locals {
     }
 
     xbps = {
-      description  = "The X Binary Package System"
+      description  = "The X Binary Package System (XBPS)"
       homepage_url = "https://voidlinux.org/xbps/"
       teams = [
         "xbps-developers",
@@ -136,11 +136,20 @@ locals {
     }
 
     repo-exporter = {
-      description = "Prometheus exporter for XBPS Repos"
+      description        = "Prometheus exporter for XBPS Repos"
       allow_merge_commit = false
       allow_squash_merge = false
       teams = [
         "void-ops",
+      ]
+    }
+
+    man-site = {
+      description         = "Components related to man.voidlinux.org"
+      allow_merge_commit  = false
+      allow_squash_commit = false
+      teams = [
+        "pkg-committers",
       ]
     }
 
@@ -181,6 +190,7 @@ locals {
 
     openbsd-man = {
       description = "The OpenBSD man(1) utility for Linux"
+      has_issues  = true
       archived    = true
       teams = [
         "pkg-committers",
@@ -228,6 +238,7 @@ resource "github_repository" "void_linux_github_io" {
   name                 = "void-linux.github.io"
   description          = "Void Linux website"
   homepage_url         = "https://voidlinux.org"
+  has_issues           = true
   vulnerability_alerts = true
 
   pages {
