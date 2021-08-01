@@ -35,7 +35,7 @@ job "infradocs" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infradocs:3336d97b4f537248bf0bbf6a645cf8d00beda972"
+        image = "ghcr.io/void-linux/infradocs:dd77c15ce0df909e5b6af7df4c32b1f18791cbdc"
         ports = ["http"]
       }
     }
