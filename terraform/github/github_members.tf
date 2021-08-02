@@ -40,6 +40,7 @@ locals {
         "ahesford",
         "ericonr",
         "jnbr",
+        "paper42",
         "leahneukirchen",
         "lemmi",
         "q66",
