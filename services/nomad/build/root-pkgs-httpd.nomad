@@ -5,7 +5,7 @@ job "build-mirror" {
 
   group "busybox" {
     network {
-      mode = "bridge"
+      mode = "host"
       port "http" {
         to = 80
         static = 80
@@ -29,6 +29,7 @@ job "build-mirror" {
       config {
         image = "busybox:1.32-musl"
         args = ["httpd", "-f", "-p", "80", "-h", "/pkgs"]
+        network_mode = "host"
       }
 
       volume_mount {
