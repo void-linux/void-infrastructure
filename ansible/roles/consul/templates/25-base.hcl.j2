@@ -1,5 +1,5 @@
 data_dir = "/var/lib/consul"
-client_addr = "127.0.0.1 172.26.64.1 {{void_mesh[inventory_hostname]}}"
+client_addr = "127.0.0.1 {{void_mesh[inventory_hostname]}}"
 advertise_addr = "{{void_mesh[inventory_hostname]}}"
 datacenter = "void"
 acl {
