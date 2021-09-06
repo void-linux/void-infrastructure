@@ -4,3 +4,4 @@ XBPS_DEBUG_PKGS={{ buildslave_zones[buildslave_zone].xbps.debugpkgs | default("y
 XBPS_CHROOT_CMD={{ buildslave_zones[buildslave_zone].xbps.chrootcmd | default("uchroot") }}
 XBPS_USE_GIT_REVS={{ buildslave_zones[buildslave_zone].xbps.gitrevs | default("yes") }}
 XBPS_DISTFILES_MIRROR="{{ buildslave_zones[buildslave_zone].xbps.distfiles_mirror | default('https://sources.voidlinux.org/') }}"
+XBPS_PRESERVE_PKGS="yes"
