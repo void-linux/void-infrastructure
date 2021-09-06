@@ -8,7 +8,7 @@ module "consul_base" {
 
 module "vault_base" {
   source  = "resinstack/base/vault"
-  version = "0.1.1"
+  version = "0.1.2"
 }
 
 module "nomad_base" {
