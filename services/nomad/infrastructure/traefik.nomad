@@ -3,12 +3,6 @@ job "traefik" {
   namespace = "infrastructure"
   type = "system"
   group "lb" {
-    volume "acme_data" {
-      type      = "host"
-      read_only = false
-      source    = "acme_data"
-    }
-
     network {
       mode = "bridge"
       port "http" {
@@ -25,21 +19,24 @@ job "traefik" {
       }
     }
 
+    service {
+      port = "http"
+      tags = [
+        "traefik.enable=true",
+        "traefik.http.routers.proxy-lb.service=api@internal",
+        "traefik.http.routers.proxy-lb.tls=true",
+      ]
+    }
+
     task "traefik" {
       driver = "docker"
-
-      volume_mount {
-        volume = "acme_data"
-        destination = "/acme"
-        read_only = false
-      }
 
       vault {
         policies = ["void-secrets-traefik"]
       }
 
       config {
-        image = "traefik:2.3.5"
+        image = "traefik:2.5.3"
 
         args = [
           "--api.dashboard",
@@ -48,19 +45,21 @@ job "traefik" {
           "--entrypoints.https.address=:443",
           "--entrypoints.traefik.address=:8080",
           "--metrics.prometheus",
+          "--pilot.dashboard=false",
           "--providers.file.filename=/local/dynamic.toml",
           "--providers.consulcatalog.defaultrule=Host(`{{normalize .Name}}.s.voidlinux.org`)",
           "--providers.consulcatalog.exposedbydefault=false",
           "--providers.consulcatalog.endpoint.address=${attr.unique.network.ip-address}:8500",
-          "--certificatesresolvers.do.acme.email=hostmaster@voidlinux.org",
-          "--certificatesresolvers.do.acme.storage=/acme/acme.json",
-          "--certificatesresolvers.do.acme.dnschallenge.provider=digitalocean",
-          "--certificatesresolvers.do.acme.dnschallenge.resolvers=8.8.8.8",
         ]
       }
 
       template {
         data=<<EOF
+[tls.stores]
+  [tls.stores.default]
+    [tls.stores.default.defaultCertificate]
+      certFile = "/secrets/certs/voidlinux.org.crt"
+      keyFile  = "/secrets/certs/voidlinux.org.key"
 [http]
   [http.middlewares]
     [http.middlewares.httpsredirect.redirectScheme]
@@ -71,15 +70,6 @@ job "traefik" {
       middlewares = ["httpsredirect"]
       rule = "HostRegexp(`{host:.+}`)"
       service = "noop@internal"
-    [http.routers.wildcard-cert]
-      entryPoints = ["http"]
-      service = "noop@internal"
-      rule = "Host(`noop.s.voidlinux.org`)"
-      [http.routers.wildcard-cert.tls]
-        certResolver = "do"
-        [[http.routers.wildcard-cert.tls.domains]]
-          main = "*.voidlinux.org"
-          sans = ["*.s.voidlinux.org"]
     [http.routers.nomad]
       entryPoints = ["https"]
       service = "nomad"
@@ -113,14 +103,23 @@ EOF
       }
 
       template {
-        data=<<EOF
-{{- with secret "secret/traefik/do-api" }}
-DO_AUTH_TOKEN={{.Data.api_key}}
-{{- end }}
+        data =<<EOF
+{{- with secret "secret/lego/data/certificates/_.voidlinux.org.crt" -}}
+{{.Data.contents}}
+{{- end -}}
 EOF
-        destination = "secrets/env"
+        destination = "secrets/certs/voidlinux.org.crt"
         perms = 400
-        env = true
+      }
+
+      template {
+        data =<<EOF
+{{- with secret "secret/lego/data/certificates/_.voidlinux.org.key" -}}
+{{.Data.contents}}
+{{- end -}}
+EOF
+        destination = "secrets/certs/voidlinux.org.key"
+        perms = 400
       }
 
       resources {

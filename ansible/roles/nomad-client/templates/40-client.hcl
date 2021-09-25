@@ -3,6 +3,7 @@ client {
   enabled = true
   network_interface = "void0"
   cni_path = "/usr/libexec/cni"
+  gc_interval = "10m"
 
   host_volume "netauth_config" {
     path = "/etc/netauth"
