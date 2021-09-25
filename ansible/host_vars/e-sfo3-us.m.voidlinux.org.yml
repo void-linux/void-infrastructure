@@ -1,5 +1,0 @@
----
-nomad_host_volumes:
-  - name: acme_data
-    path: /data/acme
-    read_only: false
