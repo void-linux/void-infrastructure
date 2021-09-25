@@ -123,3 +123,8 @@ nomad_host_volumes:
   - name: musl_hostdir
     path: /hostdir
     read_only: false
+
+nomad_reserved_ports:
+  - 80  # Legacy nginx on this host
+  - 443 # Legacy nginx on this host
+  - 873 # Externally managed rsync on this host

@@ -1,9 +1,16 @@
-#jinja2: trim_blocks: "true", lstrip_blocks: "true"
+#Jinja2: trim_blocks: "true", lstrip_blocks: "true"
 client {
   enabled = true
   network_interface = "void0"
   cni_path = "/usr/libexec/cni"
   gc_interval = "10m"
+
+  reserved {
+    cpu = 250
+    memory = 512
+
+    reserved_ports = "{{nomad_reserved_ports|default([])|join(",")}}"
+  }
 
   host_volume "netauth_config" {
     path = "/etc/netauth"
