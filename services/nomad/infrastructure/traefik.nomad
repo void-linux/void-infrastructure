@@ -1,5 +1,5 @@
 job "traefik" {
-  datacenters = ["VOID-PROXY"]
+  datacenters = ["VOID-PROXY", "VOID"]
   namespace = "infrastructure"
   type = "system"
   group "lb" {
