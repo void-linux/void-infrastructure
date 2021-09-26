@@ -4,6 +4,14 @@
     pkg: docker
     state: present
 
+- name: Create config directory
+  file:
+    path: /etc/docker
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Install daemon.json
   template:
     src: daemon.json

@@ -91,7 +91,7 @@ resource "digitalocean_record" "a_mci_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
   name   = "a-mci-us.m"
-  value  = "198.204.250.218"
+  value  = "199.168.97.186"
 }
 
 resource "digitalocean_record" "vm1_a_mci_us" {

@@ -1,18 +1,16 @@
 ---
 network_interfaces:
-  - name: eth0
+  - name: eno1
     mode: static
-    mode6: static
+    mode6: disabled
     resolvermode: static
     resolvermode6: disabled
     addresses:
-      - 65.21.160.177/32
+      - 199.168.97.186/29
     resolvers:
       - 8.8.8.8
     routers:
-      - 135.181.18.178
-    addresses6:
-      - 2a01:4f9:4b:42dc::d01/64
+      - 199.168.97.185
 
 xbps_repository_address: alpha.de.repo.voidlinux.org
 xbps_repository_main: http://{{ xbps_repository_address }}/current/musl

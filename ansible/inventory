@@ -16,14 +16,8 @@ a-hel-fi.m.voidlinux.org
 [man]
 a-hel-fi.m.voidlinux.org
 
-[mirror]
-vm1.a-mci-us.m.voidlinux.org
-
 [popcorn]
 a-hel-fi.m.voidlinux.org
-
-[lxc]
-vm1.a-mci-us.m.voidlinux.org
 
 [mirrormanager]
 a-hel-fi.m.voidlinux.org
@@ -44,11 +38,13 @@ c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
 e-sfo3-us.m.voidlinux.org
 f-sfo3-us.m.voidlinux.org
+a-mci-us.m.voidlinux.org
 
 [hashi:children]
 hashimaster
 hashiworker
 hashiproxy
+hashimirror
 hashimx
 
 [hashimaster]
@@ -58,7 +54,6 @@ d-sfo3-us.m.voidlinux.org
 
 [hashiworker]
 a-hel-fi.m.voidlinux.org
-b-hel-fi.m.voidlinux.org
 a-fsn-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 c-lej-de.m.voidlinux.org
@@ -66,11 +61,14 @@ c-lej-de.m.voidlinux.org
 [hashiproxy]
 e-sfo3-us.m.voidlinux.org
 
+[hashimirror]
+b-hel-fi.m.voidlinux.org
+a-mci-us.m.voidlinux.org
+
 [hashimx]
 f-sfo3-us.m.voidlinux.org
 
 [unmanaged]
-a-mci-us.m.voidlinux.org
 a-lej-de.m.voidlinux.org
 
 [prod]
@@ -87,5 +85,3 @@ c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
 e-sfo3-us.m.voidlinux.org
 f-sfo3-us.m.voidlinux.org
-
-vm1.a-mci-us.m.voidlinux.org
