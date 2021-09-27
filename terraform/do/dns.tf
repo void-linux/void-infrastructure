@@ -236,6 +236,20 @@ resource "digitalocean_record" "catchall" {
 # We have a few mirrors that get special names, those go here. #
 ################################################################
 
+resource "digitalocean_record" "repo_fi" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "CNAME"
+  name = "repo-fi.${digitalocean_domain.voidlinux_org.name}."
+  value = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+}
+
+resource "digitalocean_record" "repo_us" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "CNAME"
+  name = "repo-us.${digitalocean_domain.voidlinux_org.name}."
+  value = "a-mci-us.m.${digitalocean_domain.voidlinux_org.name}."
+}
+
 resource "digitalocean_record" "repo_alpha_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"

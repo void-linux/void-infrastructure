@@ -22,3 +22,8 @@ resource "nomad_namespace" "build" {
   name        = "build"
   description = "Home of build related tasks"
 }
+
+resource "nomad_namespace" "mirror" {
+  name        = "mirror"
+  description = "Home of mirror related tasks"
+}

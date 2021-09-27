@@ -1,5 +1,5 @@
 job "traefik" {
-  datacenters = ["VOID-PROXY", "VOID"]
+  datacenters = ["VOID-PROXY", "VOID-MIRROR"]
   namespace = "infrastructure"
   type = "system"
   group "lb" {
@@ -20,11 +20,12 @@ job "traefik" {
     }
 
     service {
+      name = "traefik-${node.unique.name}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.proxy-lb.service=api@internal",
-        "traefik.http.routers.proxy-lb.tls=true",
+        "traefik.http.routers.traefik-${node.unique.name}.service=api@internal",
+        "traefik.http.routers.traefik-${node.unique.name}.tls=true",
       ]
     }
 
