@@ -1,6 +1,8 @@
 FROM  ghcr.io/void-linux/void-linux:latest-thin-x86_64
 
-RUN xbps-install -Sy rsync tini
+RUN xbps-install -Sy rsync tini && \
+        mkdir -p /etc/rsyncd.conf.d/ && \
+        rm -rf /var/cache/xbps
 
 WORKDIR /srv/rsync
 COPY rsyncd.conf /etc/rsyncd.conf
