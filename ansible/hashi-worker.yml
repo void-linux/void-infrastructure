@@ -27,6 +27,7 @@
         - "*filter"
         - "-A INPUT -p tcp --dport 80 -j ACCEPT"
         - "-A INPUT -p tcp --dport 443 -j ACCEPT"
+        - "-A INPUT -p tcp --dport 873 -j ACCEPT"
         - "COMMIT"
 
 - hosts: hashimx

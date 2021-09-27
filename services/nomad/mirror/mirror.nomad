@@ -3,10 +3,14 @@ job "mirror" {
   datacenters = ["VOID-MIRROR"]
   namespace = "mirror"
 
-  group "http" {
+  group "services" {
     network {
       mode = "bridge"
       port "http" { to = 80 }
+      port "rsync" {
+        to = 873
+        static = 873
+      }
     }
 
     volume "root-mirror" {
@@ -30,11 +34,38 @@ job "mirror" {
 
       config {
         image = "ghcr.io/void-linux/infra-nginx:v20210926rc01"
+        ports = ["http"]
       }
 
       volume_mount {
         volume = "root-mirror"
         destination = "/srv/www"
+      }
+    }
+
+    task "rsync" {
+      driver = "docker"
+
+      config {
+        image = "ghcr.io/void-linux/infra-rsync:v20210926rc01"
+        ports = ["rsync"]
+        volumes = ["local/voidmirror.conf:/etc/rsyncd.conf.d/voidmirror.conf"]
+      }
+
+      volume_mount {
+        volume = "root-mirror"
+        destination = "/srv/rsync"
+      }
+
+      template {
+        data = <<EOF
+[voidlinux]
+comment = Main Void Repository
+path = /srv/rsync
+read only = yes
+list = yes
+EOF
+        destination = "local/voidmirror.conf"
       }
     }
   }
