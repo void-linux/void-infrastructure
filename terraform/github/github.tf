@@ -24,6 +24,9 @@ locals {
       teams = [
         "pkg-committers",
       ]
+      topics = [
+        "hacktoberfest",
+      ]
     }
 
     void-mklive = {
@@ -44,6 +47,9 @@ locals {
       teams = [
         "doc-writers",
         "pkg-committers",
+      ]
+      topics = [
+        "hacktoberfest",
       ]
     }
 
@@ -218,6 +224,7 @@ resource "github_repository" "repositories" {
   allow_merge_commit = lookup(each.value, "allow_merge_commit", null)
   allow_squash_merge = lookup(each.value, "allow_squash_merge", null)
   archived           = lookup(each.value, "archived", null)
+  topics = flatten([["voidlinux"], lookup(each.value, "topics", [])])
 
   vulnerability_alerts = true
 }
@@ -240,6 +247,11 @@ resource "github_repository" "void_linux_github_io" {
   homepage_url         = "https://voidlinux.org"
   has_issues           = true
   vulnerability_alerts = true
+
+  topics = [
+    "voidlinux",
+    "hacktoberfest",
+  ]
 
   pages {
     cname = "voidlinux.org"
