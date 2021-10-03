@@ -4,6 +4,14 @@ job "repo-exporter" {
   datacenters = ["VOID"]
 
   group "exporter" {
+    affinity {
+      # Prefer to sit on the machine hosting the internal mirrors so
+      # that checks hit localhost.
+      attribute = "${node.unique.hostname}"
+      value     = "a-hel-fi"
+      weight    = 100
+    }
+
     network {
       mode = "bridge"
       port "metrics" {
