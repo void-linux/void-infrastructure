@@ -16,6 +16,7 @@ server:
 
   do-not-query-localhost: no
   extended-statistics: yes
+  infra-keep-probing: yes
 
 {% if unbound_stub_consul|default(false) %}
   private-domain: consul.
