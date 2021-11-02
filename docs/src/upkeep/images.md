@@ -32,7 +32,7 @@ Now install the required extra packages:
 Obtain the contents of mklive:
 
 ```
-$ git clone git://github.com/void-linux/void-mklive.git
+$ git clone https://github.com/void-linux/void-mklive.git
 ```
 
 Perform the initial make for templating:

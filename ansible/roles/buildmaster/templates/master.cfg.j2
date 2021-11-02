@@ -68,8 +68,8 @@ for m in user_settings.machines:
 	subarch = m['subarch']
 	BootstrapArgs = m['BootstrapArgs']
 
-	xbps_packages_url = 'git://github.com/void-linux/void-packages.git'
-	bulk_url = 'git://github.com/void-linux/xbps-bulk.git'
+	xbps_packages_url = 'https://github.com/void-linux/void-packages.git'
+	bulk_url = 'https://github.com/void-linux/xbps-bulk.git'
 
 	BootstrapZap = """
 {distdir}/xbps-src -m {masterdir} zap
