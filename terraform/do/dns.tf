@@ -45,6 +45,13 @@ resource "digitalocean_record" "a_hel_fi" {
   value  = "95.216.76.97"
 }
 
+resource "digitalocean_record" "a_hel_fi_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "a-hel-fi.m"
+  value  = "2a01:4f9:2b:c9e::2"
+}
+
 resource "digitalocean_record" "b_hel_fi" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
