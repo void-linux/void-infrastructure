@@ -2,6 +2,9 @@
 
 : "${ACTION:=renew}"
 : "${SERVER:=https://acme-v02.api.letsencrypt.org/directory}"
+: "${DO_PROPAGATION_TIMEOUT=15m}"
+
+export DO_PROPAGATION_TIMEOUT
 
 handle_path() {
     vault kv list "$1" | tail -n +3 | while read -r path ; do
