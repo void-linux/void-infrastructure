@@ -18,13 +18,13 @@ job "lego" {
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-lego:v20210923RC04"
+        image = "ghcr.io/void-linux/infra-lego:v20211216RC02"
       }
 
       env {
         VAULT_ADDR="http://active.vault.service.consul:8200"
         ACTION="renew"
-        DO_PROPAGATION_TIMEOUT="10m"
+        DO_PROPAGATION_TIMEOUT="600"
       }
 
       template {
