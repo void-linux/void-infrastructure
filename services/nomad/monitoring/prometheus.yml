@@ -36,13 +36,13 @@ scrape_configs:
       - targets:
           - a-hel-fi.m.voidlinux.org
           - alpha.de.repo.voidlinux.org
-          - alpha.us.repo.voidlinux.org
           - build.voidlinux.org
           - docs.voidlinux.org
           - infradocs.voidlinux.org
+          - repo-fi.voidlinux.org
+          - repo-us.voidlinux.org
           - sources.voidlinux.org
           - terraform.voidlinux.org
-          - vm1.a-mci-us.m.voidlinux.org
           - voidlinux.org
           - www.voidlinux.org
           - xq-api.voidlinux.org
