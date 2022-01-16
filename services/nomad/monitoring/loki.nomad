@@ -8,7 +8,6 @@ job "loki" {
 
     network {
       port "http" { static = 3100 }
-      port "grpc" { static = 9095 }
     }
 
     service {
@@ -30,16 +29,11 @@ job "loki" {
       driver = "docker"
 
       config {
-        image = "grafana/loki:2.1.0"
+        image = "grafana/loki:2.4.2"
         network_mode = "host"
 
         args = [
           "-config.file=/local/loki.yml",
-          "-server.http-listen-address=${NOMAD_IP_http}",
-          "-server.http-listen-port=${NOMAD_PORT_http}",
-          "-server.grpc-listen-address=${NOMAD_IP_grpc}",
-          "-server.grpc-listen-port=${NOMAD_PORT_grpc}",
-          "-ingester.lifecycler.addr=${NOMAD_IP_http}",
         ]
       }
 

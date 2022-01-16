@@ -1,14 +1,25 @@
 auth_enabled: false
 
+server:
+  http_listen_port: 3100
+
 ingester:
   lifecycler:
     ring:
       kvstore:
         store: inmemory
       replication_factor: 1
-    final_sleep: 0s
   chunk_idle_period: 5m
   chunk_retain_period: 30s
+  wal:
+    enabled: false
+
+compactor:
+  working_directory: /data/retention
+  shared_store: filesystem
+  compaction_interval: 1h
+  retention_enabled: true
+  retention_delete_delay: 2h
 
 schema_config:
   configs:
@@ -31,7 +42,4 @@ limits_config:
   enforce_metric_name: false
   reject_old_samples: true
   reject_old_samples_max_age: 168h
-
-table_manager:
-  retention_deletes_enabled: true
-  retention_period: 720h # 30 days
+  retention_period: 30d
