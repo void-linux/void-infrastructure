@@ -29,7 +29,7 @@ job "alertmanager" {
       driver = "docker"
 
       config {
-        image = "quay.io/prometheus/alertmanager:v0.21.0"
+        image = "prom/alertmanager:v0.23.0"
         ports = ["http"]
         args = [
           "--config.file=/local/alertmanager.yml",
