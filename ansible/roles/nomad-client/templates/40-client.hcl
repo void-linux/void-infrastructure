@@ -21,6 +21,11 @@ client {
     path = "/var/log"
     read_only = false
   }
+
+  host_volume "dockersocket" {
+    path = "/run/docker.sock"
+    read_only = true
+  }
 {% for volume in nomad_host_volumes|default([]) %}
 
   host_volume "{{volume.name}}" {
@@ -33,4 +38,10 @@ client {
 vault {
   enabled = true
   address = "http://active.vault.service.consul:8200"
+}
+
+plugin "docker" {
+  config {
+    extra_labels = ["*"]
+  }
 }

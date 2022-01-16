@@ -81,37 +81,5 @@ job "debuginfod" {
         delay = "30s"
       }
     }
-    task "promtail" {
-      driver = "docker"
-
-      config {
-        image = "grafana/promtail:2.1.0"
-        args = ["-config.file=/local/promtail.yml"]
-      }
-
-      template {
-                data = <<EOT
----
-server:
-  disable: true
-clients:
-  - url: http://loki.service.consul:3100/loki/api/v1/push
-positions:
-  filename: /alloc/positions.yaml
-scrape_configs:
-  - job_name: debuginfod
-    static_configs:
-      - targets:
-        - localhost
-        labels:
-          __path__: /alloc/logs/debuginfod*
-          nomad_namespace: "{{ env "NOMAD_NAMESPACE" }}"
-          nomad_job: "debuginfod"
-          nomad_group: "{{ env "NOMAD_GROUP_NAME" }}"
-          nomad_task: "{{ env "NOMAD_TASK_NAME" }}"
-EOT
-        destination = "local/promtail.yml"
-      }
-    }
   }
 }

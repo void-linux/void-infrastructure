@@ -108,6 +108,10 @@ EOT
         image = "ghcr.io/netauth/ldap:v0.2.3"
       }
 
+      resources {
+        memory = 100
+      }
+
       env {
         NETAUTH_LOGLEVEL = "trace"
       }

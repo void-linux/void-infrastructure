@@ -4,14 +4,6 @@
     pkg: vault
     state: present
 
-- name: Enforce ownership on /etc/vault
-  file:
-    path: /etc/vault
-    state: directory
-    owner: _vault
-    group: _vault
-    mode: 0750
-
 - name: Install Storage config
   template:
     src: 25-storage.hcl.j2
