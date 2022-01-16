@@ -270,8 +270,8 @@ scrape_configs:
         - mirrors.servercentral.com/voidlinux/current
         - mirrors.tuna.tsinghua.edu.cn/voidlinux/current
         - quantum-mirror.hu/mirrors/pub/voidlinux/current
-        - repo-fi.voidlinux.org
-        - repo-us.voidlinux.org
+        - repo-fi.voidlinux.org/current
+        - repo-us.voidlinux.org/current
         - void.cijber.net/current
         - void.webconverger.org/current
     relabel_configs:
