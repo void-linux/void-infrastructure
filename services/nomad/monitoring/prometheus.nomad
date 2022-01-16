@@ -44,7 +44,7 @@ job "prometheus" {
       }
 
       config {
-        image = "prom/prometheus:v2.22.0"
+        image = "prom/prometheus:v2.32.1"
         ports = ["http"]
         args = [
           "--config.file=/local/prometheus.yml",
