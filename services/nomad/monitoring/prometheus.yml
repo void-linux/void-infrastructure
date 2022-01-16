@@ -253,7 +253,6 @@ scrape_configs:
       arch: [x86_64]
     static_configs:
       - targets:
-        - alpha.us.repo.voidlinux.org/current
         - cdimage.debian.org/mirror/voidlinux/current
         - ftp.acc.umu.se/mirror/voidlinux/current
         - ftp.debian.ru/mirrors/voidlinux/current
@@ -263,7 +262,6 @@ scrape_configs:
         - ftp.swin.edu.au/voidlinux/current
         - mirror.aarnet.edu.au/pub/voidlinux/current
         - mirror.clarkson.edu/voidlinux/current
-        - mirror.maakpain.kro.kr/void/current
         - mirror.ps.kz/voidlinux/current
         - mirror.yandex.ru/mirrors/voidlinux/current
         - mirrors.bfsu.edu.cn/voidlinux/current
@@ -272,9 +270,10 @@ scrape_configs:
         - mirrors.servercentral.com/voidlinux/current
         - mirrors.tuna.tsinghua.edu.cn/voidlinux/current
         - quantum-mirror.hu/mirrors/pub/voidlinux/current
+        - repo-fi.voidlinux.org
+        - repo-us.voidlinux.org
         - void.cijber.net/current
         - void.webconverger.org/current
-        - mirror.erickochen.nl/voidlinux/current
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
