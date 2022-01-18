@@ -64,6 +64,7 @@ comment = Main Void Repository
 path = /srv/rsync
 read only = yes
 list = yes
+transfer logging = true
 EOF
         destination = "local/voidmirror.conf"
       }
