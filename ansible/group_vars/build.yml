@@ -70,6 +70,7 @@ buildslave_zones:
       name: Leah Neukirchen
       mail: leah@vuxu.org
     xbps:
+      makejobs: 3
   FI-1:
     admin:
       nick: maldridge
