@@ -12,7 +12,7 @@ groups:
           description: "A Prometheus job has disappeared\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
       - alert: PrometheusTargetMissing
-        expr: up == 0
+        expr: up{job!="mirror-sync"} == 0
         for: 5m
         labels:
           severity: critical
