@@ -19,6 +19,7 @@ job "oldwiki" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.oldwiki.tls=true",
+        "traefik.http.routers.oldwiki.rule=Host(`wiki.voidlinux.org`)",
       ]
 
       check {
