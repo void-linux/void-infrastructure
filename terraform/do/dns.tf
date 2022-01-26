@@ -153,8 +153,8 @@ resource "digitalocean_record" "f_sfo3_us" {
 #######################################################################
 # Services                                                            #
 #                                                                     #
-# These services, with the exception of the legacy wiki, are all just #
-# CNAMEs onto other machines defined above.                           #
+# These services, with the exception of the website itself, are all   #
+# just CNAMEs onto other machines defined above.                      #
 #######################################################################
 
 resource "digitalocean_record" "build" {
@@ -208,9 +208,9 @@ resource "digitalocean_record" "sources" {
 
 resource "digitalocean_record" "wiki" {
   domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
+  type   = "CNAME"
   name   = "wiki"
-  value  = "148.251.199.115"
+  value  = "e-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "www" {
