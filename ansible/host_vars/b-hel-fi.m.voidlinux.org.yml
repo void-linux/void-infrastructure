@@ -26,3 +26,6 @@ nomad_host_volumes:
   - name: root_mirror
     path: /data/root_mirror
     read_only: false
+  - name: devspace_data
+    path: /data/devspace
+    read_only: false
