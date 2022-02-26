@@ -20,7 +20,7 @@
 - name: Install Token Keys
   copy:
     src: secret/netauth_token.key
-    dest: /etc/netauth/keys/token.key
+    dest: /etc/netauth/keys/rsa-private.tokenkey
     owner: _netauth
     group: _netauth
     mode: 0400

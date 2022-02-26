@@ -34,7 +34,7 @@
 - name: Install Token Verification Key
   copy:
     src: secret/netauth_token.pem
-    dest: /etc/netauth/keys/token.pem
+    dest: /etc/netauth/keys/rsa-public.tokenkey
     owner: root
     group: root
     mode: 0644

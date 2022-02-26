@@ -29,3 +29,6 @@ nomad_host_volumes:
   - name: devspace_data
     path: /data/devspace
     read_only: false
+  - name: devspace_home
+    path: /data/devspace/home
+    read_only: true

@@ -164,6 +164,20 @@ resource "digitalocean_record" "build" {
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
+resource "digitalocean_record" "devspace" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "CNAME"
+  name = "devspace"
+  value = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+}
+
+resource "digitalocean_record" "devspace_sftp" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "CNAME"
+  name = "devspace-sftp"
+  value = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+}
+
 resource "digitalocean_record" "docs" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
