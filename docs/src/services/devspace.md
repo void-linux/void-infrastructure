@@ -4,7 +4,8 @@ Sometimes maintainers wish to distribute certain files to either each
 other or to external users for test.  A good example is new builds of
 the major browsers, and builds that are unsuitable for inclusion in
 the main repo in their current state, such as when a new technology is
-being trialed.
+being trialed.  This service is available at
+<https://devspace.voidlinux.org>.
 
 For these purposes Void Linux maintains the worlds worst webhost, void
 DevSpace.  This is a webserver and SFTP server combination that derive
