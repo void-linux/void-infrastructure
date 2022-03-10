@@ -33,7 +33,7 @@ job "mirror" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:v20210926rc01"
+        image = "ghcr.io/void-linux/infra-nginx:20220309rc01"
         ports = ["http"]
       }
 
