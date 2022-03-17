@@ -6,5 +6,5 @@ RUN xbps-install -Sy rsync tini snooze && \
 
 WORKDIR /srv/rsync
 COPY rsyncd.conf /etc/rsyncd.conf
-ENTRYPOINT ["/usr/bin/tini"]
-CMD ["rsync", "--", "--daemon", "--no-detach", "--config", "/etc/rsyncd.conf"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["/usr/bin/rsync", "--daemon", "--no-detach", "--config", "/etc/rsyncd.conf"]
