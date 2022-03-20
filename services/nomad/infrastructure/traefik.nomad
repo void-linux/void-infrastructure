@@ -37,7 +37,7 @@ job "traefik" {
       }
 
       config {
-        image = "traefik:2.5.6"
+        image = "traefik:v2.6.1"
         ports = ["http", "https", "traefik"]
 
         args = [
