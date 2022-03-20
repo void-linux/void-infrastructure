@@ -37,6 +37,10 @@ job "alertmanager" {
         ]
       }
 
+      resources {
+        memory = 100
+      }
+
       template {
         data = <<EOT
 global:

@@ -26,6 +26,10 @@ job "alertrelay" {
         args = ["--config=/local/config.yml"]
       }
 
+      resources {
+        memory = 100
+      }
+
       template {
         data = <<EOT
 ---
