@@ -31,7 +31,7 @@ job "ssl-exporter" {
       driver = "docker"
 
       config {
-        image = "ribbybibby/ssl-exporter:v2.1.1"
+        image = "ribbybibby/ssl-exporter:2.4.0"
         ports = ["http"]
       }
     }
