@@ -54,6 +54,11 @@ job "prometheus" {
         ]
       }
 
+      resources {
+        cpu = 500
+        memory = 400
+      }
+
       template {
         data = file("./prometheus.yml")
         destination = "local/prometheus.yml"
