@@ -4,7 +4,6 @@ job "vector" {
     "VOID-MX",
     "VOID-PROXY",
     "VOID-MIRROR",
-    "VOID-CONTROL",
   ]
   namespace   = "monitoring"
   type        = "system"
