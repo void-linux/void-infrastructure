@@ -1,5 +1,5 @@
 ---
-- hosts: hashiworker,hashiproxy,hashimirror,hashimx
+- hosts: hashiworker,hashiproxy,hashimirror
   become: yes
   become_user: root
   become_method: sudo
@@ -28,26 +28,4 @@
         - "-A INPUT -p tcp --dport 80 -j ACCEPT"
         - "-A INPUT -p tcp --dport 443 -j ACCEPT"
         - "-A INPUT -p tcp --dport 873 -j ACCEPT"
-        - "COMMIT"
-
-- hosts: hashimx
-  become: yes
-  become_user: root
-  become_method: sudo
-  tasks:
-    - name: Accept mail traffic
-      lineinfile:
-        line: "{{item}}"
-        path: /etc/iptables.d/proxy.rules
-        create: yes
-        owner: root
-        group: root
-        mode: 0640
-      with_items:
-        - "*filter"
-        - "-A INPUT -p tcp --dport 25 -j ACCEPT"
-        - "-A INPUT -p tcp --dport 143 -j ACCEPT"
-        - "-A INPUT -p tcp --dport 465 -j ACCEPT"
-        - "-A INPUT -p tcp --dport 587 -j ACCEPT"
-        - "-A INPUT -p tcp --dport 993 -j ACCEPT"
         - "COMMIT"
