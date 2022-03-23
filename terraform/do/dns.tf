@@ -143,13 +143,6 @@ resource "digitalocean_record" "e_sfo3_us" {
   value  = digitalocean_droplet.e_sfo3_us.ipv4_address
 }
 
-resource "digitalocean_record" "f_sfo3_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "f-sfo3-us.m"
-  value  = digitalocean_droplet.f_sfo3_us.ipv4_address
-}
-
 #######################################################################
 # Services                                                            #
 #                                                                     #
@@ -303,29 +296,4 @@ resource "digitalocean_record" "verification_github" {
   type   = "TXT"
   name   = "_github-challenge-void-linux"
   value  = "3dc3629c19"
-}
-
-
-
-
-resource "digitalocean_record" "mtmp_mx" {
-  domain   = digitalocean_domain.voidlinux_org.name
-  type     = "MX"
-  name     = "mtmp"
-  value    = "${digitalocean_record.f_sfo3_us.fqdn}."
-  priority = 10
-}
-
-resource "digitalocean_record" "mtmp" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "mtmp"
-  value  = digitalocean_droplet.f_sfo3_us.ipv4_address
-}
-
-resource "digitalocean_record" "mtmp_spf" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "TXT"
-  name   = "mtmp"
-  value  = "v=spf1 mx -all"
 }
