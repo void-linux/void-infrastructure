@@ -251,10 +251,10 @@ resource "digitalocean_record" "catchall" {
 ################################################################
 
 # Default repo, can be repointed as necessary
-resource "digitalocean_record" "repo" {
+resource "digitalocean_record" "repo_default" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
-  name   = "repo.${digitalocean_domain.voidlinux_org.name}."
+  name   = "repo-default.${digitalocean_domain.voidlinux_org.name}."
   value  = "repo-fi.voidlinux.org."
 }
 
