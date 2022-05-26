@@ -159,16 +159,16 @@ resource "digitalocean_record" "build" {
 
 resource "digitalocean_record" "devspace" {
   domain = digitalocean_domain.voidlinux_org.name
-  type = "CNAME"
-  name = "devspace"
-  value = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+  type   = "CNAME"
+  name   = "devspace"
+  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "devspace_sftp" {
   domain = digitalocean_domain.voidlinux_org.name
-  type = "CNAME"
-  name = "devspace-sftp"
-  value = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+  type   = "CNAME"
+  name   = "devspace-sftp"
+  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "docs" {
@@ -250,18 +250,26 @@ resource "digitalocean_record" "catchall" {
 # We have a few mirrors that get special names, those go here. #
 ################################################################
 
+# Default repo, can be repointed as necessary
+resource "digitalocean_record" "repo" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "repo.${digitalocean_domain.voidlinux_org.name}."
+  value  = "repo-fi.voidlinux.org."
+}
+
 resource "digitalocean_record" "repo_fi" {
   domain = digitalocean_domain.voidlinux_org.name
-  type = "CNAME"
-  name = "repo-fi.${digitalocean_domain.voidlinux_org.name}."
-  value = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+  type   = "CNAME"
+  name   = "repo-fi.${digitalocean_domain.voidlinux_org.name}."
+  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "repo_us" {
   domain = digitalocean_domain.voidlinux_org.name
-  type = "CNAME"
-  name = "repo-us.${digitalocean_domain.voidlinux_org.name}."
-  value = "a-mci-us.m.${digitalocean_domain.voidlinux_org.name}."
+  type   = "CNAME"
+  name   = "repo-us.${digitalocean_domain.voidlinux_org.name}."
+  value  = "a-mci-us.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "repo_alpha_de" {
