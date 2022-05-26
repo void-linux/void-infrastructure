@@ -25,7 +25,7 @@ job "mirror" {
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.mirror-${node.unique.name}.tls=true",
-        "traefik.http.routers.mirror-${node.unique.name}.rule=HostRegexp(`repo.voidlinux.org`, `{subdomain:repo-[a-z]{2}}.voidlinux.org`)",
+        "traefik.http.routers.mirror-${node.unique.name}.rule=HostRegexp(`repo-default.voidlinux.org`, `{subdomain:repo-[a-z]{2}}.voidlinux.org`)",
       ]
     }
 
