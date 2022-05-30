@@ -4,7 +4,7 @@ job "traefik" {
   type = "system"
   group "lb" {
     network {
-      mode = "bridge"
+      mode = "host"
       port "http" {
         to = 80
         static = 80
@@ -38,7 +38,7 @@ job "traefik" {
 
       config {
         image = "traefik:v2.6.1"
-        ports = ["http", "https", "traefik"]
+        network_mode = "host"
 
         args = [
           "--api.dashboard",
