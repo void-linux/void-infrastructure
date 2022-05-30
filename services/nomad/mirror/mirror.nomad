@@ -33,8 +33,7 @@ job "mirror" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20220309rc01"
-        ports = ["http"]
+        image = "ghcr.io/void-linux/infra-nginx:20220530RC01"
       }
 
       volume_mount {
@@ -48,7 +47,6 @@ job "mirror" {
 
       config {
         image = "ghcr.io/void-linux/infra-rsync:v20210926rc01"
-        ports = ["rsync"]
         volumes = ["local/voidmirror.conf:/etc/rsyncd.conf.d/voidmirror.conf"]
       }
 
