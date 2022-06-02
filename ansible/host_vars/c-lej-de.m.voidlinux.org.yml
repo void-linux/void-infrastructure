@@ -13,12 +13,10 @@ sshd_AllowGroups:
   - build-ops
   - syncpeers
 
-xbps_repository_address: alpha.de.repo.voidlinux.org
-xbps_repository_main: http://{{ xbps_repository_address }}/current
-xbps_repository_nonfree: http://{{ xbps_repository_address }}/current/nonfree
-xbps_repository_multilib: http://{{ xbps_repository_address }}/current/multilib
-xbps_repository_multilib_nonfree: http://{{ xbps_repository_address }}/current/multilib/nonfree
-xbps_repository_port: 80
+xbps_repository_main: https://{{ xbps_repository_address }}/current
+xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/nonfree
+xbps_repository_multilib: https://{{ xbps_repository_address }}/current/multilib
+xbps_repository_multilib_nonfree: https://{{ xbps_repository_address }}/current/multilib/nonfree
 
 buildslave_user: buildbot
 buildslave_sync_user: xbps-master

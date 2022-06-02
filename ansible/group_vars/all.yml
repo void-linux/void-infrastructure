@@ -1,9 +1,9 @@
 ---
-xbps_repository_main: https://alpha.de.repo.voidlinux.org/current
-xbps_repository_nonfree: https://alpha.de.repo.voidlinux.org/current/nonfree
-xbps_repository_multilib: https://alpha.de.repo.voidlinux.org/current/multilib
-xbps_repository_multilib_nonfree: https://alpha.de.repo.voidlinux.org/current/multilib/nonfree
-xbps_repository_address: alpha.de.repo.voidlinux.org
+xbps_repository_address: repo-fi.voidlinux.org
+xbps_repository_main: https://{{xbps_repository_address}}/current
+xbps_repository_nonfree: https://{{xbps_repository_address}}/current/nonfree
+xbps_repository_multilib: https://{{xbps_repository_address}}/current/multilib
+xbps_repository_multilib_nonfree: https://{{xbps_repository_address}}/current/multilib/nonfree
 xbps_repository_port: 443
 
 metal_domain_root: '.m.voidlinux.org'
