@@ -38,6 +38,7 @@ locals {
         "Vaelatern",
         "abenson",
         "ahesford",
+        "classabbyamp",
         "ericonr",
         "jnbr",
         "paper42",
