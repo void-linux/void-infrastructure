@@ -13,11 +13,6 @@ sshd_AllowGroups:
   - build-ops
   - syncpeers
 
-xbps_repository_main: https://{{ xbps_repository_address }}/current
-xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/nonfree
-xbps_repository_multilib: https://{{ xbps_repository_address }}/current/multilib
-xbps_repository_multilib_nonfree: https://{{ xbps_repository_address }}/current/multilib/nonfree
-
 buildslave_user: buildbot
 buildslave_sync_user: xbps-master
 buildslave_rootdir: /home/buildbot

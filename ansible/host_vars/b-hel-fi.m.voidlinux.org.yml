@@ -1,25 +1,14 @@
 ---
-network_interfaces:
+network_static_routes:
+  - to: default
+    via: 135.181.18.178 onlink dev eth0
+
+network_static_interfaces:
   - name: eth0
-    mode: static
-    mode6: static
-    resolvermode: static
-    resolvermode6: disabled
-    addresses:
+    type: direct
+    addrs:
       - 65.21.160.177/32
-    resolvers:
-      - 8.8.8.8
-    routers:
-      - 135.181.18.178
-    addresses6:
       - 2a01:4f9:4b:42dc::d01/64
-
-xbps_repository_main: https://{{ xbps_repository_address }}/current/musl
-xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/musl/nonfree
-xbps_repository_multilib: https://{{ xbps_repository_address }}/current/musl/multilib
-xbps_repository_multilib_nonfree: https://{{ xbps_repository_address }}/current/musl/multilib/nonfree
-
-netlogon_use_cache: false
 
 nomad_host_volumes:
   - name: root_mirror

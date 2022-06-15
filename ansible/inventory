@@ -78,3 +78,13 @@ b-sfo3-us.m.voidlinux.org
 c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
 e-sfo3-us.m.voidlinux.org
+
+[musl]
+a-mci-us.m.voidlinux.org
+b-hel-fi.m.voidlinux.org
+
+[net_static]
+a-hel-fi.m.voidlinux.org
+b-hel-fi.m.voidlinux.org
+a-mci-us.m.voidlinux.org
+b-lej-de.m.voidlinux.org

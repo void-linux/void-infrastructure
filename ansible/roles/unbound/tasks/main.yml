@@ -19,27 +19,8 @@
   args:
     creates: /etc/unbound/unbound_control.key
 
-- name: Disable network DNS management
-  file:
-    path: /var/libexec/dhcpcd-hooks/20-resolv.conf
-    state: absent
-
-- name: Install /etc/resolv.conf
-  copy:
-    src: resolv.conf
-    dest: /etc/resolv.conf
-    owner: root
-    group: root
-    mode: 0644
-
 - name: Enable Service
   service:
     name: unbound
     state: started
     enabled: true
-
-- name: Ensure resolv.conf is immutable.
-  file:
-    path: /etc/resolv.conf
-    attr: +i
-  register: resolv_file

@@ -10,8 +10,10 @@ metal_domain_root: '.m.voidlinux.org'
 network_hostname: '{{ inventory_hostname | regex_replace(metal_domain_root, "") | regex_replace("\.", "-") }}'
 network_fqdn: '{{ inventory_hostname }}'
 network_boot_hosts:
-  - addr: 161.35.231.145
-    name: netauth.voidlinux.org
+  - name: netauth.voidlinux.org
+    addr: 161.35.231.145
+  - name: repo-fi.voidlinux.org
+    addr: 65.21.160.177
 
 network_input_policy: DROP
 network_output_policy: ACCEPT
@@ -21,5 +23,8 @@ network_output_policy: ACCEPT
 # also technically requires net.ipv4.ip_forward, wich is enabled on
 # hosts that require this functionality.
 network_forward_policy: ACCEPT
+
+network_static_dns_resolvers:
+  - 127.0.0.1
 
 nginx_bind_443: "{{void_aquire_certs}}"

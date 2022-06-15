@@ -1,4 +1,11 @@
 ---
+- hosts: net_static
+  become: yes
+  become_method: sudo
+  become_user: root
+  roles:
+    - void.network.static
+
 - hosts: all:!unmanaged
   become: yes
   become_method: sudo
@@ -6,6 +13,8 @@
   vars:
     node_exporter_consul_token: "{{lookup('file', 'secret/node_exporter_consul_token')}}"
   roles:
+    - void.network.iptables
+    - void.network.dns
     - xbps-repoconf
     - sshd
     - mosh

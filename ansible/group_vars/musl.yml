@@ -1,0 +1,7 @@
+---
+xbps_repository_main: https://{{ xbps_repository_address }}/current/musl
+xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/musl/nonfree
+xbps_repository_multilib: https://{{ xbps_repository_address }}/current/musl/multilib
+xbps_repository_multilib_nonfree: https://{{ xbps_repository_address }}/current/musl/multilib/nonfree
+
+netlogon_use_cache: false

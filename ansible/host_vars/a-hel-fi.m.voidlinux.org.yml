@@ -1,31 +1,19 @@
 ---
-network_interfaces:
+network_static_routes:
+  - to: default
+    via: 95.216.76.65
+
+network_static_interfaces:
   - name: enp0s31f6
-    mode: static
-    mode6: static
-    resolvermode: static
-    resolvermode6: static
-    addresses:
+    type: direct
+    addrs:
       - 95.216.76.97/26
-    resolvers:
-      - 213.133.98.98
-      - 213.133.99.99
-      - 213.133.100.100
-    routers:
-      - 95.216.76.65
-    resolvers6:
-      - 2a01:4F8:0:1::add:1010
-      - 2a01:4F8:0:1::add:9999
-      - 2a01:4F8:0:1::add:9898
-    addresses6:
       - 2a01:4f9:2b:c9e::2/64
 
 xbps_repository_main: /mnt/data/pkgs/binpkgs
 xbps_repository_nonfree: /mnt/data/pkgs/binpkgs/nonfree
 xbps_repository_multilib: /mnt/data/pkgs/binpkgs/multilib
 xbps_repository_multilib_nonfree: /mnt/data/pkgs/binpkgs/multilib/nonfree
-
-network_address_use_slaac: false
 
 sshd_AllowGroups:
   - build-ops

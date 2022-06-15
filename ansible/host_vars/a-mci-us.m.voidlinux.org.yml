@@ -1,23 +1,13 @@
 ---
-network_interfaces:
+network_static_routes:
+  - to: default
+    via: 199.168.97.185
+
+network_static_interfaces:
   - name: eno1
-    mode: static
-    mode6: disabled
-    resolvermode: static
-    resolvermode6: disabled
-    addresses:
+    type: direct
+    addrs:
       - 199.168.97.186/29
-    resolvers:
-      - 8.8.8.8
-    routers:
-      - 199.168.97.185
-
-xbps_repository_main: https://{{ xbps_repository_address }}/current/musl
-xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/musl/nonfree
-xbps_repository_multilib: https://{{ xbps_repository_address }}/current/musl/multilib
-xbps_repository_multilib_nonfree: https://{{ xbps_repository_address }}/current/musl/multilib/nonfree
-
-netlogon_use_cache: false
 
 nomad_host_volumes:
   - name: root_mirror
