@@ -1,0 +1,14 @@
+---
+- name: Configure DHCP Client
+  template:
+    src: dhcpcd.conf.j2
+    dest: /etc/dhcpcd.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable Service
+  runit:
+    name: dhcpcd
+    state: started
+    enabled: true

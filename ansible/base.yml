@@ -6,6 +6,13 @@
   roles:
     - void.network.static
 
+- hosts: "!net_static"
+  become: yes
+  become_method: sudo
+  become_user: root
+  roles:
+    - dhcpcd
+
 - hosts: all:!unmanaged
   become: yes
   become_method: sudo
