@@ -265,6 +265,14 @@ resource "digitalocean_record" "repo_default" {
   value  = "repo-fi.voidlinux.org."
 }
 
+# CI repo, can be repointed as necessary
+resource "digitalocean_record" "repo_ci" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "repo-ci.${digitalocean_domain.voidlinux_org.name}."
+  value  = "repo-us.voidlinux.org."
+}
+
 resource "digitalocean_record" "repo_fi" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
