@@ -294,13 +294,6 @@ resource "digitalocean_record" "repo_alpha_de" {
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
-resource "digitalocean_record" "repo_alpha_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "alpha.us.repo"
-  value  = "vm1.a-mci-us.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
 resource "digitalocean_record" "repo_shadow" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
