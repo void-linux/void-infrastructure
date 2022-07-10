@@ -73,6 +73,13 @@ resource "digitalocean_record" "a_fsn_de" {
   value  = "138.201.204.130"
 }
 
+resource "digitalocean_record" "b_fsn_de" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "b-fsn-de.m"
+  value  = "168.119.90.174"
+}
+
 resource "digitalocean_record" "a_lej_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
