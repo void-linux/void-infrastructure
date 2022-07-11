@@ -1,4 +1,4 @@
 ---
 dependencies:
-  - { role: network }
+  - { role: void.network.iptables }
   - { role: netauth-config }

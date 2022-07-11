@@ -1,6 +1,3 @@
-[submodule "roles/network"]
-	path = ansible/roles/network
-	url = git@github.com:void-ansible-roles/network.git
 [submodule "roles/nginx"]
 	path = ansible/roles/nginx
 	url = git@github.com:void-ansible-roles/nginx.git
