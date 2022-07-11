@@ -1,0 +1,5 @@
+---
+sshd_AllowGroups:
+  - build-ops
+  - syncpeers
+

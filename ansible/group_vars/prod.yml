@@ -74,6 +74,7 @@ void_mesh:
   a-fsn-de.m.voidlinux.org: 192.168.99.112
   b-hel-fi.m.voidlinux.org: 192.168.99.113
   a-mci-us.m.voidlinux.org: 192.168.99.114
+  b-fsn-de.m.voidlinux.org: 192.168.99.115
 
 consul_servers:
   - 192.168.99.104
