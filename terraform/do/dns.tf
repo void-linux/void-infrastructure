@@ -80,6 +80,13 @@ resource "digitalocean_record" "b_fsn_de" {
   value  = "168.119.90.174"
 }
 
+resource "digitalocean_record" "b_fsn_de_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "b-fsn-de.m"
+  value  = "2a01:4f8:251:5391:5054:ff:fe89:6714"
+}
+
 resource "digitalocean_record" "a_lej_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
