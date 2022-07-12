@@ -3,8 +3,8 @@ a-hel-fi.m.voidlinux.org
 
 [buildslave]
 a-hel-fi.m.voidlinux.org
-c-lej-de.m.voidlinux.org
 a-fsn-de.m.voidlinux.org
+b-fsn-de.m.voidlinux.org
 
 [build:children]
 buildmaster
