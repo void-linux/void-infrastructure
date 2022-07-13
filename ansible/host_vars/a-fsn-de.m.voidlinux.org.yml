@@ -1,4 +1,17 @@
 ---
+network_static_routes:
+  - to: default
+    via: 138.201.204.129
+  - to: default
+    via: fe80::1 dev enp4s0
+
+network_static_interfaces:
+  - name: enp4s0
+    type: direct
+    addrs:
+      - 138.201.204.130/26
+      - 2a01:4f8:173:1481::2/64
+
 xbps_repository_main: /data/pkgs
 xbps_repository_nonfree: /data/pkgs/nonfree
 xbps_repository_multilib: /data/pkgs/multilib

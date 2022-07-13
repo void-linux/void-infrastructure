@@ -2,6 +2,8 @@
 network_static_routes:
   - to: default
     via: 95.216.76.65
+  - to: default
+    via: fe80::1 dev enp0s31f6
 
 network_static_interfaces:
   - name: enp0s31f6

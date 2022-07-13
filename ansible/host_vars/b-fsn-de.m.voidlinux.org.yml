@@ -1,6 +1,6 @@
 ---
 sshd_AllowGroups:
   - build-ops
-  - syncpeers
+  - void-buildsync
 
 buildslave_zone: DE-2
