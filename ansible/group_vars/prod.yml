@@ -12,8 +12,6 @@ prometheus:
       port: 9100
     - host: a-hel-fi.m.voidlinux.org
       port: 9100
-    - host: c-lej-de.m.voidlinux.org
-      port: 9100
     - host: vm1.a-mci-us.m.voidlinux.org
       port: 9100
     - host: vm2.a-lej-de.m.voidlinux.org
@@ -34,7 +32,6 @@ prometheus:
             - b-lej-de.m.voidlinux.org:9100
             - vm1.a-mci-us.m.voidlinux.org:9100
             - vm2.a-lej-de.m.voidlinux.org:9100
-            - c-lej-de.m.voidlinux.org:9100
             - a-hel-fi.m.voidlinux.org:9100
       - job_name: 'ssl'
         metrics_path: /probe
@@ -65,7 +62,6 @@ prometheus:
 void_mesh:
   a-hel-fi.m.voidlinux.org: 192.168.99.100
   b-lej-de.m.voidlinux.org: 192.168.99.101
-  c-lej-de.m.voidlinux.org: 192.168.99.102
   a-sfo3-us.m.voidlinux.org: 192.168.99.103
   b-sfo3-us.m.voidlinux.org: 192.168.99.104
   c-sfo3-us.m.voidlinux.org: 192.168.99.105
