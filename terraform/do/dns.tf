@@ -115,13 +115,6 @@ resource "digitalocean_record" "b_lej_de" {
   value  = "78.46.212.193"
 }
 
-resource "digitalocean_record" "c_lej_de" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "c-lej-de.m"
-  value  = "5.9.152.66"
-}
-
 resource "digitalocean_record" "a_mci_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
