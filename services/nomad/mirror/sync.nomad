@@ -29,7 +29,10 @@ job "sync" {
         args = [
           "-vurk",
           "--filter", "- .*",
+          "--filter", "- *-repodata.*",
           "--delete-after",
+          "--timeout", "15",
+          "--contimeout", "5",
           "rsync://a-hel-fi.node.consul/voidmirror/",
           "/mirror/",
         ]
