@@ -63,6 +63,8 @@ path = /srv/rsync
 read only = yes
 list = yes
 transfer logging = true
+timeout = 600
+exclude = - .* - *-repodata.* - *-stagedata.*
 EOF
         destination = "local/voidmirror.conf"
       }
