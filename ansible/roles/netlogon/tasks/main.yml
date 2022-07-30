@@ -101,7 +101,7 @@
 - name: Install maintenance sudo policy
   template:
     src: maintenance.sudoers
-    dest: /etc/sudoers.d/maintenance
+    dest: /etc/sudoers.d/zz-maintenance
     owner: root
     group: root
     mode: 0640
