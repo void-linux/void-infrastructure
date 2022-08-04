@@ -20,12 +20,12 @@ job "mirror" {
     }
 
     service {
-      name = "mirror-${node.unique.name}"
+      name = "mirror-${meta.mirror_region}"
       port = "http"
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.mirror-${node.unique.name}.tls=true",
-        "traefik.http.routers.mirror-${node.unique.name}.rule=HostRegexp(`repo-default.voidlinux.org`, `{subdomain:repo-[a-z]{2}}.voidlinux.org`)",
+        "traefik.http.routers.mirror-${meta.mirror_region}.tls=true",
+        "traefik.http.routers.mirror-${meta.mirror_region}.rule=Host(`repo-${meta.mirror_region}.voidlinux.org`)",
       ]
     }
 
@@ -33,7 +33,7 @@ job "mirror" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20220530RC01"
+        image = "ghcr.io/void-linux/infra-nginx:20220804RC02"
       }
 
       volume_mount {
