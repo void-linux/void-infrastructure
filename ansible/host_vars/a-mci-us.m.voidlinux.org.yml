@@ -13,3 +13,6 @@ nomad_host_volumes:
   - name: root_mirror
     path: /data/root_mirror
     read_only: false
+
+nomad_meta:
+  mirror_region: us

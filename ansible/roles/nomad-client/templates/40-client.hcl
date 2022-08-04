@@ -33,6 +33,14 @@ client {
     read_only = {{volume.read_only|bool|lower}}
   }
 {% endfor %}
+{% if nomad_meta|default(false) %}
+
+  meta {
+{% for key, value in nomad_meta.items() %}
+    {{key}} = "{{value}}"
+{% endfor %}
+  }
+{% endif %}
 }
 
 vault {

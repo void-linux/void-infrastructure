@@ -20,3 +20,6 @@ nomad_host_volumes:
   - name: devspace_home
     path: /data/devspace/home
     read_only: true
+
+nomad_meta:
+  mirror_region: fi
