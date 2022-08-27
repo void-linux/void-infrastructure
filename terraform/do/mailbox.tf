@@ -7,8 +7,3 @@ resource "digitalocean_droplet" "f_sfo3_us" {
   vpc_uuid = digitalocean_vpc.main.id
   ssh_keys = [digitalocean_ssh_key.maldridge1.fingerprint]
 }
-
-resource "digitalocean_reserved_ip" "mx1" {
-  droplet_id = digitalocean_droplet.f_sfo3_us.id
-  region     = digitalocean_droplet.f_sfo3_us.region
-}

@@ -220,6 +220,13 @@ resource "digitalocean_record" "man" {
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
+resource "digitalocean_record" "mx1" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "mx1"
+  value  = "${digitalocean_record.f_sfo3_us.fqdn}."
+}
+
 resource "digitalocean_record" "netauth" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
