@@ -12,6 +12,12 @@ job "maddy" {
       source = "maddy_data"
     }
 
+    volume "netauth_config" {
+      type = "host"
+      read_only = true
+      source = "netauth_config"
+    }
+
     network {
       mode = "bridge"
       port "smtp"        { static = 25 }
@@ -40,6 +46,10 @@ job "maddy" {
           "secrets/tls:/data/tls",
           "local/maddy.conf:/data/maddy.conf",
         ]
+      }
+
+      resources {
+        memory = 200
       }
 
       env {
@@ -71,6 +81,28 @@ EOF
 EOF
         destination = "secrets/tls/privkey.pem"
         perms = 400
+      }
+    }
+
+    task "ldap" {
+      driver = "docker"
+
+      volume_mount {
+        volume = "netauth_config"
+        destination = "/etc/netauth"
+        read_only = true
+      }
+
+      config {
+        image = "ghcr.io/netauth/ldap:v0.3.0"
+      }
+
+      resources {
+        memory = 100
+      }
+
+      env {
+        NETAUTH_LDAP_ALLOW_ANON = true
       }
     }
   }
