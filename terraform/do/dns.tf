@@ -298,7 +298,7 @@ resource "digitalocean_record" "repo_ci" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
   name   = "repo-ci.${digitalocean_domain.voidlinux_org.name}."
-  value  = "repo-fi.voidlinux.org."
+  value  = "repo-us.voidlinux.org."
 }
 
 resource "digitalocean_record" "repo_fi" {
