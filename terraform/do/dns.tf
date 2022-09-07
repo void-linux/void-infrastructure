@@ -22,8 +22,15 @@ resource "digitalocean_record" "apex_mx" {
   domain   = digitalocean_domain.voidlinux_org.name
   type     = "MX"
   name     = "@"
-  value    = "vm3.a-lej-de.m.${digitalocean_domain.voidlinux_org.name}."
+  value    = "f-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
   priority = 10
+}
+
+resource "digitalocean_record" "apex_txt" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "TXT"
+  name = "@"
+  value = "v=spf1 mx a:f-sfo3-us.m.voidlinux.org ~all"
 }
 
 
@@ -340,4 +347,26 @@ resource "digitalocean_record" "verification_github" {
   type   = "TXT"
   name   = "_github-challenge-void-linux"
   value  = "3dc3629c19"
+}
+
+
+#################################################################
+# Email Records                                                 #
+#                                                               #
+# These are for the myriad of things that attempt to make email #
+# some semblance of secure.                                     #
+#################################################################
+
+resource "digitalocean_record" "_dmarc" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "TXT"
+  name = "_dmarc.${digitalocean_domain.voidlinux_org.name}."
+  value = "v=DMARC1; p=quarantine; ruf=mailto:postmaster@voidlinux.org"
+}
+
+resource "digitalocean_record" "__dkim" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "TXT"
+  name = "default._domainkey.${digitalocean_domain.voidlinux_org.name}"
+  value = "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArgfWwtFQp4PzJSXCIkPvaID+PiiZhloR0u/A5XylUQfmR4w/JvAbsPLbXNRPJXPihSyBrzh4hRk2k6Sq66yBIk9qOKoV4dgQJnAkTrvoNMfSVPjVCd9yYQcShZOOw4/g/zQM1RJA0uf8N4V8hmQ3/gFr8M2QRLdnYl8f99XkFS5099SZKZ36E2zWeYK9nMwepGhtlTEuQoI0y7FWm1p8+r33vt2Sol1EuG+A0EC5r/qJAwB78Dac0JChbWaPrj1ZqBhnBP57bh8Zq3Vx+4s6IBqg8HCRn6jhxjng/ql20ppviC9Xxa9hpFiT2drszFcbMhq4IlQLkXBD7SILvDGlmwIDAQAB"
 }
