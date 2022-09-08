@@ -263,7 +263,9 @@ scrape_configs:
         - mirror.aarnet.edu.au/pub/voidlinux/current
         - mirror.clarkson.edu/voidlinux/current
         - mirror.ps.kz/voidlinux/current
+        - mirror.vofr.net/voidlinux/current
         - mirror.yandex.ru/mirrors/voidlinux/current
+        - mirror2.sandyriver.net/pub/voidlinux/current
         - mirrors.bfsu.edu.cn/voidlinux/current
         - mirrors.cnnic.cn/voidlinux/current
         - mirrors.dotsrc.org/voidlinux/current
