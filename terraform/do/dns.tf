@@ -224,7 +224,7 @@ resource "digitalocean_record" "man" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
   name   = "man"
-  value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "mx1" {
