@@ -8,7 +8,7 @@ RUN xbps-install -Suy xbps && xbps-install -y void-man-cgi fcgiwrap spawn-fcgi &
     mkdir -p /var/lib/man-cgi && \
     ln -s /run/runit/supervise.fcgi /etc/runit/runsvdir/container/fcgi/supervise && \
     ln -s /etc/sv/nginx /etc/runit/runsvdir/container/ && \
-    for arch in x86_64 x86_64-musl armv7l armv7l-musl; do ln -s "/pages/$arch" "/var/lib/man-cgi/$arch"; done
+    for arch in x86_64 x86_64-musl armv7l armv7l-musl; do ln -s "/mirror/man/$arch" "/var/lib/man-cgi/$arch"; done
 
 COPY run.fcgi /etc/runit/runsvdir/container/fcgi/run
 COPY root.conf /etc/nginx/locations.d/root.conf
