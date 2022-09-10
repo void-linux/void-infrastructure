@@ -1,12 +1,15 @@
 #!/bin/sh
 
-cd /var/lib/man-cgi || exit 1
+mkdir -p /mirror/man
+cd /mirror/man || exit 1
 
 for arch in x86_64 musl/x86_64-musl armv7l musl/armv7l-musl; do
+    printf "Dumping %s\n" "$arch"
     [ -d "./${arch#musl/}" ] || mkdir ./${arch#musl/}
     cd ./${arch#musl/} || exit 1
     xmandump -c cache.json /mirror/current/${arch}-repodata
     cd ../ || exit 1
 done
 
+printf "Running makewhatis; this could take a while...\n"
 makewhatis x86_64 x86_64-musl armv7l armv7l-musl
