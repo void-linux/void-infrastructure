@@ -5,7 +5,7 @@ cd /var/lib/man-cgi || exit 1
 for arch in x86_64 musl/x86_64-musl armv7l musl/armv7l-musl; do
     [ -d "./${arch#musl/}" ] || mkdir ./${arch#musl/}
     cd ./${arch#musl/} || exit 1
-    xmandump -c cache.json /binpkgs/${arch}-repodata
+    xmandump -c cache.json /mirror/current/${arch}-repodata
     cd ../ || exit 1
 done
 
