@@ -11,8 +11,8 @@ network_static_interfaces:
       - 2a01:4f9:4b:42dc::d01/64
 
 nomad_host_volumes:
-  - name: root_mirror
-    path: /data/root_mirror
+  - name: dist_mirror
+    path: /data/dist_mirror
     read_only: false
   - name: devspace_data
     path: /data/devspace

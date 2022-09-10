@@ -13,9 +13,9 @@ job "sync" {
 
     network { mode = "bridge" }
 
-    volume "root-mirror" {
+    volume "dist-mirror" {
       type = "host"
-      source = "root_mirror"
+      source = "dist_mirror"
       read_only = false
     }
 
@@ -43,7 +43,7 @@ job "sync" {
       }
 
       volume_mount {
-        volume = "root-mirror"
+        volume = "dist-mirror"
         destination = "/mirror"
       }
     }

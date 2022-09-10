@@ -13,9 +13,9 @@ job "mirror" {
       }
     }
 
-    volume "root-mirror" {
+    volume "dist-mirror" {
       type = "host"
-      source = "root_mirror"
+      source = "dist_mirror"
       read_only = true
     }
 
@@ -37,7 +37,7 @@ job "mirror" {
       }
 
       volume_mount {
-        volume = "root-mirror"
+        volume = "dist-mirror"
         destination = "/srv/www"
       }
     }
@@ -51,7 +51,7 @@ job "mirror" {
       }
 
       volume_mount {
-        volume = "root-mirror"
+        volume = "dist-mirror"
         destination = "/srv/rsync"
       }
 
