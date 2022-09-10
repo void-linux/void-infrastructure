@@ -1,2 +1,0 @@
-#!/bin/sh
-exec spawn-fcgi -n -u xmandump -U nginx -s /var/run/fcgiwrap-man.socket -- /usr/bin/fcgiwrap

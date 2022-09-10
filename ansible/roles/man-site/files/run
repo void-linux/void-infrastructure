@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec chpst -u xmandump snooze /var/lib/man-cgi/update
