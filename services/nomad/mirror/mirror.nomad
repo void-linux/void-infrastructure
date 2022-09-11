@@ -34,11 +34,17 @@ job "mirror" {
 
       config {
         image = "ghcr.io/void-linux/infra-nginx:20220804RC02"
+        volumes = ["local/compat-layout.conf:/etc/nginx/locations.d/compat-layout.conf"]
       }
 
       volume_mount {
         volume = "dist-mirror"
         destination = "/srv/www"
+      }
+
+      template {
+        data = file("compat-layout.conf")
+        destination = "local/compat-layout.conf"
       }
     }
 
