@@ -6,9 +6,9 @@ job "man-cgi" {
   group "man-cgi" {
     count = 1
 
-    volume "manpages" {
+    volume "dist_mirror" {
       type = "host"
-      source = "manpages"
+      source = "dist_mirror"
       read_only = true
     }
 
@@ -31,12 +31,12 @@ job "man-cgi" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-man-cgi:20220910RC01"
+        image = "ghcr.io/void-linux/infra-man-cgi:20220911RC01"
       }
 
       volume_mount {
-        volume = "manpages"
-        destination = "/pages"
+        volume = "dist_mirror"
+        destination = "/mirror"
       }
     }
   }

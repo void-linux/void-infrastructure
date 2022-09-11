@@ -21,7 +21,7 @@ job "xmandump" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-xmandump:20220910RC02"
+        image = "ghcr.io/void-linux/infra-xmandump:20220911RC02"
       }
 
       volume_mount {

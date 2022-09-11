@@ -33,6 +33,7 @@ job "sync" {
           "--delete-after",
           "--timeout", "15",
           "--contimeout", "5",
+          "--links",
           "rsync://a-hel-fi.node.consul/voidmirror/",
           "/mirror/",
         ]
