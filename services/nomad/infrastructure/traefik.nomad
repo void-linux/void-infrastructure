@@ -39,6 +39,7 @@ job "traefik" {
       config {
         image = "traefik:v2.6.1"
         network_mode = "host"
+        dns_servers = ["127.0.0.1"]
 
         args = [
           "--api.dashboard",
