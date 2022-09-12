@@ -1,7 +1,7 @@
 job "man-cgi" {
   datacenters = ["VOID-MIRROR"]
   namespace = "apps"
-  type = "service"
+  type = "system"
 
   group "man-cgi" {
     count = 1
