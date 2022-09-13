@@ -3,13 +3,16 @@
 mkdir -p /mirror/man
 cd /mirror/man || exit 1
 
-for arch in x86_64 musl/x86_64-musl armv7l musl/armv7l-musl; do
+archs="x86_64 x86_64-musl armv7l armv7l-musl"
+
+for arch in $archs; do
     printf "Dumping %s\n" "$arch"
-    [ -d "./${arch#musl/}" ] || mkdir ./${arch#musl/}
-    cd ./${arch#musl/} || exit 1
-    xmandump -compress -c cache.json /mirror/current/${arch}-repodata
+    [ -d "./${arch}" ] || mkdir "./${arch}"
+    cd "./${arch}" || exit 1
+    [ "${arch}" != "${arch%-musl}" ] && subdir="musl" || subdir=
+    xmandump -compress -c cache.json "/mirror/current/${subdir}/${arch}-repodata" "/mirror/current/${subdir}/nonfree/${arch}-repodata"
     cd ../ || exit 1
 done
 
 printf "Running makewhatis; this could take a while...\n"
-makewhatis x86_64 x86_64-musl armv7l armv7l-musl
+makewhatis $archs
