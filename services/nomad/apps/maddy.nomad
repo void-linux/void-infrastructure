@@ -105,5 +105,29 @@ EOF
         NETAUTH_LDAP_ALLOW_ANON = true
       }
     }
+
+    task "rspamd" {
+      driver = "docker"
+
+      config {
+        image = "ghcr.io/void-linux/infra-rspamd:20220917RC01"
+      }
+
+      resources {
+        memory = 100
+      }
+    }
+
+    task "redis" {
+      driver = "docker"
+
+      config {
+        image = "redis:6.2"
+      }
+
+      resources {
+        memory = 100
+      }
+    }
   }
 }
