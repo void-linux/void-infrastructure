@@ -1,4 +1,4 @@
-name: SpamAssassin Service Container
+name: rspamd Service Container
 on:
   workflow_dispatch:
     inputs:
@@ -26,8 +26,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: services/pkg/spamassassin
+          context: services/pkg/rspamd
           push: true
-          tags: "ghcr.io/void-linux/infra-spamassassin:${{ github.event.inputs.version }}"
+          tags: "ghcr.io/void-linux/infra-rspamd:${{ github.event.inputs.version }}"
           labels: |
             org.opencontainers.image.source=${{ github.repositoryUrl }}
