@@ -45,7 +45,7 @@ When adding a new user make sure to specify the username and number to
 ensure the number is in the range that will be cached by nsscached.
 
 ```shell
-$ netauth new-entity --ID <username> --number <number>
+$ netauth entity create <username> --number <number>
 ```
 
 ### Making an entity a valid shell user
@@ -54,7 +54,7 @@ Shell users have additional required attributes, these can be set
 seperately:
 
 ```shell
-$ netauth modify-meta --ID <username> --primary-group netusers --shell /bin/bash
+$ netauth entity update <username> --primary-group netusers --shell /bin/bash
 ```
 
 For all users the primary group should be `netusers` and the shell
@@ -68,7 +68,7 @@ example to add a new build operator who can unwedge the buildslaves,
 the following command sets the appropriate groups:
 
 ```shell
-$ netauth entity-membership --ID <username> --group build-ops --action add
+$ netauth entity membership <username> ADD build-ops
 ```
 
 ### Adding and removing SSH keys
@@ -80,7 +80,7 @@ removing keys the server will match keys on substrings, so technically
 the key comment should be sufficient to remove it if it is unique.
 
 ```shell
-$ netauth modify-keys --ID <username> --mode ADD --key "<key>"
+$ netauth entity key add SSH "<key>"
 ```
 
 ## Basic user interaction
@@ -106,3 +106,9 @@ $ cfssl certinfo -domain netauth.voidlinux.org:1729 | jq --raw-output .pem
 
 At that point, the password can be set with [netauth auth
 change-secret](https://docs.netauth.org/commands/netauth_auth_change-secret.html).
+
+### Setting the entity ID
+
+Netauth uses the system username as the entity ID for netauth operations.
+In some cases, the netauth entity ID for a user may be different from the system username.
+To override this, use the `--entity` flag or set the `NETAUTH_ENTITY` environment variable.
