@@ -37,6 +37,9 @@ locals {
       teams = [
         "pkg-committers",
       ]
+      topics = [
+        "hacktoberfest",
+      ]
     }
 
     void-docs = {
