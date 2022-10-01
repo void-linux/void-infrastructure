@@ -65,7 +65,7 @@ job "devspace" {
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-sftpgo:20220224RC01"
+        image = "ghcr.io/void-linux/infra-sftpgo:20221001RC01"
       }
 
       env {
@@ -137,7 +137,7 @@ EOF
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20220530RC01"
+        image = "ghcr.io/void-linux/infra-nginx:20220909RC01"
       }
     }
   }
