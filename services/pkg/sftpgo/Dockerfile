@@ -1,6 +1,6 @@
 FROM  ghcr.io/void-linux/void-linux:latest-thin-x86_64
 
-RUN xbps-install -Sy tini sftpgo NetAuth-sftpgo-hook
+RUN xbps-install -Syu xbps && xbps-install -Sy tini sftpgo NetAuth-sftpgo-hook
 
 ENV SFTPGO_HTTPD__TEMPLATES_PATH=/usr/share/sftpgo/templates \
         SFTPGO_HTTPD__STATIC_FILES_PATH=/usr/share/sftpgo/static \
