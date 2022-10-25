@@ -1,0 +1,21 @@
+---
+network_static_routes:
+  - to: default
+    via: 212.83.43.1
+  - to: default
+    via: 2a00:f48:2000:1031::1
+
+network_static_interfaces:
+  - name: eno2
+    type: direct
+    addrs:
+      - 212.83.43.28
+      - 2a00:f48:2000:1031::3/64
+
+nomad_host_volumes:
+  - name: dist_mirror
+    path: /data/dist_mirror
+    read_only: false
+
+nomad_meta:
+  mirror_region: de
