@@ -80,6 +80,20 @@ resource "digitalocean_record" "b_hel_fi_v6" {
   value  = "2a01:4f9:4b:42dc::d01"
 }
 
+resource "digitalocean_record" "a_fra_de" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "a-fra-de.m"
+  value  = "212.83.43.28"
+}
+
+resource "digitalocean_record" "a_fra_de_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "a-fra-de.m"
+  value  = "2a00:f48:2000:1031::3"
+}
+
 resource "digitalocean_record" "a_fsn_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
