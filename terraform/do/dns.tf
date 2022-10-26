@@ -329,6 +329,13 @@ resource "digitalocean_record" "repo_ci" {
   value  = "repo-us.voidlinux.org."
 }
 
+resource "digitalocean_record" "repo_de" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "repo-de.${digitalocean_domain.voidlinux_org.name}."
+  value  = "a-fra-de.m.voidlinux.org."
+}
+
 resource "digitalocean_record" "repo_fi" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
