@@ -90,7 +90,7 @@ job "traefik" {
       [http.routers.vault.tls]
     [http.routers.repo-ci]
       entryPoints = ["http", "https"]
-      service = "mirror-us@consulcatalog"
+      service = "mirror-fi@consulcatalog"
       rule = "Host(`repo-ci.voidlinux.org`)"
       [http.routers.repo-ci.tls]
     [http.routers.repo-default]
