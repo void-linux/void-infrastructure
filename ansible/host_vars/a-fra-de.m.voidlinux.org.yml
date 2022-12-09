@@ -1,7 +1,7 @@
 ---
 network_static_routes:
   - to: default
-    via: 212.83.43.1
+    via: 212.83.43.1 onlink dev eno2
   - to: default
     via: 2a00:f48:2000:1031::1
 
