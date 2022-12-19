@@ -44,7 +44,6 @@ locals {
         "paper42",
         "leahneukirchen",
         "lemmi",
-        "q66",
         "sgn",
         "thypon",
       ]
