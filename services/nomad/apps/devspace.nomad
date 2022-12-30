@@ -30,11 +30,10 @@ job "devspace" {
     service {
       name = "devspace-sftp"
       port = "http"
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.devspace-sftp.tls=true",
-        "traefik.http.routers.devspace-sftp.rule=Host(`devspace-sftp.voidlinux.org`)",
-      ]
+      meta {
+        nginx_enable = "true"
+        nginx_names = "devspace-sftp.voidlinux.org"
+      }
       check {
         type = "http"
         port = 8081
@@ -121,11 +120,10 @@ EOF
     service {
       name = "devspace"
       port = "http"
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.devspace.tls=true",
-        "traefik.http.routers.devspace.rule=Host(`devspace.voidlinux.org`)",
-      ]
+      meta {
+        nginx_enable = "true"
+        nginx_names = "devspace.voidlinux.org"
+      }
     }
 
     task "nginx" {
