@@ -84,7 +84,11 @@ EOF
         data = <<EOF
 server {
     include /etc/nginx/fragments/ssl.conf;
-    server_name ~repo-.+.voidlinux.org;
+    server_name repo-default.voidlinux.org
+                repo-de.voidlinux.org
+                repo-fi.voidlinux.org
+                repo-us.voidlinux.org
+                "~^repo-[a-z]{2}\.voidlinux\.org$";
     root /srv/www;
 
     location / {
