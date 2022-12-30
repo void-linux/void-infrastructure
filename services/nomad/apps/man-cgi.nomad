@@ -20,11 +20,10 @@ job "man-cgi" {
     service {
       name = "man-cgi"
       port = "http"
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.man-cgi.tls=true",
-        "traefik.http.routers.man-cgi.rule=Host(`man.voidlinux.org`)",
-      ]
+      meta {
+        nginx_enable = "true"
+        nginx_names = "man.voidlinux.org"
+      }
     }
 
     task "man-cgi" {
