@@ -59,6 +59,17 @@ EOF
       template {
         data = <<EOF
 server {
+    include /etc/nginx/fragments/ssl.conf;
+    server_name _;
+    return 400;
+}
+EOF
+        destination = "local/nginx/00-default.conf"
+      }
+
+      template {
+        data = <<EOF
+server {
     listen 80 default_server;
     listen [::]:80 default_server;
     server_name _;
