@@ -60,8 +60,8 @@ EOF
         data = <<EOF
 server {
     include /etc/nginx/fragments/ssl.conf;
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
     server_name _;
     return 400;
 }
