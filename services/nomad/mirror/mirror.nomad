@@ -27,7 +27,7 @@ job "mirror" {
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20221229RC02"
+        image = "ghcr.io/void-linux/infra-nginx:20221230RC01"
         network_mode = "host"
       }
 
