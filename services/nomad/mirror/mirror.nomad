@@ -19,26 +19,69 @@ job "mirror" {
       read_only = true
     }
 
-    service {
-      name = "mirror-${meta.mirror_region}"
-      port = "http"
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.mirror-${meta.mirror_region}.tls=true",
-        "traefik.http.routers.mirror-${meta.mirror_region}.rule=Host(`repo-${meta.mirror_region}.voidlinux.org`)",
-      ]
-    }
-
     task "nginx" {
       driver = "docker"
 
+      vault {
+        policies = ["void-secrets-traefik"]
+      }
+
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20220804RC02"
+        image = "ghcr.io/void-linux/infra-nginx:20221229RC02"
+        network_mode = "host"
       }
 
       volume_mount {
         volume = "dist-mirror"
         destination = "/srv/www"
+      }
+
+      template {
+        data =<<EOF
+{{- with secret "secret/lego/data/certificates/_.voidlinux.org.crt" -}}
+{{.Data.contents}}
+{{- end -}}
+EOF
+        destination = "secrets/certs/voidlinux.org.crt"
+        perms = 400
+      }
+
+      template {
+        data =<<EOF
+{{- with secret "secret/lego/data/certificates/_.voidlinux.org.key" -}}
+{{.Data.contents}}
+{{- end -}}
+EOF
+        destination = "secrets/certs/voidlinux.org.key"
+        perms = 400
+      }
+
+      template {
+        data = <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+
+    return 301 https://$host$request_uri;
+}
+EOF
+        destination = "local/nginx/ssl_redirect.conf"
+      }
+
+      template {
+        data = <<EOF
+server {
+    include /etc/nginx/fragments/ssl.conf;
+    server_name repo-*.voidlinux.org;
+    root /srv/www;
+
+    location / {
+        autoindex on;
+    }
+}
+EOF
+        destination = "local/nginx/mirror.conf"
       }
     }
 

@@ -1,5 +1,5 @@
 job "traefik" {
-  datacenters = ["VOID-PROXY", "VOID-MIRROR"]
+  datacenters = ["VOID-PROXY"]
   namespace = "infrastructure"
   type = "system"
   group "lb" {
@@ -88,16 +88,6 @@ job "traefik" {
       service = "vault"
       rule = "Host(`vault.s.voidlinux.org`)"
       [http.routers.vault.tls]
-    [http.routers.repo-ci]
-      entryPoints = ["http", "https"]
-      service = "mirror-fi@consulcatalog"
-      rule = "Host(`repo-ci.voidlinux.org`)"
-      [http.routers.repo-ci.tls]
-    [http.routers.repo-default]
-      entryPoints = ["http", "https"]
-      service = "mirror-fi@consulcatalog"
-      rule = "Host(`repo-default.voidlinux.org`)"
-      [http.routers.repo-default.tls]
   [http.services]
     [http.services.nomad]
       [http.services.nomad.loadBalancer]
