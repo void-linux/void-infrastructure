@@ -60,6 +60,8 @@ EOF
         data = <<EOF
 server {
     include /etc/nginx/fragments/ssl.conf;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name _;
     return 400;
 }
@@ -84,6 +86,8 @@ EOF
         data = <<EOF
 server {
     include /etc/nginx/fragments/ssl.conf;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name repo-default.voidlinux.org
                 repo-de.voidlinux.org
                 repo-fi.voidlinux.org
@@ -108,6 +112,8 @@ EOF
 {{ scratch.Set .Name "1" -}}
 server {
     include /etc/nginx/fragments/ssl.conf;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name {{ index .ServiceMeta "nginx_names" }};
 
     location / {
