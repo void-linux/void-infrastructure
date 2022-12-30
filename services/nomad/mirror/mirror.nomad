@@ -73,7 +73,7 @@ EOF
         data = <<EOF
 server {
     include /etc/nginx/fragments/ssl.conf;
-    server_name repo-*.voidlinux.org;
+    server_name ~repo-.+.voidlinux.org;
     root /srv/www;
 
     location / {
@@ -82,6 +82,31 @@ server {
 }
 EOF
         destination = "local/nginx/mirror.conf"
+      }
+
+      template {
+        data = <<EOF
+{{ range services -}}
+{{ range service (printf "%s~_agent" .Name) -}}
+{{ if index .ServiceMeta "nginx_enable" -}}
+{{ if not (scratch.Key .Name) -}}
+{{ scratch.Set .Name "1" -}}
+server {
+    include /etc/nginx/fragments/ssl.conf;
+    server_name {{ index .ServiceMeta "nginx_names" }};
+
+    location / {
+        proxy_pass http://{{ .Address }}:{{ .Port }};
+    }
+}
+{{ end -}}
+{{ end -}}
+{{ end -}}
+{{ end -}}
+EOF
+        destination = "local/nginx/proxy.conf"
+        change_mode = "signal"
+        change_signal = "SIGHUP"
       }
     }
 
