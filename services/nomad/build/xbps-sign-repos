@@ -13,7 +13,7 @@ for f in ${REPOS}; do
        export XBPS_TARGET_ARCH=$x
        xbps-rindex -s \
 		       --signedby "Void Linux" --privkey /secrets/id_rsa ${f}
-       find ${f} -maxdepth 1 -name '*.xbps' -print0 | \
+       find ${f} -maxdepth 1 -name "*.$x.xbps" -print0 | \
 		       xargs -L 1000 -r0 xbps-rindex -S \
 		       --signedby "Void Linux" --privkey /secrets/id_rsa
     done
