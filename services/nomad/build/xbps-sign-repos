@@ -21,4 +21,7 @@ for f in ${REPOS}; do
 		   --signedby "Void Linux" --privkey /secrets/id_rsa ${f}/*.noarch.xbps
 done
 
+# Remove signatures that don't have a corresponding package.
+find /pkgs -name '*.xbps.sig' -exec sh -c 'for x in "$@"; do [ -e "${x%.sig}" ] || rm -- $x; done' _ {} +
+
 exit 0
