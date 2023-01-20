@@ -214,6 +214,15 @@ locals {
         "pkg-committers",
       ]
     }
+
+    xmirror = {
+      description        = "Interactive script for changing XBPS mirrors"
+      allow_merge_commit = false
+      allow_squash_merge = false
+      teams = [
+        "pkg-committers",
+      ]
+    }
   }
 }
 
@@ -227,7 +236,7 @@ resource "github_repository" "repositories" {
   allow_merge_commit = lookup(each.value, "allow_merge_commit", null)
   allow_squash_merge = lookup(each.value, "allow_squash_merge", null)
   archived           = lookup(each.value, "archived", null)
-  topics = flatten([["voidlinux"], lookup(each.value, "topics", [])])
+  topics             = flatten([["voidlinux"], lookup(each.value, "topics", [])])
 
   vulnerability_alerts = true
 }
