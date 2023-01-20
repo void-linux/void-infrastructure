@@ -92,11 +92,17 @@ server {
                 repo-de.voidlinux.org
                 repo-fi.voidlinux.org
                 repo-us.voidlinux.org
+                repo-fastly.voidlinux.org
                 "~^repo-[a-z]{2}\.voidlinux\.org$";
     root /srv/www;
 
     location / {
         autoindex on;
+    }
+
+    location ~* \.(?:xbps|sig|iso|gz|xz)$ {
+        expires 1y;
+        add_header Cache-Control "public";
     }
 }
 EOF

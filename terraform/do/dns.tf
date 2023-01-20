@@ -364,6 +364,13 @@ resource "digitalocean_record" "repo_shadow" {
   value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
+resource "digitalocean_record" "repo_fastly" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "repo-fastly"
+  value  = "dualstack.n.sni.global.fastly.net."
+}
+
 ###################################################################
 # Verification Records                                            #
 #                                                                 #
@@ -377,6 +384,12 @@ resource "digitalocean_record" "verification_github" {
   value  = "3dc3629c19"
 }
 
+resource "digitalocean_record" "verification_fastly" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "_acme-challenge.repo-fastly"
+  value  = "q355elndt9ih044oyf.fastly-validations.com."
+}
 
 #################################################################
 # Email Records                                                 #

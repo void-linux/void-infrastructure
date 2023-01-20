@@ -4,6 +4,7 @@
 - [Terraform](./terraform/index.md)
   - [GitHub](./terraform/github.md)
   - [DigitalOcean](./terraform/do.md)
+  - [Fastly](./terraform/fastly.md)
 - [Ansible](./ansible/index.md)
   - [Installation](./ansible/setup-installation.md)
   - [Secrets](./ansible/secrets.md)
