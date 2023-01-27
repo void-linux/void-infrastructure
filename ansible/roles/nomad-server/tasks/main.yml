@@ -2,7 +2,7 @@
 - name: Install configuration
   copy:
     src: 40-server.hcl
-    dest: /etc/nomad/40-server.hcl
+    dest: /etc/nomad.d/40-server.hcl
     owner: root
     group: root
     mode: 0755
@@ -12,7 +12,7 @@
 - name: Install Secrets
   template:
     src: 30-secrets.hcl
-    dest: /etc/nomad/
+    dest: /etc/nomad.d/
     owner: root
     group: root
     mode: 0400

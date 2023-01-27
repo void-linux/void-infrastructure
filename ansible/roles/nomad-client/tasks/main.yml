@@ -1,15 +1,8 @@
 ---
-- name: Install Packages
-  xbps:
-    pkg:
-      - cni
-      - cni-plugins
-    state: present
-
 - name: Install Configuration
   template:
     src: 40-client.hcl
-    dest: /etc/nomad/40-client.hcl
+    dest: /etc/nomad.d/40-client.hcl
     owner: root
     group: root
     mode: 0644

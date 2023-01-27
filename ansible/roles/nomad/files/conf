@@ -1,7 +1,5 @@
 #!/bin/sh
 
-modprobe bridge
-
 # We need consul and unbound first
 sv check consul >/dev/null || exit 1
 sv check unbound >/dev/null || exit 1
@@ -12,6 +10,3 @@ while ! getent hosts active.vault.service.consul ; do
     sleep 5
     unbound-control flush_negative
 done
-
-exec 2>&1
-exec nomad agent -config /etc/nomad/
