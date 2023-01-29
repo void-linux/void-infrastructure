@@ -11,6 +11,7 @@ resource "fastly_service_vcl" "main_repo" {
     name    = "primary-origin"
     port    = 443
     use_ssl = true
+    shield  = "hel-helsinki-fi"
   }
 
   snippet {
