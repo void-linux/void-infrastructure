@@ -34,7 +34,7 @@ job "terrastate" {
       check {
         type = "http"
         address_mode = "host"
-        path = "/alive"
+        path = "/healthz"
         timeout = "30s"
         interval = "15s"
       }
@@ -55,7 +55,8 @@ job "terrastate" {
       }
 
       config {
-        image = "ghcr.io/the-maldridge/terrastate:v1.0.6"
+        image = "ghcr.io/the-maldridge/terrastate:v1.1.1"
+        init = true
       }
     }
   }
