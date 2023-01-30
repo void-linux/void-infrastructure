@@ -214,15 +214,6 @@ locals {
         "pkg-committers",
       ]
     }
-
-    xmirror = {
-      description        = "Interactive script for changing XBPS mirrors"
-      allow_merge_commit = false
-      allow_squash_merge = false
-      teams = [
-        "pkg-committers",
-      ]
-    }
   }
 }
 
@@ -273,6 +264,35 @@ resource "github_repository" "void_linux_github_io" {
       path   = "/"
     }
   }
+}
+
+resource "github_repository" "xmirror" {
+  name        = "xmirror"
+  description = "Interactive script for changing XBPS mirrors"
+  has_issues  = true
+
+  allow_squash_merge = false
+  allow_merge_commit = false
+
+  topics = [
+    "voidlinux",
+    "hacktoberfest",
+  ]
+
+  pages {
+    cname = "xmirror.voidlinux.org"
+
+    source {
+      branch = "gh-pages"
+      path   = "/"
+    }
+  }
+}
+
+resource "github_team_repository" "xmirror_pkg_committers" {
+  team_id    = github_team.teams["pkg-committers"].id
+  repository = github_repository.xmirror.name
+  permission = "push"
 }
 
 resource "github_team_repository" "void_linux_github_io_webmasters" {
