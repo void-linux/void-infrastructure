@@ -28,20 +28,33 @@ in the prod namespace and membership in the `netauth/terrastate-prod`
 group is required.  Without access to this group you will not be able
 to access the terraform state.
 
-Change the terraform directory and run the following command:
+Export the following variables in order to authenticate your access to
+the remote state storage.  These are your [netauth
+credentials](../services/netauth.html):
 
 ```
-$ terraform init --backend-config "username=<username>" --backend-config "password=<password>"
+TF_HTTP_USERNAME=<entity-id>
+TF_HTTP_PASSWORD=<entity-pw>
 ```
 
-NOTE: This will cache your password to local disk.  This is a known
-defect.
+Change the terraform project directory and run the following command:
+
+```
+$ terraform init
+```
 
 ## Obtaining Control Authority
 
-Having access to state isn't sufficient.  You will also need a
-Personal Access Token from GitHub, and access to the cloud service
-account.  Obtain a token for your account, and contact another member
-of the infrastructure team to obtain the service principal.  Place the
-service principal in terraform/account.json, and the token in the
-environment variable `GITHUB_TOKEN`.
+Having access to state isn't sufficient.  Depending on what projects
+you're wishing to manage, you may need any of the following additional
+credentials:
+
+  * GitHub Personal Access Token (PAT) exported as `GITHUB_TOKEN`
+  * Fastly API Token exported as `FASTLY_API_KEY`
+  * DigitalOcean API Token exported as `DIGITALOCEAN_API_TOKEN`
+  * Vault Token at either `~/.vault-token` or `VAULT_TOKEN`
+  * Nomad Token exported as `NOMAD_TOKEN`
+  * Consul Token exported as `CONSUL_HTTP_TOKEN`
+
+These variables and keys are in addition to the state access which
+must be initialized individually per project.
