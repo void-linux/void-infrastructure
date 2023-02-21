@@ -106,14 +106,6 @@ locals {
       ]
     }
 
-    xbps = {
-      description  = "The X Binary Package System (XBPS)"
-      homepage_url = "https://voidlinux.org/xbps/"
-      teams = [
-        "xbps-developers",
-      ]
-    }
-
     xbps-bulk = {
       description  = "Builds a set of packages that need to be updated with inter-dependencies."
       homepage_url = "https://voidlinux.org"
@@ -287,6 +279,36 @@ resource "github_repository" "xmirror" {
       path   = "/"
     }
   }
+}
+
+resource "github_repository" "xbps" {
+  name         = "xbps"
+  description  = "The X Binary Package System (XBPS)"
+  homepage_url = "https://voidlinux.org/xbps/"
+  has_issues   = true
+
+  allow_squash_merge = false
+  allow_merge_commit = false
+
+  topics = [
+    "voidlinux",
+    "hacktoberfest",
+  ]
+
+  pages {
+    cname = "xbps-api-docs.voidlinux.org"
+
+    source {
+      branch = "gh-pages"
+      path   = "/"
+    }
+  }
+}
+
+resource "github_team_repository" "xbps_xbps_developers" {
+  team_id    = github_team.teams["xbps-developers"].id
+  repository = github_repository.xbps.name
+  permission = "push"
 }
 
 resource "github_team_repository" "xmirror_pkg_committers" {
