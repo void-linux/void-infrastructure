@@ -290,11 +290,18 @@ resource "digitalocean_record" "www" {
   value  = "185.199.109.153"
 }
 
+resource "digitalocean_record" "xbps_api_docs" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "xbps-api-docs"
+  value  = "void-linux.github.io."
+}
+
 resource "digitalocean_record" "xmirror" {
   domain = digitalocean_domain.voidlinux_org.name
-  type = "CNAME"
-  name = "xmirror"
-  value = "void-linux.github.io."
+  type   = "CNAME"
+  name   = "xmirror"
+  value  = "void-linux.github.io."
 }
 
 resource "digitalocean_record" "xqapi" {
