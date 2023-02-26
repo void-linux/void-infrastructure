@@ -123,6 +123,7 @@ server {
     server_name {{ index .ServiceMeta "nginx_names" }};
 
     location / {
+        proxy_set_header Host $host;
         proxy_pass http://{{ .Address }}:{{ .Port }};
     }
 }
