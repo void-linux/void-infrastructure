@@ -41,7 +41,7 @@ job "maddy" {
       }
 
       config {
-        image = "foxcpp/maddy:0.6.2"
+        image = "foxcpp/maddy:0.6.3"
         volumes = [
           "secrets/tls:/data/tls",
           "local/maddy.conf:/data/maddy.conf",
