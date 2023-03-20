@@ -23,7 +23,7 @@ groups:
       # please add ignored mountpoints in node_exporter parameters like
       # "--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/)"
       - alert: HostOutOfDiskSpace
-        expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10
+        expr: (node_filesystem_avail_bytes < 1024*1024*1024*10) and ((node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10)
         for: 5m
         labels:
           severity: warning
