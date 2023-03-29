@@ -199,6 +199,13 @@ resource "digitalocean_record" "f_sfo3_us" {
   value  = digitalocean_droplet.f_sfo3_us.ipv4_address
 }
 
+resource "digitalocean_record" "g_sfo3_us" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "g-sfo3-us.m"
+  value  = digitalocean_droplet.g_sfo3_us.ipv4_address
+}
+
 #######################################################################
 # Services                                                            #
 #                                                                     #
@@ -267,6 +274,13 @@ resource "digitalocean_record" "popcorn" {
   type   = "CNAME"
   name   = "popcorn"
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+}
+
+resource "digitalocean_record" "skype" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "skype"
+  value  = "g-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "sources" {
