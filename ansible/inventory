@@ -37,6 +37,7 @@ c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
 e-sfo3-us.m.voidlinux.org
 f-sfo3-us.m.voidlinux.org
+g-sfo3-us.m.voidlinux.org
 a-mci-us.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
@@ -46,6 +47,7 @@ hashiworker
 hashiproxy
 hashimirror
 hashimx
+hashiconf
 
 [hashimaster]
 b-sfo3-us.m.voidlinux.org
@@ -69,6 +71,9 @@ a-fra-de.m.voidlinux.org
 [hashimx]
 f-sfo3-us.m.voidlinux.org
 
+[hashiconf]
+g-sfo3-us.m.voidlinux.org
+
 [unmanaged]
 a-lej-de.m.voidlinux.org
 
@@ -86,6 +91,7 @@ c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
 e-sfo3-us.m.voidlinux.org
 f-sfo3-us.m.voidlinux.org
+g-sfo3-us.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
 [musl]
