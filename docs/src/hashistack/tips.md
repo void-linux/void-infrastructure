@@ -13,7 +13,7 @@ for logging in and getting tokens for nomad and consul:
 export NOMAD_ADDR=https://nomad.s.voidlinux.org
 export VAULT_ADDR=https://vault.s.voidlinux.org
 export CONSUL_HTTP_ADDR=https://consul.s.voidlinux.org
-
+export NOMAD_NAMESPACE='*'
 
 vlogin() {
     vault login -method=ldap username=maldridge
