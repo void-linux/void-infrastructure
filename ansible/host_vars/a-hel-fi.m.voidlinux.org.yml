@@ -113,6 +113,9 @@ nomad_host_volumes:
   - name: musl_hostdir
     path: /hostdir
     read_only: false
+  - name: ccache
+    path: /hostdir/ccache
+    read_only: true
 
 nomad_reserved_ports:
   - 80  # Legacy nginx on this host

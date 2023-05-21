@@ -4,3 +4,8 @@ sshd_AllowGroups:
   - void-buildsync
 
 buildslave_zone: DE-2
+
+nomad_host_volumes:
+  - name: ccache
+    path: /hostdir/ccache
+    read_only: true
