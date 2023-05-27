@@ -131,7 +131,50 @@ EOF
         change_mode = "signal"
         change_signal = "SIGHUP"
       }
+
+          template {
+        data = <<EOF
+server {
+    include /etc/nginx/fragments/ssl.conf;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name nomad.voidlinux.org;
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_pass http://nomad.service.consul:4646;
     }
+}
+
+server {
+    include /etc/nginx/fragments/ssl.conf;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name consul.voidlinux.org;
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_pass http://consul.service.consul:8500;
+    }
+}
+
+server {
+    include /etc/nginx/fragments/ssl.conf;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name vault.voidlinux.org;
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_pass http://active.vault.service.consul:8200;
+    }
+}
+EOF
+        destination = "local/nginx/hashi.conf"
+        change_mode = "signal"
+        change_signal = "SIGHUP"
+      }
+}
 
     task "rsync" {
       driver = "docker"
