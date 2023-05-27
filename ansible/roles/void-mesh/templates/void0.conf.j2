@@ -8,7 +8,7 @@ ListenPort = 51820
 [Peer]
 PublicKey = {{lookup('file', 'secret/vpn/'+peer+'.pub')}}
 AllowedIPs = {{void_mesh[peer]}}/32
-Endpoint = {{peer}}:51820
+Endpoint = {{lookup('community.general.dig', peer)}}:51820 # {{peer}}
 
 {% endif %}
 {% endfor %}
