@@ -15,10 +15,6 @@ scrape_configs:
     static_configs:
       - targets:
         - localhost:9090
-  - job_name: traefik
-    static_configs:
-      - targets:
-        - e-sfo3-us.node.consul:8080
   - job_name: node
     consul_sd_configs:
       - server: {{ env "NOMAD_HOST_IP_http" }}:8500
