@@ -1,5 +1,5 @@
 ---
-- hosts: hashiworker,hashiproxy,hashimirror,hashimx
+- hosts: hashiworker,hashimirror,hashimx
   become: yes
   become_user: root
   become_method: sudo
@@ -10,7 +10,7 @@
     - nomad-client
 
 
-- hosts: hashiproxy,hashimirror
+- hosts: hashimirror
   become: yes
   become_user: root
   become_method: sudo
