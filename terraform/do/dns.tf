@@ -235,13 +235,6 @@ resource "digitalocean_record" "d_sfo3_us" {
   value  = digitalocean_droplet.d_sfo3_us.ipv4_address
 }
 
-resource "digitalocean_record" "e_sfo3_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "e-sfo3-us.m"
-  value  = digitalocean_droplet.e_sfo3_us.ipv4_address
-}
-
 resource "digitalocean_record" "f_sfo3_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
@@ -284,13 +277,6 @@ resource "digitalocean_record" "docs" {
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
-resource "digitalocean_record" "infradocs" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "infradocs"
-  value  = "${digitalocean_record.e_sfo3_us.fqdn}."
-}
-
 resource "digitalocean_record" "man" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
@@ -324,13 +310,6 @@ resource "digitalocean_record" "sources" {
   type   = "CNAME"
   name   = "sources"
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
-resource "digitalocean_record" "wiki" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "wiki"
-  value  = "e-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "www" {

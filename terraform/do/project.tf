@@ -14,7 +14,6 @@ resource "digitalocean_project_resources" "void" {
     digitalocean_droplet.b_sfo3_us.urn,
     digitalocean_droplet.c_sfo3_us.urn,
     digitalocean_droplet.d_sfo3_us.urn,
-    digitalocean_droplet.e_sfo3_us.urn,
     digitalocean_droplet.f_sfo3_us.urn,
     digitalocean_domain.voidlinux_org.urn,
   ]
