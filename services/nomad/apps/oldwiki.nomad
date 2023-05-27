@@ -16,6 +16,10 @@ job "oldwiki" {
     service {
       name = "oldwiki"
       port = "http"
+      meta {
+        nginx_enable = "true"
+        nginx_names = "wiki.voidlinux.org"
+      }
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.oldwiki.tls=true",

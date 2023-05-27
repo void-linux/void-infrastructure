@@ -14,6 +14,10 @@ job "alps" {
     service {
       name = "alps"
       port = "http"
+      meta {
+        nginx_enable = "true"
+        nginx_names = "alps.s.voidlinux.org alps.voidlinux.org"
+      }
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.alps.tls=true",

@@ -22,7 +22,6 @@ job "repo-exporter" {
 
     service {
       port = "metrics"
-      tags = ["traefik.enable=true", "traefik.http.routers.repo-exporter-exporter.tls=true"]
       check {
         type = "http"
         port = "metrics"

@@ -16,6 +16,10 @@ job "ircbot" {
     service {
       name = "ircbot"
       port = "http"
+      meta {
+        nginx_enable = "true"
+        nginx_names = "ircbot.s.voidlinux.org"
+      }
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.ircbot.tls=true"

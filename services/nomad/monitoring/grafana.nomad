@@ -26,6 +26,11 @@ job "grafana" {
     service {
       name = "grafana"
       port = "http"
+      meta {
+        nginx_enable = "true"
+        nginx_names = "grafana.s.voidlinux.org grafana.voidlinux.org"
+      }
+
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.grafana.tls=true",

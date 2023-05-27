@@ -16,6 +16,10 @@ job "infradocs" {
     service {
       name = "infradocs"
       port = "http"
+      meta {
+        nginx_enable = "true"
+        nginx_names = "infradocs.voidlinux.org"
+      }
       tags = [
         "traefik.enable=true",
         "traefik.http.routers.infradocs.tls=true",

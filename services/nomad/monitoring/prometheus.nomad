@@ -23,6 +23,10 @@ job "prometheus" {
     service {
       name = "prometheus"
       port = "http"
+      meta {
+        nginx_enable = "true"
+        nginx_names = "prometheus.s.voidlinux.org prometheus.voidlinux.org"
+      }
       tags = ["traefik.enable=true", "traefik.http.routers.prometheus.tls=true"]
 
       check {

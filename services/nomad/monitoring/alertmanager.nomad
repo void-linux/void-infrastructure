@@ -14,6 +14,10 @@ job "alertmanager" {
     service {
       name = "alertmanager"
       port = "http"
+      meta {
+        nginx_enable = "true"
+        nginx_names = "alertmanager.s.voidlinux.org alertmanager.voidlinux.org"
+      }
       tags = ["traefik.enable=true", "traefik.http.routers.alertmanager.tls=true"]
 
       check {
