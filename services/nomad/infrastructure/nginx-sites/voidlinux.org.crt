@@ -1,0 +1,3 @@
+{{- with secret "secret/lego/data/certificates/_.voidlinux.org.crt" -}}
+{{.Data.contents}}
+{{- end -}}
