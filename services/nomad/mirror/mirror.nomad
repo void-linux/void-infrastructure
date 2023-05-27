@@ -5,12 +5,7 @@ job "mirror" {
 
   group "services" {
     network {
-      mode = "bridge"
-      port "http" { to = 80 }
-      port "rsync" {
-        to = 873
-        static = 873
-      }
+      mode = "host"
     }
 
     volume "dist-mirror" {
@@ -144,6 +139,7 @@ EOF
       config {
         image = "ghcr.io/void-linux/infra-rsync:v20210926rc01"
         volumes = ["local/voidmirror.conf:/etc/rsyncd.conf.d/voidmirror.conf"]
+        network_mode = "host"
       }
 
       volume_mount {
