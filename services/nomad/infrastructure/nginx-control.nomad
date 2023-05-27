@@ -12,7 +12,7 @@ job "nginx-control" {
       driver = "docker"
 
       vault {
-        policies = ["void-secrets-traefik"]
+        policies = ["void-secrets-tls"]
       }
 
       config {
