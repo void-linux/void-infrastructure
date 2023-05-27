@@ -40,6 +40,56 @@ resource "digitalocean_record" "apex_txt" {
   value  = "v=spf1 mx a:f-sfo3-us.m.voidlinux.org ~all"
 }
 
+##########################################################################
+# Omniproxy                                                              #
+#                                                                        #
+# The Omniproxy is a record that points to any machine running nginx and #
+# capable of serving requests that will ultimately terminate to          #
+# somewhere inside Void's private network.  This doesn't refer to any    #
+# single machine anywhere, and allows us to dynamically punt traffic     #
+# around where and when machines are cycled into and out of service.  It #
+# also means that if you reboot one of these machines traffic should     #
+# continue to flow since most browsers are smart enough to retry failed  #
+# requests to A records.                                                 #
+##########################################################################
+
+resource "digitalocean_record" "omniproxy" {
+  for_each = toset([
+    digitalocean_record.b_hel_fi.value,
+    digitalocean_record.a_fra_de.value,
+  ])
+
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "omniproxy"
+  value  = each.value
+}
+
+resource "digitalocean_record" "omniproxy_v6" {
+  for_each = toset([
+    digitalocean_record.b_hel_fi_v6.value,
+    digitalocean_record.a_fra_de_v6.value,
+  ])
+
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "omniproxy"
+  value  = each.value
+}
+
+resource "digitalocean_record" "catchall" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "*.s.${digitalocean_domain.voidlinux_org.name}."
+  value  = "omniproxy.${digitalocean_domain.voidlinux_org.name}."
+}
+
+resource "digitalocean_record" "catchall_apex" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "*.${digitalocean_domain.voidlinux_org.name}."
+  value  = "omniproxy.${digitalocean_domain.voidlinux_org.name}."
+}
 
 ##########################################################################
 # Machines                                                               #
@@ -310,16 +360,6 @@ resource "digitalocean_record" "xqapi" {
   name   = "xq-api"
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
-
-# Catchall which points at the dynamic load balancers, this is going
-# to match if nothing else above does.
-resource "digitalocean_record" "catchall" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "*.s.${digitalocean_domain.voidlinux_org.name}."
-  value  = "e-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
 
 ################################################################
 # Mirrors                                                      #
