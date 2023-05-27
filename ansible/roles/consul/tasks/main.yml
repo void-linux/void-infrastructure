@@ -4,31 +4,10 @@
     pkg: consul
     state: present
 
-- name: Create System Group
-  group:
-    name: _consul
-    system: yes
-
-- name: Create System User
-  user:
-    name: _consul
-    group: _consul
-    system: yes
-    home: /var/lib/consul
-    skeleton: /var/empty
-
-- name: Create Configuration Directory
-  file:
-    path: /etc/consul
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-
 - name: Install Core Configuration
   template:
     src: 25-base.hcl.j2
-    dest: /etc/consul/25-base.hcl
+    dest: /etc/consul.d/25-base.hcl
     owner: root
     group: root
     mode: 0644
@@ -38,7 +17,7 @@
 - name: Install retry_join Configuration
   template:
     src: 30-retry-join.hcl.j2
-    dest: /etc/consul/30-retry-join.hcl
+    dest: /etc/consul.d/30-retry-join.hcl
     owner: root
     group: root
     mode: 0644
@@ -48,41 +27,12 @@
 - name: Install Gossip Encryption Keys
   template:
     src: 30-gossip-encryption.hcl.j2
-    dest: /etc/consul/30-gossip-encryption.hcl
+    dest: /etc/consul.d/30-gossip-encryption.hcl
     owner: root
     group: _consul
     mode: 0640
   notify:
     - consul
-
-- name: Install Service (1/3)
-  file:
-    path: /etc/sv/{{item}}
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-  with_items:
-    - consul
-    - consul/log
-
-- name: Install Service (2/3)
-  copy:
-    src: run
-    dest: /etc/sv/consul/run
-    owner: root
-    group: root
-    mode: 0755
-  notify:
-    - consul
-
-- name: Install Service (3/3)
-  copy:
-    src: run.log
-    dest: /etc/sv/consul/log/run
-    owner: root
-    group: root
-    mode: 0755
 
 - name: Enable services
   service:
