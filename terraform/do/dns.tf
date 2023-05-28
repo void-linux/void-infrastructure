@@ -110,9 +110,18 @@ resource "digitalocean_record" "control_proxy" {
   ])
 
   domain = digitalocean_domain.voidlinux_org.name
-  type = "A"
-  name = "cproxy.${digitalocean_domain.voidlinux_org.name}."
-  value = each.value
+  type   = "A"
+  name   = "cproxy.${digitalocean_domain.voidlinux_org.name}."
+  value  = each.value
+}
+
+resource "digitalocean_record" "control_pointer" {
+  for_each = toset(["nomad", "consul", "vault"])
+
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = each.value
+  value  = "cproxy.${digitalocean_domain.voidlinux_org.name}."
 }
 
 ##########################################################################
