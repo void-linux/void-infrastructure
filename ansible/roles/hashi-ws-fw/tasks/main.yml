@@ -1,0 +1,11 @@
+---
+- name: Install Firewall Rules
+  ansible.builtin.copy:
+    src: hashi-ws.rules
+    dest: /etc/iptables.d/hashi-ws.rules
+    owner: root
+    group: root
+    mode: "0640"
+  notify:
+    - iptables
+

@@ -10,3 +10,4 @@
     - vault
     - nomad-server
     - nomad-client
+    - hashi-ws-fw
