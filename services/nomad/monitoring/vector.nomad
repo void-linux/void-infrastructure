@@ -2,8 +2,8 @@ job "vector" {
   datacenters = [
     "VOID",
     "VOID-MX",
-    "VOID-PROXY",
     "VOID-MIRROR",
+    "VOID-CONTROL",
   ]
   namespace   = "monitoring"
   type        = "system"
