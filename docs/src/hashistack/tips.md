@@ -10,9 +10,9 @@ You can source the following file and it sets up convenient aliases
 for logging in and getting tokens for nomad and consul:
 
 ```
-export NOMAD_ADDR=https://nomad.s.voidlinux.org
-export VAULT_ADDR=https://vault.s.voidlinux.org
-export CONSUL_HTTP_ADDR=https://consul.s.voidlinux.org
+export NOMAD_ADDR=https://nomad.voidlinux.org
+export VAULT_ADDR=https://vault.voidlinux.org
+export CONSUL_HTTP_ADDR=https://consul.voidlinux.org
 export NOMAD_NAMESPACE='*'
 
 vlogin() {

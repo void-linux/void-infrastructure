@@ -78,7 +78,7 @@ using `logcli` from the `loki` package.  LogCLI can run the first
 query from the cheat sheet above as follows:
 
 ```shell
-$ export LOKI_ADDR=https://loki.s.voidlinux.org
+$ export LOKI_ADDR=https://loki.voidlinux.org
 $ logcli query '{nomad_job="buildsync-musl"}'
 Common labels: {filename="/alloc/logs/rsync.stdout.0", nomad_group="rsync", nomad_job="buildsync-musl", nomad_namespace="build", nomad_task="promtail"}
 2021-03-07T20:30:59-08:00 {} debug/xlunch-dbg-4.7.0_1.armv6l-musl.xbps

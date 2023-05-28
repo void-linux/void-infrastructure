@@ -9,7 +9,7 @@ To log into vault you will need a NetAuth account, and may then log in
 using the following command:
 
 ```
-export VAULT_ADDR=https://vault.s.voidlinux.org
+export VAULT_ADDR=https://vault.voidlinux.org
 vault login -method=ldap username=<you>
 ```
 

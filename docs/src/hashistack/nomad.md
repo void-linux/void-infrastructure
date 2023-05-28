@@ -15,7 +15,7 @@ To work with nomad you will need a nomad token which you can obtain
 from vault:
 
 ```
-export NOMAD_ADDR=https://nomad.s.voidlinux.org
+export NOMAD_ADDR=https://nomad.voidlinux.org
 vault read nomad/creds/<role>
 ```
 
