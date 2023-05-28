@@ -91,6 +91,30 @@ resource "digitalocean_record" "catchall_apex" {
   value  = "omniproxy.${digitalocean_domain.voidlinux_org.name}."
 }
 
+#########################################################################
+# Control Hosts                                                         #
+#                                                                       #
+# Void manages most of the fleet via a Hashicorp Nomad cluster that has #
+# certain dependent services.  These services are pointed directly at   #
+# the control plane which runs its own proxies distinct from the        #
+# services that ingress via the omniproxy above.  The proxy running on  #
+# the control hosts is also capable of proxying all traffic, but is not #
+# part of the omniproxy alias above to reduce load.                     #
+#########################################################################
+
+resource "digitalocean_record" "control_proxy" {
+  for_each = toset([
+    digitalocean_record.b_sfo3_us.value,
+    digitalocean_record.c_sfo3_us.value,
+    digitalocean_record.d_sfo3_us.value,
+  ])
+
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "A"
+  name = "cproxy.${digitalocean_domain.voidlinux_org.name}."
+  value = each.value
+}
+
 ##########################################################################
 # Machines                                                               #
 #                                                                        #
