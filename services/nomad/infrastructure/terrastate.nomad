@@ -30,10 +30,6 @@ job "terrastate" {
         nginx_enable = "true"
         nginx_names = "terrastate.s.voidlinux.org"
       }
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.terrastate.tls=true",
-      ]
 
       check {
         type = "http"

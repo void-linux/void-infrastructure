@@ -17,10 +17,6 @@ job "loki" {
         nginx_enable = "true"
         nginx_names = "loki.s.voidlinux.org loki.voidlinux.org"
       }
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.loki.tls=true",
-      ]
     }
 
     volume "loki-data" {

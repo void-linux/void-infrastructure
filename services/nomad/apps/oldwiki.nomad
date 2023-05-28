@@ -20,11 +20,6 @@ job "oldwiki" {
         nginx_enable = "true"
         nginx_names = "wiki.voidlinux.org"
       }
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.oldwiki.tls=true",
-        "traefik.http.routers.oldwiki.rule=Host(`wiki.voidlinux.org`)",
-      ]
 
       check {
         type = "http"

@@ -31,11 +31,6 @@ job "grafana" {
         nginx_names = "grafana.s.voidlinux.org grafana.voidlinux.org"
       }
 
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.grafana.tls=true",
-      ]
-
       check {
         type = "http"
         address_mode = "host"

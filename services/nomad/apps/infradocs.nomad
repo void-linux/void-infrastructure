@@ -20,11 +20,6 @@ job "infradocs" {
         nginx_enable = "true"
         nginx_names = "infradocs.voidlinux.org"
       }
-      tags = [
-        "traefik.enable=true",
-        "traefik.http.routers.infradocs.tls=true",
-        "traefik.http.routers.infradocs.rule=Host(`infradocs.voidlinux.org`)",
-      ]
 
       check {
         type = "http"
