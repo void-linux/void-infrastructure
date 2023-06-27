@@ -21,6 +21,7 @@ locals {
       homepage_url       = "https://voidlinux.org"
       allow_merge_commit = false
       allow_squash_merge = false
+      has_discussions    = true
       teams = [
         "pkg-committers",
       ]
