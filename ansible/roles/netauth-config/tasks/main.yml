@@ -6,6 +6,7 @@
     owner: root
     group: root
     mode: 0755
+  tags: [install_netauth_conf]
 
 - name: Configure NetAuth library
   copy:
@@ -14,6 +15,7 @@
     owner: root
     group: root
     mode: 0644
+  tags: [install_netauth_conf]
 
 - name: Ensure key directory
   file:
@@ -22,6 +24,7 @@
     owner: root
     group: root
     mode: 0755
+  tags: [install_netauth_conf]
 
 - name: Install NetAuth Certificate
   copy:
@@ -30,6 +33,7 @@
     owner: root
     group: root
     mode: 0644
+  tags: [install_netauth_conf, configure_netauth_conf]
 
 - name: Install Token Verification Key
   copy:
@@ -38,6 +42,7 @@
     owner: root
     group: root
     mode: 0644
+  tags: [install_netauth_conf, configure_netauth_conf]
 
 - name: Install Firewall Rules
   copy:
@@ -48,3 +53,4 @@
     mode: 0644
   notify:
     - iptables
+  tags: [install_netauth_conf]

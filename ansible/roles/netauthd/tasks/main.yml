@@ -16,6 +16,7 @@
   no_log: true
   notify:
     - netauthd
+  tags: [install_netauthd, configure_netauthd]
 
 - name: Install Token Keys
   copy:
@@ -27,6 +28,7 @@
   no_log: true
   notify:
     - netauthd
+  tags: [install_netauthd, configure_netauthd]
 
 - name: Install Firewall Rules
   copy:
