@@ -249,6 +249,7 @@ scrape_configs:
       arch: [x86_64]
     static_configs:
       - targets:
+        - ftp.cc.uoc.gr/mirrors/linux/voidlinux/current
         - ftp.debian.ru/mirrors/voidlinux/current
         - ftp.dk.xemacs.org/voidlinux/current
         - ftp.lysator.liu.se/pub/voidlinux/current
@@ -271,6 +272,7 @@ scrape_configs:
         - quantum-mirror.hu/mirrors/pub/voidlinux/current
         - repo-fi.voidlinux.org/current
         - repo-us.voidlinux.org/current
+        - repo.jing.rocks/voidlinux/current
         - void.chililinux.com/voidlinux/current
         - void.cijber.net/current
         - void.sakamoto.pl/current
