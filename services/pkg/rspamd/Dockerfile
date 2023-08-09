@@ -1,4 +1,4 @@
-FROM  ghcr.io/void-linux/void-linux:latest-full-x86_64-musl
+FROM  ghcr.io/void-linux/void-musl-full:latest
 
 RUN xbps-install -Suy xbps && xbps-install -y rspamd tini
 ENTRYPOINT ["/usr/bin/tini", "--"]

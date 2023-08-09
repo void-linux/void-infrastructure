@@ -1,4 +1,4 @@
-FROM  ghcr.io/void-linux/void-linux:latest-thin-x86_64
+FROM  ghcr.io/void-linux/void-glibc:latest
 
 RUN xbps-install -Sy && xbps-install -y lego vault binutils upx findutils diffutils && \
         strip /usr/bin/vault /usr/bin/lego && \

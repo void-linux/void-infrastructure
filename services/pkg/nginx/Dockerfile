@@ -1,4 +1,4 @@
-FROM  ghcr.io/void-linux/void-linux:latest-full-x86_64
+FROM  ghcr.io/void-linux/void-glibc-full:latest
 
 RUN xbps-install -Suy xbps && xbps-install -Sy nginx tini
 

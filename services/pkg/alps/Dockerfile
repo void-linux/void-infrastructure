@@ -1,4 +1,4 @@
-FROM ghcr.io/void-linux/void-linux:latest-full-x86_64-musl as build
+FROM ghcr.io/void-linux/void-musl-full:latest as build
 ARG ALPS_REV=master
 WORKDIR /alps
 RUN xbps-install -Suy xbps && xbps-install -y git go ca-certificates curl tar file && \
