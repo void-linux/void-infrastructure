@@ -1,4 +1,4 @@
-FROM  ghcr.io/void-linux/void-linux:latest-thin-x86_64
+FROM  ghcr.io/void-linux/void-glibc:latest
 
 RUN xbps-install -Syu xbps && xbps-install -Sy tini sftpgo NetAuth-sftpgo-hook
 

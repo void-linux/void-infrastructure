@@ -1,4 +1,4 @@
-FROM ghcr.io/void-linux/void-linux:20210312rc01-mini-bb-x86_64-musl
+FROM ghcr.io/void-linux/void-musl-busybox:latest
 RUN xbps-install -Sy debuginfod && \
         rm -rf /var/cache/xbps
 WORKDIR /debuginfod
