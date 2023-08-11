@@ -91,8 +91,8 @@ locals {
       ]
     }
 
-    void-docker = {
-      description  = "Docker images for Void Linux"
+    void-containers = {
+      description  = "OCI container images for Void Linux"
       homepage_url = "https://voidlinux.org"
       teams = [
         "pkg-committers",
