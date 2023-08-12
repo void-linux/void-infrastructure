@@ -1,0 +1,27 @@
+name: Build all service containers
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - alps
+          - debuginfod
+          - lego
+          - man-cgi
+          - nginx
+          - rspamd
+          - rsync
+          - sftpgo
+          - xmandump
+
+    uses: ./.github/workflows/build-pkg.yml
+    with:
+      service_name: ${{ matrix.service }}
