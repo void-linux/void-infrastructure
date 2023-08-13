@@ -3,52 +3,60 @@ job "buildsync-musl" {
   datacenters = ["VOID"]
   namespace = "build"
 
-  group "rsync" {
+  group "lsyncd" {
+    count = 1
     network { mode = "bridge" }
 
-    volume "root-pkgs" {
+    volume "musl_hostdir" {
       type = "host"
-      source = "root-pkgs"
-      read_only = false
+      source = "musl_hostdir"
+      read_only = true
     }
 
     task "rsync" {
-      leader = true
       driver = "docker"
 
-      vault {
-        policies = ["void-secrets-buildsync"]
-      }
-
       config {
-        image = "eeacms/rsync"
-        args = ["client"]
-      }
-
-      env {
-        CRON_TASK_1="*/5 * * * * flock -n /run/rsync.lock rsync -vurk -e 'ssh -i /secrets/id_rsa -o UserKnownHostsFile=/local/known_hosts' --exclude '*.sig' --delete-after -f '+ */' -f '+ *-repodata' -f '+ *.xbps' -f '+ otime' -f '- *' void-buildsync@a-hel-fi.node.consul:/hostdir/binpkgs/ /pkgs/musl/"
+        image = "ghcr.io/void-linux/infra-lsyncd:20230814"
       }
 
       volume_mount {
-        volume = "root-pkgs"
-        destination = "/pkgs"
+        volume = "musl_hostdir"
+        destination = "/hostdir"
       }
 
       template {
         data = <<EOF
-{{- with secret "secret/buildsync/ssh" -}}
-{{.Data.private_key}}
-{{- end -}}
-EOF
-        destination = "secrets/id_rsa"
-        perms = "0400"
-      }
+settings {
+    statusFile = "/tmp/lsyncd.status",
+    nodaemon = true,
+}
 
-      template {
-        data = <<EOF
-a-hel-fi.node.consul ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIW8voCZh9nQpdx3fAsvfZO4mCYv0/OUVNPF9A/GsHtX
+sync {
+    default.rsync,
+    source = "/hostdir/binpkgs",
+    {{- range nomadService "build-rsyncd" -}}
+    target = "rsync://a-fsn-de.node.consul:{{ .Port }}/pkgs/musl",
+    {{- end -}}
+    delay = 15,
+    filter = {
+        "+ */",
+        "+ *-repodata",
+        "+ *.xbps",
+        "+ otime",
+        "- .*",
+        "- *",
+    },
+    rsync = {
+        verbose = true,
+        update = true,
+        copy_dirlinks = true,
+        _extra = { "--delete-after" },
+    }
+}
 EOF
-        destination = "local/known_hosts"
+        destination = "local/lsyncd.conf"
+        perms = "0644"
       }
     }
   }
