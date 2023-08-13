@@ -115,6 +115,14 @@ locals {
       ]
     }
 
+    xbps-legacy-sign = {
+      description  = "Sign xbps packages using xbps's quirks for backwards compatibility."
+      homepage_url = "https://voidlinux.org"
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
     runit = {
       description        = "The init system for Void Linux."
       homepage_url       = "https://voidlinux.org"
