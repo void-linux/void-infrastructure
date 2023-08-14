@@ -1,0 +1,23 @@
+name: lsyncd Service Container
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - services/pkg/lsyncd/**
+  push:
+    branches:
+      - master
+    paths:
+      - services/pkg/lsyncd/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    uses: ./.github/workflows/build-pkg.yml
+    with:
+      service_name: lsyncd
