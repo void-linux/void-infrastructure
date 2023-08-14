@@ -9,3 +9,6 @@ nomad_host_volumes:
   - name: ccache
     path: /hostdir/ccache
     read_only: true
+  - name: aarch64_hostdir
+    path: /hostdir
+    read_only: false
