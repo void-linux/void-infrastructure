@@ -35,6 +35,11 @@ target "infra-lego" {
   context = "services/pkg/lego/"
 }
 
+target "infra-lsyncd" {
+  inherits = ["_common-musl"]
+  context = "services/pkg/lsyncd/"
+}
+
 target "infra-man-cgi" {
   inherits = ["infra-nginx"]
   context = "services/pkg/man-cgi/"

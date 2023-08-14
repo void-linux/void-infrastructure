@@ -15,6 +15,7 @@ jobs:
           - alps
           - debuginfod
           - lego
+          - lsyncd
           - man-cgi
           - nginx
           - rspamd
