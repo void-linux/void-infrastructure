@@ -146,7 +146,7 @@ scrape_configs:
     metrics_path: /probe
     scrape_interval: 2m
     params:
-      arch: [x86_4-musl]
+      arch: [x86_64-musl]
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul/musl
