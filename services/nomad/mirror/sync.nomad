@@ -34,7 +34,7 @@ job "sync" {
           "--timeout", "15",
           "--contimeout", "5",
           "--links",
-          "rsync://a-hel-fi.node.consul/voidmirror/",
+          "rsync://a-fsn-de.node.consul/shadow/",
           "/mirror/",
         ]
       }
