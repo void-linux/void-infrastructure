@@ -16,6 +16,10 @@ job "buildsync-musl" {
     task "rsync" {
       driver = "docker"
 
+      vault {
+        policies = ["void-secrets-buildsync"]
+      }
+
       config {
         image = "ghcr.io/void-linux/infra-lsyncd:20230814"
       }
@@ -23,6 +27,16 @@ job "buildsync-musl" {
       volume_mount {
         volume = "musl_hostdir"
         destination = "/hostdir"
+      }
+
+      template {
+        data = <<EOF
+{{- with secret "secret/buildsync/musl" -}}
+{{.Data.password}}
+{{- end -}}
+EOF
+        destination = "secrets/rsync_passwd"
+        perms = "0400"
       }
 
       template {
@@ -36,7 +50,7 @@ sync {
     default.rsync,
     source = "/hostdir/binpkgs",
     {{- range nomadService "build-rsyncd" -}}
-    target = "rsync://a-fsn-de.node.consul:{{ .Port }}/pkgs/musl",
+    target = "rsync://buildsync-musl@a-fsn-de.node.consul:{{ .Port }}/musl",
     {{- end -}}
     delay = 15,
     filter = {
@@ -51,6 +65,23 @@ sync {
         verbose = true,
         update = true,
         copy_dirlinks = true,
+        password_file = "/secrets/rsync_passwd",
+        _extra = { "--delete-after" },
+    }
+}
+
+sync {
+    default.rsync,
+    source = "/hostdir/sources",
+    {{- range nomadService "build-rsyncd" -}}
+    target = "rsync://buildsync-musl@a-fsn-de.node.consul:{{ .Port }}/sources",
+    {{- end -}}
+    delay = 15,
+    rsync = {
+        verbose = true,
+        update = true,
+        copy_dirlinks = true,
+        password_file = "/secrets/rsync_passwd",
         _extra = { "--delete-after" },
     }
 }
