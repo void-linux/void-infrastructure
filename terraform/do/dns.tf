@@ -240,20 +240,6 @@ resource "digitalocean_record" "b_lej_de" {
   value  = "78.46.212.193"
 }
 
-resource "digitalocean_record" "a_mci_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "a-mci-us.m"
-  value  = "199.168.97.186"
-}
-
-resource "digitalocean_record" "vm1_a_mci_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "vm1.a-mci-us.m"
-  value  = "198.204.250.219"
-}
-
 resource "digitalocean_record" "a_sfo3_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
@@ -427,7 +413,7 @@ resource "digitalocean_record" "repo_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
   name   = "repo-us.${digitalocean_domain.voidlinux_org.name}."
-  value  = "a-mci-us.m.${digitalocean_domain.voidlinux_org.name}."
+  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "repo_alpha_de" {
