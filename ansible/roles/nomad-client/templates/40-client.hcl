@@ -12,6 +12,11 @@ client {
     reserved_ports = "{{nomad_reserved_ports|default([])|join(",")}}"
   }
 
+  host_network "internal" {
+    cidr = "192.168.99.0/24"
+    interface = "void0"
+  }
+
   host_volume "netauth_config" {
     path = "/etc/netauth"
     read_only = true
