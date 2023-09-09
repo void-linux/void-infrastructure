@@ -177,6 +177,20 @@ resource "digitalocean_record" "c_hel_fi_v6" {
   value  = "2a01:4f9:c012:498a::2"
 }
 
+resource "digitalocean_record" "d_hel_fi" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "d-hel-fi.m"
+  value  = "135.181.160.58"
+}
+
+resource "digitalocean_record" "d_hel_fi_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "d-hel-fi.m"
+  value  = "2a01:4f9:3a:17d7::2"
+}
+
 resource "digitalocean_record" "a_fra_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
