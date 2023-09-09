@@ -1,0 +1,27 @@
+---
+network_static_routes:
+  - to: default
+    via: 135.181.160.1 onlink dev enp0s31f6
+  - to: default
+    via: fe80::1 onlink dev enp0s31f6
+
+network_static_interfaces:
+  - name: enp0s31f6
+    type: direct
+    addrs:
+      - 135.181.160.58/26
+      - 2a01:4f9:3a:17d7::2
+
+nomad_host_volumes:
+  - name: dist_mirror
+    path: /data/dist_mirror
+    read_only: false
+  - name: devspace_data
+    path: /data/devspace
+    read_only: false
+  - name: devspace_home
+    path: /data/devspace/home
+    read_only: true
+
+nomad_meta:
+  mirror_region: fi

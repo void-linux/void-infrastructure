@@ -29,6 +29,7 @@ a-sfo3-us.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 b-hel-fi.m.voidlinux.org
 c-hel-fi.m.voidlinux.org
+d-hel-fi.m.voidlinux.org
 a-fsn-de.m.voidlinux.org
 b-fsn-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
@@ -58,6 +59,7 @@ b-lej-de.m.voidlinux.org
 
 [hashimirror]
 b-hel-fi.m.voidlinux.org
+d-hel-fi.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
 [hashimx]
@@ -71,6 +73,7 @@ a-lej-de.m.voidlinux.org
 a-hel-fi.m.voidlinux.org
 b-hel-fi.m.voidlinux.org
 c-hel-fi.m.voidlinux.org
+d-hel-fi.m.voidlinux.org
 a-fsn-de.m.voidlinux.org
 b-fsn-de.m.voidlinux.org
 a-lej-de.m.voidlinux.org
@@ -85,12 +88,14 @@ a-fra-de.m.voidlinux.org
 [musl]
 b-hel-fi.m.voidlinux.org
 c-hel-fi.m.voidlinux.org
+d-hel-fi.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
 [net_static]
 a-hel-fi.m.voidlinux.org
 b-hel-fi.m.voidlinux.org
 c-hel-fi.m.voidlinux.org
+d-hel-fi.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 a-fsn-de.m.voidlinux.org
 a-fra-de.m.voidlinux.org
