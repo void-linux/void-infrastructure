@@ -50,6 +50,7 @@ EOF
 
         template {
           data = <<EOF
+{{ $allocID := env "NOMAD_ALLOC_ID" -}}
 settings {
     statusFile = "/tmp/lsyncd.status",
     nodaemon = true,
@@ -58,8 +59,8 @@ settings {
 sync {
     default.rsync,
     source = "/hostdir/binpkgs",
-    {{- range nomadService "build-rsyncd" -}}
-    target = "rsync://buildsync-${group.value}@a-fsn-de.node.consul:{{ .Port }}/${group.value}",
+    {{- range nomadService 1 $allocID "build-rsyncd" -}}
+    target = "rsync://buildsync-${group.value}@{{ .Address }}:{{ .Port }}/${group.value}",
     {{- end -}}
     delay = 15,
     filter = {
@@ -82,8 +83,8 @@ sync {
 sync {
     default.rsync,
     source = "/hostdir/sources",
-    {{- range nomadService "build-rsyncd" -}}
-    target = "rsync://buildsync-${group.value}@a-fsn-de.node.consul:{{ .Port }}/sources",
+    {{- range nomadService 1 $allocID "build-rsyncd" -}}
+    target = "rsync://buildsync-${group.value}@{{ .Address }}:{{ .Port }}/sources",
     {{- end -}}
     delay = 15,
     rsync = {
