@@ -359,13 +359,6 @@ resource "digitalocean_record" "xmirror" {
   value  = "void-linux.github.io."
 }
 
-resource "digitalocean_record" "xqapi" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "xq-api"
-  value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
 ################################################################
 # Mirrors                                                      #
 #                                                              #
