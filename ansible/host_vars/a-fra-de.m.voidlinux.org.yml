@@ -16,6 +16,9 @@ nomad_host_volumes:
   - name: dist_mirror
     path: /data/dist_mirror
     read_only: false
+  - name: dist_sources
+    path: /data/dist_sources
+    read_only: false
 
 nomad_meta:
   mirror_region: de
