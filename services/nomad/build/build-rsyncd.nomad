@@ -52,11 +52,10 @@ job "build-rsyncd" {
         data = <<EOF
 {{- with secret "secret/buildsync/aarch64" -}}
 buildsync-aarch64:{{.Data.password}}
-{{- end -}}
-
+{{ end }}
 {{- with secret "secret/buildsync/musl" -}}
 buildsync-musl:{{.Data.password}}
-{{- end -}}
+{{ end }}
 EOF
         destination = "secrets/buildsync.secrets"
         perms = "0400"
