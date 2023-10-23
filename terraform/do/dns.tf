@@ -317,20 +317,6 @@ resource "digitalocean_record" "devspace_sftp" {
   value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
-resource "digitalocean_record" "docs" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "docs"
-  value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
-resource "digitalocean_record" "man" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "man"
-  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
 resource "digitalocean_record" "mx1" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
