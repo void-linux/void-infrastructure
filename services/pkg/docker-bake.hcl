@@ -79,3 +79,8 @@ target "infra-xmandump" {
   inherits = ["_common-glibc"]
   context = "services/pkg/xmandump/"
 }
+
+target "infra-xq-api" {
+  inherits = ["_common-glibc"]
+  context = "services/pkg/xq-api/"
+}
