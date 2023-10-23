@@ -13,9 +13,9 @@ job "shadow-rsyncd" {
       }
     }
 
-    volume "glibc_hostdir" {
+    volume "root_mirror" {
       type = "host"
-      source = "glibc_hostdir"
+      source = "root_mirror"
       read_only = true
     }
 
@@ -34,14 +34,8 @@ job "shadow-rsyncd" {
       }
 
       volume_mount {
-        volume = "glibc_hostdir"
-        destination = "/hostdir"
-      }
-
-      template {
-        data = file("xbps-clean-sigs")
-        destination = "local/xbps-clean-sigs"
-        perms = "0755"
+        volume = "root_mirror"
+        destination = "/mirror"
       }
 
       template {
@@ -55,7 +49,7 @@ transfer logging = true
 timeout = 600
 
 [shadow]
-path = /hostdir
+path = /mirror
 exclude = - *-repodata.* - *-stagedata.* - .*
 EOF
         destination = "local/shadowsync.conf"

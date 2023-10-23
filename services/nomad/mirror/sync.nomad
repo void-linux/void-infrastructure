@@ -28,13 +28,9 @@ job "sync" {
         command = "/usr/bin/rsync"
         args = [
           "-vurk",
-          "--filter", "- .*",
-          "--filter", "- *-repodata.*",
           "--delete-after",
-          "--timeout", "15",
-          "--contimeout", "5",
           "--links",
-          "rsync://$RSYNC_ADDR/shadow/",
+          "rsync://${env["RSYNC_ADDR"]}/shadow/",
           "/mirror/",
         ]
       }
