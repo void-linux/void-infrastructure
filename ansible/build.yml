@@ -6,7 +6,6 @@
   roles:
     - acmetool
     - buildmaster
-    - root-mirror-shim
     - void-updates
     - sources_site
     - xq-api

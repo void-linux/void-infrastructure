@@ -78,15 +78,6 @@ xqapi:
   repodata: /mnt/data/pkgs/binpkgs
 
 nomad_host_volumes:
-  - name: root_mirror
-    path: /srv/www/void-repo
-    read_only: false
-  - name: dist_pkgs
-    path: /mnt/data/pkgs/binpkgs
-    read_only: false
-  - name: dist_sources
-    path: /mnt/data/pkgs/sources
-    read_only: false
   - name: terrastate
     path: /nomad/terrastate
     read_only: false

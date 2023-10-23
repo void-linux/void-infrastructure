@@ -7,25 +7,22 @@
     group: root
     mode: 0755
 
-- name: Create xlocate group
-  group:
-    name: xlocate
-    state: present
-
 - name: Create Static Mirror Directories
   file:
-    path: "/srv/www/void-repo/{{ item.name }}"
+    path: "/srv/www/void-repo/{{ item }}"
     state: directory
-    owner: "{{ item.owner|default('root') }}"
-    group: "{{ item.group|default('root') }}"
-    mode: "{{ item.mode|default(0755) }}"
-  with_items:
-    - name: distfiles
-    - name: live
-    - name: logos
-    - name: static
-    - name: xlocate
-      group: xlocate
-      mode: '0775'
+    owner: root
+    group: root
+    mode: "0755"
+  loop:
+    - current
+    - distfiles
+    - docs
+    - live
+    - logos
+    - man
+    - static
+    - void-updates
+    - xlocate
   loop_control:
-    label: "{{ item.name }}"
+    label: "{{ item }}"

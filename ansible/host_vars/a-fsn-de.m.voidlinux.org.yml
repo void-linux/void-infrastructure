@@ -30,6 +30,9 @@ nomad_host_volumes:
   - name: root-pkgs
     path: /hostdir/binpkgs
     read_only: false
+  - name: root_mirror
+    path: /srv/www/void-repo
+    read_only: false
   - name: glibc_hostdir
     path: /hostdir
     read_only: false

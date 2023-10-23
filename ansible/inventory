@@ -10,6 +10,9 @@ b-fsn-de.m.voidlinux.org
 buildmaster
 buildslave
 
+[root_mirror]
+a-fsn-de.m.voidlinux.org
+
 [docs]
 a-hel-fi.m.voidlinux.org
 

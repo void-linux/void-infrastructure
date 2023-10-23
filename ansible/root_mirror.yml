@@ -1,0 +1,7 @@
+---
+- hosts: root_mirror
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - root-mirror-shim
