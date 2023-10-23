@@ -65,6 +65,11 @@ target "infra-sftpgo" {
   context = "services/pkg/sftpgo/"
 }
 
+target "infra-xlocate" {
+  inherits = ["_common-glibc"]
+  context = "services/pkg/xlocate/"
+}
+
 target "infra-xmandump" {
   inherits = ["_common-glibc"]
   context = "services/pkg/xmandump/"
