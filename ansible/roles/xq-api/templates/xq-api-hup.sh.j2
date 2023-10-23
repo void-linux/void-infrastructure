@@ -1,2 +1,0 @@
-#!/bin/sh
-exec snooze -H {{ xqapi_hup.hour | default('*') | quote }} -M {{ xqapi_hup.minute | default('/5') | quote }} /usr/bin/sv hup xq-api
