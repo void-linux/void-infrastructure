@@ -17,6 +17,8 @@ job "void-docs" {
       read_only = false
     }
 
+    network { mode = "bridge" }
+
     task "void-docs" {
       driver = "docker"
 
