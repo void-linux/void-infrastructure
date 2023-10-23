@@ -8,10 +8,15 @@ job "nginx" {
       mode = "host"
     }
 
-    volume "dist-mirror" {
-      type = "host"
-      source = "dist_mirror"
-      read_only = true
+    dynamic "volume" {
+      for_each = [ "mirror", "sources", ]
+      labels = [ "dist-${volume.value}" ]
+
+      content {
+        type = "host"
+        source = "dist_${volume.value}"
+        read_only = true
+      }
     }
 
     task "nginx" {
@@ -26,9 +31,13 @@ job "nginx" {
         network_mode = "host"
       }
 
-      volume_mount {
-        volume = "dist-mirror"
-        destination = "/srv/www"
+      dynamic "volume_mount" {
+        for_each = [ "mirror", "sources", ]
+
+        content {
+          volume = "dist-${volume_mount.value}"
+          destination = "/srv/www/${volume_mount.value}"
+        }
       }
 
       dynamic "template" {
@@ -52,6 +61,7 @@ job "nginx" {
           "10-ssl-redirect.conf",
           "10-mirror.conf",
           "10-proxy.conf",
+          "10-sources.conf",
         ]
 
         content {
