@@ -70,7 +70,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul
-          - alpha.de.repo.voidlinux.org/current
+          - repo-default.voidlinux.org/current
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -90,7 +90,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul
-          - alpha.de.repo.voidlinux.org/current
+          - repo-default.voidlinux.org/current
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -110,7 +110,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul
-          - alpha.de.repo.voidlinux.org/current
+          - repo-default.voidlinux.org/current
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -130,7 +130,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul
-          - alpha.de.repo.voidlinux.org/current
+          - repo-default.voidlinux.org/current
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -150,7 +150,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul/musl
-          - alpha.de.repo.voidlinux.org/current/musl
+          - repo-default.voidlinux.org/current/musl
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -170,7 +170,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul/musl
-          - alpha.de.repo.voidlinux.org/current/musl
+          - repo-default.voidlinux.org/current/musl
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -190,7 +190,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul/musl
-          - alpha.de.repo.voidlinux.org/current/musl
+          - repo-default.voidlinux.org/current/musl
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -210,7 +210,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul/aarch64
-          - alpha.de.repo.voidlinux.org/current/aarch64
+          - repo-default.voidlinux.org/current/aarch64
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -230,7 +230,7 @@ scrape_configs:
     static_configs:
       - targets:
           - root-pkgs-internal.service.consul/aarch64
-          - alpha.de.repo.voidlinux.org/current/aarch64
+          - repo-default.voidlinux.org/current/aarch64
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
