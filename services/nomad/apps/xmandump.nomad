@@ -4,7 +4,7 @@ job "xmandump" {
   type = "batch"
 
   periodic {
-    cron = "@daily"
+    crons = ["@daily"]
     prohibit_overlap = true
   }
 
