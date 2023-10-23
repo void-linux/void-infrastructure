@@ -34,9 +34,20 @@ job "sync" {
           "--timeout", "15",
           "--contimeout", "5",
           "--links",
-          "rsync://a-fsn-de.node.consul/shadow/",
+          "rsync://$RSYNC_ADDR/shadow/",
           "/mirror/",
         ]
+      }
+
+      template {
+        data=<<EOF
+{{ $allocID := env "NOMAD_ALLOC_ID" -}}
+{{ range nomadService 1 $allocID "shadow-rsyncd" }}
+RSYNC_ADDR="{{ .Address }}:{{ .Port }}"
+{{ end }}
+EOF
+        destination = "local/env"
+        env = true
       }
 
       resources {
