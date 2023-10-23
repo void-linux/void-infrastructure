@@ -6,7 +6,6 @@
   roles:
     - acmetool
     - buildmaster
-    - xq-api
 
 - hosts: buildslave
   become: yes

@@ -26,9 +26,6 @@ nginx_dhparam_bits: 2048
 buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.org/fullchain
 buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.org/privkey
 
-xqapi_site_cert_path: /var/lib/acme/live/xq-api.voidlinux.org/fullchain
-xqapi_site_key_path: /var/lib/acme/live/xq-api.voidlinux.org/privkey
-
 man_cert_path: /var/lib/acme/live/man.voidlinux.org/fullchain
 man_key_path: /var/lib/acme/live/man.voidlinux.org/privkey
 
@@ -46,15 +43,9 @@ acmetool:
     - site: build.voidlinux.org
       names:
         - build.voidlinux.org
-    - site: xq-api.voidlinux.org
-      names:
-        - xq-api.voidlinux.org
   hostmaster_email: postmaster@voidlinux.org
   services:
     - nginx
-
-xqapi:
-  repodata: /mnt/data/pkgs/binpkgs
 
 nomad_host_volumes:
   - name: terrastate
