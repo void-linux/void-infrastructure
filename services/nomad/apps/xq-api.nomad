@@ -26,7 +26,7 @@ job "xq-api" {
       }
     }
 
-    task "man-cgi" {
+    task "xq-api" {
       driver = "docker"
 
       config {
@@ -36,6 +36,10 @@ job "xq-api" {
       volume_mount {
         volume = "dist_mirror"
         destination = "/mirror"
+      }
+
+      resources {
+        memory = 1000
       }
     }
   }
