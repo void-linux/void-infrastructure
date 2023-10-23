@@ -7,7 +7,6 @@
     - acmetool
     - buildmaster
     - void-updates
-    - sources_site
     - xq-api
 
 - hosts: buildslave
