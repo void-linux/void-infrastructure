@@ -31,9 +31,8 @@ job "vector" {
       driver = "docker"
 
       config {
-        image = "timberio/vector:0.20.0-debian"
+        image = "timberio/vector:0.33.0"
         args  = ["-c", "/local/vector.yaml"]
-        ports = ["metrics"]
       }
 
       resources {
