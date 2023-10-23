@@ -1,0 +1,23 @@
+name: xq-api Service Container
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - services/pkg/xq-api/**
+  push:
+    branches:
+      - master
+    paths:
+      - services/pkg/xq-api/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    uses: ./.github/workflows/build-pkg.yml
+    with:
+      service_name: xq-api
