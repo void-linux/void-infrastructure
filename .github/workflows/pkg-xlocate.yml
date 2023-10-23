@@ -1,0 +1,23 @@
+name: xlocate Service Container
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - services/pkg/xlocate/**
+  push:
+    branches:
+      - master
+    paths:
+      - services/pkg/xlocate/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    uses: ./.github/workflows/build-pkg.yml
+    with:
+      service_name: xlocate
