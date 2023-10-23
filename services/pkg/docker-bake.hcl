@@ -45,6 +45,11 @@ target "infra-man-cgi" {
   context = "services/pkg/man-cgi/"
 }
 
+target "infra-mdbook" {
+  inherits = ["_common-glibc"]
+  context = "services/pkg/mdbook/"
+}
+
 target "infra-nginx" {
   inherits = ["_common-glibc"]
   context = "services/pkg/nginx/"
