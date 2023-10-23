@@ -4,7 +4,7 @@ job "sync" {
   namespace = "mirror"
 
   periodic {
-    cron = "* * * * *"
+    crons = ["* * * * *"]
     prohibit_overlap = true
   }
 
