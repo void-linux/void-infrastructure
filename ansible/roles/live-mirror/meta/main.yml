@@ -1,6 +1,0 @@
----
-dependencies:
-  - { role: void.network.iptables }
-  - { role: mirror-base }
-  - { role: nginx }
-  - { role: rsyncd }

@@ -1,1 +1,0 @@
-live_mirror_rsync_passwd: "{{ lookup('file', 'secret/live_mirror_rsync_passwd') }}"
