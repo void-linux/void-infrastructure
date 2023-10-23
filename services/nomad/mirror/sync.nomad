@@ -8,51 +8,59 @@ job "sync" {
     prohibit_overlap = true
   }
 
-  group "rsync" {
-    count = 1
+  dynamic "group" {
+    for_each = [ "mirror", "sources", ]
+    labels = [ "sync-${group.value}" ]
 
-    network { mode = "bridge" }
+    content {
+      count = 1
+      network { mode = "bridge" }
 
-    volume "dist-mirror" {
-      type = "host"
-      source = "dist_mirror"
-      read_only = false
-    }
+      dynamic "volume" {
+        for_each =  [ "${group.value}" ]
+        labels = [ "dist-${volume.value}" ]
 
-    task "rsync" {
-      leader = true
-      driver = "docker"
-
-      config {
-        image = "ghcr.io/void-linux/infra-rsync:v20220316RC02"
-        command = "/usr/bin/rsync"
-        args = [
-          "-vurk",
-          "--delete-after",
-          "--links",
-          "rsync://${env["RSYNC_ADDR"]}/shadow/",
-          "/mirror/",
-        ]
+        content {
+          type = "host"
+          source = "dist_${volume.value}"
+          read_only = false
+        }
       }
 
-      template {
-        data=<<EOF
+      task "rsync" {
+        driver = "docker"
+
+        config {
+          image = "ghcr.io/void-linux/infra-rsync:v20220316RC02"
+          command = "/usr/bin/rsync"
+          args = [
+            "-vurk",
+            "--delete-after",
+            "--links",
+            "rsync://${env["RSYNC_ADDR"]}/${group.value}/",
+            "/${group.value}/",
+          ]
+        }
+
+        template {
+          data=<<EOF
 {{ $allocID := env "NOMAD_ALLOC_ID" -}}
 {{ range nomadService 1 $allocID "shadow-rsyncd" }}
 RSYNC_ADDR="{{ .Address }}:{{ .Port }}"
 {{ end }}
 EOF
-        destination = "local/env"
-        env = true
-      }
+          destination = "local/env"
+          env = true
+        }
 
-      resources {
-        memory = 1000
-      }
+        resources {
+          memory = 1000
+        }
 
-      volume_mount {
-        volume = "dist-mirror"
-        destination = "/mirror"
+        volume_mount {
+          volume = "dist-${group.value}"
+          destination = "/${group.value}"
+        }
       }
     }
   }
