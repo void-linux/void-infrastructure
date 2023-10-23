@@ -338,13 +338,6 @@ resource "digitalocean_record" "popcorn" {
   value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
-resource "digitalocean_record" "sources" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "sources"
-  value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
 resource "digitalocean_record" "www" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
