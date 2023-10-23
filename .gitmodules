@@ -13,9 +13,6 @@
 [submodule "roles/mosh"]
 	path = ansible/roles/mosh
 	url = git@github.com:void-ansible-roles/mosh.git
-[submodule "ansible/roles/mdbook"]
-	path = ansible/roles/mdbook
-	url = git@github.com:void-ansible-roles/mdbook.git
 [submodule "ansible/roles/node_exporter"]
         path = ansible/roles/node_exporter
         url = git@github.com:void-ansible-roles/node_exporter.git

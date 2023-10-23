@@ -49,24 +49,9 @@ acmetool:
     - site: xq-api.voidlinux.org
       names:
         - xq-api.voidlinux.org
-    - site: docs.voidlinux.org
-      names:
-        - docs.voidlinux.org
   hostmaster_email: postmaster@voidlinux.org
   services:
     - nginx
-
-mdbook_sites:
-  - name: docs
-    root_path: /srv/www/void-repo/docs
-    urls:
-      - docs.voidlinux.org
-    source_url: https://github.com/void-linux/void-docs
-    source_port: 443
-    tls:
-      certificate: /var/lib/acme/live/docs.voidlinux.org/fullchain
-      key: /var/lib/acme/live/docs.voidlinux.org/privkey
-      stapling: true
 
 xqapi:
   repodata: /mnt/data/pkgs/binpkgs

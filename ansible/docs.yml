@@ -1,9 +1,0 @@
----
-- hosts: docs
-  become: yes
-  become_method: sudo
-  become_user: root
-  roles:
-    - acmetool
-    - nginx
-    - mdbook
