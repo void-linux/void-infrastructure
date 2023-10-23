@@ -44,19 +44,6 @@ buildslave_groups:
 
 buildslave_hostdir_group: void-repo
 
-live_mirror_bind6: true
-live_mirror_servernames:
-  - a-hel-fi.m.voidlinux.org
-  - alpha.de.repo.voidlinux.org
-
-live_mirror_srvdir: /srv/www/void-repo
-live_mirror_secure_sync: true
-live_mirror_isroot: true
-
-live_mirror_ssl: true
-live_mirror_cert_path: /var/lib/acme/live/a-hel-fi.m.voidlinux.org/fullchain
-live_mirror_certkey_path: /var/lib/acme/live/a-hel-fi.m.voidlinux.org/privkey
-
 acmetool:
   sites:
     - site: build.voidlinux.org
@@ -68,16 +55,9 @@ acmetool:
     - site: xq-api.voidlinux.org
       names:
         - xq-api.voidlinux.org
-    - site: a-hel-fi.m.voidlinux.org
-      names:
-        - a-hel-fi.m.voidlinux.org
-        - alpha.de.repo.voidlinux.org
     - site: docs.voidlinux.org
       names:
         - docs.voidlinux.org
-    - site: man.voidlinux.org
-      names:
-        - man.voidlinux.org
   hostmaster_email: postmaster@voidlinux.org
   services:
     - nginx
@@ -120,4 +100,3 @@ nomad_host_volumes:
 nomad_reserved_ports:
   - 80  # Legacy nginx on this host
   - 443 # Legacy nginx on this host
-  - 873 # Externally managed rsync on this host

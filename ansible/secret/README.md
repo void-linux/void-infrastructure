@@ -53,19 +53,6 @@ CONTAIN RESTRICTED INFORMATION.
     installation images (images@voidlinux.eu).
   * `void_image_key_secret.asc`: PGP private key associated with
     legacy installation images (images@voidlinux.eu).
-  * `live_mirror_rsync_passwd`: Single line of ASCII text that will be
-    used as the legacy rsync password where legacy passwords are still
-    in use.
-  * `live_mirror_syncusers.yml`: Data file containing addtional rsync
-    users and passwords where rsync credentials are in use.  Format is
-    as follows:
-
-    ```yaml
-    ---
-    live_mirror_syncpasswds:
-      vmirror: 'password-with-special-chars'
-    ```
-
   * `popcorn_key`: Single line of ASCII text that will be used as the
     statrepo reset code.
   * `netauth_tls_certificate.pem`: TLS Certificate for NetAuth to

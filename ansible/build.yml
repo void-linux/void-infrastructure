@@ -8,7 +8,6 @@
     - buildmaster
     - root-mirror-shim
     - void-updates
-    - live-mirror
     - sources_site
     - xq-api
 
