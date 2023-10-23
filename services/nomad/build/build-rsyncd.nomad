@@ -73,10 +73,6 @@ transfer logging = true
 timeout = 600
 incoming chmod = D0755,F0644
 
-[shadow]
-path = /hostdir
-exclude = - *-repodata.* - *-stagedata.* - .*
-
 [sources]
 path = /hostdir/sources
 auth users = buildsync-*:rw
