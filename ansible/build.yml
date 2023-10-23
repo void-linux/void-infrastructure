@@ -6,7 +6,6 @@
   roles:
     - acmetool
     - buildmaster
-    - void-updates
     - xq-api
 
 - hosts: buildslave
