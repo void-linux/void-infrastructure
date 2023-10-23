@@ -19,6 +19,12 @@ job "shadow-rsyncd" {
       read_only = true
     }
 
+    volume "glibc_hostdir" {
+      type = "host"
+      source = "glibc_hostdir"
+      read_only = true
+    }
+
     service {
       provider = "nomad"
       name = "shadow-rsyncd"
@@ -38,6 +44,11 @@ job "shadow-rsyncd" {
         destination = "/mirror"
       }
 
+      volume_mount {
+        volume = "glibc_hostdir"
+        destination = "/hostdir"
+      }
+
       template {
         data = <<EOF
 [global]
@@ -48,9 +59,13 @@ list = yes
 transfer logging = true
 timeout = 600
 
-[shadow]
+[mirror]
 path = /mirror
 exclude = - *-repodata.* - *-stagedata.* - .*
+
+[sources]
+path = /hostdir/sources
+exclude = - .*
 EOF
         destination = "local/shadowsync.conf"
       }
