@@ -11,6 +11,8 @@ job "xlocate" {
   group "app" {
     count = 1
 
+    network { mode = "bridge" }
+
     volume "root-mirror" {
       type = "host"
       source = "root_mirror"
@@ -23,6 +25,10 @@ job "xlocate" {
       config {
         image = "ghcr.io/void-linux/infra-xlocate:20231023R1"
         volumes = [ "local/xbps.conf:/etc/xbps.d/00-repository-main.conf" ]
+      }
+
+      resources {
+        memory = 1000
       }
 
       env {

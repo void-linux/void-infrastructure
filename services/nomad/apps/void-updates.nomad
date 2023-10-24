@@ -11,6 +11,8 @@ job "void-updates" {
   group "app" {
     count = 1
 
+    network { mode = "bridge" }
+
     volume "root-mirror" {
       type = "host"
       source = "root_mirror"
@@ -22,6 +24,10 @@ job "void-updates" {
 
       config {
         image = "ghcr.io/void-linux/void-updates:20231023R1"
+      }
+
+      resources {
+        memory = 1000
       }
 
       env {
