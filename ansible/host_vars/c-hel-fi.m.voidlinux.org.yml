@@ -11,3 +11,8 @@ network_static_interfaces:
     addrs:
       - 95.217.132.25/32
       - 2a01:4f9:c012:498a::2/64
+
+nomad_host_volumes:
+  - name: maddy_data
+    path: /nomad/maddy_data
+    read_only: false
