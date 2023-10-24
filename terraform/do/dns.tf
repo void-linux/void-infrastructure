@@ -404,20 +404,6 @@ resource "digitalocean_record" "repo_us" {
   value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
-resource "digitalocean_record" "repo_alpha_de" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "alpha.de.repo"
-  value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
-resource "digitalocean_record" "repo_shadow" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "shadow.repo"
-  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
 resource "digitalocean_record" "repo_fastly" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
