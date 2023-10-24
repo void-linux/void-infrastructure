@@ -26,9 +26,6 @@ nginx_dhparam_bits: 2048
 buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.org/fullchain
 buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.org/privkey
 
-man_cert_path: /var/lib/acme/live/man.voidlinux.org/fullchain
-man_key_path: /var/lib/acme/live/man.voidlinux.org/privkey
-
 buildslave_zone: FI-1
 buildslave_master: localhost
 
