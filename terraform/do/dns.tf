@@ -29,7 +29,7 @@ resource "digitalocean_record" "apex_mx" {
   domain   = digitalocean_domain.voidlinux_org.name
   type     = "MX"
   name     = "@"
-  value    = "f-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
+  value    = "c-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
   priority = 10
 }
 
@@ -37,7 +37,7 @@ resource "digitalocean_record" "apex_txt" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "TXT"
   name   = "@"
-  value  = "v=spf1 mx a:f-sfo3-us.m.voidlinux.org ~all"
+  value  = "v=spf1 mx a:c-hel-fi.m.voidlinux.org ~all"
 }
 
 ##########################################################################
@@ -323,7 +323,7 @@ resource "digitalocean_record" "mx1" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
   name   = "mx1"
-  value  = "${digitalocean_record.f_sfo3_us.fqdn}."
+  value  = "${digitalocean_record.c_hel_fi.fqdn}."
 }
 
 resource "digitalocean_record" "netauth" {
