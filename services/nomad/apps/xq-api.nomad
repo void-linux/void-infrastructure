@@ -39,7 +39,7 @@ job "xq-api" {
       }
 
       resources {
-        memory = 1000
+        memory = 1500
       }
     }
   }
