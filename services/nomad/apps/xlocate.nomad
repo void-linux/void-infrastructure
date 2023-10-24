@@ -23,7 +23,7 @@ job "xlocate" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-xlocate:20231023R1"
+        image = "ghcr.io/void-linux/infra-xlocate:20231024R1"
         volumes = [ "local/xbps.conf:/etc/xbps.d/00-repository-main.conf" ]
       }
 
