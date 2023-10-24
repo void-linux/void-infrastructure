@@ -19,12 +19,12 @@ job "maddy" {
     }
 
     network {
-      mode = "bridge"
-      port "smtp"        { static = 25 }
-      port "imap"        { static = 143 }
-      port "submissions" { static = 465 }
-      port "submission"  { static = 587 }
-      port "imaps"       { static = 993 }
+      mode = "host"
+      # port "smtp"        { static = 25 }
+      # port "imap"        { static = 143 }
+      # port "submissions" { static = 465 }
+      # port "submission"  { static = 587 }
+      # port "imaps"       { static = 993 }
     }
 
     task "maddy" {
@@ -40,16 +40,20 @@ job "maddy" {
         read_only = false
       }
 
+      volume_mount {
+        volume = "netauth_config"
+        destination = "/etc/netauth"
+        read_only = true
+      }
+
       config {
-        image = "foxcpp/maddy:0.6.3"
-        volumes = [
-          "secrets/tls:/data/tls",
-          "local/maddy.conf:/data/maddy.conf",
-        ]
+        image = "docker.io/foxcpp/maddy:0.7.0"
+        entrypoint = ["/bin/maddy", "--config", "/local/maddy.conf", "run"]
+        network_mode = "host"
       }
 
       resources {
-        memory = 200
+        memory = 500
       }
 
       env {
@@ -81,28 +85,6 @@ EOF
 EOF
         destination = "secrets/tls/privkey.pem"
         perms = 400
-      }
-    }
-
-    task "ldap" {
-      driver = "docker"
-
-      volume_mount {
-        volume = "netauth_config"
-        destination = "/etc/netauth"
-        read_only = true
-      }
-
-      config {
-        image = "ghcr.io/netauth/ldap:v0.3.0"
-      }
-
-      resources {
-        memory = 100
-      }
-
-      env {
-        NETAUTH_LDAP_ALLOW_ANON = true
       }
     }
   }
