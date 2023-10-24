@@ -31,7 +31,7 @@ job "vector" {
       driver = "docker"
 
       config {
-        image = "timberio/vector:0.33.0"
+        image = "timberio/vector:0.33.0-alpine"
         args  = ["-c", "/local/vector.yaml"]
       }
 
@@ -66,12 +66,12 @@ sinks:
       enabled: false
     out_of_order_action: drop
     labels:
-      nomad_namespace: "{{ label.com\\.hashicorp\\.nomad\\.namespace }}"
-      nomad_job: "{{ label.com\\.hashicorp\\.nomad\\.job_name }}"
-      nomad_group: "{{ label.com\\.hashicorp\\.nomad\\.task_group_name }}"
-      nomad_task: "{{ label.com\\.hashicorp\\.nomad\\.task_name }}"
-      nomad_node: "{{ label.com\\.hashicorp\\.nomad\\.node_name }}"
-      nomad_alloc: "{{ label.com\\.hashicorp\\.nomad\\.alloc_id }}"
+      nomad_namespace: "{{ label.com.hashicorp.nomad.namespace }}"
+      nomad_job: "{{ label.com.hashicorp.nomad.job_name }}"
+      nomad_group: "{{ label.com.hashicorp.nomad.task_group_name }}"
+      nomad_task: "{{ label.com.hashicorp.nomad.task_name }}"
+      nomad_node: "{{ label.com.hashicorp.nomad.node_name }}"
+      nomad_alloc: "{{ label.com.hashicorp.nomad.alloc_id }}"
 EOF
         left_delimiter  = "///1"
         right_delimiter = "///2"
