@@ -383,6 +383,15 @@ resource "digitalocean_record" "repo_ci" {
   value  = "repo-fi.voidlinux.org."
 }
 
+# Sync repo that other origins default to, can be repointed as
+# necessary
+resource "digitalocean_record" "repo_sync" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "CNAME"
+  name   = "repo-sync.${digitalocean_domain.voidlinux_org.name}."
+  value  = "repo-fi.voidlinux.org."
+}
+
 resource "digitalocean_record" "repo_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
