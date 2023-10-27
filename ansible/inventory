@@ -31,7 +31,6 @@ a-sfo3-us.m.voidlinux.org
 b-sfo3-us.m.voidlinux.org
 c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
-f-sfo3-us.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
 [hashi:children]
@@ -57,7 +56,6 @@ d-hel-fi.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
 [hashimx]
-f-sfo3-us.m.voidlinux.org
 c-hel-fi.m.voidlinux.org
 
 [unmanaged]
@@ -76,7 +74,6 @@ a-sfo3-us.m.voidlinux.org
 b-sfo3-us.m.voidlinux.org
 c-sfo3-us.m.voidlinux.org
 d-sfo3-us.m.voidlinux.org
-f-sfo3-us.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
 [musl]
