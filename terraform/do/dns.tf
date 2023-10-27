@@ -284,13 +284,6 @@ resource "digitalocean_record" "d_sfo3_us" {
   value  = digitalocean_droplet.d_sfo3_us.ipv4_address
 }
 
-resource "digitalocean_record" "f_sfo3_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "f-sfo3-us.m"
-  value  = digitalocean_droplet.f_sfo3_us.ipv4_address
-}
-
 #######################################################################
 # Services                                                            #
 #                                                                     #
