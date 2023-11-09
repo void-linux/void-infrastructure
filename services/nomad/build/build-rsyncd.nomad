@@ -75,6 +75,7 @@ incoming chmod = D0755,F0644
 
 [sources]
 path = /hostdir/sources
+filter = - .* - *.part
 auth users = buildsync-*:rw
 
 [aarch64]
