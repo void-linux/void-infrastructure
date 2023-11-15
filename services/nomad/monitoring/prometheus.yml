@@ -247,38 +247,8 @@ scrape_configs:
     scrape_interval: 2m
     params:
       arch: [x86_64]
-    static_configs:
-      - targets:
-        - ftp.cc.uoc.gr/mirrors/linux/voidlinux/current
-        - ftp.debian.ru/mirrors/voidlinux/current
-        - ftp.dk.xemacs.org/voidlinux/current
-        - ftp.lysator.liu.se/pub/voidlinux/current
-        - ftp.swin.edu.au/voidlinux/current
-        - mirror.aarnet.edu.au/pub/voidlinux/current
-        - mirror.accum.se/mirror/voidlinux/current
-        - mirror.clarkson.edu/voidlinux/current
-        - mirror.nju.edu.cn/voidlinux/current
-        - mirror.ps.kz/voidlinux/current
-        - mirror.puzzle.ch/voidlinux/current
-        - mirror.sjtu.edu.cn/voidlinux/current
-        - mirror.vofr.net/voidlinux/current
-        - mirror.yandex.ru/mirrors/voidlinux/current
-        - mirror2.sandyriver.net/pub/voidlinux/current
-        - mirrors.bfsu.edu.cn/voidlinux/current
-        - mirrors.cnnic.cn/voidlinux/current
-        - mirrors.dotsrc.org/voidlinux/current
-        - mirrors.servercentral.com/voidlinux/current
-        - mirrors.tuna.tsinghua.edu.cn/voidlinux/current
-        - quantum-mirror.hu/mirrors/pub/voidlinux/current
-        - repo-fi.voidlinux.org/current
-        - repo-us.voidlinux.org/current
-        - repo.jing.rocks/voidlinux/current
-        - void.chililinux.com/voidlinux/current
-        - void.cijber.net/current
-        - void.sakamoto.pl/current
-        - void.webconverger.org/current
-        - voidlinux.com.br/repo/current
-        - voidlinux.mirror.garr.it/current
+    http_sd_configs:
+      - url: https://xmirror.voidlinux.org/metrics/prometheus.json
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
