@@ -18,6 +18,7 @@ job "nginx-control" {
       config {
         image = "ghcr.io/void-linux/infra-nginx:20221230RC01"
         network_mode = "host"
+        dns_servers = ["127.0.0.1"]
       }
 
       dynamic "template" {
