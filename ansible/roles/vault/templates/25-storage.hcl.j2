@@ -1,6 +1,16 @@
-storage "consul" {
-  address = "127.0.0.1:8500"
-  path    = "vault"
+#jinja2: lstrip_blocks: "True", trim_blocks: "True"
+storage "raft" {
+  path = "/var/lib/vault"
+  node_id = "{{ inventory_hostname }}"
 
-  token = "{{lookup('file', 'secret/vault_consul_token')}}"
+  {% for server in vault_retry_join_servers %}
+  retry_join {
+    leader_api_addr = "http://{{ void_mesh[server] }}:8200"
+  }
+  {% endfor %}
+}
+
+service_registration "consul" {
+  address = "http://127.0.0.1:8500"
+  token   = "{{lookup('file', 'secret/vault_consul_token')}}"
 }

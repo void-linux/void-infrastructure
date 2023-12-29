@@ -1,21 +1,35 @@
 ---
 - name: Install Packages
-  xbps:
+  community.general.xbps:
     pkg: vault
     state: present
+  tags: [install_vault]
+
+- name: Install Base Config
+  ansible.builtin.template:
+    src: 10-base.hcl.j2
+    dest: /etc/vault/10-base.hcl
+    owner: _vault
+    group: _vault
+    mode: "0640"
+  notify:
+    - vault
+  tags: [install_vault, configure_vault]
 
 - name: Install Storage config
-  template:
+  ansible.builtin.template:
     src: 25-storage.hcl.j2
     dest: /etc/vault/25-storage.hcl
     owner: _vault
     group: _vault
     mode: 0640
+  vars:
+    vault_retry_join_servers: "{{ groups['hashimaster'] | difference(inventory_hostname) }}"
   notify:
     - vault
 
 - name: Install Listener config
-  copy:
+  ansible.builtin.copy:
     src: 30-listeners.hcl
     dest: /etc/vault/30-listeners.hcl
     owner: _vault
@@ -23,9 +37,11 @@
     mode: 0640
   notify:
     - vault
+  tags: [install_vault, configure_vault]
 
 - name: Enable Service
-  service:
+  ansible.builtin.runit:
     name: vault
     state: started
     enabled: true
+  tags: [install_vault, enable_vault]
