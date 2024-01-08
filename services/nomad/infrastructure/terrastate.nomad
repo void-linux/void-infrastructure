@@ -4,6 +4,15 @@ job "terrastate" {
   namespace = "infrastructure"
 
   group "terrastate" {
+    count = 1
+
+    network {
+      mode = "bridge"
+      port "http" {
+        to = 8080
+      }
+    }
+
     volume "terrastate_data" {
       type = "host"
       read_only = false
@@ -14,13 +23,6 @@ job "terrastate" {
       type = "host"
       read_only = true
       source = "netauth_config"
-    }
-
-    network {
-      mode = "bridge"
-      port "http" {
-        to = 8080
-      }
     }
 
     service {
@@ -43,6 +45,19 @@ job "terrastate" {
     task "app" {
       driver = "docker"
 
+      config {
+        image = "ghcr.io/the-maldridge/terrastate:v1.2.1"
+        init = true
+      }
+
+      env {
+        TS_AUTH = "htpasswd:netauth"
+        TS_BITCASK_PATH = "/data"
+        TS_HTGROUP_FILE = "/secrets/.htgroup"
+        TS_HTPASSWD_FILE = "/secrets/.htpasswd"
+        TS_STORE = "bitcask"
+      }
+
       volume_mount {
         volume = "terrastate_data"
         destination = "/data"
@@ -54,9 +69,18 @@ job "terrastate" {
         read_only = true
       }
 
-      config {
-        image = "ghcr.io/the-maldridge/terrastate:v1.1.1"
-        init = true
+      template {
+        data = <<EOF
+_terraform:{{ with nomadVar "nomad/jobs/terrastate" }}{{ .hashed_passwd }}{{ end }}
+EOF
+        destination = "${NOMAD_SECRETS_DIR}/.htpasswd"
+      }
+
+      template {
+        data = <<EOF
+terrastate-tls: _terraform
+EOF
+        destination = "${NOMAD_SECRETS_DIR}/.htgroup"
       }
     }
   }
