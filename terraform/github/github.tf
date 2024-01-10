@@ -133,6 +133,13 @@ locals {
       ]
     }
 
+    internal-discussions = {
+      description = "A repo to hold internal discussions."
+      teams = [
+        "pkg-committers",
+      ]
+    }
+
     ###########################
     # Auxilliary Repositories #
     ###########################
