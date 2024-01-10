@@ -2,6 +2,11 @@ resource "nomad_acl_policy" "certs_admin" {
   name = "certs-admin"
   description = "Manage certificates in nomad variables"
 
+  job_acl {
+    namespace = "infrastructure"
+    job_id = "cert-renew"
+  }
+
   rules_hcl = <<EOT
 namespace "mirror" {
   variables {
