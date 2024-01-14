@@ -22,8 +22,12 @@ job "vector" {
     }
 
     service {
-      provider = "nomad"
+      # provider = "nomad"
       port = "metrics"
+      meta {
+        nginx_enable = "true"
+        nginx_names = "vector-tmp.voidlinux.org"
+      }
     }
 
     task "vector" {
@@ -44,40 +48,45 @@ job "vector" {
         read_only   = true
       }
 
-      template {
-                data = <<EOF
----
-sources:
-  docker:
-    type: docker_logs
-    exclude_containers:
-      - "vector-"
-      - "loki-"
-sinks:
-  loki:
-    type: loki
-    inputs:
-      - docker
-    endpoint: http://loki.service.consul:3100
-    encoding:
-      codec: text
-    healthcheck:
-      enabled: false
-    out_of_order_action: drop
-    labels:
-      nomad_namespace: "{{ label.com.hashicorp.nomad.namespace }}"
-      nomad_job: "{{ label.com.hashicorp.nomad.job_name }}"
-      nomad_group: "{{ label.com.hashicorp.nomad.task_group_name }}"
-      nomad_task: "{{ label.com.hashicorp.nomad.task_name }}"
-      nomad_node: "{{ label.com.hashicorp.nomad.node_name }}"
-      nomad_alloc: "{{ label.com.hashicorp.nomad.alloc_id }}"
-EOF
-        left_delimiter  = "///1"
-        right_delimiter = "///2"
-
-        destination = "local/vector.yaml"
+      env {
+        NOMAD_HOST = "${node.unique.name}"
       }
 
+      template {
+        data = yamlencode({
+          sources = {
+            docker = {
+              type = "docker_logs"
+              exclude_containers = [
+                "vector-",
+                "loki-",
+                "nomad_init_",
+              ]
+            }
+          }
+          sinks = {
+            loki = {
+              type = "loki"
+              inputs = ["docker"]
+              endpoint = "http://loki.service.consul:3100"
+              encoding = { codec = "text" }
+              healthcheck = { enabled = false }
+              out_of_order_action = "drop"
+              labels = {
+                nomad_node = "$NOMAD_HOST"
+                nomad_namespace = "{{ label.\"com.hashicorp.nomad.namespace\" }}"
+                nomad_job = "{{ label.\"com.hashicorp.nomad.job_name\" }}"
+                nomad_group = "{{ label.\"com.hashicorp.nomad.task_group_name\" }}"
+                nomad_task = "{{ label.\"com.hashicorp.nomad.task_name\" }}"
+                nomad_alloc = "{{ label.\"com.hashicorp.nomad.alloc_id\" }}"
+              }
+            }
+          }
+        })
+        destination = "local/vector.yaml"
+        left_delimiter = "[["
+        right_delimiter = "]]"
+      }
     }
   }
 }
