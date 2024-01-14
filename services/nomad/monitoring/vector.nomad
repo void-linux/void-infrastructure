@@ -22,16 +22,15 @@ job "vector" {
     }
 
     service {
-      name         = "vector"
-      port         = "8088"
-      address_mode = "alloc"
+      provider = "nomad"
+      port = "metrics"
     }
 
     task "vector" {
       driver = "docker"
 
       config {
-        image = "timberio/vector:0.33.0-alpine"
+        image = "timberio/vector:0.35.0-alpine"
         args  = ["-c", "/local/vector.yaml"]
       }
 
