@@ -80,7 +80,7 @@ for m in user_settings.machines:
 """.format(distdir=distdir, masterdir=masterdir, hostdir=hostdir)
 
 	BootstrapInstall = """
-{distdir}/xbps-src {BootstrapArgs} -m {masterdir} -H {hostdir} binary-bootstrap {subarch}
+{distdir}/xbps-src {BootstrapArgs} -m {masterdir} -H {hostdir} -A {subarch} binary-bootstrap
 """.format(BootstrapArgs=BootstrapArgs, distdir=distdir, masterdir=masterdir, hostdir=hostdir, subarch=subarch)
 
 	RemoveObsoletes = """
