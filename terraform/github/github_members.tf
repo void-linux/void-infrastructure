@@ -44,6 +44,7 @@ locals {
         "jnbr",
         "leahneukirchen",
         "lemmi",
+        "oreo639",
         "paper42",
         "sgn",
         "thypon",
