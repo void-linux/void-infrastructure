@@ -8,7 +8,7 @@ buildmaster_rootdir: /home/void-buildmaster/
 buildmaster_machmap:
   x86_64:
     cross: native
-    subarch:
+    subarch: x86_64
   x86_64-musl:
     cross: native-x86_64-musl
     subarch: x86_64-musl
