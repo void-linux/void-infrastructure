@@ -68,6 +68,7 @@ job "devspace" {
       }
 
       env {
+        SFTPGO_SFTPD__BINDINGS__0__ADDRESS=""
         SFTPGO_HTTPD__BINDINGS__0__ADDRESS=""
         SFTPGO_TELEMETRY__BIND_PORT="8081"
         SFTPGO_TELEMETRY__BIND_ADDRESS=""
