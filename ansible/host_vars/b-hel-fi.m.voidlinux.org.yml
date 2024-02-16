@@ -17,12 +17,6 @@ nomad_host_volumes:
   - name: dist_sources
     path: /data/dist_sources
     read_only: false
-  - name: devspace_data
-    path: /data/devspace
-    read_only: false
-  - name: devspace_home
-    path: /data/devspace/home
-    read_only: true
 
 nomad_meta:
   mirror_region: fi
