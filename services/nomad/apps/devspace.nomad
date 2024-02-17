@@ -19,11 +19,10 @@ job "devspace" {
     }
 
     network {
-      mode = "bridge"
-      port "http" { to = 8080 }
+      mode = "host"
+      port "http" {}
       port "sftp" {
         static = 2022
-        to = 2022
       }
     }
 
@@ -37,7 +36,6 @@ job "devspace" {
       check {
         type = "http"
         port = 8081
-        address_mode = "alloc"
         path = "/healthz"
         timeout = "1s"
         interval = "30s"
@@ -65,10 +63,11 @@ job "devspace" {
 
       config {
         image = "ghcr.io/void-linux/infra-sftpgo:20221001RC01"
+        network_mode = "host"
       }
 
       env {
-        SFTPGO_HTTPD__BINDINGS__0__ADDRESS=""
+        SFTPGO_HTTPD__BINDINGS__0__PORT="${NOMAD_PORT_http}"
         SFTPGO_TELEMETRY__BIND_PORT="8081"
         SFTPGO_TELEMETRY__BIND_ADDRESS=""
         SFTPGO_NETAUTH_REQUIREGROUP="devspace-users"
