@@ -1,4 +1,4 @@
-FROM ghcr.io/void-linux/infra-nginx:20221230RC01
+FROM ghcr.io/void-linux/infra-nginx:20230812
 
 RUN xbps-install -Suy xbps && xbps-install -y void-man-cgi fcgiwrap spawn-fcgi && \
     rm -rf /var/cache/xbps && \
@@ -13,8 +13,10 @@ RUN xbps-install -Suy xbps && xbps-install -y void-man-cgi fcgiwrap spawn-fcgi &
 COPY run.fcgi /etc/runit/runsvdir/container/fcgi/run
 COPY nginx.conf /etc/nginx/sites.d/00-default.conf
 COPY manpath.conf /var/lib/man-cgi/manpath.conf
+COPY head.html /var/lib/man-cgi/head.html
 COPY header.html /var/lib/man-cgi/header.html
 COPY footer.html /var/lib/man-cgi/footer.html
+COPY void.css /var/lib/man-cgi/void.css
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/usr/bin/runsvdir", "/etc/runit/runsvdir/container"]
