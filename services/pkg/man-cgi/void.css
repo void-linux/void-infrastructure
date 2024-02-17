@@ -1,0 +1,310 @@
+:root {
+	--void-green: #478061;
+	--void-dark-green: #62b086;
+	--void-light: #fafafa;
+	--void-dark: #252525;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--bg: #ffffff;
+		--fg: #333;
+
+		--nav-bg: var(--void-green);
+		--nav-fg: var(--bg);
+		--nav-bg-hover: var(--bg);
+		--nav-fg-hover: var(--fg);
+
+		--links: var(--void-green);
+		--links-hover: var(--fg);
+
+		--inline-code-color: #fdf6e3;
+		--code-border: #ccc;
+
+		--quote-bg: #ebf4ef;
+		--quote-border: #d1e6da;
+		--quote-code-bg: var(--inline-code-color);
+
+		--table-border-color: var(--void-green);
+		--table-header-bg: var(--void-green);
+		--table-header-fg: #fff;
+		--table-alternate-bg: var(--void-light);
+
+		--hr-color: #888;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #222;
+		--fg: #eee;
+
+		--nav-bg: #295340;
+		--nav-fg: var(--fg);
+		--nav-bg-hover: var(--bg);
+		--nav-fg-hover: var(--fg);
+
+		--links: var(--void-dark-green);
+		--links-hover: var(--fg);
+
+		--inline-code-color: #353535;
+		--code-border: #111;
+
+		--quote-bg: #293d35;
+		--quote-border: #22362e;
+		--quote-code-bg: #2a2a2a;
+
+		--table-border-color: var(--void-green);
+		--table-header-bg: var(--void-green);
+		--table-header-fg: #fff;
+		--table-alternate-bg: #2c2c2c;
+
+		--hr-color: #888;
+	}
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Ubuntu Light'), local('Ubuntu-Light'), url(https://fonts.gstatic.com/s/ubuntu/v11/4iCv6KVjbNBYlgoC1CzjsGyI.ttf) format('truetype');
+}
+
+html {
+	max-width: 100%;
+}
+
+body {
+	color: var(--fg);
+	background-color: var(--bg);
+	margin: 0;
+}
+
+a, :link, :visited {
+	color: var(--links);
+}
+
+a:hover {
+	text-decoration: none;
+	color: var(--links-hover);
+}
+
+.manual-text {
+	max-width: 65em;
+	padding: 0 1em;
+}
+
+/* Hide architecture selector */
+select[name="arch"] {
+	display: none;
+}
+
+/* navigation */
+.container {
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+	.container {
+		width: 750px;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.container {
+		width: 970px;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.container {
+		width: 1170px;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+	.container {
+		width: 1320px;
+	}
+}
+
+.container:before {
+	display: table;
+	content: " ";
+}
+
+.container:after {
+	clear: both;
+}
+
+.navbar {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 16px;
+	font-weight: 300;
+	background-color: var(--nav-bg);
+	color: var(--nav-fg);
+	border: 0;
+	border-radius: 0;
+	z-index: 1;
+	position: sticky;
+	top: 0;
+	min-height: 50px;
+}
+
+.navbar .container {
+	min-height: 50px;
+}
+
+.navbar .menu-spacer {
+	display: none;
+	min-height: 50px;
+}
+
+.menu-wrapper {
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+	min-height: 50px;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	min-height: 50px;
+}
+
+nav.menu-local {
+	align-self: flex-start;
+}
+
+nav.menu-external {
+	align-self: flex-end;
+}
+
+nav div {
+	display: flex;
+	align-items: center;
+}
+
+nav div a, nav div a:link, nav div a:visited {
+	display: block;
+	text-decoration: none;
+	white-space: nowrap;
+	color: inherit;
+	padding: 0.5em 0.69em;
+	font-size: 1.1em;
+}
+
+nav div a:hover {
+	color: inherit;
+}
+
+nav div:hover {
+	background-color: var(--nav-bg-hover);
+	color: var(--nav-fg-hover);
+}
+
+#menu-toggle-cb {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+
+#menu-toggle {
+	cursor: pointer;
+	user-select: none;
+	width: 38px;
+	height: 36px;
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: none;
+	margin-top: 6px;
+	margin-right: 6px;
+}
+
+#menu-toggle .bar {
+	background-color: var(--nav-fg);
+	display: block;
+	width: 24px;
+	height: 4px;
+	position: absolute;
+	top: 16px;
+	right: 7px;
+}
+
+#menu-toggle .bar:first-child {
+	top: 8px;
+}
+
+#menu-toggle .bar:last-child {
+	top: 24px;
+}
+
+#menu-toggle-cb:checked ~ #menu-toggle .bar:first-child {
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+#menu-toggle-cb:checked ~ #menu-toggle .bar:last-child {
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+#menu-toggle-cb:checked ~ #menu-toggle .bar:nth-child(odd) {
+	top: 16px;
+}
+
+#menu-toggle-cb:checked ~ #menu-toggle .bar:nth-child(even) {
+	display: none;
+}
+
+@media (max-width: 69em) {
+	.menu-spacer {
+		display: block;
+		height: 50px;
+	}
+
+	.menu-wrapper {
+		margin-top: 50px;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	nav {
+		flex-direction: column;
+		align-self: stretch !important;
+	}
+
+	#menu-toggle {
+		display: block;
+	}
+
+	#menu-toggle-cb ~ .menu-wrapper {
+		max-height: 0;
+		overflow: hidden;
+		display: none;
+	}
+
+	#menu-toggle-cb:checked ~ .menu-wrapper {
+		max-height: 100vh;
+		display: flex;
+	}
+
+	#menu-toggle-cb ~ .menu-wrapper,
+	#menu-toggle-cb:checked ~ .menu-wrapper {
+		-webkit-transition: all 0.5s;
+		-moz-transition: all 0.5s;
+		-ms-transition: all 0.5s;
+		-o-transition: all 0.5s;
+		transition: all 0.5s;
+	}
+}
