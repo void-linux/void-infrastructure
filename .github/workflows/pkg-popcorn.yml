@@ -1,0 +1,23 @@
+name: Popcorn Service Container
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - services/pkg/popcorn/**
+  push:
+    branches:
+      - master
+    paths:
+      - services/pkg/popcorn/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    uses: ./.github/workflows/build-pkg.yml
+    with:
+      service_name: popcorn
