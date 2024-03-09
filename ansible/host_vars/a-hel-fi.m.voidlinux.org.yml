@@ -49,6 +49,9 @@ nomad_host_volumes:
   - name: ccache
     path: /hostdir/ccache
     read_only: true
+  - name: popcorn_data
+    path: /nomad/popcorn_data
+    read_only: false
 
 nomad_reserved_ports:
   - 80  # Legacy nginx on this host

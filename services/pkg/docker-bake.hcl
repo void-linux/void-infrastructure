@@ -55,6 +55,11 @@ target "infra-nginx" {
   context = "services/pkg/nginx/"
 }
 
+target "infra-popcorn" {
+  inherits = ["_common-glibc"]
+  context = "services/pkg/popcorn/"
+}
+
 target "infra-rspamd" {
   inherits = ["_common-musl"]
   context = "services/pkg/rspamd/"
