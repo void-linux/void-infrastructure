@@ -6,4 +6,4 @@ complete information can be found at [the ansible
 website](https://docs.ansible.com).
 
 Operation of Ansible is beyond the scope of this manual, but a short
-introduction is nonethelss provided.
+introduction is nonetheless provided.
