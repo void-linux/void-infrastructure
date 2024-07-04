@@ -44,6 +44,41 @@
         - "-A INPUT -p tcp --dport 873 -j ACCEPT"
         - "COMMIT"
 
+- name: Special rules for d-hel-fi
+  hosts: d-hel-fi.m.voidlinux.org
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Accept IPv4 Traffic
+      lineinfile:
+        line: "{{item}}"
+        path: /etc/iptables.d/root_mirror.rules
+        create: yes
+        owner: root
+        group: root
+        mode: 0640
+      with_items:
+        - "*filter"
+        - "-A INPUT -p tcp --dport 2022 -j ACCEPT"
+        - "-A INPUT -p tcp --dport 8001 -j ACCEPT"
+        - "-A INPUT -p tcp --dport 8003 -j ACCEPT"
+        - "COMMIT"
+    - name: Accept IPv6 Traffic
+      lineinfile:
+        line: "{{item}}"
+        path: /etc/ip6tables.d/root_mirror.6rules
+        create: yes
+        owner: root
+        group: root
+        mode: 0640
+      with_items:
+        - "*filter"
+        - "-A INPUT -p tcp --dport 2022 -j ACCEPT"
+        - "-A INPUT -p tcp --dport 8001 -j ACCEPT"
+        - "-A INPUT -p tcp --dport 8003 -j ACCEPT"
+        - "COMMIT"
+
 - hosts: hashimx
   become: yes
   become_user: root
