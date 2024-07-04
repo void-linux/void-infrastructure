@@ -326,13 +326,6 @@ resource "digitalocean_record" "netauth" {
   value  = "a-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
-resource "digitalocean_record" "popcorn" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "popcorn"
-  value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
 resource "digitalocean_record" "www" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
