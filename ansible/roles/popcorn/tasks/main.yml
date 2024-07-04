@@ -1,92 +1,62 @@
 ---
-- name: Install packages
-  xbps:
-    pkg:
-      - PopCorn-Server
-      - snooze
-    state: present
 
-- name: Configure statrepo server
-  template:
-    src: statrepo.conf.j2
-    dest: /etc/sv/statrepo/conf
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - statrepo
+- name: Unconfigure statrepo server
+  file:
+    path: /etc/sv/statrepo/conf
+    state: absent
 
-- name: Configure pqueryd
-  copy:
-    src: pqueryd.conf
-    dest: /etc/sv/pqueryd/conf
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - pqueryd
+- name: Unconfigure pqueryd
+  file:
+    path: /etc/sv/pqueryd/conf
+    state: absent
 
-- name: Create webroot
+- name: Remove webroot
   file:
     path: /srv/www/popcorn
-    state: directory
-    owner: _popcorn
-    group: _popcorn
-    mode: 0755
+    state: absent
 
-- name: Configure nginx
-  include_role:
-    name: nginx
-    tasks_from: base-site
-  vars:
-    - site:
-        name: popcorn
-        urls:
-          - popcorn.voidlinux.org
-        root_path: /srv/www/popcorn
-        autoindex: true
-
-- name: Install report service (1/2)
+- name: Unconfigure nginx
   file:
-    path: /etc/sv/popcorn-reports
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Install report service (2/2)
-  template:
-    src: reports_service.sh.j2
-    dest: /etc/sv/popcorn-reports/run
-    owner: root
-    group: root
-    mode: 0755
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/nginx/locations.d/popcorn.voidlinux.org
+    - /etc/nginx/sites-available/popcorn.conf
+    - /etc/nginx/sites-enabled/popcorn.conf
+    - /etc/iptables.d/nginx-resolvers-popcorn.rules
+    - /etc/ip6tables.d/nginx-resolvers-popcorn.6rules
   notify:
-    - popcorn-reports
+    - nginx
+    - iptables
 
-- name: Install report script
-  template:
-    src: popcorn_report.j2
-    dest: /usr/local/bin/popcorn_report
-    owner: root
-    group: root
-    mode: 0755
+- name: Uninstall report script
+  file:
+    path: /usr/local/bin/popcorn_report
+    state: absent
 
-- name: Install firewall rules
-  copy:
-    src: popcorn.rules
-    dest: /etc/iptables.d/popcorn.rules
-    owner: root
-    group: root
-    mode: 0600
+- name: Uninstall firewall rules
+  file:
+    path: /etc/iptables.d/popcorn.rules
+    state: absent
   notify:
     - iptables
 
-- name: Enable services
+- name: Disable services
   runit:
     name: "{{ item }}"
-    enabled: yes
+    enabled: no
   with_items:
     - statrepo
     - popcorn-reports
     - pqueryd
+
+- name: Uninstall report service
+  file:
+    path: /etc/sv/popcorn-reports
+    state: absent
+
+- name: Uninstall packages
+  xbps:
+    pkg:
+      - PopCorn-Server
+    state: absent
