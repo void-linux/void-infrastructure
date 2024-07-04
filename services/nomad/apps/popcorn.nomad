@@ -3,83 +3,18 @@ job "popcorn" {
   namespace = "apps"
   type = "service"
 
-  group "popcorn" {
+  group "webserver" {
     count = 1
 
     network {
       mode = "bridge"
-      port "statrepo" { static = 8001 }
-      port "pqueryd" { static = 8003 }
       port "http" { to = 80 }
     }
 
     volume "popcorn_data" {
       type = "host"
       source = "popcorn_data"
-      read_only = false
-    }
-
-    service {
-      name = "popcorn-statrepo"
-      port = "statrepo"
-    }
-
-    task "statrepo" {
-      driver = "docker"
-
-      config {
-        image = "ghcr.io/void-linux/infra-popcorn:20240704R1"
-        command = "statrepo"
-        args = [
-          "--port", "${NOMAD_PORT_statrepo}",
-          "--reset_key", "${POPCORN_KEY}",
-        ]
-        ports = ["statrepo"]
-      }
-
-      template {
-                data = <<EOF
-{{- with nomadVar "nomad/jobs/popcorn" -}}
-POPCORN_KEY={{.reset_key}}
-{{- end -}}
-EOF
-        destination = "secrets/env"
-        env = true
-      }
-
-      volume_mount {
-        volume = "popcorn_data"
-        destination = "/var/lib/popcorn"
-      }
-    }
-
-    service {
-      name = "popcorn-pqueryd"
-      port = "pqueryd"
-    }
-
-    task "pqueryd" {
-      driver = "docker"
-
-      config {
-        image = "ghcr.io/void-linux/infra-popcorn:20240704R1"
-        command = "pqueryd"
-        args = [
-          "--checkpoint_enabled=false",
-          "--port", "${NOMAD_PORT_pqueryd}",
-          "--data_dir", "/data",
-        ]
-      }
-
-      resources {
-        memory = 8000
-      }
-
-      volume_mount {
-        volume = "popcorn_data"
-        destination = "/data"
-        read_only = true
-      }
+      read_only = true
     }
 
     service {
@@ -117,6 +52,88 @@ EOF
       volume_mount {
         volume = "popcorn_data"
         destination = "/srv/www"
+        read_only = true
+      }
+    }
+  }
+
+  group "popcorn" {
+    count = 1
+
+    network {
+      mode = "host"
+      port "statrepo" { static = 8001 }
+      port "pqueryd" { static = 8003 }
+    }
+
+    service {
+      name = "popcorn-statrepo"
+      port = "statrepo"
+    }
+
+    service {
+      name = "popcorn-pqueryd"
+      port = "pqueryd"
+    }
+
+    volume "popcorn_data" {
+      type = "host"
+      source = "popcorn_data"
+      read_only = false
+    }
+
+    task "statrepo" {
+      driver = "docker"
+
+      config {
+        image = "ghcr.io/void-linux/infra-popcorn:20240704R1"
+        command = "statrepo"
+        args = [
+          "--addr", "0.0.0.0",
+          "--port", 8001,
+          "--reset_key", "${POPCORN_KEY}",
+        ]
+        network_mode = "host"
+      }
+
+      template {
+        data = <<EOF
+{{- with nomadVar "nomad/jobs/popcorn" -}}
+POPCORN_KEY={{.reset_key}}
+{{- end -}}
+EOF
+        destination = "secrets/env"
+        env = true
+      }
+
+      volume_mount {
+        volume = "popcorn_data"
+        destination = "/var/lib/popcorn"
+      }
+    }
+
+    task "pqueryd" {
+      driver = "docker"
+
+      config {
+        image = "ghcr.io/void-linux/infra-popcorn:20240704R1"
+        command = "pqueryd"
+        args = [
+          "--checkpoint_enabled=false",
+          "--addr", "0.0.0.0",
+          "--port", 8003,
+          "--data_dir", "/data",
+        ]
+        network_mode = "host"
+      }
+
+      resources {
+        memory = 8000
+      }
+
+      volume_mount {
+        volume = "popcorn_data"
+        destination = "/data"
         read_only = true
       }
     }
