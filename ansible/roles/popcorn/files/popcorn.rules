@@ -1,4 +1,0 @@
-*filter
--A INPUT -p tcp --dport 8001 -j ACCEPT
--A INPUT -p tcp --dport 8003 -j ACCEPT
-COMMIT

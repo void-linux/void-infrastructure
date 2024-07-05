@@ -13,9 +13,6 @@ buildslave
 [root_mirror]
 a-fsn-de.m.voidlinux.org
 
-[popcorn]
-a-hel-fi.m.voidlinux.org
-
 [netauth]
 a-sfo3-us.m.voidlinux.org
 

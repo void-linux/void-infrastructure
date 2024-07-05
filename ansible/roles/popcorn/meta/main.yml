@@ -1,4 +1,0 @@
----
-dependencies:
-  - { role: void.network.iptables }
-  - { role: nginx }

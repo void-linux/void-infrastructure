@@ -10,7 +10,7 @@ Information in depth about PopCorn can be found at the project's
 
 Stats from PopCorn are available for anyone who wishes to query the
 system.  The server is live at `popcorn.voidlinux.org` with reports
-services on port 8000 and the stats repository available on port 8003.
+services on port 8003 and the stats repository available on port 8001.
 
 ### Getting the day's stats
 

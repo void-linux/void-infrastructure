@@ -1,2 +1,0 @@
----
-popcorn_key: "{{ lookup('file', 'secret/popcorn_key') }}"

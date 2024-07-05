@@ -53,8 +53,6 @@ CONTAIN RESTRICTED INFORMATION.
     installation images (images@voidlinux.eu).
   * `void_image_key_secret.asc`: PGP private key associated with
     legacy installation images (images@voidlinux.eu).
-  * `popcorn_key`: Single line of ASCII text that will be used as the
-    statrepo reset code.
   * `netauth_tls_certificate.pem`: TLS Certificate for NetAuth to
     authenticate the server.
   * `netauth_tls_certificate.key`: Private key for the TLS certificate
