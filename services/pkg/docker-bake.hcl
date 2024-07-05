@@ -25,6 +25,20 @@ target "infra-alps" {
   context = "services/pkg/alps/"
 }
 
+target "infra-buildbot" {
+  inherits = ["_common"]
+  platforms = ["linux/amd64"]
+  args = { "LIBC" = "glibc" }
+  context = "services/pkg/buildbot/"
+}
+
+target "infra-buildbot-builder" {
+  inherits = ["_common"]
+  platforms = ["linux/amd64"]
+  args = { "LIBC" = "glibc" }
+  context = "services/pkg/buildbot-builder/"
+}
+
 target "infra-debuginfod" {
   inherits = ["_common-musl"]
   context = "services/pkg/debuginfod/"

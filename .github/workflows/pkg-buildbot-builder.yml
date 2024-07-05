@@ -1,0 +1,23 @@
+name: buildbot-builder Service Container
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - services/pkg/buildbot-builder/**
+  push:
+    branches:
+      - master
+    paths:
+      - services/pkg/buildbot-builder/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    uses: ./.github/workflows/build-pkg.yml
+    with:
+      service_name: buildbot-builder
