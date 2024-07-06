@@ -1,0 +1,16 @@
+---
+# from https://developer.hashicorp.com/nomad/docs/drivers/docker#allow_caps
+nomad_default_caps:
+  - audit_write
+  - chown
+  - dac_override
+  - fowner
+  - fsetid
+  - kill
+  - mknod
+  - net_bind_service
+  - setfcap
+  - setgid
+  - setpcap
+  - setuid
+  - sys_chroot

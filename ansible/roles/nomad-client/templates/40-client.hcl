@@ -56,5 +56,6 @@ vault {
 plugin "docker" {
   config {
     extra_labels = ["*"]
+    allow_caps = {{ ( nomad_default_caps + ( nomad_extra_caps | default([]) ) ) | to_json }}
   }
 }
