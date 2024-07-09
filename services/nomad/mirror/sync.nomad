@@ -31,7 +31,7 @@ job "sync" {
         driver = "docker"
 
         config {
-          image = "ghcr.io/void-linux/infra-rsync:v20220316RC02"
+          image = "ghcr.io/void-linux/infra-rsync:20240709R1"
           command = "/usr/bin/rsync"
           args = [
             "-vurk",

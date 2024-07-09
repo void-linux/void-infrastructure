@@ -18,7 +18,7 @@ job "rsyncd" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-rsync:v20210926rc01"
+        image = "ghcr.io/void-linux/infra-rsync:20240709R1"
         volumes = ["local/voidmirror.conf:/etc/rsyncd.conf.d/voidmirror.conf"]
         network_mode = "host"
       }

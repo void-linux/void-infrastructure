@@ -33,7 +33,7 @@ job "build-rsyncd" {
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-rsync:20230815"
+        image = "ghcr.io/void-linux/infra-rsync:20240709R1"
         volumes = [ "local/buildsync.conf:/etc/rsyncd.conf.d/buildsync.conf" ]
       }
 
