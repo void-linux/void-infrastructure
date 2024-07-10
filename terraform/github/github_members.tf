@@ -48,6 +48,7 @@ locals {
         "paper42",
         "sgn",
         "thypon",
+        "tranzystorekk",
       ]
     }
 
