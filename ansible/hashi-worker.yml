@@ -116,3 +116,10 @@
         - "-A INPUT -p tcp --dport 587 -j ACCEPT"
         - "-A INPUT -p tcp --dport 993 -j ACCEPT"
         - "COMMIT"
+
+- hosts: buildworker
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - buildworker
