@@ -1,24 +1,16 @@
 ---
-- name: Install Service (1/2)
-  file:
-    path: /etc/sv/btimefiles
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Install Service (2/2)
-  copy:
-    src: run
-    dest: /etc/sv/btimefiles/run
-    owner: root
-    group: root
-    mode: 0755
-  notify:
-    - btimefiles
-
-- name: Enable Service
+- name: Disable Service
   runit:
     name: btimefiles
-    state: started
-    enabled: true
+    enabled: false
+
+- name: Uninstall Service (1/2)
+  file:
+    path: /etc/sv/btimefiles/run
+    state: absent
+
+- name: Uninstall Service (2/2)
+  file:
+    path: /etc/sv/btimefiles
+    state: absent
+
