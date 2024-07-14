@@ -1,0 +1,12 @@
+---
+# Default user to run buildbot workers under
+buildworker_user: _void-builder
+
+# Additional groups for the buildworker user.  At minimum this must
+# contain xbuilder for the chroot to work correctly within xbps-src
+buildworker_groups:
+  - xbuilder
+
+# uid/gid for buildbot worker user
+buildworker_uid: 418
+buildworker_gid: 418
