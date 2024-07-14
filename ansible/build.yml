@@ -14,3 +14,10 @@
   roles:
     - buildslave
     - btimefiles
+
+- hosts: buildworker
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - buildworker
