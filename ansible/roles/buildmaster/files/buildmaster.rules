@@ -1,6 +1,0 @@
-*filter
--A INPUT -p tcp --dport 80 -j ACCEPT
--A INPUT -p tcp --dport 443 -j ACCEPT
--A INPUT -p tcp --dport 9989 -j ACCEPT
--A INPUT -p udp --dport 9989 -j ACCEPT
-COMMIT
