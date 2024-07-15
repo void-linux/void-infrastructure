@@ -6,6 +6,7 @@
   roles:
     - buildmaster
     - unacmetool
+    - unnginx
 
 - hosts: buildslave
   become: yes
