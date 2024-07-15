@@ -7,9 +7,6 @@
 [submodule "roles/xbps-repoconf"]
 	path = ansible/roles/xbps-repoconf
 	url = git@github.com:void-ansible-roles/xbps-repoconf.git
-[submodule "roles/acmetool"]
-	path = ansible/roles/acmetool
-	url = git@github.com:void-ansible-roles/acmetool.git
 [submodule "roles/mosh"]
 	path = ansible/roles/mosh
 	url = git@github.com:void-ansible-roles/mosh.git
