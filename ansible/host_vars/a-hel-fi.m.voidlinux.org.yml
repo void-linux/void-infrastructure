@@ -14,26 +14,8 @@ network_static_interfaces:
 
 sshd_AllowGroups:
   - build-ops
-  - syncpeers
 
 nginx_dhparam_bits: 2048
-
-buildmaster_ssl_cert_path: /var/lib/acme/live/build.voidlinux.org/fullchain
-buildmaster_ssl_certkey_path: /var/lib/acme/live/build.voidlinux.org/privkey
-
-buildslave_zone: FI-1
-buildslave_master: localhost
-
-buildslave_groups:
-  - xbuilder
-  - void-repo
-
-buildslave_hostdir_group: void-repo
-
-buildworker_archs:
-  - x86_64-musl
-  - armv7l-musl
-  - armv6l-musl
 
 acmetool:
   sites:

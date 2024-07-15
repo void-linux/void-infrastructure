@@ -7,46 +7,6 @@ CONTAIN RESTRICTED INFORMATION.
 
 ## Description of Files
 
-  * `buildmaster_github_secret`: Secret that GitHub will send to the
-    buildbot to validate the authenticity of its event stream.
-  * `buildmaster_github_webhook_password`: Secret that GitHub must
-    supply to access the webhook provided by the buildbot.
-  * `buildmaster_signing_key`: Master repository signing key for xbps
-    to sign the repository files.
-  * `buildmaster_signing_keyphrase`: Passphrase for the signing key
-    defined above.
-  * `buildmaster_slave_reposync_private`: Private half of an SSH
-    keypair to be used for retreiving files from remote builders to
-    the root mirror.
-  * `buildmaster_slave_reposync_public`: Public half of an SSH
-    keypair to be used for retreiving files from remote builders to
-    the root mirror.
-  * `buildmaster_users.yml`: Data file defining the users and their
-    credentials to access the buildbot administrative interface.  The
-    format is as follows:
-
-    ```yaml
-    ---
-    buildmaster_users:
-      - name: maldridge
-        pass: 'password-with-special-chars'
-    ```
-
-  * `buildslave_credentials.yml`: Data file defining the machine
-    credentials used by the buildbot to log into remote buildbot
-    instances and invoke builds on them.  The format is as follows:
-
-    ```yaml
-    ---
-    buildslave_credentials:
-      x86_64-primary: "pure-random-bytes"
-    ```
-
-    The identifiers used in the map must match those provided in the
-    `group_vars/build.yml` file.
-
-  * `known_hosts`: A known_hosts file in the correct format for SSH
-    which contains the host fingerprints for remote build machines.
   * `images.asc`: PGP public key associated with legacy installation
     images (Juan RP).
   * `void_image_key.asc`: PGP public key associated with legacy
