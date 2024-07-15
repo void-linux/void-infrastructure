@@ -1,10 +1,6 @@
 ---
-void_aquire_certs: true
-
 sshd_passwords: false
 sshd_challengeresponse: false
-
-nginx_acme_challenge_path: /var/run/acme/acme-challenge/
 
 void_mesh:
   a-hel-fi.m.voidlinux.org: 192.168.99.100

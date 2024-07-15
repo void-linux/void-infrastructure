@@ -15,8 +15,6 @@ network_static_interfaces:
 sshd_AllowGroups:
   - build-ops
 
-nginx_dhparam_bits: 2048
-
 nomad_host_volumes:
   - name: terrastate
     path: /nomad/terrastate
@@ -33,7 +31,3 @@ nomad_host_volumes:
   - name: ccache
     path: /hostdir/ccache
     read_only: true
-
-nomad_reserved_ports:
-  - 80  # Legacy nginx on this host
-  - 443 # Legacy nginx on this host
