@@ -4,8 +4,8 @@
   become_user: root
   become_method: sudo
   roles:
-    - acmetool
     - buildmaster
+    - unacmetool
 
 - hosts: buildslave
   become: yes
