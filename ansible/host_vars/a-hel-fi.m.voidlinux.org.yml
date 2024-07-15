@@ -17,15 +17,6 @@ sshd_AllowGroups:
 
 nginx_dhparam_bits: 2048
 
-acmetool:
-  sites:
-    - site: build.voidlinux.org
-      names:
-        - build.voidlinux.org
-  hostmaster_email: postmaster@voidlinux.org
-  services:
-    - nginx
-
 nomad_host_volumes:
   - name: terrastate
     path: /nomad/terrastate
