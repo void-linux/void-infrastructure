@@ -19,9 +19,6 @@ xbps_repository_multilib_nonfree: /data/pkgs/multilib/nonfree
 
 sshd_AllowGroups:
   - build-ops
-  - void-buildsync
-
-buildslave_zone: DE-1
 
 buildworker_archs:
   - x86_64

@@ -1,2 +1,0 @@
-%build-ops ALL=(ALL) NOPASSWD: /usr/bin/sv restart void-buildmaster
-%build-ops ALL=({{ buildmaster_user }}) ALL

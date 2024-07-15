@@ -1,9 +1,6 @@
 ---
 sshd_AllowGroups:
   - build-ops
-  - void-buildsync
-
-buildslave_zone: DE-2
 
 buildworker_archs:
   - aarch64
