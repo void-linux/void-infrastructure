@@ -1,25 +1,19 @@
 ---
-- name: Create the void-repo group
+- name: Remove the void-repo group
   group:
     name: void-repo
-    state: present
+    state: absent
 
-- name: Install the buildmaster firewall rules
-  copy:
-    src: buildmaster.rules
-    dest: /etc/iptables.d
-    owner: root
-    group: root
-    mode: 0640
+- name: Remove the buildmaster firewall rules
+  file:
+    path: /etc/iptables.d/buildmaster.rules
+    state: absent
   notify:
     - iptables
 
 - name: Install the buildmaster firewall rules (v6)
-  copy:
-    src: buildmaster.6rules
-    dest: /etc/ip6tables.d
-    owner: root
-    group: root
-    mode: 0640
+  file:
+    path: /etc/ip6tables.d/buildmaster.6rules
+    state: absent
   notify:
     - iptables
