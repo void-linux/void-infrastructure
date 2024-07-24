@@ -60,6 +60,7 @@ locals {
     void-wiki = {
       description  = "Components for wiki.voidlinux.org"
       homepage_url = "https://voidlinux.org"
+      archived     = true
       teams = [
         "pkg-committers",
       ]
