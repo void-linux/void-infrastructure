@@ -62,6 +62,7 @@ job "nginx" {
           "10-mirror.conf",
           "10-proxy.conf",
           "10-sources.conf",
+          "10-wiki.conf"
         ]
 
         content {
