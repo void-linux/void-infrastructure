@@ -37,6 +37,10 @@ job "build-rsyncd" {
         volumes = [ "local/buildsync.conf:/etc/rsyncd.conf.d/buildsync.conf" ]
       }
 
+      resources {
+        memory = 1000
+      }
+
       volume_mount {
         volume = "glibc_hostdir"
         destination = "/hostdir"
