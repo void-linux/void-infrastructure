@@ -36,6 +36,7 @@ job "sync" {
           args = [
             "-vurk",
             "--delete-after",
+            "--delay-updates",
             "--links",
             "rsync://${env["RSYNC_ADDR"]}/${group.value}/",
             "/${group.value}/",
