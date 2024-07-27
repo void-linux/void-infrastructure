@@ -11,6 +11,11 @@ job "xmandump" {
   group "app" {
     count = 1
 
+    restart {
+      attempts = 0
+      mode = "fail"
+    }
+
     volume "root-mirror" {
       type = "host"
       source = "root_mirror"
@@ -21,7 +26,7 @@ job "xmandump" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-xmandump:20220913RC01"
+        image = "ghcr.io/void-linux/infra-xmandump:20240727R1"
       }
 
       volume_mount {
