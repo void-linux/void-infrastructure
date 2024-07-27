@@ -76,7 +76,7 @@ sync {
         update = true,
         copy_dirlinks = true,
         password_file = "/secrets/rsync_passwd",
-        _extra = { "--delete-after" },
+        _extra = { "--delete-after", "--delay-updates" },
     }
 }
 
@@ -92,7 +92,7 @@ sync {
         update = true,
         copy_dirlinks = true,
         password_file = "/secrets/rsync_passwd",
-        _extra = { "--delete-after" },
+        _extra = { "--delete-after", "--delay-updates" },
     }
 }
 EOF
