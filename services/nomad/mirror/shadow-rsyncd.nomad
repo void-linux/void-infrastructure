@@ -39,6 +39,10 @@ job "shadow-rsyncd" {
         volumes = [ "local/shadowsync.conf:/etc/rsyncd.conf.d/shadowsync.conf" ]
       }
 
+      resources {
+        memory = 1000
+      }
+
       volume_mount {
         volume = "root_mirror"
         destination = "/mirror"
