@@ -85,7 +85,7 @@ auth users = buildsync-*:rw
 [aarch64]
 path = /hostdir/binpkgs/aarch64
 auth users = buildsync-aarch64:rw
-filter = + */ + *-repodata + otime + *.xbps - *.sig - *.sig2 - *-repodata.* - *-stagedata.* - *.x86_64* - .*
+filter = + */ + *-repodata + otime + *.xbps - *.sig - *.sig2 - *-repodata.* - *-stagedata.* - *.x86_64* - x86_64*-repodata - .*
 post-xfer exec = /local/xbps-clean-sigs
 
 [musl]
