@@ -1,0 +1,5 @@
+---
+# Running xbps-src with xbps-uchroot and overlayfs within a container
+# requires CAP_SYS_ADMIN to be able to mount the overlay
+nomad_extra_caps:
+  - sys_admin

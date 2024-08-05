@@ -1,0 +1,18 @@
+---
+- name: Create buildbot worker user ({{ buildworker_user }})
+  user:
+    name: "{{ buildworker_user }}"
+    state: present
+    createhome: no
+    system: yes
+    uid: "{{ buildworker_uid }}"
+    gid: "{{ buildworker_gid }}"
+    groups: "{{ buildworker_groups | join(',') }}"
+
+- name: Install sudo policy
+  template:
+    src: buildworker.sudoers.j2
+    dest: /etc/sudoers.d/buildworker
+    owner: root
+    group: root
+    mode: 0640
