@@ -55,7 +55,6 @@ resource "digitalocean_record" "apex_txt" {
 
 resource "digitalocean_record" "omniproxy" {
   for_each = toset([
-    digitalocean_record.b_hel_fi.value,
     digitalocean_record.d_hel_fi.value,
     digitalocean_record.a_fra_de.value,
   ])
@@ -396,7 +395,7 @@ resource "digitalocean_record" "repo_fi" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
   name   = "repo-fi.${digitalocean_domain.voidlinux_org.name}."
-  value  = "b-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
+  value  = "d-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "repo_us" {
