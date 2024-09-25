@@ -38,7 +38,7 @@ job "build-rsyncd" {
       }
 
       resources {
-        memory = 1000
+        memory = 1500
       }
 
       volume_mount {
@@ -79,7 +79,7 @@ incoming chmod = D0755,F0644
 
 [sources]
 path = /hostdir/sources
-filter = - .* - *.part
+filter = - by_sha256/ - .* - *.part
 auth users = buildsync-*:rw
 
 [aarch64]
