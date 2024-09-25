@@ -69,7 +69,7 @@ exclude = - *-repodata.* - *-stagedata.* - .*
 
 [sources]
 path = /hostdir/sources
-exclude = - .*
+exclude = - by_sha256/ - .*
 EOF
         destination = "local/shadowsync.conf"
       }
