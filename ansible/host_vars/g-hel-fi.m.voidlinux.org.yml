@@ -1,0 +1,13 @@
+---
+network_static_routes:
+  - to: default
+    via: 172.31.1.1 onlink dev eth0
+  - to: default
+    via: fe80::1
+
+network_static_interfaces:
+  - name: eth0
+    type: direct
+    addrs:
+      - 95.217.130.28/32
+      - 2a01:4f9:c012:65::2/64
