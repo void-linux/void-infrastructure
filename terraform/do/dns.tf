@@ -192,6 +192,76 @@ resource "digitalocean_record" "d_hel_fi_v6" {
   value  = "2a01:4f9:3a:17d7::2"
 }
 
+resource "digitalocean_record" "e_hel_fi" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "A"
+  name = "e-hel-fi.m"
+  value = "95.216.161.173"
+}
+
+resource "digitalocean_record" "e_hel_fi_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "e-hel-fi.m"
+  value  = "2a01:4f9:c010:ddfd::2"
+}
+
+resource "digitalocean_record" "f_hel_fi" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "A"
+  name = "f-hel-fi.m"
+  value = "65.21.149.215"
+}
+
+resource "digitalocean_record" "f_hel_fi_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "f-hel-fi.m"
+  value  = "2a01:4f9:c012:7a9e::2"
+}
+
+resource "digitalocean_record" "g_hel_fi" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "A"
+  name = "g-hel-fi.m"
+  value = "95.217.130.28"
+}
+
+resource "digitalocean_record" "g_hel_fi_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "g-hel-fi.m"
+  value  = "2a01:4f9:c012:65::2"
+}
+
+resource "digitalocean_record" "h_hel_fi" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "A"
+  name = "h-hel-fi.m"
+  value = "65.21.145.134"
+}
+
+resource "digitalocean_record" "h_hel_fi_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "h-hel-fi.m"
+  value  = "2a01:4f9:c012:8db::2"
+}
+
+resource "digitalocean_record" "i_hel_fi" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type = "A"
+  name = "i-hel-fi.m"
+  value = "95.216.191.60"
+}
+
+resource "digitalocean_record" "i_hel_fi_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "i-hel-fi.m"
+  value  = "2a01:4f9:c012:be3::2"
+}
+
 resource "digitalocean_record" "a_fra_de" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
