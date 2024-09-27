@@ -15,6 +15,7 @@ a-fsn-de.m.voidlinux.org
 
 [netauth]
 a-sfo3-us.m.voidlinux.org
+i-hel-fi.m.voidlinux.org
 
 [netlogon]
 a-hel-fi.m.voidlinux.org
@@ -42,15 +43,16 @@ hashimirror
 hashimx
 
 [hashimaster]
-b-sfo3-us.m.voidlinux.org
-c-sfo3-us.m.voidlinux.org
-d-sfo3-us.m.voidlinux.org
+e-hel-fi.m.voidlinux.org
+f-hel-fi.m.voidlinux.org
+g-hel-fi.m.voidlinux.org
 
 [hashiworker]
 a-hel-fi.m.voidlinux.org
 a-fsn-de.m.voidlinux.org
 b-fsn-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
+h-hel-fi.m.voidlinux.org
 
 [hashimirror]
 b-hel-fi.m.voidlinux.org

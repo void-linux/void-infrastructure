@@ -105,9 +105,9 @@ resource "digitalocean_record" "catchall_apex" {
 
 resource "digitalocean_record" "control_proxy" {
   for_each = toset([
-    digitalocean_record.b_sfo3_us.value,
-    digitalocean_record.c_sfo3_us.value,
-    digitalocean_record.d_sfo3_us.value,
+    digitalocean_record.e_hel_fi.value,
+    digitalocean_record.f_hel_fi.value,
+    digitalocean_record.g_hel_fi.value,
   ])
 
   domain = digitalocean_domain.voidlinux_org.name
