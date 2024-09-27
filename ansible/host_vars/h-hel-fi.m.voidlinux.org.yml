@@ -11,3 +11,8 @@ network_static_interfaces:
     addrs:
       - 65.21.145.134/32
       - 2a01:4f9:c012:8db::2/64
+
+nomad_host_volumes:
+  - name: buildbot_database
+    path: /data/buildbot
+    read_only: false
