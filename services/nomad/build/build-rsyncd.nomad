@@ -28,10 +28,6 @@ job "build-rsyncd" {
     task "rsyncd" {
       driver = "docker"
 
-      vault {
-        policies = ["void-secrets-buildsync"]
-      }
-
       config {
         image = "ghcr.io/void-linux/infra-rsync:20240709R1"
         volumes = [ "local/buildsync.conf:/etc/rsyncd.conf.d/buildsync.conf" ]
@@ -54,12 +50,10 @@ job "build-rsyncd" {
 
       template {
         data = <<EOF
-{{- with secret "secret/buildsync/aarch64" -}}
-buildsync-aarch64:{{.Data.password}}
-{{ end }}
-{{- with secret "secret/buildsync/musl" -}}
-buildsync-musl:{{.Data.password}}
-{{ end }}
+{{- with nomadVar "nomad/jobs/buildsync" }}
+buildsync-aarch64:{{ .aarch64_password }}
+buildsync-musl:{{ .musl_password }}
+{{- end }}
 EOF
         destination = "secrets/buildsync.secrets"
         perms = "0400"
@@ -68,8 +62,8 @@ EOF
       template {
         data = <<EOF
 [global]
-uid = 992
-gid = 991
+uid = 418
+gid = 418
 secrets file = /secrets/buildsync.secrets
 read only = yes
 list = yes
