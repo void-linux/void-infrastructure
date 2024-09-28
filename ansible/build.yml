@@ -13,4 +13,3 @@
   become_method: sudo
   roles:
     - buildslave
-    - btimefiles

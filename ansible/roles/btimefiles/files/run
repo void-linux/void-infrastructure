@@ -1,9 +1,0 @@
-#!/bin/sh
-
-while true ; do
-    t=$(date +%s)
-    for dir in / /nonfree /debug /multilib /multilib/nonfree /nonfree ; do
-        echo "$t">"/hostdir/binpkgs/$dir/otime"
-    done
-    sleep 60
-done
