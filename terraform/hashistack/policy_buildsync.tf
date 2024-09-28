@@ -1,13 +1,24 @@
-data "vault_policy_document" "secrets_buildsync" {
-  rule {
-    path         = "secret/buildsync/*"
-    capabilities = ["read"]
-    description  = "Read secrets associated with build repo sync"
+resource "nomad_acl_policy" "buildsync_admin" {
+  name = "buildsync-admin"
+  description = "Manage buildsync secrets in nomad variables"
+
+  job_acl {
+    namespace = "build"
+    job_id = "buildbot-worker"
+  }
+
+  job_acl {
+    namespace = "build"
+    job_id = "build-rsyncd"
+  }
+
+  rules_hcl = <<EOT
+namespace "build" {
+  variables {
+    path "nomad/jobs/buildsync" {
+      capabilities = ["read"]
+    }
   }
 }
-
-resource "vault_policy" "secrets_buildsync" {
-  name   = "void-secrets-buildsync"
-  policy = data.vault_policy_document.secrets_buildsync.hcl
+EOT
 }
-
