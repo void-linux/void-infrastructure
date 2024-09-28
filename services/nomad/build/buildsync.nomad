@@ -25,10 +25,6 @@ job "buildsync" {
       task "rsync" {
         driver = "docker"
 
-        vault {
-          policies = ["void-secrets-buildsync"]
-        }
-
         config {
           image = "ghcr.io/void-linux/infra-lsyncd:20230814"
         }
@@ -40,8 +36,8 @@ job "buildsync" {
 
         template {
           data = <<EOF
-{{- with secret "secret/buildsync/${group.value}" -}}
-{{.Data.password}}
+{{- with nomadVar "nomad/jobs/buildsync" -}}
+{{.${group.value}_password}}
 {{- end -}}
 EOF
           destination = "secrets/rsync_passwd"
@@ -54,30 +50,6 @@ EOF
 settings {
     statusFile = "/tmp/lsyncd.status",
     nodaemon = true,
-}
-
-sync {
-    default.rsync,
-    source = "/hostdir/binpkgs",
-    {{- range nomadService 1 $allocID "build-rsyncd" -}}
-    target = "rsync://buildsync-${group.value}@{{ .Address }}:{{ .Port }}/${group.value}",
-    {{- end -}}
-    delay = 15,
-    filter = {
-        "+ */",
-        "+ *-repodata",
-        "+ *.xbps",
-        "+ otime",
-        "- .*",
-        "- *",
-    },
-    rsync = {
-        verbose = true,
-        update = true,
-        copy_dirlinks = true,
-        password_file = "/secrets/rsync_passwd",
-        _extra = { "--delete-after", "--delay-updates" },
-    }
 }
 
 sync {
