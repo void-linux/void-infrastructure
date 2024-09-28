@@ -360,13 +360,6 @@ resource "digitalocean_record" "d_sfo3_us" {
 # just CNAMEs onto other machines defined above.                      #
 #######################################################################
 
-resource "digitalocean_record" "build" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "CNAME"
-  name   = "build"
-  value  = "a-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
-}
-
 resource "digitalocean_record" "devspace" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
