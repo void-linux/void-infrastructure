@@ -223,6 +223,15 @@ locals {
         "pkg-committers",
       ]
     }
+
+    buildbot-theme = {
+      description        = "Void Linux theme for Buildbot"
+      allow_merge_commit = false
+      allow_squash_merge = false
+      teams = [
+        "pkg-committers",
+      ]
+    }
   }
 }
 
