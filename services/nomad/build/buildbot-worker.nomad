@@ -72,6 +72,7 @@ job "buildbot-worker" {
 
         config {
           image = "ghcr.io/void-linux/infra-buildbot-builder:20240928R1"
+          volumes = [ "local/xbps-repos.conf:/usr/share/xbps.d/00-repository-main.conf" ]
           cap_add = ["sys_admin"]
         }
 
@@ -128,6 +129,20 @@ EOF
 Void Linux Buildbot builder for ${group.value.name} running on {{ env "attr.unique.hostname" -}}
 EOF
           destination = "local/info/host"
+        }
+
+        template {
+          data = <<EOF
+repository=/hostdir/binpkgs/bootstrap
+repository=/hostdir/binpkgs
+repository=/hostdir/binpkgs/nonfree
+{{ if eq "${group.value.name}" "glibc" }}
+repository=/hostdir/binpkgs/multilib/bootstrap
+repository=/hostdir/binpkgs/multilib
+repository=/hostdir/binpkgs/multilib/nonfree
+{{ end }}
+EOF
+          destination = "local/xbps-repos.conf"
         }
 
         template {
