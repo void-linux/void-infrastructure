@@ -61,7 +61,6 @@ job "buildbot" {
 
       config {
         image = "ghcr.io/void-linux/infra-buildbot:20240928R1"
-        force_pull = true
         ports = ["http", "worker"]
       }
 
