@@ -12,3 +12,6 @@ nomad_host_volumes:
   - name: aarch64_hostdir
     path: /hostdir
     read_only: false
+  - name: aarch64_workdir
+    path: /workdir
+    read_only: false

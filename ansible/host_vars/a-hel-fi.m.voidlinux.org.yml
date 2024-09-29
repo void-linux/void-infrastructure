@@ -46,6 +46,9 @@ nomad_host_volumes:
   - name: musl_hostdir
     path: /hostdir
     read_only: false
+  - name: musl_workdir
+    path: /workdir
+    read_only: false
   - name: ccache
     path: /hostdir/ccache
     read_only: true

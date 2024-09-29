@@ -36,6 +36,9 @@ nomad_host_volumes:
   - name: glibc_hostdir
     path: /hostdir
     read_only: false
+  - name: glibc_workdir
+    path: /workdir
+    read_only: false
   - name: ccache
     path: /hostdir/ccache
     read_only: true
