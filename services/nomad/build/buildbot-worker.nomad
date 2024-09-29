@@ -29,19 +29,35 @@ job "buildbot-worker" {
         }
       }
 
+      dynamic "volume" {
+        for_each = [ "${group.value.name}" ]
+        labels = [ "${volume.value}_workdir" ]
+
+        content {
+          type = "host"
+          source = "${volume.value}_workdir"
+          read_only = false
+        }
+      }
+
       // https://github.com/hashicorp/nomad/issues/8892
-      task "prep-hostdir" {
+      task "prep-host-dirs" {
         driver = "docker"
 
         config {
           image = "ghcr.io/void-linux/void-glibc-full:20240526R1"
           command = "chown"
-          args = ["-R", "418:418", "/hostdir"]
+          args = ["418:418", "/hostdir", "/workdir"]
         }
 
         volume_mount {
           volume = "${group.value.name}_hostdir"
           destination = "/hostdir"
+        }
+
+        volume_mount {
+          volume = "${group.value.name}_workdir"
+          destination = "/workdir"
         }
 
         lifecycle {
@@ -56,7 +72,6 @@ job "buildbot-worker" {
 
         config {
           image = "ghcr.io/void-linux/infra-buildbot-builder:20240928R1"
-          force_pull = true
           cap_add = ["sys_admin"]
         }
 
@@ -68,6 +83,11 @@ job "buildbot-worker" {
         volume_mount {
           volume = "${group.value.name}_hostdir"
           destination = "/hostdir"
+        }
+
+        volume_mount {
+          volume = "${group.value.name}_workdir"
+          destination = "/workdir"
         }
 
         template {
