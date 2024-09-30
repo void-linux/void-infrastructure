@@ -72,7 +72,10 @@ job "buildbot-worker" {
 
         config {
           image = "ghcr.io/void-linux/infra-buildbot-builder:20240928R1"
-          volumes = [ "local/xbps-repos.conf:/usr/share/xbps.d/00-repository-main.conf" ]
+          volumes = [
+            "local/xbps-repos.conf:/etc/xbps.d/00-repository-main.conf",
+            "local/xbps-arch.conf:/etc/xbps.d/xbps-arch.conf",
+          ]
           cap_add = ["sys_admin"]
         }
 
@@ -131,6 +134,8 @@ EOF
           destination = "local/info/host"
         }
 
+        // the builders should use local repos
+        // except for aarch64, which must be able to get hostmakedepends from repo-default
         template {
           data = <<EOF
 repository=/hostdir/binpkgs/bootstrap
@@ -141,8 +146,20 @@ repository=/hostdir/binpkgs/multilib/bootstrap
 repository=/hostdir/binpkgs/multilib
 repository=/hostdir/binpkgs/multilib/nonfree
 {{ end }}
+{{ if eq "${group.value.name}" "aarch64" }}
+repository=https://repo-default.voidlinux.org/current
+repository=https://repo-default.voidlinux.org/current/musl
+{{ end }}
 EOF
           destination = "local/xbps-repos.conf"
+        }
+
+        // /usr/share/xbps.d/xbps-arch.conf will mess up xbps-checkvers, so mask it with an empty file
+        template {
+          data = <<EOF
+# this file intentionally left blank
+EOF
+          destination = "local/xbps-arch.conf"
         }
 
         template {
