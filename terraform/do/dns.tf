@@ -332,27 +332,6 @@ resource "digitalocean_record" "a_sfo3_us" {
   value  = digitalocean_droplet.a_sfo3_us.ipv4_address
 }
 
-resource "digitalocean_record" "b_sfo3_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "b-sfo3-us.m"
-  value  = digitalocean_droplet.b_sfo3_us.ipv4_address
-}
-
-resource "digitalocean_record" "c_sfo3_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "c-sfo3-us.m"
-  value  = digitalocean_droplet.c_sfo3_us.ipv4_address
-}
-
-resource "digitalocean_record" "d_sfo3_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "d-sfo3-us.m"
-  value  = digitalocean_droplet.d_sfo3_us.ipv4_address
-}
-
 #######################################################################
 # Services                                                            #
 #                                                                     #
@@ -385,7 +364,7 @@ resource "digitalocean_record" "netauth" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "CNAME"
   name   = "netauth"
-  value  = "a-sfo3-us.m.${digitalocean_domain.voidlinux_org.name}."
+  value  = "i-hel-fi.m.${digitalocean_domain.voidlinux_org.name}."
 }
 
 resource "digitalocean_record" "popcorn" {
