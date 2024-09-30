@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec su --login {{ buildslave_user }} -c 'buildslave start --nodaemon "{{ buildslave_rootdir }}/{{ item.directory | default('void-builder-' + item.mach) }}"'

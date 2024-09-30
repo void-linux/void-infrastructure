@@ -1,3 +1,0 @@
----
-buildmaster_github_secret: "{{ lookup('file', 'secret/buildmaster_github_secret') }}"
-buildmaster_irc_password: "{{ lookup('file', 'secret/buildmaster_irc_password') }}"

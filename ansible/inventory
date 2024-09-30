@@ -1,15 +1,3 @@
-[buildmaster]
-a-hel-fi.m.voidlinux.org
-
-[buildslave]
-a-hel-fi.m.voidlinux.org
-a-fsn-de.m.voidlinux.org
-b-fsn-de.m.voidlinux.org
-
-[build:children]
-buildmaster
-buildslave
-
 [buildworker]
 a-hel-fi.m.voidlinux.org
 a-fsn-de.m.voidlinux.org
