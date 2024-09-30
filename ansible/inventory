@@ -36,9 +36,6 @@ a-fsn-de.m.voidlinux.org
 b-fsn-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 a-sfo3-us.m.voidlinux.org
-b-sfo3-us.m.voidlinux.org
-c-sfo3-us.m.voidlinux.org
-d-sfo3-us.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
 [hashi:children]
@@ -85,9 +82,6 @@ b-fsn-de.m.voidlinux.org
 a-lej-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 a-sfo3-us.m.voidlinux.org
-b-sfo3-us.m.voidlinux.org
-c-sfo3-us.m.voidlinux.org
-d-sfo3-us.m.voidlinux.org
 a-fra-de.m.voidlinux.org
 
 [musl]

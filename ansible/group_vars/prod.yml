@@ -17,9 +17,6 @@ void_mesh:
   h-hel-fi.m.voidlinux.org: 192.168.99.123
   i-hel-fi.m.voidlinux.org: 192.168.99.124
   a-sfo3-us.m.voidlinux.org: 192.168.99.103
-  b-sfo3-us.m.voidlinux.org: 192.168.99.104
-  c-sfo3-us.m.voidlinux.org: 192.168.99.105
-  d-sfo3-us.m.voidlinux.org: 192.168.99.106
   a-fsn-de.m.voidlinux.org: 192.168.99.112
   b-hel-fi.m.voidlinux.org: 192.168.99.113
   b-fsn-de.m.voidlinux.org: 192.168.99.115
