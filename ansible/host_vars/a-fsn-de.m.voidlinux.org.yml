@@ -23,6 +23,12 @@ sshd_AllowGroups:
 
 buildslave_zone: DE-1
 
+buildworker_archs:
+  - x86_64
+  - i686
+  - armv7l
+  - armv6l
+
 nomad_host_volumes:
   - name: void-packages
     path: /data/void-packages
@@ -38,6 +44,9 @@ nomad_host_volumes:
     read_only: false
   - name: glibc_workdir
     path: /workdir
+    read_only: false
+  - name: glibc_buildrootdir
+    path: /buildroot
     read_only: false
   - name: ccache
     path: /hostdir/ccache

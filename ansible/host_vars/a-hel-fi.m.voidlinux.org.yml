@@ -30,6 +30,11 @@ buildslave_groups:
 
 buildslave_hostdir_group: void-repo
 
+buildworker_archs:
+  - x86_64-musl
+  - armv7l-musl
+  - armv6l-musl
+
 acmetool:
   sites:
     - site: build.voidlinux.org
@@ -48,6 +53,9 @@ nomad_host_volumes:
     read_only: false
   - name: musl_workdir
     path: /workdir
+    read_only: false
+  - name: musl_buildrootdir
+    path: /buildroot
     read_only: false
   - name: ccache
     path: /hostdir/ccache

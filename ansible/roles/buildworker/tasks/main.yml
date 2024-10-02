@@ -22,3 +22,20 @@
     owner: root
     group: root
     mode: 0640
+
+- name: Create buildroot directory
+  file:
+    path: /buildroot
+    state: directory
+    owner: "{{ buildworker_uid }}"
+    group: "{{ buildworker_gid }}"
+    mode: "0755"
+
+- name: Create buildroot subdirectories
+  file:
+    path: "/buildroot/{{ item }}"
+    state: directory
+    owner: "{{ buildworker_uid }}"
+    group: "{{ buildworker_gid }}"
+    mode: "0755"
+  with_items: "{{ buildworker_archs | default([]) }}"

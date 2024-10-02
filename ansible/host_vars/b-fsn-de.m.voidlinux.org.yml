@@ -5,6 +5,10 @@ sshd_AllowGroups:
 
 buildslave_zone: DE-2
 
+buildworker_archs:
+  - aarch64
+  - aarch64-musl
+
 nomad_host_volumes:
   - name: ccache
     path: /hostdir/ccache
@@ -14,4 +18,7 @@ nomad_host_volumes:
     read_only: false
   - name: aarch64_workdir
     path: /workdir
+    read_only: false
+  - name: aarch64_buildrootdir
+    path: /buildroot
     read_only: false
