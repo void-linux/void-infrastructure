@@ -5,10 +5,11 @@ job "buildbot-worker" {
 
   dynamic "group" {
     for_each = [
-      // memory is ~85% of capacity
-      { name = "glibc",   jobs = 10, mem = 109512 },
-      { name = "musl",    jobs = 6,  mem = 54512  },
-      { name = "aarch64", jobs = 3,  mem = 27256  },
+      // memory is ~90% of capacity
+      // memory_max is ~95% of capacity
+      { name = "glibc",   jobs = 10, mem = 115840, mem_max = 122270 },
+      { name = "musl",    jobs = 6,  mem = 57690,  mem_max = 60890  },
+      { name = "aarch64", jobs = 3,  mem = 28500,  mem_max = 30500  },
     ]
     labels = [ "buildbot-worker-${group.value.name}" ]
 
@@ -98,6 +99,7 @@ job "buildbot-worker" {
         resources {
           cores = "${group.value.jobs}"
           memory = "${group.value.mem}"
+          memory_max = "${group.value.mem_max}"
         }
 
         volume_mount {
