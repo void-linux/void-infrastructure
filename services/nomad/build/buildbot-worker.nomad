@@ -135,7 +135,6 @@ EOF
           data = <<EOF
 XBPS_MAKEJOBS=${group.value.jobs}
 XBPS_CHROOT_CMD=uchroot
-XBPS_CHROOT_CMD_ARGS='-t'
 XBPS_CCACHE=yes
 XBPS_DEBUG_PKGS=yes
 XBPS_USE_GIT_REVS=yes
