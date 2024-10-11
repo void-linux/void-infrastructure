@@ -1,0 +1,37 @@
+---
+- name: Create the webroot
+  file:
+    path: /srv/www
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Disable nginx
+  runit:
+    name: nginx
+    enabled: false
+
+- name: Unconfigure nginx firewall rules
+  file:
+    path: /etc/iptables.d/nginx.rules
+    state: absent
+  notify:
+    - iptables
+
+- name: Unconfigure nginx firewall rules
+  file:
+    path: /etc/ip6tables.d/nginx.6rules
+    state: absent
+  notify:
+    - iptables
+
+- name: Remove nginx files
+  file:
+    path: /etc/nginx
+    state: absent
+
+- name: Remove nginx
+  xbps:
+    pkg: nginx
+    state: present
