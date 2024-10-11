@@ -18,7 +18,7 @@ job "ircbot" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "ircbot.s.voidlinux.org"
+        nginx_names = "ircbot.voidlinux.org"
       }
     }
 
