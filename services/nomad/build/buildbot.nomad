@@ -64,6 +64,12 @@ job "buildbot" {
         ports = ["http", "worker"]
       }
 
+      resources {
+        // see https://github.com/buildbot/buildbot/issues/3011
+        // (fixed in buildbot 4.1.0)
+        memory = 2048
+      }
+
       meta {
         // set to "true" to create or upgrade the database when starting
         db-upgrade = "false"
