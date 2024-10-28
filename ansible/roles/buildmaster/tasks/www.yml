@@ -1,25 +1,15 @@
 ---
-- name: Configure webserver
-  include_role:
-    name: nginx
-    tasks_from: base-site
-  vars:
-    - site:
-        name: buildmaster
-        static_root: false
-        urls:
-          - build.voidlinux.org
-        tls:
-          certificate: "{{ buildmaster_ssl_cert_path | default('/dev/null') }}"
-          key: "{{ buildmaster_ssl_certkey_path | default('/dev/null') }}"
-          stapling: yes
-
-- name: Install root location block
-  copy:
-    src: buildmaster_root.conf
-    dest: /etc/nginx/locations.d/build.voidlinux.org/
-    owner: root
-    group: root
-    mode: 0644
+- name: Unconfigure nginx
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /var/lib/acme/live/build.voidlinux.org
+    - /etc/nginx/locations.d/build.voidlinux.org
+    - /etc/nginx/sites-available/buildmaster.conf
+    - /etc/nginx/sites-enabled/buildmaster.conf
+    - /etc/iptables.d/nginx-resolvers-buildmaster.rules
+    - /etc/ip6tables.d/nginx-resolvers-buildmaster.6rules
   notify:
     - nginx
+    - iptables
