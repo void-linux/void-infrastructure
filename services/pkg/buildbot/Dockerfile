@@ -1,11 +1,14 @@
-FROM  ghcr.io/void-linux/void-glibc-full:20240526R1
+FROM  ghcr.io/void-linux/void-glibc-full:latest
 
-RUN xbps-install -Suy xbps && xbps-install -uy python3 tini git curl
-ARG THEME_VERSION=v0.1.0
+RUN xbps-install -Suy xbps && xbps-install -uy python3 tini git curl && rm -rf /var/cache/xbps /tmp/*
+
 # version must be synced with ../buildbot-worker
+ARG BUILDBOT_VERSION=4.2.1
+ARG THEME_VERSION=v0.1.0
+
 RUN python3 -m venv /venv && \
 	/venv/bin/pip3 install wheel && \
-	/venv/bin/pip3 install 'buildbot[tls,bundle]~=4.0.0' treq \
+	/venv/bin/pip3 install 'buildbot[tls,bundle]~='$BUILDBOT_VERSION \
 		buildbot-prometheus buildbot-netauth \
 		git+https://github.com/void-linux/buildbot-theme.git@$THEME_VERSION
 WORKDIR /buildbot
