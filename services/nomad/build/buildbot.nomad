@@ -52,22 +52,20 @@ job "buildbot" {
     }
 
     service {
-        name = "buildbot-metrics"
-        port = "metrics"
+      name = "buildbot-metrics"
+      port = "metrics"
     }
 
     task "buildbot" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-buildbot:20240928R1"
+        image = "ghcr.io/void-linux/infra-buildbot:20250422R1"
         ports = ["http", "worker"]
       }
 
       resources {
-        // see https://github.com/buildbot/buildbot/issues/3011
-        // (fixed in buildbot 4.1.0)
-        memory = 2048
+        memory = 1024
       }
 
       meta {
