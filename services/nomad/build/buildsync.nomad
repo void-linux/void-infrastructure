@@ -59,6 +59,11 @@ sync {
     target = "rsync://buildsync-${group.value}@{{ .Address }}:{{ .Port }}/sources",
     {{- end -}}
     delay = 15,
+    filter = {
+      "- by_sha256/",
+      "- .*",
+      "- *.part",
+    },
     rsync = {
         verbose = true,
         update = true,
