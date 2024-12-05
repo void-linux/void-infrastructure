@@ -3,6 +3,13 @@ job "sync" {
   datacenters = ["VOID-MIRROR"]
   namespace = "mirror"
 
+  # FIXME: b-hel-fi is consistently filling up when syncing chromium/electron tarballs
+  constraint {
+    attribute = "${node.unique.name}"
+    operator = "set_contains_any"
+    value = "d-hel-fi,a-fra-de"
+  }
+
   periodic {
     crons = ["* * * * *"]
     prohibit_overlap = true
