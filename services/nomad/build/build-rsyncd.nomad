@@ -35,6 +35,7 @@ job "build-rsyncd" {
 
       resources {
         memory = 1500
+        memory_max = 3000
       }
 
       volume_mount {
