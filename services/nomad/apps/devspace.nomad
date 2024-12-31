@@ -62,15 +62,23 @@ job "devspace" {
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-sftpgo:20221001RC01"
+        image = "ghcr.io/void-linux/infra-sftpgo:20241231R1"
         network_mode = "host"
       }
 
       env {
-        SFTPGO_HTTPD__BINDINGS__0__PORT="${NOMAD_PORT_http}"
-        SFTPGO_TELEMETRY__BIND_PORT="8081"
-        SFTPGO_TELEMETRY__BIND_ADDRESS=""
-        SFTPGO_NETAUTH_REQUIREGROUP="devspace-users"
+        SFTPGO_HTTPD__BINDINGS__0__PORT = "${NOMAD_PORT_http}"
+        SFTPGO_HTTPD__TEMPLATES_PATH = "/usr/share/sftpgo/templates"
+        SFTPGO_HTTPD__STATIC_FILES_PATH = "/usr/share/sftpgo/static"
+        SFTPGO_SFTPD__HOST_KEYS = "/secrets/id_rsa,/secrets/id_ecdsa,/secrets/id_ed25519"
+        SFTPGO_TELEMETRY__BIND_PORT = "8081"
+        SFTPGO_TELEMETRY__BIND_ADDRESS = ""
+        SFTPGO_DATA_PROVIDER__DRIVER = "sqlite"
+        SFTPGO_DATA_PROVIDER__NAME = "/data/sftpgo.db"
+        SFTPGO_DATA_PROVIDER__EXTERNAL_AUTH_HOOK = "/usr/libexec/sftpgo/netauth-hook"
+        SFTPGO_COMMAND__COMMANDS__0__PATH = "/usr/libexec/sftpgo/netauth-hook"
+        SFTPGO_COMMAND__COMMANDS__0__ENV = "SFTPGO_NETAUTH_REQUIREGROUP=devspace-users,SFTPGO_NETAUTH_HOMEDIR=/data/home"
+        SFTPGO_COMMAND__COMMANDS__0__HOOK = "external_auth"
       }
 
       template {
@@ -134,7 +142,23 @@ EOF
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20220909RC01"
+        image = "ghcr.io/void-linux/infra-nginx:20230812"
+      }
+
+      template {
+        data = <<EOF
+server {
+    server_name devspace;
+    listen 0.0.0.0:80 default_server;
+
+    root /srv/www;
+
+    location / {
+        autoindex on;
+    }
+}
+EOF
+        destination = "local/nginx/devspace.conf"
       }
     }
   }
