@@ -35,7 +35,7 @@ job "shadow-rsyncd" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-rsync:20240709R1"
+        image = "ghcr.io/void-linux/infra-rsync:20250114R1"
         volumes = [ "local/shadowsync.conf:/etc/rsyncd.conf.d/shadowsync.conf" ]
       }
 
