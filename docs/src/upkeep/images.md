@@ -4,6 +4,11 @@ Void prepares and distributes multiple live images. These are prepared manually
 due to the need for full root authority during build, and for the need to sign
 them after building.
 
+## Preparation
+
+In `void-docs`, tag a release as `<year>.<month>.<day>` and update the package.
+In `void-mklive`, increment the `version` file and tag that commit as `v<date>`.
+
 ## Building the Images
 
 The images should be built using Github CI in the void-mklive repository. This
@@ -17,12 +22,13 @@ $ ./release.sh start
 
 By default, this will build:
 
-- Live ISOs with `base` and `xfce` variants for `x86_64*` and `i686`
+- Live ISOs with `base` and `xfce` variants for `x86_64*`, `i686`, `aarch64*`,
+   and `asahi*`
 - ROOTFSes for `x86_64*`, `i686`, `aarch64*`, `armv7l*`, and `armv6l*`
 - PLATFORMFSes for `aarch64*`, `armv7l*`, and `armv6l*` Raspberry Pis
 - SBC images for `aarch64*`, `armv7l*`, and `armv6l*` Raspberry Pis
 
-This will take approximately 2 hours for the default settings. To ensure all
+This will take approximately 30 minutes for the default settings. To ensure all
 images have the same datecode, the datecode is cached at the beginning of the
 run. The CI workflow will also generate `sha256sum.txt` for the built images.
 
@@ -61,7 +67,7 @@ $ export DATECODE=<date>
 $ pwgen -cny 25 1 > void-release-$DATECODE.key
 $ cat void-release-$DATECODE.key void-release-$DATECODE.key | \
 	minisign -G -p void-release-$DATECODE.pub -s void-release-$DATECODE.sec \
-	-c "This key is only valid for images with date $DATECODE." \
+	-c "This key is only valid for images with date $DATECODE."
 ```
 
 Copy the public half of this key to the `void-release-keys` package in
