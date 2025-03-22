@@ -11,7 +11,7 @@ network_hostname: '{{ inventory_hostname | regex_replace(metal_domain_root, "") 
 network_fqdn: '{{ inventory_hostname }}'
 network_boot_hosts:
   - name: netauth.voidlinux.org
-    addr: 161.35.231.145
+    addr: 95.216.191.60
   - name: repo-fi.voidlinux.org
     addr: 65.21.160.177
 
