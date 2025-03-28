@@ -67,7 +67,6 @@ resource "digitalocean_record" "omniproxy" {
 
 resource "digitalocean_record" "omniproxy_v6" {
   for_each = toset([
-    digitalocean_record.b_hel_fi_v6.value,
     digitalocean_record.d_hel_fi_v6.value,
     digitalocean_record.a_fra_de_v6.value,
   ])
