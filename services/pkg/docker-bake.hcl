@@ -44,11 +44,6 @@ target "infra-debuginfod" {
   context = "services/pkg/debuginfod/"
 }
 
-target "infra-lego" {
-  inherits = ["_common-glibc"]
-  context = "services/pkg/lego/"
-}
-
 target "infra-lsyncd" {
   inherits = ["_common-musl"]
   context = "services/pkg/lsyncd/"
