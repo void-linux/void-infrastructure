@@ -23,5 +23,13 @@ namespace "infrastructure" {
     }
   }
 }
+
+namespace "apps-restricted" {
+  variables {
+    path "nomad/jobs/maddy" {
+      capabilities = ["read", "write"]
+    }
+  }
+}
 EOT
 }
