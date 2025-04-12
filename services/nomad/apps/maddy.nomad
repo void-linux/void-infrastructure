@@ -30,10 +30,6 @@ job "maddy" {
     task "maddy" {
       driver = "docker"
 
-      vault {
-        policies = ["void-secrets-maddy"]
-      }
-
       volume_mount {
         volume = "maddy_data"
         destination = "/data"
@@ -68,21 +64,13 @@ job "maddy" {
       }
 
       template {
-        data =<<EOF
-{{- with secret "secret/lego/data/certificates/_.voidlinux.org.crt" -}}
-{{.Data.contents}}
-{{- end -}}
-EOF
+        data = "{{ with nomadVar \"nomad/jobs/maddy\" }}{{ .certificate }}{{ end }}"
         destination = "secrets/tls/fullchain.pem"
         perms = 400
       }
 
       template {
-        data =<<EOF
-{{- with secret "secret/lego/data/certificates/_.voidlinux.org.key" -}}
-{{.Data.contents}}
-{{- end -}}
-EOF
+        data = "{{ with nomadVar \"nomad/jobs/maddy\" }}{{ .key }}{{ end }}"
         destination = "secrets/tls/privkey.pem"
         perms = 400
       }
