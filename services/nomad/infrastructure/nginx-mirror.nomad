@@ -22,10 +22,6 @@ job "nginx" {
     task "nginx" {
       driver = "docker"
 
-      vault {
-        policies = ["void-secrets-tls"]
-      }
-
       config {
         image = "ghcr.io/void-linux/infra-nginx:20221230RC01"
         network_mode = "host"
