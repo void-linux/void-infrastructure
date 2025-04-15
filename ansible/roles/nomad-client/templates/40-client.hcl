@@ -49,11 +49,6 @@ client {
 {% endif %}
 }
 
-vault {
-  enabled = true
-  address = "http://active.vault.service.consul:8200"
-}
-
 plugin "docker" {
   config {
     extra_labels = ["*"]
