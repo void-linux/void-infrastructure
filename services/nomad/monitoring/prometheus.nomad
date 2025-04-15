@@ -30,7 +30,7 @@ job "prometheus" {
 
       check {
         type = "http"
-        address_mode = "host"
+        address_mode = "alloc"
         path = "/-/healthy"
         timeout = "30s"
         interval = "15s"
@@ -47,7 +47,7 @@ job "prometheus" {
       }
 
       config {
-        image = "prom/prometheus:v2.47.2"
+        image = "prom/prometheus:v3.2.1"
         args = [
           "--config.file=/local/prometheus.yml",
           "--storage.tsdb.path=/prometheus",

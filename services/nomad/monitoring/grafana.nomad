@@ -33,7 +33,7 @@ job "grafana" {
 
       check {
         type = "http"
-        address_mode = "host"
+        address_mode = "alloc"
         path = "/healthz"
         timeout = "30s"
         interval = "15s"
