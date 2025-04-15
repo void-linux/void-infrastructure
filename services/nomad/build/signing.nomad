@@ -15,10 +15,6 @@ job "reposigner" {
     task "legacy-sign" {
       driver = "docker"
 
-      vault {
-        policies = ["void-secrets-repomgmt"]
-      }
-
       config {
         image = "ghcr.io/void-linux/xbps-legacy-sign:20230815"
         args = [
@@ -37,8 +33,8 @@ job "reposigner" {
 
       template {
         data = <<EOF
-{{- with secret "secret/repomgmt/signing" -}}
-{{.Data.key}}
+{{- with nomadVar "nomad/jobs/reposigner" -}}
+{{ .key }}
 {{- end -}}
 EOF
         destination = "secrets/id_rsa"
@@ -47,8 +43,8 @@ EOF
 
       template {
         data = <<EOF
-{{- with secret "secret/repomgmt/signing" -}}
-{{.Data.keyphrase}}
+{{- with nomadVar "nomad/jobs/reposigner" -}}
+{{ .keyphrase }}
 {{- end -}}
 EOF
         destination = "secrets/id_rsa_passphrase"
