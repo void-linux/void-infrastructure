@@ -17,10 +17,6 @@ job "alertrelay" {
     task "app" {
       driver = "docker"
 
-      vault {
-        policies = ["void-secrets-alertrelay"]
-      }
-
       config {
         image = "maldridge/alertmanager-irc-relay:v0.4.1"
         args = ["--config=/local/config.yml"]
@@ -50,7 +46,7 @@ EOT
 
       template {
         data = <<EOT
-NICKSERV_PASSWORD={{ with secret "secret/alertrelay/credentials" }}{{.Data.password}}{{end}}
+NICKSERV_PASSWORD={{ with nomadVar "nomad/jobs/alertrelay" }}{{ .password }}{{end}}
 EOT
         destination = "secrets/env"
         env = true
