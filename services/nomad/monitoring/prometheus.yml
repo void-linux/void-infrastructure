@@ -30,8 +30,6 @@ scrape_configs:
       module: ["https"]
     static_configs:
       - targets:
-          - a-hel-fi.m.voidlinux.org
-          - alpha.de.repo.voidlinux.org
           - build.voidlinux.org
           - docs.voidlinux.org
           - infradocs.voidlinux.org
