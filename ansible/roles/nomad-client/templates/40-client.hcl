@@ -3,6 +3,7 @@ client {
   enabled = true
   network_interface = "void0"
   cni_path = "/usr/libexec/cni"
+  bridge_network_hairpin_mode = true
   gc_interval = "10m"
 
   reserved {
