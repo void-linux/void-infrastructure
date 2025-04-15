@@ -25,10 +25,6 @@ job "ircbot" {
     task "ircbot" {
       driver = "docker"
 
-      vault {
-        policies = ["void-secrets-ircbot"]
-      }
-
       config {
         image = "ghcr.io/void-linux/ircbot:v0.1.5"
       }
@@ -42,12 +38,10 @@ job "ircbot" {
 
       template {
         data = <<EOT
-{{- with secret "secret/ircbot/credentials" }}
-IRC_USER="{{.Data.user}}"
-IRC_PASS="{{.Data.pass}}"
-{{- end }}
-{{- with secret "secret/ircbot/webhook" }}
-WEBHOOK_SECRET="{{.Data.gh}}"
+{{- with nomadVar "nomad/jobs/ircbot" }}
+IRC_USER="{{ .username }}"
+IRC_PASS="{{ .password }}"
+WEBHOOK_SECRET="{{ .webhook }}"
 {{- end }}
 EOT
         destination = "secret/env"
