@@ -57,10 +57,6 @@ job "devspace" {
         read_only = true
       }
 
-      vault {
-        policies = ["void-secrets-devspace"]
-      }
-
       config {
         image = "ghcr.io/void-linux/infra-sftpgo:20241231R1"
         network_mode = "host"
@@ -83,8 +79,8 @@ job "devspace" {
 
       template {
                 data = <<EOF
-{{- with secret "secret/devspace/ssh" -}}
-{{.Data.ssh_host_rsa_key}}
+{{- with nomadVar "nomad/jobs/devspace" -}}
+{{ .ssh_host_rsa_key }}
 {{- end -}}
 EOF
         destination = "secrets/id_rsa"
@@ -92,8 +88,8 @@ EOF
 
       template {
                 data = <<EOF
-{{- with secret "secret/devspace/ssh" -}}
-{{.Data.ssh_host_ed25519_key}}
+{{- with nomadVar "nomad/jobs/devspace" -}}
+{{ .ssh_host_ed25519_key }}
 {{- end -}}
 EOF
         destination = "secrets/id_ed25519"
@@ -101,8 +97,8 @@ EOF
 
       template {
                 data = <<EOF
-{{- with secret "secret/devspace/ssh" -}}
-{{.Data.ssh_host_ecdsa_key}}
+{{- with nomadVar "nomad/jobs/devspace" -}}
+{{ .ssh_host_ecdsa_key }}
 {{- end -}}
 EOF
         destination = "secrets/id_ecdsa"
