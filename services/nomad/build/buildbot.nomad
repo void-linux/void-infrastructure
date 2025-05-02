@@ -65,7 +65,7 @@ job "buildbot" {
       }
 
       resources {
-        memory = 1024
+        memory = 2048
       }
 
       meta {
