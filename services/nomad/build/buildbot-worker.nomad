@@ -88,7 +88,7 @@ job "buildbot-worker" {
         user = "void-builder"
 
         config {
-          image = "ghcr.io/void-linux/infra-buildbot-builder:20250422R1"
+          image = "ghcr.io/void-linux/infra-buildbot-builder:20250506R2"
           volumes = [
             "local/xbps-repos.conf:/etc/xbps.d/00-repository-main.conf",
             "local/xbps-arch.conf:/etc/xbps.d/xbps-arch.conf",
