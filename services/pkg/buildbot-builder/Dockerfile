@@ -2,7 +2,7 @@ FROM ghcr.io/void-linux/void-glibc-full:latest AS build
 
 RUN xbps-install -Suy xbps && xbps-install -uy git go
 
-ARG GO_XBPS_SRC_VERSION=aed3b4682c7b2d1e31447cdb1de60e817e4dada1
+ARG GO_XBPS_SRC_VERSION=4baf85634b7c1f429967e4e6ac85a93577ba9f67
 
 RUN env GOBIN=/usr/local/bin GOMODCACHE=/tmp/go \
     go install -v github.com/Duncaen/go-xbps-src/cmd/xbps-src-make@$GO_XBPS_SRC_VERSION
