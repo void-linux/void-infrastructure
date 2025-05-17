@@ -24,7 +24,7 @@
     group: _vault
     mode: 0640
   vars:
-    vault_retry_join_servers: "{{ groups['hashimaster'] | difference(inventory_hostname) }}"
+    vault_retry_join_servers: "{{ groups['hashimaster'] | difference([inventory_hostname]) | sort }}"
   notify:
     - vault
 
