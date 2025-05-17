@@ -3,10 +3,3 @@
 # We need consul and unbound first
 sv check consul >/dev/null || exit 1
 sv check unbound >/dev/null || exit 1
-
-# We're racing DNS setup here because this *has* to be up before Nomad
-# starts in order for it to get fingerprinted.
-while ! getent hosts active.vault.service.consul ; do
-    sleep 5
-    unbound-control flush_negative
-done
