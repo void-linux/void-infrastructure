@@ -1,11 +1,15 @@
 ---
 - name: Install configuration
-  copy:
+  template:
     src: 40-server.hcl
     dest: /etc/nomad.d/40-server.hcl
     owner: root
     group: root
     mode: 0755
+  vars:
+    nomad_other_servers: "{{ groups['hashimaster'] | difference([inventory_hostname]) }}"
+    nomad_retry_join_servers: "{{ nomad_other_servers | map('extract', void_mesh) | list | sort }}"
+  tags: [configure_nomad]
   notify:
     - nomad
 
