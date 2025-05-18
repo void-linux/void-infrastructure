@@ -3,6 +3,13 @@ job "man-cgi" {
   namespace = "apps"
   type = "system"
 
+  # FIXME: b-hel-fi is not currently syncing
+  constraint {
+    attribute = "${node.unique.name}"
+    operator = "set_contains_any"
+    value = "d-hel-fi,a-fra-de"
+  }
+
   group "man-cgi" {
     count = 1
 
