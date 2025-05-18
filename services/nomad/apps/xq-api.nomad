@@ -3,6 +3,13 @@ job "xq-api" {
   namespace = "apps"
   type = "system"
 
+  # FIXME: b-hel-fi is not currently syncing
+  constraint {
+    attribute = "${node.unique.name}"
+    operator = "set_contains_any"
+    value = "d-hel-fi,a-fra-de"
+  }
+
   group "xq-api" {
     count = 1
 
