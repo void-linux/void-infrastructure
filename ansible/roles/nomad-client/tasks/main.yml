@@ -6,6 +6,8 @@
     owner: root
     group: root
     mode: 0644
+  vars:
+    nomad_retry_join_servers: "{{ groups['hashimaster'] | map('extract', void_mesh) | list | sort }}"
   notify:
     - nomad
 
