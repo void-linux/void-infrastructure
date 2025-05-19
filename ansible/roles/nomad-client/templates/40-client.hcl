@@ -13,6 +13,10 @@ client {
     reserved_ports = "{{nomad_reserved_ports|default([])|join(",")}}"
   }
 
+  server_join {
+    retry_join = {{ nomad_retry_join_servers | to_json }}
+  }
+
   host_network "internal" {
     cidr = "192.168.99.0/24"
     interface = "void0"
