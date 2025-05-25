@@ -47,7 +47,7 @@ job "prometheus" {
       }
 
       config {
-        image = "prom/prometheus:v3.2.1"
+        image = "docker.io/prom/prometheus:v3.4.0"
         args = [
           "--config.file=/local/prometheus.yml",
           "--storage.tsdb.path=/prometheus",
