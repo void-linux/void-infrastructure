@@ -140,6 +140,9 @@ XBPS_DEBUG_PKGS=yes
 XBPS_USE_GIT_REVS=yes
 XBPS_DISTFILES_MIRROR=https://sources.voidlinux.org
 XBPS_PRESERVE_PKGS=yes
+{{ range service "root-pkgs-internal" }}
+XBPS_MIRROR=http://{{ .Address }}:{{ .Port }}
+{{ end }}
 EOF
           destination = "local/xbps-src.conf"
         }
@@ -169,8 +172,10 @@ repository=/hostdir/binpkgs/multilib
 repository=/hostdir/binpkgs/multilib/nonfree
 {{ end }}
 {{ if eq "${group.value.name}" "aarch64" }}
-repository=https://repo-default.voidlinux.org/current
-repository=https://repo-default.voidlinux.org/current/musl
+{{ range service "root-pkgs-internal" }}
+repository=http://{{ .Address }}:{{ .Port }}
+repository=http://{{ .Address }}:{{ .Port }}/musl
+{{ end }}
 {{ end }}
 EOF
           destination = "local/xbps-repos.conf"
