@@ -1,0 +1,27 @@
+---
+network_static_routes:
+  - to: default
+    via: 172.31.1.1 onlink dev eth0
+  - to: default
+    via: fe80::1
+
+network_static_interfaces:
+  - name: eth0
+    type: direct
+    addrs:
+      - 95.216.203.66/32
+      - 2a01:4f9:c013:c508::2/64
+
+nomad_host_volumes:
+  - name: prometheus
+    path: /data/prometheus
+    read_only: false
+  - name: grafana
+    path: /data/grafana
+    read_only: false
+  - name: loki-data
+    path: /data/loki
+    read_only: false
+  - name: etherpad-data
+    path: /data/etherpad
+    read_only: false

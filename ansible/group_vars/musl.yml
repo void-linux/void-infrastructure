@@ -4,4 +4,8 @@ xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/musl/nonf
 xbps_repository_multilib: https://{{ xbps_repository_address }}/current/musl/multilib
 xbps_repository_multilib_nonfree: https://{{ xbps_repository_address }}/current/musl/multilib/nonfree
 
+xbps_repoconf_repos_enabled:
+  - 00-repository-main
+  - 10-repository-nonfree
+
 netlogon_use_cache: false

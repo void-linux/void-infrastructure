@@ -1,5 +1,5 @@
 ---
-xbps_repository_address: repo-fi.voidlinux.org
+xbps_repository_address: repo-de.voidlinux.org
 xbps_repository_main: https://{{xbps_repository_address}}/current
 xbps_repository_nonfree: https://{{xbps_repository_address}}/current/nonfree
 xbps_repository_multilib: https://{{xbps_repository_address}}/current/multilib
@@ -12,8 +12,8 @@ network_fqdn: '{{ inventory_hostname }}'
 network_boot_hosts:
   - name: netauth.voidlinux.org
     addr: 95.216.191.60
-  - name: repo-fi.voidlinux.org
-    addr: 65.21.160.177
+  - name: repo-de.voidlinux.org
+    addr: 212.83.43.28
 
 network_input_policy: DROP
 network_output_policy: ACCEPT
