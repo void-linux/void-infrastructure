@@ -50,7 +50,7 @@ job "grafana" {
       }
 
       config {
-        image = "grafana/grafana:10.1.5"
+        image = "docker.io/grafana/grafana:12.0.1"
       }
 
       env {
