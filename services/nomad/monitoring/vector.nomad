@@ -22,7 +22,6 @@ job "vector" {
     }
 
     service {
-      # provider = "nomad"
       port = "metrics"
       meta {
         nginx_enable = "true"
@@ -34,7 +33,7 @@ job "vector" {
       driver = "docker"
 
       config {
-        image = "timberio/vector:0.35.0-alpine"
+        image = "timberio/vector:0.45.0-alpine"
         args  = ["-c", "/local/vector.yaml"]
       }
 
@@ -79,6 +78,21 @@ job "vector" {
                 nomad_group = "{{ label.\"com.hashicorp.nomad.task_group_name\" }}"
                 nomad_task = "{{ label.\"com.hashicorp.nomad.task_name\" }}"
                 nomad_alloc = "{{ label.\"com.hashicorp.nomad.alloc_id\" }}"
+              }
+            }
+            vlogs = {
+              type        = "elasticsearch"
+              inputs      = ["docker"]
+              endpoints   = ["http://vmlogs.service.consul:9428/insert/elasticsearch/"]
+              api_version = "v8"
+              compression = "gzip"
+              healthcheck = { enabled = false }
+              query = {
+                "_time_field" = "timestamp"
+                "_stream_fields" = join(",", formatlist("label.com.hashicorp.nomad.%s", [
+                  "namespace", "job_name", "task_group_name", "task_name", "alloc_id",
+                ]))
+                "_msg_field" = "message"
               }
             }
           }

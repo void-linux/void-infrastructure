@@ -25,3 +25,6 @@ nomad_host_volumes:
   - name: etherpad-data
     path: /data/etherpad
     read_only: false
+  - name: vmlogs_data
+    path: /data/vmlogs
+    read_only: false
