@@ -4,14 +4,6 @@ job "repo-exporter" {
   datacenters = ["VOID"]
 
   group "exporter" {
-    affinity {
-      # Prefer to sit on the machine hosting the internal mirrors so
-      # that checks hit localhost.
-      attribute = "${node.unique.hostname}"
-      value     = "a-hel-fi"
-      weight    = 100
-    }
-
     network {
       mode = "bridge"
       port "metrics" {
@@ -36,11 +28,11 @@ job "repo-exporter" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/repo-exporter:v0.0.6-b1"
+        image = "ghcr.io/void-linux/repo-exporter:v0.1.1"
       }
 
       resources {
-        memory = 500
+        memory = 1000
       }
     }
   }
