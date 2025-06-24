@@ -23,7 +23,7 @@ job "void-updates" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/void-updates:20231023R1"
+        image = "ghcr.io/void-linux/void-updates:20250624R2"
       }
 
       resources {
