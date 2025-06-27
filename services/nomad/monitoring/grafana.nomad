@@ -57,9 +57,10 @@ job "grafana" {
         GF_AUTH_ANONYMOUS_ENABLED="true"
         GF_AUTH_ANONYMOUS_ORG_NAME="Main Org."
         GF_AUTH_ANONYMOUS_ORG_ROLE="Viewer"
-        GF_AUTH_LDAP_ENABLED="true"
-        GF_AUTH_LDAP_CONFIG_FILE="/local/ldap.toml"
         GF_AUTH_LDAP_ALLOW_SIGN_UP="true"
+        GF_AUTH_LDAP_CONFIG_FILE="/local/ldap.toml"
+        GF_AUTH_LDAP_ENABLED="true"
+        GF_INSTALL_PLUGINS="victoriametrics-logs-datasource"
       }
 
         template {
