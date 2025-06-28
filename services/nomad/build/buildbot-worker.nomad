@@ -58,7 +58,7 @@ job "buildbot-worker" {
         driver = "docker"
 
         config {
-          image = "ghcr.io/void-linux/void-glibc-full:20250622R1"
+          image = "ghcr.io/void-linux/void-glibc-full:20250616R2"
           command = "chown"
           args = ["418:418", "/hostdir", "/workdir", "/buildroots"]
         }
