@@ -12,7 +12,7 @@ job "nginx-control" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20221230RC01"
+        image = "ghcr.io/void-linux/infra-nginx:20250719R1"
         network_mode = "host"
         dns_servers = ["127.0.0.1"]
       }
