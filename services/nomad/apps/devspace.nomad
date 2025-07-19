@@ -138,7 +138,7 @@ EOF
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20230812"
+        image = "ghcr.io/void-linux/infra-nginx:20250719R1"
       }
 
       template {
