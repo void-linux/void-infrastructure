@@ -23,7 +23,7 @@ job "nginx" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20221230RC01"
+        image = "ghcr.io/void-linux/infra-nginx:20250719R1"
         network_mode = "host"
       }
 
