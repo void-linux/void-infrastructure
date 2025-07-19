@@ -1,4 +1,4 @@
-FROM ghcr.io/void-linux/infra-nginx:20230812
+FROM ghcr.io/void-linux/infra-nginx:20250719R1
 
 RUN xbps-install -Suy xbps && xbps-install -y void-man-cgi fcgiwrap spawn-fcgi && \
     rm -rf /var/cache/xbps && \
