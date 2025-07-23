@@ -41,6 +41,7 @@ locals {
         "cinerea0",
         "classabbyamp",
         "ericonr",
+        "icp1994",
         "jnbr",
         "leahneukirchen",
         "lemmi",
