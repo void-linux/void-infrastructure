@@ -10,7 +10,7 @@ job "buildbot-worker" {
       // memory_max is ~95% of capacity
       { name = "glibc",   jobs = 10, cpu = 38100, mem = 115840, mem_max = 122270 },
       { name = "musl",    jobs = 6,  cpu = 21700, mem = 57690,  mem_max = 60890  },
-      { name = "aarch64", jobs = 6,  cpu = 12000, mem = 28500,  mem_max = 30500  },
+      { name = "aarch64", jobs = 14,  cpu = 16000, mem = 27500,  mem_max = 29500 },
     ]
     labels = [ "buildbot-worker-${group.value.name}" ]
 
@@ -161,7 +161,6 @@ EOF
         }
 
         // the builders should use local repos
-        // except for aarch64, which must be able to get hostmakedepends from repo-default
         template {
           data = <<EOF
 repository=/hostdir/binpkgs/bootstrap
@@ -171,12 +170,6 @@ repository=/hostdir/binpkgs/nonfree
 repository=/hostdir/binpkgs/multilib/bootstrap
 repository=/hostdir/binpkgs/multilib
 repository=/hostdir/binpkgs/multilib/nonfree
-{{ end }}
-{{ if eq "${group.value.name}" "aarch64" }}
-{{ range service "root-pkgs-internal" }}
-repository=http://{{ .Address }}:{{ .Port }}
-repository=http://{{ .Address }}:{{ .Port }}/musl
-{{ end }}
 {{ end }}
 EOF
           destination = "local/xbps-repos.conf"
