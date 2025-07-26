@@ -18,7 +18,7 @@ RUN rm -rf /var/cache/xbps /tmp/* && \
 USER void-builder
 
 # version must be synced with ../buildbot
-ARG BUILDBOT_VERSION=4.2.1
+ARG BUILDBOT_VERSION=4.3.0
 
 RUN python3 -m venv /venv && \
 	/venv/bin/pip3 install wheel && \
