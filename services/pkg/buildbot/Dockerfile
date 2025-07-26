@@ -3,7 +3,7 @@ FROM  ghcr.io/void-linux/void-glibc-full:latest
 RUN xbps-install -Suy xbps && xbps-install -uy python3 tini git curl && rm -rf /var/cache/xbps /tmp/*
 
 # version must be synced with ../buildbot-worker
-ARG BUILDBOT_VERSION=4.2.1
+ARG BUILDBOT_VERSION=4.3.0
 ARG THEME_VERSION=v0.1.0
 
 RUN python3 -m venv /venv && \
