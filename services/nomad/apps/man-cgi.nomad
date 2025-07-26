@@ -37,7 +37,7 @@ job "man-cgi" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-man-cgi:20240218R1"
+        image = "ghcr.io/void-linux/infra-man-cgi:20250726R1"
       }
 
       volume_mount {
