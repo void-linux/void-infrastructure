@@ -345,6 +345,13 @@ resource "digitalocean_record" "a_sfo3_us" {
   value  = digitalocean_droplet.a_sfo3_us.ipv4_address
 }
 
+resource "digitalocean_record" "a_sea_us" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "a-sea-us.m"
+  value  = "199.255.18.172"
+}
+
 #######################################################################
 # Services                                                            #
 #                                                                     #
