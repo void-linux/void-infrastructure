@@ -1,0 +1,10 @@
+---
+ansible_host: 199.255.18.172
+ansible_port: 1222
+
+xbps_repository_main: https://{{ xbps_repository_address }}/current/aarch64
+xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/aarch64/nonfree
+
+xbps_repoconf_repos_enabled:
+  - 00-repository-main
+  - 10-repository-nonfree

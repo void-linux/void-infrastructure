@@ -26,6 +26,7 @@ b-fsn-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 a-sfo3-us.m.voidlinux.org
 a-fra-de.m.voidlinux.org
+a-sea-us.m.voidlinux.org
 
 [hashi:children]
 hashimaster
@@ -45,6 +46,7 @@ b-fsn-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 h-hel-fi.m.voidlinux.org
 j-hel-fi.m.voidlinux.org
+a-sea-us.m.voidlinux.org
 
 [hashimirror]
 b-hel-fi.m.voidlinux.org
@@ -74,6 +76,7 @@ a-lej-de.m.voidlinux.org
 b-lej-de.m.voidlinux.org
 a-sfo3-us.m.voidlinux.org
 a-fra-de.m.voidlinux.org
+a-sea-us.m.voidlinux.org
 
 [musl]
 b-hel-fi.m.voidlinux.org

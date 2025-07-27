@@ -19,5 +19,6 @@
   become_user: root
   become_method: sudo
   gather_facts: no
+  strategy: ansible.builtin.host_pinned
   roles:
     - void-mesh
