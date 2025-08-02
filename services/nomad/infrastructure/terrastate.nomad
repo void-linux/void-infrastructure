@@ -46,11 +46,12 @@ job "terrastate" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/the-maldridge/terrastate:v1.2.1"
+        image = "ghcr.io/the-maldridge/terrastate:v1.2.3"
         init = true
       }
 
       env {
+        AUTHWARE_BASIC_MECHS="netauth"
         TS_AUTH = "htpasswd:netauth"
         TS_BITCASK_PATH = "/data"
         TS_HTGROUP_FILE = "/secrets/.htgroup"
