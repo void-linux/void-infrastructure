@@ -33,6 +33,26 @@ job "ssl-exporter" {
       config {
         image = "ribbybibby/ssl-exporter:2.4.0"
         ports = ["http"]
+        args = ["--config.file=/local/conf.yaml"]
+      }
+
+      template {
+        data = <<EOF
+modules:
+  https:
+    prober: https
+  https_insecure:
+    prober: https
+    tls_config:
+      insecure_skip_verify: true
+  tcp:
+    prober: tcp
+  tcp_insecure:
+    prober: tcp
+    tls_config:
+      insecure_skip_verify: true
+EOF
+        destination = "local/conf.yaml"
       }
     }
   }
