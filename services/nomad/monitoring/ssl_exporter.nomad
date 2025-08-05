@@ -37,21 +37,28 @@ job "ssl-exporter" {
       }
 
       template {
-        data = <<EOF
-modules:
-  https:
-    prober: https
-  https_insecure:
-    prober: https
-    tls_config:
-      insecure_skip_verify: true
-  tcp:
-    prober: tcp
-  tcp_insecure:
-    prober: tcp
-    tls_config:
-      insecure_skip_verify: true
-EOF
+        data = yamlencode({
+          modules = {
+            https = {
+              prober = "https"
+            }
+            https_insecure = {
+              prober = "https"
+              tls_config = {
+                insecure_skip_verify = true
+              }
+            }
+            tcp = {
+              prober = "tcp"
+            }
+            tcp_insecure = {
+              prober = "tcp"
+              tls_config = {
+                insecure_skip_verify = true
+              }
+            }
+          }
+        })
         destination = "local/conf.yaml"
       }
     }
