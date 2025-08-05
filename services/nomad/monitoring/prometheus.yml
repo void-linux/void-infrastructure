@@ -47,6 +47,21 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: ssl-exporter.service.consul:9219
+  - job_name: 'ssl-self-signed'
+    metrics_path: /probe
+    scrape_interval: 2m
+    params:
+      module: ["tcp_insecure"]
+    static_configs:
+      - targets:
+        - netauth.voidlinux.org:1729
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: ssl-exporter.service.consul:9219
   - job_name: alertmanager
     consul_sd_configs:
       - server: {{ env "NOMAD_HOST_IP_http" }}:8500
