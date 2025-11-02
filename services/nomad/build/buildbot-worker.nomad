@@ -10,7 +10,7 @@ job "buildbot-worker" {
       // memory_max is ~95% of capacity
       { name = "glibc",   jobs = 10, cpu = 38100, mem = 115840, mem_max = 122270 },
       { name = "musl",    jobs = 6,  cpu = 21700, mem = 57690,  mem_max = 60890  },
-      { name = "aarch64", jobs = 14,  cpu = 16000, mem = 27500,  mem_max = 29500 },
+      { name = "aarch64", jobs = 12, cpu = 16000, mem = 27500,  mem_max = 29500  },
     ]
     labels = [ "buildbot-worker-${group.value.name}" ]
 
@@ -163,13 +163,19 @@ EOF
         // the builders should use local repos
         template {
           data = <<EOF
-repository=/hostdir/binpkgs/bootstrap
-repository=/hostdir/binpkgs
-repository=/hostdir/binpkgs/nonfree
+{{ range service "root-pkgs-internal" }}
 {{ if eq "${group.value.name}" "glibc" }}
-repository=/hostdir/binpkgs/multilib/bootstrap
-repository=/hostdir/binpkgs/multilib
-repository=/hostdir/binpkgs/multilib/nonfree
+repository=http://{{ .Address }}:{{ .Port }}/bootstrap
+repository=http://{{ .Address }}:{{ .Port }}
+repository=http://{{ .Address }}:{{ .Port }}/nonfree
+repository=http://{{ .Address }}:{{ .Port }}/multilib/bootstrap
+repository=http://{{ .Address }}:{{ .Port }}/multilib
+repository=http://{{ .Address }}:{{ .Port }}/multilib/nonfree
+{{ else }}
+repository=http://{{ .Address }}:{{ .Port }}/${group.value.name}/bootstrap
+repository=http://{{ .Address }}:{{ .Port }}/${group.value.name}
+repository=http://{{ .Address }}:{{ .Port }}/${group.value.name}/nonfree
+{{ end }}
 {{ end }}
 EOF
           destination = "local/xbps-repos.conf"
@@ -198,7 +204,7 @@ EOF
         template {
           data = <<EOF
 {{- with nomadVar "nomad/jobs/buildsync" -}}
-{{ .${group.value.name}_password }}
+{{ .password }}
 {{- end -}}
 EOF
           destination = "secrets/rsync/password"
