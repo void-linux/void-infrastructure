@@ -1,7 +1,7 @@
-FROM  ghcr.io/void-linux/void-glibc:latest
+FROM ghcr.io/void-linux/void-glibc:latest
 
 RUN xbps-install -Sy rsync tini snooze findutils && \
-        mkdir -p /etc/rsyncd.conf.d/ && \
+        mkdir -p /etc/rsyncd.conf.d/ /local/rsync.conf.d/ && \
         rm -rf /var/cache/xbps
 
 WORKDIR /srv/rsync
