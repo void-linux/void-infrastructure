@@ -60,7 +60,7 @@ job "buildbot" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-buildbot:20250422R1"
+        image = "ghcr.io/void-linux/infra-buildbot:20251119R1"
         ports = ["http", "worker"]
       }
 
