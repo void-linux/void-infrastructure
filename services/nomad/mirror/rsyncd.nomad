@@ -37,7 +37,7 @@ read only = yes
 list = yes
 transfer logging = true
 timeout = 600
-exclude = - .* - *-repodata.* - *-stagedata.*
+exclude = - .* - *-repodata.* - *.lock
 EOF
         destination = "local/voidmirror.conf"
       }
