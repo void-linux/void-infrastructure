@@ -65,7 +65,7 @@ timeout = 600
 
 [mirror]
 path = /mirror
-exclude = - *-repodata.* - *-stagedata.* - .*
+exclude = - .* - *-repodata.* - *.lock
 
 [sources]
 path = /hostdir/sources
