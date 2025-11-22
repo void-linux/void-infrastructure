@@ -13,9 +13,9 @@ job "build-rsyncd" {
       }
     }
 
-    volume "glibc_hostdir" {
+    volume "root_mirror" {
       type = "host"
-      source = "glibc_hostdir"
+      source = "root_mirror"
       read_only = false
     }
 
@@ -39,21 +39,20 @@ job "build-rsyncd" {
       }
 
       volume_mount {
-        volume = "glibc_hostdir"
-        destination = "/hostdir"
+        volume = "root_mirror"
+        destination = "/mirror"
       }
 
       template {
-        data = file("xbps-clean-sigs")
-        destination = "local/xbps-clean-sigs"
+        data = file("rsync-post-xfer")
+        destination = "local/rsync-post-xfer"
         perms = "0755"
       }
 
       template {
         data = <<EOF
 {{- with nomadVar "nomad/jobs/buildsync" }}
-buildsync-aarch64:{{ .aarch64_password }}
-buildsync-musl:{{ .musl_password }}
+buildsync:{{ .password }}
 {{- end }}
 EOF
         destination = "secrets/buildsync.secrets"
@@ -77,19 +76,28 @@ path = /hostdir/sources
 filter = - by_sha256/ - .* - *.part
 auth users = buildsync-*:rw
 
-[aarch64]
-path = /hostdir/binpkgs/aarch64
-auth users = buildsync-aarch64:rw
-filter = + */ + *-repodata + otime + *.xbps - *.sig - *.sig2 - *-repodata.* - *-stagedata.* - *.x86_64* - x86_64*-repodata - .*
-post-xfer exec = /local/xbps-clean-sigs
-
-[musl]
-path = /hostdir/binpkgs/musl
-auth users = buildsync-musl:rw
-filter = + */ + *-repodata + otime + *.xbps - *.sig - *.sig2 - *-repodata.* - *-stagedata.* - .*
-post-xfer exec = /local/xbps-clean-sigs
+&merge /local/rsyncd.d
 EOF
         destination = "local/buildsync.conf"
+      }
+
+      dynamic "template" {
+        for_each = [
+          "x86_64", "i686", "armv7l", "armv6l",
+          "x86_64-musl", "armv7l-musl", "armv6l-musl",
+          "aarch64", "aarch64-musl",
+        ]
+
+        content {
+          data = <<EOF
+[incoming-${template.value}]
+path = /incoming/${template.value}
+auth users = buildsync:rw
+filter = + */ + *.xbps - *.sig - *.sig2 - *-repodata* - .*
+post-xfer exec = /local/rsync-post-xfer
+EOF
+          destination = "local/rsyncd.d/${template.value}.conf.inc"
+        }
       }
     }
   }
