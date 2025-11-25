@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -e
+
+process_repo() {
+    repo="$1"
+    if [ ! -d "$RSYNC_MODULE_PATH/$repo" ] || [ ! -d "/mirror/current/$TGT/$repo" ]; then
+        return
+    fi
+    # add to repodata
+    find "$RSYNC_MODULE_PATH"/"$repo" -maxdepth 1 -type f -printf "/mirror/current/$TGT/$repo/%f\0" | \
+        xargs -0 xbps-rindex -a
+    # clean old packages from repodata
+    xbps-rindex -c "/mirror/current/$TGT/$repo"
+    # remove old packages
+    xbps-rindex -r "/mirror/current/$TGT/$repo"
+    # Remove signatures that don't have a corresponding package
+    find "/mirror/current/$TGT/$repo" -maxdepth 1 \( -name '*.xbps.sig' -o -name '*.xbps.sig2' \) \
+        -exec sh -c 'for x in "$@"; do [ -e "${x%.sig*}" ] || rm -- $x; done' _ {} +
+}
+
+export XBPS_TARGET_ARCH="${RSYNC_MODULE_NAME#*-}"
+
+case "$XBPS_TARGET_ARCH" in
+    aarch64*) TGT="aarch64" ;;
+    *-musl) TGT="musl" ;;
+    *) TGT="" ;;
+esac
+
+# copy files to repo
+rsync -va "${RSYNC_MODULE_PATH:?}"/ /mirror/current/"$TGT"/
+
+for repo in / /bootstrap /debug /nonfree; do
+    process_repo "$repo"
+done
+
+if [ "$XBPS_TARGET_ARCH" = 'i686' ]; then
+    for repo in /multilib /multilib/bootstrap /multilib/nonfree; do
+        process_repo "$repo"
+    done
+fi
+
+# clean up incoming
+rm -r "${RSYNC_MODULE_PATH:?}"/*
+
+exit 0
