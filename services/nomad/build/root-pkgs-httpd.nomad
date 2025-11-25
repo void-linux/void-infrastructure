@@ -27,7 +27,7 @@ job "build-mirror" {
       driver = "docker"
 
       config {
-        image = "busybox:1.32-musl"
+        image = "busybox:1.37-musl"
         args = ["httpd", "-f", "-p", "80", "-h", "/pkgs"]
         network_mode = "host"
       }
