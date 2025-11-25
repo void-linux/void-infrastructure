@@ -9,7 +9,7 @@ job "build-rsyncd" {
       mode = "bridge"
       port "rsync" {
         to = 873
-        host_network = "internal"
+        # XXX: host_network = "internal"
       }
     }
 

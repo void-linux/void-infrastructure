@@ -13,6 +13,7 @@ job "build-mirror" {
     }
 
     service {
+      provider = "nomad" # XXX
       name = "root-pkgs-internal"
       port = "http"
     }
