@@ -3,53 +3,45 @@ job "timefiles" {
   datacenters = ["VOID"]
   namespace = "build"
 
-  dynamic "group" {
-    for_each = [ "glibc", "aarch64", "musl", ]
-    labels = [ "timefiles-${group.value}" ]
+  group "timefiles" {
+    count = 1
+    network { mode = "bridge" }
 
-    content {
-      count = 1
-      network { mode = "bridge" }
+    volume "root_mirror" {
+      type = "host"
+      source = "root_mirror"
+      read_only = false
+    }
 
-      dynamic "volume" {
-        for_each = [ "${group.value}" ]
-        labels = [ "${volume.value}_hostdir" ]
+    task "timefiles" {
+      driver = "docker"
 
-        content {
-          type = "host"
-          source = "${volume.value}_hostdir"
-          read_only = false
-        }
+      config {
+        image = "ghcr.io/void-linux/void-glibc:20240526R1"
+        command = "/local/run.sh"
       }
 
-      task "timefiles" {
-        driver = "docker"
+      volume_mount {
+        volume = "root_mirror"
+        destination = "/mirror"
+      }
 
-        config {
-          image = "ghcr.io/void-linux/void-glibc:20240526R1"
-          command = "/local/run.sh"
-        }
-
-        volume_mount {
-          volume = "${group.value}_hostdir"
-          destination = "/hostdir"
-        }
-
-        template {
-          data = <<EOF
+      template {
+        data = <<EOF
 #!/bin/sh
 
 while true ; do
-    t="$(date +%s)"
-    for dir in / /nonfree /debug /multilib /multilib/nonfree /nonfree ; do
-        echo "$t">"/hostdir/binpkgs/$dir/otime"
-    done
-    sleep 60
+  t="$(date +%s)"
+  for dir in / /nonfree /debug /multilib /multilib/nonfree /nonfree; do
+    [ -e "/mirror/current/$dir" ] && echo "$t">"/mirror/current/$dir/otime"
+    [ -e "/mirror/current/musl/$dir" ] && echo "$t">"/mirror/current/musl/$dir/otime"
+    [ -e "/mirror/current/aarch64/$dir" ] && echo "$t">"/mirror/current/aarch64/$dir/otime"
+  done
+  sleep 60
 done
 EOF
-          destination = "local/run.sh"
-          perms = "0755"
-        }
+        destination = "local/run.sh"
+        perms = "0755"
       }
     }
   }
