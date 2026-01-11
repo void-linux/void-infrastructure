@@ -2,11 +2,11 @@ terraform {
   required_providers {
     acme = {
       source  = "vancluever/acme"
-      version = "2.19.0"
+      version = "2.41.0"
     }
     nomad = {
       source = "hashicorp/nomad"
-      version = "2.1.0"
+      version = "2.5.2"
     }
   }
 }
