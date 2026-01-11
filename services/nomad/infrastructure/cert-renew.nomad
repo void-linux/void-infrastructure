@@ -4,7 +4,7 @@ job "cert-renew" {
   type = "batch"
 
   periodic {
-    cron = "@weekly"
+    crons = ["@weekly"]
   }
 
   group "terraform" {
@@ -16,7 +16,7 @@ job "cert-renew" {
       driver = "docker"
 
       config {
-        image = "docker.io/hashicorp/terraform:1.6.6"
+        image = "docker.io/hashicorp/terraform:1.14.3"
         entrypoint = ["/local/entrypoint"]
       }
 
