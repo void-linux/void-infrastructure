@@ -46,16 +46,15 @@ job "terrastate" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/the-maldridge/terrastate:v1.2.3"
+        image = "ghcr.io/the-maldridge/terrastate:v1.2.4"
         init = true
       }
 
       env {
-        AUTHWARE_BASIC_MECHS="netauth"
-        TS_AUTH = "htpasswd:netauth"
+        AUTHWARE_BASIC_MECHS = "htpasswd:netauth"
+        AUTHWARE_HTPASSWD_FILE = "/secrets/.htpasswd"
+        AUTHWARE_HTGROUP_FILE = "/secrets/.htgroup"
         TS_BITCASK_PATH = "/data"
-        TS_HTGROUP_FILE = "/secrets/.htgroup"
-        TS_HTPASSWD_FILE = "/secrets/.htpasswd"
         TS_STORE = "bitcask"
       }
 
@@ -75,6 +74,7 @@ job "terrastate" {
 _terraform:{{ with nomadVar "nomad/jobs/terrastate" }}{{ .hashed_passwd }}{{ end }}
 EOF
         destination = "${NOMAD_SECRETS_DIR}/.htpasswd"
+        change_mode = "signal"
       }
 
       template {
