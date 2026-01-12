@@ -1,6 +1,6 @@
 FROM ghcr.io/void-linux/void-glibc-full:latest
 
-RUN xbps-install -Suy xbps && xbps-install -y tini mdBook rsync git && \
+RUN xbps-install -Suy xbps && xbps-install -y tini mdBook-legacy rsync git && \
 	rm -rf /var/cache/xbps
 
 WORKDIR /mdbook
