@@ -31,7 +31,7 @@ nomad_host_volumes:
     path: /data/void-packages
     read_only: false
   - name: root-pkgs
-    path: /hostdir/binpkgs
+    path: /srv/www/void-repo/current
     read_only: false
   - name: root_mirror
     path: /srv/www/void-repo
@@ -48,3 +48,6 @@ nomad_host_volumes:
   - name: ccache
     path: /hostdir/ccache
     read_only: true
+  - name: incoming_pkgs
+    path: /incoming
+    read_only: false

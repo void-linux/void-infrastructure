@@ -8,3 +8,24 @@ xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/aarch64/n
 xbps_repoconf_repos_enabled:
   - 00-repository-main
   - 10-repository-nonfree
+
+sshd_AllowGroups:
+  - build-ops
+
+buildworker_archs:
+  - aarch64
+  - aarch64-musl
+
+nomad_host_volumes:
+  - name: ccache
+    path: /hostdir/ccache
+    read_only: true
+  - name: aarch64_hostdir
+    path: /hostdir
+    read_only: false
+  - name: aarch64_workdir
+    path: /builder/workdir
+    read_only: false
+  - name: aarch64_buildrootdir
+    path: /builder/buildroot
+    read_only: false
