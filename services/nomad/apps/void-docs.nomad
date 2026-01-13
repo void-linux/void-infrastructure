@@ -23,7 +23,7 @@ job "void-docs" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-mdbook:20231023R1"
+        image = "ghcr.io/void-linux/infra-mdbook:20260113R1"
       }
 
       env {
