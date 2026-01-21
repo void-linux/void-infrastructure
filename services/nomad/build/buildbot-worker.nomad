@@ -8,9 +8,13 @@ job "buildbot-worker" {
       // cpu is ~equivalent to a number of cores
       // memory is ~90% of capacity
       // memory_max is ~95% of capacity
-      { name = "glibc",   jobs = 10, cpu = 38100, mem = 115840, mem_max = 122270 },
-      { name = "musl",    jobs = 6,  cpu = 21700, mem = 57690,  mem_max = 60890  },
-      { name = "aarch64", jobs = 6,  cpu = 12000, mem = 28500,  mem_max = 30500  },
+      # XXX
+      # { name = "glibc",   jobs = 10, cpu = 38100, mem = 115840, mem_max = 122270 },
+      # { name = "musl",    jobs = 6,  cpu = 21700, mem = 57690,  mem_max = 60890  },
+      # { name = "aarch64", jobs = 12, cpu = 16000, mem = 27500,  mem_max = 29500  },
+      { name = "glibc",   jobs = 2, cpu = 10000, mem = 4096, mem_max = 8192 },
+      { name = "musl",    jobs = 2, cpu = 10000, mem = 4096, mem_max = 8192 },
+      { name = "aarch64", jobs = 2, cpu = 10000, mem = 4096, mem_max = 8192 },
     ]
     labels = [ "buildbot-worker-${group.value.name}" ]
 
@@ -118,9 +122,10 @@ job "buildbot-worker" {
           destination = "/buildroots"
         }
 
+        # XXX
         template {
           data = <<EOF
-{{ range service "buildbot-worker" -}}
+{{ range nomadService "buildbot-worker" -}}
 [buildbot]
 host = {{ .Address }}
 worker-port = {{ .Port }}
@@ -132,6 +137,7 @@ EOF
           destination = "local/config.ini"
         }
 
+        # XXX
         template {
           data = <<EOF
 XBPS_MAKEJOBS=${group.value.jobs}
@@ -141,7 +147,7 @@ XBPS_DEBUG_PKGS=yes
 XBPS_USE_GIT_REVS=yes
 XBPS_DISTFILES_MIRROR=https://sources.voidlinux.org
 XBPS_PRESERVE_PKGS=yes
-{{ range service "root-pkgs-internal" }}
+{{ range nomadService "root-pkgs-internal" }}
 XBPS_MIRROR=http://{{ .Address }}:{{ .Port }}
 {{ end }}
 EOF
@@ -161,21 +167,21 @@ EOF
         }
 
         // the builders should use local repos
-        // except for aarch64, which must be able to get hostmakedepends from repo-default
+        # XXX
         template {
           data = <<EOF
-repository=/hostdir/binpkgs/bootstrap
-repository=/hostdir/binpkgs
-repository=/hostdir/binpkgs/nonfree
+{{ range nomadService "root-pkgs-internal" }}
 {{ if eq "${group.value.name}" "glibc" }}
-repository=/hostdir/binpkgs/multilib/bootstrap
-repository=/hostdir/binpkgs/multilib
-repository=/hostdir/binpkgs/multilib/nonfree
-{{ end }}
-{{ if eq "${group.value.name}" "aarch64" }}
-{{ range service "root-pkgs-internal" }}
+repository=http://{{ .Address }}:{{ .Port }}/bootstrap
 repository=http://{{ .Address }}:{{ .Port }}
-repository=http://{{ .Address }}:{{ .Port }}/musl
+repository=http://{{ .Address }}:{{ .Port }}/nonfree
+repository=http://{{ .Address }}:{{ .Port }}/multilib/bootstrap
+repository=http://{{ .Address }}:{{ .Port }}/multilib
+repository=http://{{ .Address }}:{{ .Port }}/multilib/nonfree
+{{ else }}
+repository=http://{{ .Address }}:{{ .Port }}/${group.value.name}/bootstrap
+repository=http://{{ .Address }}:{{ .Port }}/${group.value.name}
+repository=http://{{ .Address }}:{{ .Port }}/${group.value.name}/nonfree
 {{ end }}
 {{ end }}
 EOF
@@ -205,7 +211,7 @@ EOF
         template {
           data = <<EOF
 {{- with nomadVar "nomad/jobs/buildsync" -}}
-{{ .${group.value.name}_password }}
+{{ .password }}
 {{- end -}}
 EOF
           destination = "secrets/rsync/password"

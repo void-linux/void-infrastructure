@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# Remove signatures that don't have a corresponding package.
-find /hostdir/binpkgs \( -name '*.xbps.sig' -o -name '*.xbps.sig2' \) -exec sh -c 'for x in "$@"; do [ -e "${x%.sig*}" ] || rm -- $x; done' _ {} +
-
-exit 0
