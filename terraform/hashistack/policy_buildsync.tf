@@ -1,10 +1,10 @@
 resource "nomad_acl_policy" "buildsync_admin" {
-  name = "buildsync-admin"
+  name        = "buildsync-admin"
   description = "Manage buildsync secrets in nomad variables"
 
   job_acl {
     namespace = "build"
-    job_id = "build-rsyncd"
+    job_id    = "build-rsyncd"
   }
 
   rules_hcl = <<EOT
@@ -19,12 +19,12 @@ EOT
 }
 
 resource "nomad_acl_policy" "buildsync_buildbot_admin" {
-  name = "buildsync-buildbot-admin"
+  name        = "buildsync-buildbot-admin"
   description = "Manage buildsync secrets in nomad variables for buildbot"
 
   job_acl {
     namespace = "build"
-    job_id = "buildbot-worker"
+    job_id    = "buildbot-worker"
   }
 
   rules_hcl = <<EOT
