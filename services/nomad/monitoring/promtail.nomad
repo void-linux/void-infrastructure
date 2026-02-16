@@ -2,9 +2,9 @@ job "promtail" {
   datacenters = [
     "VOID",
   ]
-  namespace   = "monitoring"
-  type        = "service"
-  priority    = 99
+  namespace = "monitoring"
+  type      = "service"
+  priority  = 99
 
   group "promtail" {
     network {
@@ -22,7 +22,7 @@ job "promtail" {
       port = "metrics"
       meta {
         nginx_enable = "true"
-        nginx_names = "promtail-tmp.voidlinux.org"
+        nginx_names  = "promtail-tmp.voidlinux.org"
       }
     }
 
@@ -31,7 +31,7 @@ job "promtail" {
 
       config {
         image = "docker.io/grafana/promtail:2.9.2"
-        args = ["-config.file", "/local/config.yaml", "-config.expand-env=true"]
+        args  = ["-config.file", "/local/config.yaml", "-config.expand-env=true"]
       }
 
       resources {
@@ -62,29 +62,29 @@ job "promtail" {
           scrape_configs = [{
             job_name = "docker"
             docker_sd_configs = [{
-              host = "unix:///var/run/docker.sock"
+              host             = "unix:///var/run/docker.sock"
               refresh_interval = "5s"
             }]
             relabel_configs = [
               {
                 source_labels = ["__meta_docker_container_label_com_hashicorp_nomad_namespace"]
-                target_label = "nomad_namespace"
+                target_label  = "nomad_namespace"
               },
               {
                 source_labels = ["__meta_docker_container_label_com_hashicorp_nomad_job_name"]
-                target_label = "nomad_job"
+                target_label  = "nomad_job"
               },
               {
                 source_labels = ["__meta_docker_container_label_com_hashicorp_nomad_group_name"]
-                target_label = "nomad_group"
+                target_label  = "nomad_group"
               },
               {
                 source_labels = ["__meta_docker_container_label_com_hashicorp_nomad_task_name"]
-                target_label = "nomad_task"
+                target_label  = "nomad_task"
               },
               {
                 source_labels = ["__meta_docker_container_label_com_hashicorp_nomad_alloc_id"]
-                target_label = "nomad_alloc"
+                target_label  = "nomad_alloc"
               },
             ]
           }]

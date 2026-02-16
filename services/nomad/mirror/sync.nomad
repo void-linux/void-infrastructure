@@ -1,35 +1,35 @@
 job "sync" {
-  type = "sysbatch"
+  type        = "sysbatch"
   datacenters = ["VOID-MIRROR"]
-  namespace = "mirror"
+  namespace   = "mirror"
 
   # FIXME: b-hel-fi is consistently filling up when syncing chromium/electron tarballs
   constraint {
     attribute = "${node.unique.name}"
-    operator = "set_contains_any"
-    value = "d-hel-fi,a-fra-de"
+    operator  = "set_contains_any"
+    value     = "d-hel-fi,a-fra-de"
   }
 
   periodic {
-    crons = ["* * * * *"]
+    crons            = ["* * * * *"]
     prohibit_overlap = true
   }
 
   dynamic "group" {
-    for_each = [ "mirror", "sources", ]
-    labels = [ "sync-${group.value}" ]
+    for_each = ["mirror", "sources", ]
+    labels   = ["sync-${group.value}"]
 
     content {
       count = 1
       network { mode = "bridge" }
 
       dynamic "volume" {
-        for_each =  [ "${group.value}" ]
-        labels = [ "dist-${volume.value}" ]
+        for_each = ["${group.value}"]
+        labels   = ["dist-${volume.value}"]
 
         content {
-          type = "host"
-          source = "dist_${volume.value}"
+          type      = "host"
+          source    = "dist_${volume.value}"
           read_only = false
         }
       }
@@ -38,7 +38,7 @@ job "sync" {
         driver = "docker"
 
         config {
-          image = "ghcr.io/void-linux/infra-rsync:20240709R1"
+          image   = "ghcr.io/void-linux/infra-rsync:20240709R1"
           command = "/usr/bin/rsync"
           args = [
             "-vurk",
@@ -51,14 +51,14 @@ job "sync" {
         }
 
         template {
-          data=<<EOF
+          data        = <<EOF
 {{ $allocID := env "NOMAD_ALLOC_ID" -}}
 {{ range nomadService 1 $allocID "shadow-rsyncd" }}
 RSYNC_ADDR="{{ .Address }}:{{ .Port }}"
 {{ end }}
 EOF
           destination = "local/env"
-          env = true
+          env         = true
         }
 
         resources {
@@ -66,7 +66,7 @@ EOF
         }
 
         volume_mount {
-          volume = "dist-${group.value}"
+          volume      = "dist-${group.value}"
           destination = "/${group.value}"
         }
       }

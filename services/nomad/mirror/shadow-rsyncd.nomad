@@ -1,42 +1,42 @@
 job "shadow-rsyncd" {
-  type = "service"
+  type        = "service"
   datacenters = ["VOID"]
-  namespace = "mirror"
+  namespace   = "mirror"
 
   group "rsync" {
     count = 1
     network {
       mode = "bridge"
       port "rsync" {
-        to = 873
+        to           = 873
         host_network = "internal"
       }
     }
 
     volume "root_mirror" {
-      type = "host"
-      source = "root_mirror"
+      type      = "host"
+      source    = "root_mirror"
       read_only = true
     }
 
     volume "glibc_hostdir" {
-      type = "host"
-      source = "glibc_hostdir"
+      type      = "host"
+      source    = "glibc_hostdir"
       read_only = true
     }
 
     service {
       provider = "nomad"
-      name = "shadow-rsyncd"
-      port = "rsync"
+      name     = "shadow-rsyncd"
+      port     = "rsync"
     }
 
     task "rsyncd" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-rsync:20250114R1"
-        volumes = [ "local/shadowsync.conf:/etc/rsyncd.conf.d/shadowsync.conf" ]
+        image   = "ghcr.io/void-linux/infra-rsync:20250114R1"
+        volumes = ["local/shadowsync.conf:/etc/rsyncd.conf.d/shadowsync.conf"]
       }
 
       resources {
@@ -44,17 +44,17 @@ job "shadow-rsyncd" {
       }
 
       volume_mount {
-        volume = "root_mirror"
+        volume      = "root_mirror"
         destination = "/mirror"
       }
 
       volume_mount {
-        volume = "glibc_hostdir"
+        volume      = "glibc_hostdir"
         destination = "/hostdir"
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 [global]
 uid = 992
 gid = 991

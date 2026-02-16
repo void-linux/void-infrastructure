@@ -1,54 +1,54 @@
 job "buildbot-worker" {
-  type = "service"
+  type        = "service"
   datacenters = ["VOID"]
-  namespace = "build"
+  namespace   = "build"
 
   dynamic "group" {
     for_each = [
       // cpu is ~equivalent to a number of cores
       // memory is ~90% of capacity
       // memory_max is ~95% of capacity
-      { name = "glibc",   jobs = 10, cpu = 38100, mem = 115840, mem_max = 122270 },
-      { name = "musl",    jobs = 6,  cpu = 21700, mem = 57690,  mem_max = 60890  },
-      { name = "aarch64", jobs = 6,  cpu = 12000, mem = 28500,  mem_max = 30500  },
+      { name = "glibc", jobs = 10, cpu = 38100, mem = 115840, mem_max = 122270 },
+      { name = "musl", jobs = 6, cpu = 21700, mem = 57690, mem_max = 60890 },
+      { name = "aarch64", jobs = 6, cpu = 12000, mem = 28500, mem_max = 30500 },
     ]
-    labels = [ "buildbot-worker-${group.value.name}" ]
+    labels = ["buildbot-worker-${group.value.name}"]
 
     content {
       network {
-        mode = "bridge"
+        mode     = "bridge"
         hostname = "void-buildbot-worker-${group.value.name}"
       }
 
       dynamic "volume" {
-        for_each = [ "${group.value.name}" ]
-        labels = [ "${volume.value}_hostdir" ]
+        for_each = ["${group.value.name}"]
+        labels   = ["${volume.value}_hostdir"]
 
         content {
-          type = "host"
-          source = "${volume.value}_hostdir"
+          type      = "host"
+          source    = "${volume.value}_hostdir"
           read_only = false
         }
       }
 
       dynamic "volume" {
-        for_each = [ "${group.value.name}" ]
-        labels = [ "${volume.value}_workdir" ]
+        for_each = ["${group.value.name}"]
+        labels   = ["${volume.value}_workdir"]
 
         content {
-          type = "host"
-          source = "${volume.value}_workdir"
+          type      = "host"
+          source    = "${volume.value}_workdir"
           read_only = false
         }
       }
 
       dynamic "volume" {
-        for_each = [ "${group.value.name}" ]
-        labels = [ "${volume.value}_buildrootdir" ]
+        for_each = ["${group.value.name}"]
+        labels   = ["${volume.value}_buildrootdir"]
 
         content {
-          type = "host"
-          source = "${volume.value}_buildrootdir"
+          type      = "host"
+          source    = "${volume.value}_buildrootdir"
           read_only = false
         }
       }
@@ -58,23 +58,23 @@ job "buildbot-worker" {
         driver = "docker"
 
         config {
-          image = "ghcr.io/void-linux/void-glibc-full:20250616R2"
+          image   = "ghcr.io/void-linux/void-glibc-full:20250616R2"
           command = "chown"
-          args = ["418:418", "/hostdir", "/workdir", "/buildroots"]
+          args    = ["418:418", "/hostdir", "/workdir", "/buildroots"]
         }
 
         volume_mount {
-          volume = "${group.value.name}_hostdir"
+          volume      = "${group.value.name}_hostdir"
           destination = "/hostdir"
         }
 
         volume_mount {
-          volume = "${group.value.name}_workdir"
+          volume      = "${group.value.name}_workdir"
           destination = "/workdir"
         }
 
         volume_mount {
-          volume = "${group.value.name}_buildrootdir"
+          volume      = "${group.value.name}_buildrootdir"
           destination = "/buildroots"
         }
 
@@ -98,28 +98,28 @@ job "buildbot-worker" {
         }
 
         resources {
-          cpu = "${group.value.cpu}"
-          memory = "${group.value.mem}"
+          cpu        = "${group.value.cpu}"
+          memory     = "${group.value.mem}"
           memory_max = "${group.value.mem_max}"
         }
 
         volume_mount {
-          volume = "${group.value.name}_hostdir"
+          volume      = "${group.value.name}_hostdir"
           destination = "/hostdir"
         }
 
         volume_mount {
-          volume = "${group.value.name}_workdir"
+          volume      = "${group.value.name}_workdir"
           destination = "/workdir"
         }
 
         volume_mount {
-          volume = "${group.value.name}_buildrootdir"
+          volume      = "${group.value.name}_buildrootdir"
           destination = "/buildroots"
         }
 
         template {
-          data = <<EOF
+          data        = <<EOF
 {{ range service "buildbot-worker" -}}
 [buildbot]
 host = {{ .Address }}
@@ -133,7 +133,7 @@ EOF
         }
 
         template {
-          data = <<EOF
+          data        = <<EOF
 XBPS_MAKEJOBS=${group.value.jobs}
 XBPS_CHROOT_CMD=uchroot
 XBPS_CCACHE=yes
@@ -149,12 +149,12 @@ EOF
         }
 
         template {
-          data = "Void Build Operators <build-ops@voidlinux.org>"
+          data        = "Void Build Operators <build-ops@voidlinux.org>"
           destination = "local/info/admin"
         }
 
         template {
-          data = <<EOF
+          data        = <<EOF
 Void Linux Buildbot builder for ${group.value.name} running on {{ env "attr.unique.hostname" -}}
 EOF
           destination = "local/info/host"
@@ -162,7 +162,7 @@ EOF
 
         // the builders should use the internal mirror
         template {
-          data = <<EOF
+          data        = <<EOF
 {{ range service "root-pkgs-internal" }}
 {{ if eq "${group.value.name}" "glibc" }}
 repository=http://{{ .Address }}:{{ .Port }}/bootstrap
@@ -193,34 +193,34 @@ EOF
 
         // /usr/share/xbps.d/xbps-arch.conf will mess up xbps-checkvers, so mask it with an empty file
         template {
-          data = <<EOF
+          data        = <<EOF
 # this file intentionally left blank
 EOF
           destination = "local/xbps-arch.conf"
         }
 
         template {
-          data = <<EOF
+          data        = <<EOF
 {{- with nomadVar "nomad/jobs/buildbot-worker" -}}
 {{ .worker_password }}
 {{- end -}}
 EOF
           destination = "secrets/buildbot/worker-password"
-          perms = "400"
-          uid = 418
-          gid = 418
+          perms       = "400"
+          uid         = 418
+          gid         = 418
         }
 
         template {
-          data = <<EOF
+          data        = <<EOF
 {{- with nomadVar "nomad/jobs/buildsync" -}}
 {{ .password }}
 {{- end -}}
 EOF
           destination = "secrets/rsync/password"
-          perms = "400"
-          uid = 418
-          gid = 418
+          perms       = "400"
+          uid         = 418
+          gid         = 418
         }
       }
     }

@@ -1,7 +1,7 @@
 job "infradocs" {
   datacenters = ["VOID"]
-  namespace = "apps"
-  type = "service"
+  namespace   = "apps"
+  type        = "service"
 
   group "app" {
     count = 1
@@ -18,15 +18,15 @@ job "infradocs" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "infradocs.voidlinux.org"
+        nginx_names  = "infradocs.voidlinux.org"
       }
 
       check {
-        type = "http"
+        type         = "http"
         address_mode = "host"
-        path = "/"
-        timeout = "30s"
-        interval = "15s"
+        path         = "/"
+        timeout      = "30s"
+        interval     = "15s"
       }
     }
 

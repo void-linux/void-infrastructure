@@ -1,7 +1,7 @@
 job "alps" {
   datacenters = ["VOID"]
-  namespace = "apps-restricted"
-  type = "service"
+  namespace   = "apps-restricted"
+  type        = "service"
 
   group "app" {
     count = 1
@@ -16,7 +16,7 @@ job "alps" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "alps.s.voidlinux.org alps.voidlinux.org"
+        nginx_names  = "alps.s.voidlinux.org alps.voidlinux.org"
       }
     }
 
@@ -25,7 +25,7 @@ job "alps" {
 
       config {
         image = "ghcr.io/void-linux/infra-alps:9cb23b09"
-        args = ["imaps://mx1.voidlinux.org:993", "smtps://mx1.voidlinux.org:465"]
+        args  = ["imaps://mx1.voidlinux.org:993", "smtps://mx1.voidlinux.org:465"]
       }
     }
   }

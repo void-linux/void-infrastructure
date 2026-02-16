@@ -1,7 +1,7 @@
 job "alertmanager" {
   datacenters = ["VOID"]
-  namespace = "monitoring"
-  type = "service"
+  namespace   = "monitoring"
+  type        = "service"
 
   group "app" {
     count = 1
@@ -16,15 +16,15 @@ job "alertmanager" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "alertmanager.s.voidlinux.org alertmanager.voidlinux.org"
+        nginx_names  = "alertmanager.s.voidlinux.org alertmanager.voidlinux.org"
       }
 
       check {
-        type = "http"
+        type         = "http"
         address_mode = "host"
-        path = "/-/healthy"
-        timeout = "30s"
-        interval = "15s"
+        path         = "/-/healthy"
+        timeout      = "30s"
+        interval     = "15s"
       }
     }
 
@@ -45,7 +45,7 @@ job "alertmanager" {
       }
 
       template {
-        data = <<EOT
+        data        = <<EOT
 global:
 route:
   receiver: 'infra-team'

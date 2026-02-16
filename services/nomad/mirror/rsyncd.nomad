@@ -1,7 +1,7 @@
 job "rsyncd" {
-  type = "system"
+  type        = "system"
   datacenters = ["VOID-MIRROR"]
-  namespace = "mirror"
+  namespace   = "mirror"
 
   group "rsync" {
     network {
@@ -9,8 +9,8 @@ job "rsyncd" {
     }
 
     volume "dist-mirror" {
-      type = "host"
-      source = "dist_mirror"
+      type      = "host"
+      source    = "dist_mirror"
       read_only = true
     }
 
@@ -18,18 +18,18 @@ job "rsyncd" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-rsync:20250114R1"
-        volumes = ["local/voidmirror.conf:/etc/rsyncd.conf.d/voidmirror.conf"]
+        image        = "ghcr.io/void-linux/infra-rsync:20250114R1"
+        volumes      = ["local/voidmirror.conf:/etc/rsyncd.conf.d/voidmirror.conf"]
         network_mode = "host"
       }
 
       volume_mount {
-        volume = "dist-mirror"
+        volume      = "dist-mirror"
         destination = "/srv/rsync"
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 [voidlinux]
 comment = Main Void Repository
 path = /srv/rsync

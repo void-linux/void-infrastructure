@@ -1,21 +1,21 @@
 job "maddy" {
   datacenters = ["VOID-MX"]
-  namespace = "apps-restricted"
-  type = "service"
+  namespace   = "apps-restricted"
+  type        = "service"
 
   group "app" {
     count = 1
 
     volume "maddy_data" {
-      type = "host"
+      type      = "host"
       read_only = false
-      source = "maddy_data"
+      source    = "maddy_data"
     }
 
     volume "netauth_config" {
-      type = "host"
+      type      = "host"
       read_only = true
-      source = "netauth_config"
+      source    = "netauth_config"
     }
 
     network {
@@ -31,20 +31,20 @@ job "maddy" {
       driver = "docker"
 
       volume_mount {
-        volume = "maddy_data"
+        volume      = "maddy_data"
         destination = "/data"
-        read_only = false
+        read_only   = false
       }
 
       volume_mount {
-        volume = "netauth_config"
+        volume      = "netauth_config"
         destination = "/etc/netauth"
-        read_only = true
+        read_only   = true
       }
 
       config {
-        image = "docker.io/foxcpp/maddy:0.7.0"
-        entrypoint = ["/bin/maddy", "--config", "/local/maddy.conf", "run"]
+        image        = "docker.io/foxcpp/maddy:0.7.0"
+        entrypoint   = ["/bin/maddy", "--config", "/local/maddy.conf", "run"]
         network_mode = "host"
       }
 
@@ -53,26 +53,26 @@ job "maddy" {
       }
 
       env {
-        MADDY_DOMAIN = "voidlinux.org"
+        MADDY_DOMAIN   = "voidlinux.org"
         MADDY_HOSTNAME = "mx1.voidlinux.org"
       }
 
       template {
-        data = file("maddy.conf")
+        data        = file("maddy.conf")
         destination = "local/maddy.conf"
-        perms = 644
+        perms       = 644
       }
 
       template {
-        data = "{{ with nomadVar \"nomad/jobs/maddy\" }}{{ .certificate }}{{ end }}"
+        data        = "{{ with nomadVar \"nomad/jobs/maddy\" }}{{ .certificate }}{{ end }}"
         destination = "secrets/tls/fullchain.pem"
-        perms = 400
+        perms       = 400
       }
 
       template {
-        data = "{{ with nomadVar \"nomad/jobs/maddy\" }}{{ .key }}{{ end }}"
+        data        = "{{ with nomadVar \"nomad/jobs/maddy\" }}{{ .key }}{{ end }}"
         destination = "secrets/tls/privkey.pem"
-        perms = 400
+        perms       = 400
       }
     }
   }

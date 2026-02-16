@@ -1,10 +1,10 @@
 job "void-docs" {
   datacenters = ["VOID"]
-  namespace = "apps"
-  type = "batch"
+  namespace   = "apps"
+  type        = "batch"
 
   periodic {
-    crons = ["@hourly"]
+    crons            = ["@hourly"]
     prohibit_overlap = true
   }
 
@@ -12,8 +12,8 @@ job "void-docs" {
     count = 1
 
     volume "root-mirror" {
-      type = "host"
-      source = "root_mirror"
+      type      = "host"
+      source    = "root_mirror"
       read_only = false
     }
 
@@ -27,12 +27,12 @@ job "void-docs" {
       }
 
       env {
-        OUTDIR = "/mirror/docs"
+        OUTDIR   = "/mirror/docs"
         REPO_URL = "https://github.com/void-linux/void-docs.git"
       }
 
       volume_mount {
-        volume = "root-mirror"
+        volume      = "root-mirror"
         destination = "/mirror"
       }
     }

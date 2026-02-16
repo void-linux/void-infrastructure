@@ -1,7 +1,7 @@
 job "terrastate" {
-  type = "service"
+  type        = "service"
   datacenters = ["VOID"]
-  namespace = "infrastructure"
+  namespace   = "infrastructure"
 
   group "terrastate" {
     count = 1
@@ -14,15 +14,15 @@ job "terrastate" {
     }
 
     volume "terrastate_data" {
-      type = "host"
+      type      = "host"
       read_only = false
-      source = "terrastate"
+      source    = "terrastate"
     }
 
     volume "netauth_config" {
-      type = "host"
+      type      = "host"
       read_only = true
-      source = "netauth_config"
+      source    = "netauth_config"
     }
 
     service {
@@ -30,15 +30,15 @@ job "terrastate" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "terrastate.s.voidlinux.org"
+        nginx_names  = "terrastate.s.voidlinux.org"
       }
 
       check {
-        type = "http"
+        type         = "http"
         address_mode = "host"
-        path = "/healthz"
-        timeout = "30s"
-        interval = "15s"
+        path         = "/healthz"
+        timeout      = "30s"
+        interval     = "15s"
       }
     }
 
@@ -47,30 +47,30 @@ job "terrastate" {
 
       config {
         image = "ghcr.io/the-maldridge/terrastate:v1.2.4"
-        init = true
+        init  = true
       }
 
       env {
-        AUTHWARE_BASIC_MECHS = "htpasswd:netauth"
+        AUTHWARE_BASIC_MECHS   = "htpasswd:netauth"
         AUTHWARE_HTPASSWD_FILE = "/secrets/.htpasswd"
-        AUTHWARE_HTGROUP_FILE = "/secrets/.htgroup"
-        TS_BITCASK_PATH = "/data"
-        TS_STORE = "bitcask"
+        AUTHWARE_HTGROUP_FILE  = "/secrets/.htgroup"
+        TS_BITCASK_PATH        = "/data"
+        TS_STORE               = "bitcask"
       }
 
       volume_mount {
-        volume = "terrastate_data"
+        volume      = "terrastate_data"
         destination = "/data"
-        read_only = false
+        read_only   = false
       }
       volume_mount {
-        volume = "netauth_config"
+        volume      = "netauth_config"
         destination = "/etc/netauth"
-        read_only = true
+        read_only   = true
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 _terraform:{{ with nomadVar "nomad/jobs/terrastate" }}{{ .hashed_passwd }}{{ end }}
 EOF
         destination = "${NOMAD_SECRETS_DIR}/.htpasswd"
@@ -78,7 +78,7 @@ EOF
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 terrastate-tls: _terraform
 EOF
         destination = "${NOMAD_SECRETS_DIR}/.htgroup"

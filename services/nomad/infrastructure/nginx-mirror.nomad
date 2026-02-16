@@ -1,7 +1,7 @@
 job "nginx" {
-  type = "system"
+  type        = "system"
   datacenters = ["VOID-MIRROR"]
-  namespace = "mirror"
+  namespace   = "mirror"
 
   group "nginx" {
     network {
@@ -9,12 +9,12 @@ job "nginx" {
     }
 
     dynamic "volume" {
-      for_each = [ "mirror", "sources", ]
-      labels = [ "dist-${volume.value}" ]
+      for_each = ["mirror", "sources", ]
+      labels   = ["dist-${volume.value}"]
 
       content {
-        type = "host"
-        source = "dist_${volume.value}"
+        type      = "host"
+        source    = "dist_${volume.value}"
         read_only = true
       }
     }
@@ -23,15 +23,15 @@ job "nginx" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20250719R1"
+        image        = "ghcr.io/void-linux/infra-nginx:20250719R1"
         network_mode = "host"
       }
 
       dynamic "volume_mount" {
-        for_each = [ "mirror", "sources", ]
+        for_each = ["mirror", "sources", ]
 
         content {
-          volume = "dist-${volume_mount.value}"
+          volume      = "dist-${volume_mount.value}"
           destination = "/srv/www/${volume_mount.value}"
         }
       }
@@ -43,9 +43,9 @@ job "nginx" {
         ]
 
         content {
-          data = file("nginx-sites/${template.value}")
+          data        = file("nginx-sites/${template.value}")
           destination = "secrets/certs/${template.value}"
-          perms = 400
+          perms       = 400
           change_mode = "signal"
         }
       }
@@ -63,9 +63,9 @@ job "nginx" {
         ]
 
         content {
-          data = file("nginx-sites/${template.value}")
+          data        = file("nginx-sites/${template.value}")
           destination = "local/nginx/${template.value}"
-          perms = 400
+          perms       = 400
           change_mode = "signal"
         }
       }

@@ -1,7 +1,7 @@
 job "etherpad" {
-  type = "service"
+  type        = "service"
   datacenters = ["VOID"]
-  namespace = "apps"
+  namespace   = "apps"
 
   group "etherpad" {
     network {
@@ -14,14 +14,14 @@ job "etherpad" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "pad.voidlinux.org"
+        nginx_names  = "pad.voidlinux.org"
       }
     }
 
     volume "etherpad" {
-      type = "host"
+      type      = "host"
       read_only = false
-      source = "etherpad-data"
+      source    = "etherpad-data"
     }
 
     task "app" {
@@ -32,15 +32,15 @@ job "etherpad" {
       }
 
       env {
-        DB_FILENAME="/data/db.json"
-        SUPPRESS_ERRORS_IN_PAD_TEXT="false"
-        TRUST_PROXY="true"
+        DB_FILENAME                 = "/data/db.json"
+        SUPPRESS_ERRORS_IN_PAD_TEXT = "false"
+        TRUST_PROXY                 = "true"
       }
 
       volume_mount {
-        volume = "etherpad"
+        volume      = "etherpad"
         destination = "/data"
-        read_only = false
+        read_only   = false
       }
     }
   }

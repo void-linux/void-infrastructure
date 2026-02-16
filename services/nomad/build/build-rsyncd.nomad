@@ -1,40 +1,40 @@
 job "build-rsyncd" {
-  type = "service"
+  type        = "service"
   datacenters = ["VOID"]
-  namespace = "build"
+  namespace   = "build"
 
   group "rsync" {
     count = 1
     network {
       mode = "bridge"
       port "rsync" {
-        to = 873
+        to           = 873
         host_network = "internal"
       }
     }
 
     volume "glibc_hostdir" {
-      type = "host"
-      source = "glibc_hostdir"
+      type      = "host"
+      source    = "glibc_hostdir"
       read_only = false
     }
 
     volume "root_mirror" {
-      type = "host"
-      source = "root_mirror"
+      type      = "host"
+      source    = "root_mirror"
       read_only = false
     }
 
     volume "incoming_pkgs" {
-      type = "host"
-      source = "incoming_pkgs"
+      type      = "host"
+      source    = "incoming_pkgs"
       read_only = false
     }
 
     service {
       provider = "nomad"
-      name = "build-rsyncd"
-      port = "rsync"
+      name     = "build-rsyncd"
+      port     = "rsync"
     }
 
     task "rsyncd" {
@@ -45,43 +45,43 @@ job "build-rsyncd" {
       }
 
       resources {
-        memory = 1500
+        memory     = 1500
         memory_max = 3000
       }
 
       volume_mount {
-        volume = "glibc_hostdir"
+        volume      = "glibc_hostdir"
         destination = "/hostdir"
       }
 
       volume_mount {
-        volume = "root_mirror"
+        volume      = "root_mirror"
         destination = "/mirror"
       }
 
       volume_mount {
-        volume = "incoming_pkgs"
+        volume      = "incoming_pkgs"
         destination = "/incoming"
       }
 
       template {
-        data = file("rsync-post-xfer")
+        data        = file("rsync-post-xfer")
         destination = "local/rsync-post-xfer"
-        perms = "0755"
+        perms       = "0755"
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 {{- with nomadVar "nomad/jobs/buildsync" }}
 buildsync:{{ .password }}
 {{- end }}
 EOF
         destination = "secrets/buildsync.secrets"
-        perms = "0400"
+        perms       = "0400"
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 [global]
 uid = 418
 gid = 418
@@ -110,7 +110,7 @@ EOF
         ]
 
         content {
-          data = <<EOF
+          data        = <<EOF
 [incoming-${template.value}]
 path = /incoming/${template.value}
 auth users = buildsync:rw

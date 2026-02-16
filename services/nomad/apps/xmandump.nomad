@@ -1,10 +1,10 @@
 job "xmandump" {
   datacenters = ["VOID"]
-  namespace = "apps"
-  type = "batch"
+  namespace   = "apps"
+  type        = "batch"
 
   periodic {
-    crons = ["@daily"]
+    crons            = ["@daily"]
     prohibit_overlap = true
   }
 
@@ -13,12 +13,12 @@ job "xmandump" {
 
     restart {
       attempts = 0
-      mode = "fail"
+      mode     = "fail"
     }
 
     volume "root-mirror" {
-      type = "host"
-      source = "root_mirror"
+      type      = "host"
+      source    = "root_mirror"
       read_only = false
     }
 
@@ -30,7 +30,7 @@ job "xmandump" {
       }
 
       volume_mount {
-        volume = "root-mirror"
+        volume      = "root-mirror"
         destination = "/mirror"
       }
 

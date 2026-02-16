@@ -1,10 +1,10 @@
 job "void-updates" {
   datacenters = ["VOID"]
-  namespace = "apps"
-  type = "batch"
+  namespace   = "apps"
+  type        = "batch"
 
   periodic {
-    crons = ["0 4 * * *"]
+    crons            = ["0 4 * * *"]
     prohibit_overlap = true
   }
 
@@ -14,8 +14,8 @@ job "void-updates" {
     network { mode = "bridge" }
 
     volume "root-mirror" {
-      type = "host"
-      source = "root_mirror"
+      type      = "host"
+      source    = "root_mirror"
       read_only = false
     }
 
@@ -35,7 +35,7 @@ job "void-updates" {
       }
 
       volume_mount {
-        volume = "root-mirror"
+        volume      = "root-mirror"
         destination = "/mirror"
       }
     }

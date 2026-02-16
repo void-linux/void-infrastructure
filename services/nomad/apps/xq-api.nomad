@@ -1,21 +1,21 @@
 job "xq-api" {
   datacenters = ["VOID-MIRROR"]
-  namespace = "apps"
-  type = "system"
+  namespace   = "apps"
+  type        = "system"
 
   # FIXME: b-hel-fi is not currently syncing
   constraint {
     attribute = "${node.unique.name}"
-    operator = "set_contains_any"
-    value = "d-hel-fi,a-fra-de"
+    operator  = "set_contains_any"
+    value     = "d-hel-fi,a-fra-de"
   }
 
   group "xq-api" {
     count = 1
 
     volume "dist_mirror" {
-      type = "host"
-      source = "dist_mirror"
+      type      = "host"
+      source    = "dist_mirror"
       read_only = true
     }
 
@@ -29,7 +29,7 @@ job "xq-api" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "xq-api.voidlinux.org"
+        nginx_names  = "xq-api.voidlinux.org"
       }
     }
 
@@ -41,7 +41,7 @@ job "xq-api" {
       }
 
       volume_mount {
-        volume = "dist_mirror"
+        volume      = "dist_mirror"
         destination = "/mirror"
       }
 
