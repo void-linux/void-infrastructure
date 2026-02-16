@@ -114,8 +114,8 @@ EOF
             { name = "x86_64-musl",  host = "x86_64-musl",                          worker = "musl",   },
             { name = "armv7l-musl",  host = "x86_64-musl", target = "armv7l-musl",  worker = "musl",   },
             { name = "armv6l-musl",  host = "x86_64-musl", target = "armv6l-musl",  worker = "musl",   },
-            { name = "aarch64",      host = "aarch64",                              worker = "aarch64" },
-            { name = "aarch64-musl", host = "aarch64-musl",                         worker = "aarch64" },
+            { name = "aarch64",      host = "x86_64",      target = "aarch64",      worker = "aarch64" },
+            { name = "aarch64-musl", host = "x86_64-musl", target = "aarch64-musl", worker = "aarch64" },
           ],
         })
         destination = "local/workers.json"
