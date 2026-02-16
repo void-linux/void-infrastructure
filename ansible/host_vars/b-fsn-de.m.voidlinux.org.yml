@@ -10,12 +10,12 @@ nomad_host_volumes:
   - name: ccache
     path: /hostdir/ccache
     read_only: true
-  - name: musl_hostdir
+  - name: aarch64_hostdir
     path: /hostdir
     read_only: false
-  - name: musl_workdir
+  - name: aarch64_workdir
     path: /workdir
     read_only: false
-  - name: musl_buildrootdir
+  - name: aarch64_buildrootdir
     path: /buildroot
     read_only: false
