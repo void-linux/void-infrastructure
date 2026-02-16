@@ -37,7 +37,7 @@ job "buildsync" {
         template {
           data = <<EOF
 {{- with nomadVar "nomad/jobs/buildsync" -}}
-{{.${group.value}_password}}
+{{.password}}
 {{- end -}}
 EOF
           destination = "secrets/rsync_passwd"
@@ -56,7 +56,7 @@ sync {
     default.rsync,
     source = "/hostdir/sources",
     {{- range nomadService 1 $allocID "build-rsyncd" -}}
-    target = "rsync://buildsync-${group.value}@{{ .Address }}:{{ .Port }}/sources",
+    target = "rsync://buildsync@{{ .Address }}:{{ .Port }}/sources",
     {{- end -}}
     delay = 15,
     filter = {
