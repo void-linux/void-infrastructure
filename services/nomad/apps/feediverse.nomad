@@ -1,7 +1,7 @@
 job "feediverse" {
-  type = "service"
+  type        = "service"
   datacenters = ["VOID"]
-  namespace = "apps"
+  namespace   = "apps"
 
   group "feediverse" {
     network {
@@ -10,8 +10,8 @@ job "feediverse" {
 
     ephemeral_disk {
       migrate = true
-      size = 200
-      sticky = true
+      size    = 200
+      sticky  = true
     }
 
     task "app" {
@@ -22,14 +22,14 @@ job "feediverse" {
       }
 
       env {
-        VERBOSE = 1
+        VERBOSE     = 1
         CONFIG_FILE = "/secrets/config.yaml"
-        STATE_FILE = "/alloc/data/state.json"
-        DEDUPE = "url"
+        STATE_FILE  = "/alloc/data/state.json"
+        DEDUPE      = "url"
       }
 
       template {
-        data = <<EOT
+        data        = <<EOT
 {{- with nomadVar "nomad/jobs/feediverse" }}
 access_token: "{{ .access_token }}"
 client_id: "{{ .client_id }}"

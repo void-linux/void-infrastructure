@@ -1,12 +1,12 @@
 job "ccache_exporter" {
-  type = "service"
-  namespace = "monitoring"
+  type        = "service"
+  namespace   = "monitoring"
   datacenters = ["VOID"]
 
   dynamic "group" {
     for_each = {
-      glibc = { host = "a-fsn-de", size = "16GB" }
-      musl = { host = "a-hel-fi", size = "8GB" }
+      glibc   = { host = "a-fsn-de", size = "16GB" }
+      musl    = { host = "a-hel-fi", size = "8GB" }
       aarch64 = { host = "b-fsn-de", size = "16GB" }
     }
 
@@ -15,13 +15,13 @@ job "ccache_exporter" {
     content {
       constraint {
         attribute = "${node.unique.name}"
-        value = group.value.host
+        value     = group.value.host
       }
 
       volume "ccache" {
-        type = "host"
+        type      = "host"
         read_only = true
-        source = "ccache"
+        source    = "ccache"
       }
 
       network {
@@ -38,14 +38,14 @@ job "ccache_exporter" {
         driver = "docker"
 
         volume_mount {
-          volume = "ccache"
+          volume      = "ccache"
           destination = "/ccache"
-          read_only = true
+          read_only   = true
         }
 
         config {
           image = "ghcr.io/duncaen/ccache_exporter:v0.0.1"
-          args = ["-ccache-dir", "/ccache", "-ccache-size", group.value.size]
+          args  = ["-ccache-dir", "/ccache", "-ccache-size", group.value.size]
         }
       }
     }

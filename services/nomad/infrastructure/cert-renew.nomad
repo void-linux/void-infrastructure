@@ -1,7 +1,7 @@
 job "cert-renew" {
   datacenters = ["VOID"]
-  namespace = "infrastructure"
-  type = "batch"
+  namespace   = "infrastructure"
+  type        = "batch"
 
   periodic {
     crons = ["@weekly"]
@@ -16,7 +16,7 @@ job "cert-renew" {
       driver = "docker"
 
       config {
-        image = "docker.io/hashicorp/terraform:1.14.3"
+        image      = "docker.io/hashicorp/terraform:1.14.3"
         entrypoint = ["/local/entrypoint"]
       }
 
@@ -25,30 +25,30 @@ job "cert-renew" {
       }
 
       env {
-        TF_HTTP_USERNAME="_terraform"
-        NOMAD_ADDR="unix://${NOMAD_SECRETS_DIR}/api.sock"
+        TF_HTTP_USERNAME = "_terraform"
+        NOMAD_ADDR       = "unix://${NOMAD_SECRETS_DIR}/api.sock"
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 {{ with nomadVar "nomad/jobs/cert-renew" }}
 TF_HTTP_PASSWORD={{.terraform_password}}
 DO_AUTH_TOKEN={{.digitalocean_token}}
 {{ end }}
 EOF
         destination = "${NOMAD_SECRETS_DIR}/env"
-        env = true
+        env         = true
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 #!/bin/sh
 cd /local
 terraform init
 terraform apply -auto-approve
 EOF
         destination = "local/entrypoint"
-        perms = "755"
+        perms       = "755"
       }
 
       dynamic "artifact" {

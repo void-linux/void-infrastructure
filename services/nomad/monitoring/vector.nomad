@@ -5,9 +5,9 @@ job "vector" {
     "VOID-MIRROR",
     "VOID-CONTROL",
   ]
-  namespace   = "monitoring"
-  type        = "system"
-  priority    = 99
+  namespace = "monitoring"
+  type      = "system"
+  priority  = 99
 
   group "vector" {
     network {
@@ -25,7 +25,7 @@ job "vector" {
       port = "metrics"
       meta {
         nginx_enable = "true"
-        nginx_names = "vector-tmp.voidlinux.org"
+        nginx_names  = "vector-tmp.voidlinux.org"
       }
     }
 
@@ -81,8 +81,8 @@ job "vector" {
             }
           }
         })
-        destination = "local/vector.yaml"
-        left_delimiter = "[["
+        destination     = "local/vector.yaml"
+        left_delimiter  = "[["
         right_delimiter = "]]"
       }
     }

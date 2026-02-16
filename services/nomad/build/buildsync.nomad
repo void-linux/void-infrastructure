@@ -1,23 +1,23 @@
 job "buildsync" {
-  type = "service"
+  type        = "service"
   datacenters = ["VOID"]
-  namespace = "build"
+  namespace   = "build"
 
   dynamic "group" {
-    for_each = [ "aarch64", "musl", ]
-    labels = [ "buildsync-${group.value}" ]
+    for_each = ["aarch64", "musl", ]
+    labels   = ["buildsync-${group.value}"]
 
     content {
       count = 1
       network { mode = "bridge" }
 
       dynamic "volume" {
-        for_each = [ "${group.value}" ]
-        labels = [ "${volume.value}_hostdir" ]
+        for_each = ["${group.value}"]
+        labels   = ["${volume.value}_hostdir"]
 
         content {
-          type = "host"
-          source = "${volume.value}_hostdir"
+          type      = "host"
+          source    = "${volume.value}_hostdir"
           read_only = true
         }
       }
@@ -30,22 +30,22 @@ job "buildsync" {
         }
 
         volume_mount {
-          volume = "${group.value}_hostdir"
+          volume      = "${group.value}_hostdir"
           destination = "/hostdir"
         }
 
         template {
-          data = <<EOF
+          data        = <<EOF
 {{- with nomadVar "nomad/jobs/buildsync" -}}
 {{.password}}
 {{- end -}}
 EOF
           destination = "secrets/rsync_passwd"
-          perms = "0400"
+          perms       = "0400"
         }
 
         template {
-          data = <<EOF
+          data        = <<EOF
 {{ $allocID := env "NOMAD_ALLOC_ID" -}}
 settings {
     statusFile = "/tmp/lsyncd.status",
@@ -74,7 +74,7 @@ sync {
 }
 EOF
           destination = "local/lsyncd.conf"
-          perms = "0644"
+          perms       = "0644"
         }
       }
     }

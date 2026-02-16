@@ -1,10 +1,10 @@
 job "popcorn-report" {
   datacenters = ["VOID-MIRROR"]
-  namespace = "apps"
-  type = "batch"
+  namespace   = "apps"
+  type        = "batch"
 
   periodic {
-    crons = ["@daily"]
+    crons            = ["@daily"]
     prohibit_overlap = true
   }
 
@@ -14,8 +14,8 @@ job "popcorn-report" {
     network { mode = "bridge" }
 
     volume "popcorn_data" {
-      type = "host"
-      source = "popcorn_data"
+      type      = "host"
+      source    = "popcorn_data"
       read_only = false
     }
 
@@ -23,12 +23,12 @@ job "popcorn-report" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-popcorn:20240704R1"
+        image   = "ghcr.io/void-linux/infra-popcorn:20240704R1"
         command = "/local/popcorn-report"
       }
 
       volume_mount {
-        volume = "popcorn_data"
+        volume      = "popcorn_data"
         destination = "/data"
       }
 
@@ -37,7 +37,7 @@ job "popcorn-report" {
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 #!/bin/sh
 {{ range service "popcorn-statrepo" }}
 exec popcornctl --server "{{ .Address }}" --port "{{ .Port }}" \
@@ -45,17 +45,17 @@ exec popcornctl --server "{{ .Address }}" --port "{{ .Port }}" \
 {{ end }}
 EOF
         destination = "local/popcorn-report"
-        perms = "755"
+        perms       = "755"
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 {{- with nomadVar "nomad/jobs/popcorn" -}}
 POPCORN_KEY={{.reset_key}}
 {{- end -}}
 EOF
         destination = "secrets/env"
-        env = true
+        env         = true
       }
     }
   }

@@ -1,7 +1,7 @@
 job "popcorn" {
   datacenters = ["VOID-MIRROR"]
-  namespace = "apps"
-  type = "service"
+  namespace   = "apps"
+  type        = "service"
 
   group "webserver" {
     count = 1
@@ -12,8 +12,8 @@ job "popcorn" {
     }
 
     volume "popcorn_data" {
-      type = "host"
-      source = "popcorn_data"
+      type      = "host"
+      source    = "popcorn_data"
       read_only = true
     }
 
@@ -22,7 +22,7 @@ job "popcorn" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "popcorn.voidlinux.org"
+        nginx_names  = "popcorn.voidlinux.org"
       }
     }
 
@@ -34,7 +34,7 @@ job "popcorn" {
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 server {
     server_name popcorn;
     listen 0.0.0.0:80 default_server;
@@ -50,9 +50,9 @@ EOF
       }
 
       volume_mount {
-        volume = "popcorn_data"
+        volume      = "popcorn_data"
         destination = "/srv/www"
-        read_only = true
+        read_only   = true
       }
     }
   }
@@ -77,8 +77,8 @@ EOF
     }
 
     volume "popcorn_data" {
-      type = "host"
-      source = "popcorn_data"
+      type      = "host"
+      source    = "popcorn_data"
       read_only = false
     }
 
@@ -86,7 +86,7 @@ EOF
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-popcorn:20240704R1"
+        image   = "ghcr.io/void-linux/infra-popcorn:20240704R1"
         command = "statrepo"
         args = [
           "--addr", "0.0.0.0",
@@ -97,17 +97,17 @@ EOF
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 {{- with nomadVar "nomad/jobs/popcorn" -}}
 POPCORN_KEY={{.reset_key}}
 {{- end -}}
 EOF
         destination = "secrets/env"
-        env = true
+        env         = true
       }
 
       volume_mount {
-        volume = "popcorn_data"
+        volume      = "popcorn_data"
         destination = "/var/lib/popcorn"
       }
     }
@@ -116,7 +116,7 @@ EOF
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-popcorn:20240704R1"
+        image   = "ghcr.io/void-linux/infra-popcorn:20240704R1"
         command = "pqueryd"
         args = [
           "--checkpoint_enabled=false",
@@ -132,9 +132,9 @@ EOF
       }
 
       volume_mount {
-        volume = "popcorn_data"
+        volume      = "popcorn_data"
         destination = "/data"
-        read_only = true
+        read_only   = true
       }
     }
   }

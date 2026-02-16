@@ -1,14 +1,14 @@
 job "timefiles" {
-  type = "service"
+  type        = "service"
   datacenters = ["VOID"]
-  namespace = "build"
+  namespace   = "build"
 
   group "timefiles" {
     count = 1
 
     volume "root_mirror" {
-      type = "host"
-      source = "root_mirror"
+      type      = "host"
+      source    = "root_mirror"
       read_only = false
     }
 
@@ -16,17 +16,17 @@ job "timefiles" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/void-glibc:20240526R1"
+        image   = "ghcr.io/void-linux/void-glibc:20240526R1"
         command = "/local/run.sh"
       }
 
       volume_mount {
-        volume = "root_mirror"
+        volume      = "root_mirror"
         destination = "/mirror"
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 #!/bin/sh
 
 while true ; do
@@ -40,7 +40,7 @@ while true ; do
 done
 EOF
         destination = "local/run.sh"
-        perms = "0755"
+        perms       = "0755"
       }
     }
   }

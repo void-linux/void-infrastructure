@@ -14,11 +14,11 @@ job "vmlogs" {
     }
 
     service {
-      name     = "vmlogs"
-      port     = "http"
+      name = "vmlogs"
+      port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "vmlogs.voidlinux.org"
+        nginx_names  = "vmlogs.voidlinux.org"
       }
     }
 

@@ -1,7 +1,7 @@
 job "ssl-exporter" {
   datacenters = ["VOID"]
-  namespace = "monitoring"
-  type = "service"
+  namespace   = "monitoring"
+  type        = "service"
 
   group "app" {
     count = 1
@@ -9,7 +9,7 @@ job "ssl-exporter" {
     network {
       mode = "bridge"
       port "http" {
-        to = 9219
+        to     = 9219
         static = 9219
       }
     }
@@ -19,11 +19,11 @@ job "ssl-exporter" {
       port = "http"
 
       check {
-        type = "http"
+        type         = "http"
         address_mode = "host"
-        path = "/"
-        timeout = "30s"
-        interval = "15s"
+        path         = "/"
+        timeout      = "30s"
+        interval     = "15s"
       }
     }
 
@@ -33,7 +33,7 @@ job "ssl-exporter" {
       config {
         image = "ribbybibby/ssl-exporter:2.4.0"
         ports = ["http"]
-        args = ["--config.file=/local/conf.yaml"]
+        args  = ["--config.file=/local/conf.yaml"]
       }
 
       template {

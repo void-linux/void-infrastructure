@@ -1,21 +1,21 @@
 job "grafana" {
   datacenters = ["VOID"]
-  namespace = "monitoring"
-  type = "service"
+  namespace   = "monitoring"
+  type        = "service"
 
   group "app" {
     count = 1
 
     volume "grafana" {
-      type = "host"
+      type      = "host"
       read_only = false
-      source = "grafana"
+      source    = "grafana"
     }
 
     volume "netauth_config" {
-      type = "host"
+      type      = "host"
       read_only = true
-      source = "netauth_config"
+      source    = "netauth_config"
     }
 
     network {
@@ -28,15 +28,15 @@ job "grafana" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "grafana.s.voidlinux.org grafana.voidlinux.org"
+        nginx_names  = "grafana.s.voidlinux.org grafana.voidlinux.org"
       }
 
       check {
-        type = "http"
+        type         = "http"
         address_mode = "alloc"
-        path = "/healthz"
-        timeout = "30s"
-        interval = "15s"
+        path         = "/healthz"
+        timeout      = "30s"
+        interval     = "15s"
       }
     }
 
@@ -44,9 +44,9 @@ job "grafana" {
       driver = "docker"
 
       volume_mount {
-        volume = "grafana"
+        volume      = "grafana"
         destination = "/var/lib/grafana"
-        read_only = false
+        read_only   = false
       }
 
       config {
@@ -54,17 +54,17 @@ job "grafana" {
       }
 
       env {
-        GF_AUTH_ANONYMOUS_ENABLED="true"
-        GF_AUTH_ANONYMOUS_ORG_NAME="Main Org."
-        GF_AUTH_ANONYMOUS_ORG_ROLE="Viewer"
-        GF_AUTH_LDAP_ALLOW_SIGN_UP="true"
-        GF_AUTH_LDAP_CONFIG_FILE="/local/ldap.toml"
-        GF_AUTH_LDAP_ENABLED="true"
-        GF_INSTALL_PLUGINS="victoriametrics-logs-datasource"
+        GF_AUTH_ANONYMOUS_ENABLED  = "true"
+        GF_AUTH_ANONYMOUS_ORG_NAME = "Main Org."
+        GF_AUTH_ANONYMOUS_ORG_ROLE = "Viewer"
+        GF_AUTH_LDAP_ALLOW_SIGN_UP = "true"
+        GF_AUTH_LDAP_CONFIG_FILE   = "/local/ldap.toml"
+        GF_AUTH_LDAP_ENABLED       = "true"
+        GF_INSTALL_PLUGINS         = "victoriametrics-logs-datasource"
       }
 
-        template {
-          data = <<EOT
+      template {
+        data        = <<EOT
 [[servers]]
 host = "localhost"
 port = 389
@@ -90,18 +90,18 @@ org_role = "Editor"
 group_dn = "*"
 org_role = "Viewer"
 EOT
-          perms = 644
-          destination = "local/ldap.toml"
-        }
+        perms       = 644
+        destination = "local/ldap.toml"
+      }
     }
 
     task "ldap" {
       driver = "docker"
 
       volume_mount {
-        volume = "netauth_config"
+        volume      = "netauth_config"
         destination = "/etc/netauth"
-        read_only = true
+        read_only   = true
       }
 
       config {

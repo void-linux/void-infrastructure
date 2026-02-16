@@ -1,21 +1,21 @@
 job "debuginfod" {
   datacenters = ["VOID"]
-  namespace = "apps"
-  type = "service"
+  namespace   = "apps"
+  type        = "service"
 
   group "app" {
     count = 1
 
     volume "binpkgs" {
-      type = "host"
+      type      = "host"
       read_only = true
-      source = "root-pkgs"
+      source    = "root-pkgs"
     }
 
     volume "debuginfod" {
-      type = "host"
+      type      = "host"
       read_only = false
-      source = "debuginfod-data"
+      source    = "debuginfod-data"
     }
 
     network {
@@ -30,15 +30,15 @@ job "debuginfod" {
       port = "http"
       meta {
         nginx_enable = "true"
-        nginx_names = "debuginfod.s.voidlinux.org debuginfod.voidlinux.org"
+        nginx_names  = "debuginfod.s.voidlinux.org debuginfod.voidlinux.org"
       }
 
       check {
-        type = "http"
+        type         = "http"
         address_mode = "host"
-        path = "/metrics"
-        timeout = "30s"
-        interval = "15s"
+        path         = "/metrics"
+        timeout      = "30s"
+        interval     = "15s"
       }
     }
 
@@ -46,15 +46,15 @@ job "debuginfod" {
       driver = "docker"
 
       volume_mount {
-        volume = "binpkgs"
+        volume      = "binpkgs"
         destination = "/binpkgs"
-        read_only = true
+        read_only   = true
       }
 
       volume_mount {
-        volume = "debuginfod"
+        volume      = "debuginfod"
         destination = "/debuginfod"
-        read_only = false
+        read_only   = false
       }
 
       config {
@@ -73,12 +73,12 @@ job "debuginfod" {
 
       resources {
         memory = 8000
-        cpu = 6000
+        cpu    = 6000
       }
 
       restart {
         attempts = 100
-        delay = "30s"
+        delay    = "30s"
       }
     }
   }

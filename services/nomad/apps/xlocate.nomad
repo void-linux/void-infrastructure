@@ -1,10 +1,10 @@
 job "xlocate" {
   datacenters = ["VOID"]
-  namespace = "apps"
-  type = "batch"
+  namespace   = "apps"
+  type        = "batch"
 
   periodic {
-    crons = ["0 6 * * *"]
+    crons            = ["0 6 * * *"]
     prohibit_overlap = true
   }
 
@@ -14,8 +14,8 @@ job "xlocate" {
     network { mode = "bridge" }
 
     volume "root-mirror" {
-      type = "host"
-      source = "root_mirror"
+      type      = "host"
+      source    = "root_mirror"
       read_only = false
     }
 
@@ -23,8 +23,8 @@ job "xlocate" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-xlocate:20231024R1"
-        volumes = [ "local/xbps.conf:/etc/xbps.d/00-repository-main.conf" ]
+        image   = "ghcr.io/void-linux/infra-xlocate:20231024R1"
+        volumes = ["local/xbps.conf:/etc/xbps.d/00-repository-main.conf"]
       }
 
       resources {
@@ -36,12 +36,12 @@ job "xlocate" {
       }
 
       volume_mount {
-        volume = "root-mirror"
+        volume      = "root-mirror"
         destination = "/mirror"
       }
 
       template {
-        data = <<EOF
+        data        = <<EOF
 repository=/mirror/current
 repository=/mirror/current/nonfree
 repository=/mirror/current/multilib

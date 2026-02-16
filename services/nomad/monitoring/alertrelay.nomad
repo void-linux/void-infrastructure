@@ -1,6 +1,6 @@
 job "alertrelay" {
-  type = "service"
-  namespace = "monitoring"
+  type        = "service"
+  namespace   = "monitoring"
   datacenters = ["VOID"]
 
   group "app" {
@@ -19,7 +19,7 @@ job "alertrelay" {
 
       config {
         image = "maldridge/alertmanager-irc-relay:v0.4.1"
-        args = ["--config=/local/config.yml"]
+        args  = ["--config=/local/config.yml"]
       }
 
       resources {
@@ -27,7 +27,7 @@ job "alertrelay" {
       }
 
       template {
-        data = <<EOT
+        data        = <<EOT
 ---
 http_host: 0.0.0.0
 http_port: 21225
@@ -45,11 +45,11 @@ EOT
       }
 
       template {
-        data = <<EOT
+        data        = <<EOT
 NICKSERV_PASSWORD={{ with nomadVar "nomad/jobs/alertrelay" }}{{ .password }}{{end}}
 EOT
         destination = "secrets/env"
-        env = true
+        env         = true
       }
     }
   }
