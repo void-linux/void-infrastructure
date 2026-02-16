@@ -3,6 +3,7 @@
   xbps:
     pkg: consul
     state: present
+  tags: [install_consul]
 
 - name: Install Core Configuration
   template:
