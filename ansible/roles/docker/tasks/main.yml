@@ -3,6 +3,7 @@
   xbps:
     pkg: docker
     state: present
+  tags: [install_docker]
 
 - name: Create config directory
   file:
@@ -11,6 +12,7 @@
     owner: root
     group: root
     mode: 0755
+  tags: [install_docker]
 
 - name: Install daemon.json
   template:
@@ -21,6 +23,7 @@
     mode: 0644
   notify:
     - docker
+  tags: [install_docker, configure_docker]
 
 - name: Install Firewall Rules
   copy:
@@ -31,9 +34,11 @@
     mode: 0640
   notify:
     - iptables
+  tags: [install_docker, configure_docker]
 
 - name: Enable Service
   service:
     name: docker
     state: started
     enabled: true
+  tags: [install_docker, enable_docker]

@@ -3,6 +3,7 @@
   xbps:
     pkg: nomad
     state: present
+  tags: [install_nomad]
 
 - name: Install base configuration
   template:
