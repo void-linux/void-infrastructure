@@ -1,24 +1,29 @@
 ---
-- hosts: localhost
-  gather_facts: no
+- name: Generate Network Keys
+  hosts: localhost
+  gather_facts: true
   tasks:
     - name: Create secret directory
-      file:
+      ansible.builtin.file:
         path: secret/vpn
         state: directory
+        owner: "{{ ansible_facts['user_id'] }}"
+        group: "{{ ansible_facts['user_id'] }}"
+        mode: "0750"
 
     - name: Create wireguard keys
-      shell: wg genkey | tee {{item}} | wg pubkey > {{item}}.pub
+      ansible.builtin.shell: wg genkey | tee {{ item }} | wg pubkey > {{ item }}.pub
       args:
-        creates: "{{item}}.pub"
+        creates: "{{ item }}.pub"
         chdir: secret/vpn
       with_items: "{{ groups['prod'] | difference(groups['unmanaged']) }}"
 
-- hosts: prod:!unmanaged
-  become: yes
+- name: Install Mesh Network Configuration
+  hosts: prod:!unmanaged
+  become: true
   become_user: root
-  become_method: sudo
-  gather_facts: no
+  become_method: ansible.builtin.sudo
+  gather_facts: false
   strategy: ansible.builtin.host_pinned
   roles:
-    - void-mesh
+    - void_mesh

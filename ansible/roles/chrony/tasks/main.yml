@@ -1,11 +1,11 @@
 ---
 - name: Install Packages
-  xbps:
+  community.general.xbps:
     name: chrony
     state: present
 
 - name: Enable Service
-  runit:
+  community.general.runit:
     name: ntpd
     state: started
     enabled: true

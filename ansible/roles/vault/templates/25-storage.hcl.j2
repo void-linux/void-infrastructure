@@ -1,4 +1,4 @@
-#jinja2: lstrip_blocks: "True", trim_blocks: "True"
+#jinja2: lstrip_blocks: True, trim_blocks: True
 storage "raft" {
   path = "/var/lib/vault"
   node_id = "{{ inventory_hostname }}"

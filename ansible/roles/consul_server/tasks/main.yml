@@ -1,10 +1,10 @@
 ---
 - name: Install Server Configuration
-  template:
+  ansible.builtin.template:
     src: 40-server.hcl.j2
     dest: /etc/consul.d/40-server.hcl
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - consul

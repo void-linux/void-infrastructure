@@ -1,4 +1,5 @@
 ---
-- name: netauthd
-  debug:
+- name: Restart Netauthd
+  listen: netauthd
+  ansible.builtin.debug:
     msg: netauthd should be restarted!

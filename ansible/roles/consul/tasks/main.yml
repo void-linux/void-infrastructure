@@ -1,42 +1,42 @@
 ---
 - name: Install Packages
-  xbps:
+  community.general.xbps:
     pkg: consul
     state: present
   tags: [install_consul]
 
 - name: Install Core Configuration
-  template:
+  ansible.builtin.template:
     src: 25-base.hcl.j2
     dest: /etc/consul.d/25-base.hcl
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - consul
 
 - name: Install retry_join Configuration
-  template:
+  ansible.builtin.template:
     src: 30-retry-join.hcl.j2
     dest: /etc/consul.d/30-retry-join.hcl
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - consul
 
 - name: Install Gossip Encryption Keys
-  template:
+  ansible.builtin.template:
     src: 30-gossip-encryption.hcl.j2
     dest: /etc/consul.d/30-gossip-encryption.hcl
     owner: root
     group: _consul
-    mode: 0640
+    mode: "0640"
   notify:
     - consul
 
 - name: Enable services
-  service:
+  ansible.builtin.service:
     name: consul
     enabled: true
     state: started

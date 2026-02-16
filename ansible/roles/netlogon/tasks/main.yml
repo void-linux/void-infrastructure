@@ -1,36 +1,36 @@
 ---
 - name: Create local management group
-  group:
+  ansible.builtin.group:
     name: "{{ netlogon_maintenance_user }}"
     state: present
 
 - name: Create local management user
-  user:
+  ansible.builtin.user:
     name: "{{ netlogon_maintenance_user }}"
     group: "{{ netlogon_maintenance_user }}"
     groups:
       - wheel
     state: present
-    createhome: yes
+    createhome: true
 
 - name: Install management keys (1/2)
-  file:
+  ansible.builtin.file:
     path: /home/{{ netlogon_maintenance_user }}/.ssh
     state: directory
     owner: "{{ netlogon_maintenance_user }}"
     group: "{{ netlogon_maintenance_user }}"
-    mode: 0700
+    mode: "0700"
 
 - name: Install management keys (2/2)
-  template:
+  ansible.builtin.template:
     src: authorized_keys.j2
     dest: /home/{{ netlogon_maintenance_user }}/.ssh/authorized_keys
     owner: "{{ netlogon_maintenance_user }}"
     group: "{{ netlogon_maintenance_user }}"
-    mode: 0600
+    mode: "0600"
 
 - name: Install Packages
-  xbps:
+  community.general.xbps:
     pkg:
       - NetKeys
       - NetAuth-localizer
@@ -38,70 +38,70 @@
     state: present
 
 - name: Install PAM Cache
-  xbps:
+  community.general.xbps:
     pkg:
       - libpam-policycache
     state: present
   when: netlogon_use_cache
 
 - name: Install localize Service (1/2)
-  file:
+  ansible.builtin.file:
     path: /etc/sv/localize
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
 - name: Install localize Service (2/2)
-  copy:
+  ansible.builtin.copy:
     src: localize.run
     dest: /etc/sv/localize/run
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
 - name: Enable localize Service
-  runit:
+  community.general.runit:
     name: localize
     enabled: true
 
 - name: Install PAM Cache Policy
-  copy:
+  ansible.builtin.copy:
     src: base.policy
     dest: /etc/libpam-policycache.d/
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   when: netlogon_use_cache
 
 - name: Configure PAM
-  template:
+  ansible.builtin.template:
     src: system-auth
     dest: /etc/pam.d/system-auth
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Configure sudo
-  copy:
+  ansible.builtin.copy:
     src: sudoers
     dest: /etc/sudoers
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
 
 - name: Install sudo policy
-  copy:
+  ansible.builtin.copy:
     src: dante.sudoers
     dest: /etc/sudoers.d/dante
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
 
 - name: Install maintenance sudo policy
-  template:
+  ansible.builtin.template:
     src: maintenance.sudoers
     dest: /etc/sudoers.d/zz-maintenance
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"

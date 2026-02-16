@@ -4,8 +4,8 @@ grafana:
     name: grafana
     urls:
       - monitoring.voidlinux.org
-    static_root: no
+    static_root: false
     tls:
-      stapling: yes
+      stapling: true
       certificate: /var/lib/acme/live/monitoring.voidlinux.org/fullchain
       key: /var/lib/acme/live/monitoring.voidlinux.org/privkey

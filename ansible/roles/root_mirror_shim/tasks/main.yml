@@ -1,0 +1,30 @@
+---
+- name: Create Repo Directory
+  ansible.builtin.file:
+    path: /srv/www/void-repo
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Create Static Mirror Directories
+  ansible.builtin.file:
+    path: "/srv/www/void-repo/{{ item.name }}"
+    state: directory
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "0755"
+  loop:
+    - name: current
+      owner: 418
+      group: 418
+    - name: distfiles
+    - name: docs
+    - name: live
+    - name: logos
+    - name: man
+    - name: static
+    - name: void-updates
+    - name: xlocate
+  loop_control:
+    label: "{{ item.name }}"

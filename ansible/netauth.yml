@@ -1,7 +1,8 @@
 ---
-- hosts: netauth
-  become: yes
-  become_method: sudo
+- name: NetAuth Servers
+  hosts: netauth
+  become: true
   become_user: root
+  become_method: ansible.builtin.sudo
   roles:
     - netauthd

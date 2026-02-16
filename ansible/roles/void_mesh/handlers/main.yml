@@ -1,0 +1,6 @@
+---
+- name: Restart Wireguard
+  listen: wireguard
+  ansible.builtin.service:
+    name: wireguard
+    state: restarted

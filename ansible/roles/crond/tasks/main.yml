@@ -1,11 +1,11 @@
 ---
 - name: Install cronie
-  xbps:
+  community.general.xbps:
     pkg: cronie
     state: present
 
 - name: Enable cronie
-  file:
+  ansible.builtin.file:
     src: /etc/sv/crond
     dest: /var/service/crond
     state: link

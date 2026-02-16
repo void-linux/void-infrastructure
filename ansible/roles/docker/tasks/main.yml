@@ -1,43 +1,43 @@
 ---
 - name: Install Packages
-  xbps:
+  community.general.xbps:
     pkg: docker
     state: present
   tags: [install_docker]
 
 - name: Create config directory
-  file:
+  ansible.builtin.file:
     path: /etc/docker
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   tags: [install_docker]
 
 - name: Install daemon.json
-  template:
+  ansible.builtin.template:
     src: daemon.json
     dest: /etc/docker/daemon.json
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - docker
   tags: [install_docker, configure_docker]
 
 - name: Install Firewall Rules
-  copy:
+  ansible.builtin.copy:
     src: docker-dns.rules
     dest: /etc/iptables.d/docker-dns.rules
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   notify:
     - iptables
   tags: [install_docker, configure_docker]
 
 - name: Enable Service
-  service:
+  ansible.builtin.service:
     name: docker
     state: started
     enabled: true

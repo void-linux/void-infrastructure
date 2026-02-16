@@ -1,11 +1,11 @@
 ---
 - name: Install configuration
-  template:
+  ansible.builtin.template:
     src: 40-server.hcl
     dest: /etc/nomad.d/40-server.hcl
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   vars:
     nomad_other_servers: "{{ groups['hashimaster'] | difference([inventory_hostname]) }}"
     nomad_retry_join_servers: "{{ nomad_other_servers | map('extract', void_mesh) | list | sort }}"
@@ -14,11 +14,11 @@
     - nomad
 
 - name: Install Secrets
-  template:
+  ansible.builtin.template:
     src: 30-secrets.hcl
     dest: /etc/nomad.d/
     owner: root
     group: root
-    mode: 0400
+    mode: "0400"
   notify:
     - nomad

@@ -1,28 +1,29 @@
 ---
-- hosts: hashiworker,hashimirror,hashimx
-  become: yes
+- name: Common Hashiorp Worker Services
+  hosts: hashiworker,hashimirror,hashimx
+  become: true
   become_user: root
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   vars:
     nomad_role: client
   roles:
     - consul
     - nomad-client
 
-
-- hosts: hashimirror
-  become: yes
+- name: Nomad-based Mirrors
+  hosts: hashimirror
+  become: true
   become_user: root
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   tasks:
     - name: Accept IPv4 Traffic
-      lineinfile:
-        line: "{{item}}"
+      ansible.builtin.lineinfile:
+        line: "{{ item }}"
         path: /etc/iptables.d/proxy.rules
-        create: yes
+        create: true
         owner: root
         group: root
-        mode: 0640
+        mode: "0640"
       with_items:
         - "*filter"
         - "-A INPUT -p tcp --dport 80 -j ACCEPT"
@@ -30,13 +31,13 @@
         - "-A INPUT -p tcp --dport 873 -j ACCEPT"
         - "COMMIT"
     - name: Accept IPv6 Traffic
-      lineinfile:
-        line: "{{item}}"
+      ansible.builtin.lineinfile:
+        line: "{{ item }}"
         path: /etc/ip6tables.d/proxy.6rules
-        create: yes
+        create: true
         owner: root
         group: root
-        mode: 0640
+        mode: "0640"
       with_items:
         - "*filter"
         - "-A INPUT -p tcp --dport 80 -j ACCEPT"
@@ -46,18 +47,18 @@
 
 - name: Special rules for d-hel-fi
   hosts: d-hel-fi.m.voidlinux.org
-  become: yes
+  become: true
   become_user: root
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   tasks:
     - name: Accept IPv4 Traffic
-      lineinfile:
-        line: "{{item}}"
+      ansible.builtin.lineinfile:
+        line: "{{ item }}"
         path: /etc/iptables.d/root_mirror.rules
-        create: yes
+        create: true
         owner: root
         group: root
-        mode: 0640
+        mode: "0640"
       with_items:
         - "*filter"
         - "-A INPUT -p tcp --dport 2022 -j ACCEPT"
@@ -65,13 +66,13 @@
         - "-A INPUT -p tcp --dport 8003 -j ACCEPT"
         - "COMMIT"
     - name: Accept IPv6 Traffic
-      lineinfile:
-        line: "{{item}}"
+      ansible.builtin.lineinfile:
+        line: "{{ item }}"
         path: /etc/ip6tables.d/root_mirror.6rules
-        create: yes
+        create: true
         owner: root
         group: root
-        mode: 0640
+        mode: "0640"
       with_items:
         - "*filter"
         - "-A INPUT -p tcp --dport 2022 -j ACCEPT"
@@ -79,19 +80,20 @@
         - "-A INPUT -p tcp --dport 8003 -j ACCEPT"
         - "COMMIT"
 
-- hosts: hashimx
-  become: yes
+- name: Additional tasks for MX hosts
+  hosts: hashimx
+  become: true
   become_user: root
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   tasks:
     - name: Accept IPv4 Traffic
-      lineinfile:
-        line: "{{item}}"
+      ansible.builtin.lineinfile:
+        line: "{{ item }}"
         path: /etc/iptables.d/maddy.rules
-        create: yes
+        create: true
         owner: root
         group: root
-        mode: 0640
+        mode: "0640"
       with_items:
         - "*filter"
         - "-A INPUT -p tcp --dport 25 -j ACCEPT"
@@ -101,13 +103,13 @@
         - "-A INPUT -p tcp --dport 993 -j ACCEPT"
         - "COMMIT"
     - name: Accept IPv6 Traffic
-      lineinfile:
-        line: "{{item}}"
+      ansible.builtin.lineinfile:
+        line: "{{ item }}"
         path: /etc/ip6tables.d/maddy.6rules
-        create: yes
+        create: true
         owner: root
         group: root
-        mode: 0640
+        mode: "0640"
       with_items:
         - "*filter"
         - "-A INPUT -p tcp --dport 25 -j ACCEPT"
@@ -117,9 +119,10 @@
         - "-A INPUT -p tcp --dport 993 -j ACCEPT"
         - "COMMIT"
 
-- hosts: buildworker
-  become: yes
+- name: Build Servers
+  hosts: buildworker
+  become: true
   become_user: root
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   roles:
     - buildworker

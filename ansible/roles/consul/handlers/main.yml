@@ -1,5 +1,6 @@
 ---
-- name: consul
-  service:
+- name: Restart Consul Service
+  listen: consul
+  ansible.builtin.service:
     name: consul
     state: restarted

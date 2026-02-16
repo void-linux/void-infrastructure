@@ -1,47 +1,47 @@
 ---
 - name: Install NetAuth Server
-  xbps:
+  community.general.xbps:
     pkg:
       - NetAuth-server
       - sv-helper
     state: present
 
 - name: Install TLS Certificate
-  copy:
+  ansible.builtin.copy:
     src: secret/netauth_tls_certificate.key
     dest: /etc/netauth/keys/tls.key
     owner: root
     group: _netauth
-    mode: 0640
+    mode: "0640"
   no_log: true
   notify:
     - netauthd
   tags: [install_netauthd, configure_netauthd]
 
 - name: Install Token Keys
-  copy:
+  ansible.builtin.copy:
     src: secret/netauth_token.key
     dest: /etc/netauth/keys/rsa-private.tokenkey
     owner: _netauth
     group: _netauth
-    mode: 0400
+    mode: "0400"
   no_log: true
   notify:
     - netauthd
   tags: [install_netauthd, configure_netauthd]
 
 - name: Install Firewall Rules
-  copy:
+  ansible.builtin.copy:
     src: netauthd.rules
     dest: /etc/iptables.d/
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   notify:
     - iptables
 
 - name: Enable Service
-  service:
+  ansible.builtin.service:
     name: netauthd
     state: started
     enabled: true

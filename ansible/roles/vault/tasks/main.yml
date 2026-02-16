@@ -22,7 +22,7 @@
     dest: /etc/vault/25-storage.hcl
     owner: _vault
     group: _vault
-    mode: 0640
+    mode: "0640"
   vars:
     vault_retry_join_servers: "{{ groups['hashimaster'] | difference([inventory_hostname]) | sort }}"
   notify:
@@ -34,13 +34,13 @@
     dest: /etc/vault/30-listeners.hcl
     owner: _vault
     group: _vault
-    mode: 0640
+    mode: "0640"
   notify:
     - vault
   tags: [install_vault, configure_vault]
 
 - name: Enable Service
-  ansible.builtin.runit:
+  community.general.runit:
     name: vault
     state: started
     enabled: true

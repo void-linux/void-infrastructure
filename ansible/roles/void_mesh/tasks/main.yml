@@ -1,37 +1,37 @@
 ---
 - name: Install Wireguard
-  xbps:
+  community.general.xbps:
     pkg: wireguard-tools
     state: present
 
 - name: Install Config
-  template:
+  ansible.builtin.template:
     src: void0.conf.j2
     dest: /etc/wireguard/void0.conf
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   notify:
     - wireguard
 
 - name: Install Firewall Rules
-  copy:
+  ansible.builtin.copy:
     src: void-mesh.rules
     dest: /etc/iptables.d/void-mesh.rules
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   notify:
     - iptables
 
 - name: Enable IPv4 Forwarding
-  sysctl:
+  ansible.posix.sysctl:
     name: net.ipv4.ip_forward
     value: 1
-    sysctl_set: yes
+    sysctl_set: true
 
 - name: Enable Tunnels
-  service:
+  ansible.builtin.service:
     name: wireguard
     state: started
     enabled: true

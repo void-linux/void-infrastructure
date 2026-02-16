@@ -1,6 +1,7 @@
 ---
-- name: nomad
-  service:
+- name: Restart Nomad
+  listen: nomad
+  ansible.builtin.service:
     name: nomad
     state: restarted
   throttle: 1

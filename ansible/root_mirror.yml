@@ -1,7 +1,8 @@
 ---
-- hosts: root_mirror
-  become: yes
+- name: Root Mirror Configuration
+  hosts: root_mirror
+  become: true
   become_user: root
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   roles:
-    - root-mirror-shim
+    - root_mirror_shim

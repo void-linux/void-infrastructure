@@ -1,14 +1,14 @@
 ---
 xbps_repository_address: repo-de.voidlinux.org
-xbps_repository_main: https://{{xbps_repository_address}}/current
-xbps_repository_nonfree: https://{{xbps_repository_address}}/current/nonfree
-xbps_repository_multilib: https://{{xbps_repository_address}}/current/multilib
-xbps_repository_multilib_nonfree: https://{{xbps_repository_address}}/current/multilib/nonfree
+xbps_repository_main: https://{{ xbps_repository_address }}/current
+xbps_repository_nonfree: https://{{ xbps_repository_address }}/current/nonfree
+xbps_repository_multilib: https://{{ xbps_repository_address }}/current/multilib
+xbps_repository_multilib_nonfree: https://{{ xbps_repository_address }}/current/multilib/nonfree
 xbps_repository_port: 443
 
-metal_domain_root: '.m.voidlinux.org'
+metal_domain_root: ".m.voidlinux.org"
 network_hostname: '{{ inventory_hostname | regex_replace(metal_domain_root, "") | regex_replace("\.", "-") }}'
-network_fqdn: '{{ inventory_hostname }}'
+network_fqdn: "{{ inventory_hostname }}"
 network_boot_hosts:
   - name: netauth.voidlinux.org
     addr: 95.216.191.60

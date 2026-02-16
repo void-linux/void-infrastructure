@@ -1,5 +1,6 @@
 ---
-- name: vault
-  ansible.builtin.runit:
+- name: Restart Vault Service
+  listen: vault
+  community.general.runit:
     name: vault
     state: restarted

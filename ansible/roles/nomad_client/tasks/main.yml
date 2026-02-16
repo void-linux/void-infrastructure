@@ -1,20 +1,20 @@
 ---
 - name: Install Configuration
-  template:
+  ansible.builtin.template:
     src: 40-client.hcl
     dest: /etc/nomad.d/40-client.hcl
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   vars:
     nomad_retry_join_servers: "{{ groups['hashimaster'] | map('extract', void_mesh) | list | sort }}"
   notify:
     - nomad
 
 - name: Create any missing directories
-  file:
-    path: "{{item.path}}"
+  ansible.builtin.file:
+    path: "{{ item.path }}"
     state: directory
   with_items: "{{nomad_host_volumes|default([])}}"
   loop_control:
-    label: "{{item.name}}"
+    label: "{{ item.name }}"

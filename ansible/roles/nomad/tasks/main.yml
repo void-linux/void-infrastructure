@@ -1,60 +1,60 @@
 ---
 - name: Install packages
-  xbps:
+  community.general.xbps:
     pkg: nomad
     state: present
   tags: [install_nomad]
 
 - name: Install base configuration
-  template:
+  ansible.builtin.template:
     src: 25-base.hcl.j2
     dest: /etc/nomad.d/25-base.hcl
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - nomad
 
 - name: Install Consul Token
-  template:
+  ansible.builtin.template:
     src: 30-consul.hcl
     dest: /etc/nomad.d/30-consul.hcl
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   notify:
     - nomad
 
 - name: Set Datacenter
-  template:
+  ansible.builtin.template:
     src: 25-dc.hcl
     dest: /etc/nomad.d/25-dc.hcl
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - nomad
 
 - name: Install Service Config
-  copy:
+  ansible.builtin.copy:
     src: conf
     dest: /etc/sv/nomad/conf
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Enable services
-  service:
+  ansible.builtin.service:
     name: nomad
     enabled: true
     state: started
 
 - name: Install Firewall Rules
-  copy:
+  ansible.builtin.copy:
     src: nomad.rules
     dest: /etc/iptables.d/nomad.rules
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   notify:
     - iptables

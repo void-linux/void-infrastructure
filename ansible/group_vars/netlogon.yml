@@ -1,3 +1,4 @@
+---
 sshd_AuthorizedKeysCommand: /usr/bin/netkeys --ID %u
 sshd_AllowGroupsAlways:
   - wheel

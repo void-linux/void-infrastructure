@@ -1,0 +1,19 @@
+# This file contains ignores rule violations for ansible-lint
+group_vars/netlogon.yml var-naming[pattern]
+group_vars/netlogon.yml yaml[line-length]
+hashi-worker.yml syntax-check[specific]
+host_vars/a-fsn-de.m.voidlinux.org.yml var-naming[pattern]
+host_vars/a-hel-fi.m.voidlinux.org.yml var-naming[pattern]
+host_vars/b-fsn-de.m.voidlinux.org.yml var-naming[pattern]
+network.yml risky-shell-pipe
+roles/netauth-config role-name
+roles/netauth-ldap role-name
+roles/netauthd/handlers/main.yml syntax-check[specific]
+roles/node_exporter/meta/main.yml schema[meta]
+roles/nomad_client/tasks/main.yml jinja[spacing]
+roles/nomad_client/tasks/main.yml risky-file-permissions
+roles/nomad_client/vars/main.yml var-naming[no-role-prefix]
+roles/sshd/defaults/main.yml var-naming[pattern]
+roles/sshd/meta/main.yml schema[meta]
+roles/void_mesh/handlers/main.yml syntax-check[specific]
+roles/xbps-repoconf role-name

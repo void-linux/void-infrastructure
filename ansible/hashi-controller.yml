@@ -1,13 +1,14 @@
 ---
-- hosts: hashimaster
-  become: yes
+- name: Hashicorp Control Plane Servers
+  hosts: hashimaster
+  become: true
   become_user: root
-  become_method: sudo
+  become_method: ansible.builtin.sudo
   vars:
     nomad_role: server
   roles:
-    - consul-server
+    - consul_server
     - vault
-    - nomad-server
-    - nomad-client
-    - hashi-ws-fw
+    - nomad_server
+    - nomad_client
+    - hashi_ws_fw

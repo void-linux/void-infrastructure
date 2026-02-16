@@ -1,56 +1,56 @@
 ---
 - name: Create config directory
-  file:
+  ansible.builtin.file:
     path: /etc/netauth
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   tags: [install_netauth_conf]
 
 - name: Configure NetAuth library
-  copy:
+  ansible.builtin.copy:
     src: config.toml
     dest: /etc/netauth/config.toml
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   tags: [install_netauth_conf]
 
 - name: Ensure key directory
-  file:
+  ansible.builtin.file:
     path: /etc/netauth/keys
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   tags: [install_netauth_conf]
 
 - name: Install NetAuth Certificate
-  copy:
+  ansible.builtin.copy:
     src: secret/netauth_tls_certificate.pem
     dest: /etc/netauth/keys/tls.pem
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   tags: [install_netauth_conf, configure_netauth_conf]
 
 - name: Install Token Verification Key
-  copy:
+  ansible.builtin.copy:
     src: secret/netauth_token.pem
     dest: /etc/netauth/keys/rsa-public.tokenkey
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   tags: [install_netauth_conf, configure_netauth_conf]
 
 - name: Install Firewall Rules
-  copy:
+  ansible.builtin.copy:
     src: netauth.rules
     dest: /etc/iptables.d/
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - iptables
   tags: [install_netauth_conf]

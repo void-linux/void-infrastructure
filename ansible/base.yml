@@ -1,22 +1,25 @@
 ---
-- hosts: net_static
-  become: yes
-  become_method: sudo
+- name: Hosts with Static Networking
+  hosts: net_static
+  become: true
   become_user: root
+  become_method: ansible.builtin.sudo
   roles:
     - void.network.static
 
-- hosts: "!net_static"
-  become: yes
-  become_method: sudo
+- name: Hosts with Dynamic Networking
+  hosts: "!net_static"
+  become: true
   become_user: root
+  become_method: ansible.builtin.sudo
   roles:
     - dhcpcd
 
-- hosts: all:!unmanaged
-  become: yes
-  become_method: sudo
+- name: Base Machine Configuration
+  hosts: all:!unmanaged
+  become: true
   become_user: root
+  become_method: ansible.builtin.sudo
   vars:
     node_exporter_consul_token: "{{lookup('file', 'secret/node_exporter_consul_token')}}"
   roles:

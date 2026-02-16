@@ -1,10 +1,11 @@
+---
 - name: Install Packages
-  xbps:
+  community.general.xbps:
     pkg: NetAuth-ldap
     state: present
 
 - name: Enable Service
-  service:
+  ansible.builtin.service:
     name: netauth-ldap
     state: started
     enabled: true
