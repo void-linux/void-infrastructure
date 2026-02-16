@@ -1,0 +1,43 @@
+name: Lint Nomad files
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - services/nomad/**.nomad
+  push:
+    branches:
+      - master
+    paths:
+      - services/nomad/**.nomad
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint Nomad files
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/void-linux/void-glibc
+    steps:
+      - name: Prepare container
+        run: |
+          xbps-install -Syu xbps && xbps-install -y void-repo-nonfree && \
+            xbps-install -Syu && xbps-install -y nomad bash git
+
+      - name: Checkout repo
+        uses: classabbyamp/treeless-checkout-action@v1
+
+      - name: Run Lints
+        run: |
+          rv=0
+          printf "\033[1m=> Checking formatting of nomad files\033[0m\n"
+          nomad fmt -check -recursive services/nomad || rv=1
+          if [ "$rv" -ne 0 ]; then
+            printf "\033[1m=> Some nomad files need formatting! Run 'nomad fmt' on the listed files. \033[0m\n"
+          fi
+          exit "$rv"
+

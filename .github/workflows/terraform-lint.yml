@@ -1,0 +1,43 @@
+name: Lint Terraform files
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - terraform/**.tf
+  push:
+    branches:
+      - master
+    paths:
+      - terraform/**.tf
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint Terraform files
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/void-linux/void-glibc
+    steps:
+      - name: Prepare container
+        run: |
+          xbps-install -Syu xbps && xbps-install -y void-repo-nonfree && \
+            xbps-install -Syu && xbps-install -y terraform bash git
+
+      - name: Checkout repo
+        uses: classabbyamp/treeless-checkout-action@v1
+
+      - name: Run Lints
+        run: |
+          rv=0
+          printf "\033[1m=> Checking formatting of terraform files\033[0m\n"
+          terraform fmt -check -recursive terraform || rv=1
+          if [ "$rv" -ne 0 ]; then
+            printf "\033[1m=> Some terraform files need formatting! Run 'terraform fmt' on the listed files. \033[0m\n"
+          fi
+          exit "$rv"
+
