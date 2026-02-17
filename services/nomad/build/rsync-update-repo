@@ -1,0 +1,58 @@
+#!/bin/sh
+
+msg() {
+    printf '\033[32m=> %s\033[0m\n' "$*"
+}
+
+process_repo() {
+    repo="$1"
+    msg "Processing repository: $repo"
+    if [ ! -d "$RSYNC_MODULE_PATH/$repo" ] || [ ! -d "$TGT_BASE/$TGT/$repo" ]; then
+        msg "Nothing to do"
+        return
+    fi
+    # add to repodata
+    find "$RSYNC_MODULE_PATH"/"$repo" -mindepth 1 -maxdepth 1 -name '*.xbps' -printf "$TGT_BASE/$TGT/$repo/%f\0" | \
+        xargs -r0 env XBPS_TARGET_ARCH="$ARCH" xbps-rindex -a
+    # clean old packages from repodata
+    XBPS_TARGET_ARCH="$ARCH" xbps-rindex -c "$TGT_BASE/$TGT/$repo"
+    # remove old packages
+    XBPS_TARGET_ARCH="$ARCH" xbps-rindex -r "$TGT_BASE/$TGT/$repo"
+}
+
+run() {
+    set -e
+    TGT_BASE="/mirror/current"
+    ARCH="${RSYNC_MODULE_NAME#*-}"
+
+    case "$ARCH" in
+        aarch64*) TGT="aarch64" ;;
+        *-musl) TGT="musl" ;;
+        *) TGT="" ;;
+    esac
+
+    # copy files to repo
+    msg "Copying new packages to the shadow mirror"
+    rsync -va "${RSYNC_MODULE_PATH:?}"/ "$TGT_BASE/$TGT/"
+
+    for repo in / /bootstrap /debug /nonfree; do
+        process_repo "$repo"
+    done
+
+    case "$ARCH" in
+        x86_64|i686)
+            ARCH=x86_64
+            for repo in /multilib /multilib/bootstrap /multilib/nonfree; do
+                process_repo "$repo"
+            done
+            ;;
+    esac
+
+    # clean up incoming
+    msg "Cleaning up"
+    rm -rvf "${RSYNC_MODULE_PATH:?}"/*.xbps
+    set +e
+}
+
+# if this exits non-zero, rsync will fail and the log will be lost
+run >"$RSYNC_MODULE_PATH"/update-repo.log 2>&1 || true
