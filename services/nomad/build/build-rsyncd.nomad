@@ -65,8 +65,8 @@ job "build-rsyncd" {
       }
 
       template {
-        data        = file("rsync-post-xfer")
-        destination = "local/rsync-post-xfer"
+        data        = file("rsync-update-repo")
+        destination = "local/rsync-update-repo"
         perms       = "0755"
       }
 
@@ -114,8 +114,13 @@ EOF
 [incoming-${template.value}]
 path = /incoming/${template.value}
 auth users = buildsync:rw
-filter = + */ + *.${template.value}.xbps - *.sig - *.sig2 - *-repodata* - .*
-post-xfer exec = /local/rsync-post-xfer
+filter = + */ + *.${template.value}.xbps - *.sig - *.sig2 - *-repodata* - .* - *.log
+
+[updaterepo-${template.value}]
+path = /incoming/${template.value}
+auth users = buildsync:r
+filter = + update-repo.log - * - .*
+early exec = /local/rsync-update-repo
 EOF
           destination = "local/rsyncd.conf.d/${template.value}.conf.inc"
         }
