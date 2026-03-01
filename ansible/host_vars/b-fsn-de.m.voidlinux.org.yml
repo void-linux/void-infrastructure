@@ -6,6 +6,9 @@ buildworker_archs:
   - aarch64
   - aarch64-musl
 
+nomad_meta:
+  builder: "true"
+
 nomad_host_volumes:
   - name: ccache
     path: /hostdir/ccache
