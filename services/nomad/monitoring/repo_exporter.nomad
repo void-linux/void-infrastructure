@@ -3,6 +3,12 @@ job "repo-exporter" {
   namespace   = "monitoring"
   datacenters = ["VOID"]
 
+  affinity {
+    attribute = "${meta.builder}"
+    value     = "true"
+    weight    = -100
+  }
+
   group "exporter" {
     network {
       mode = "bridge"
@@ -28,7 +34,7 @@ job "repo-exporter" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/repo-exporter:v0.1.1"
+        image = "ghcr.io/void-linux/repo-exporter:v0.1.2"
       }
 
       resources {
