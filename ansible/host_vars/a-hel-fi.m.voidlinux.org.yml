@@ -15,6 +15,14 @@ network_static_interfaces:
 sshd_AllowGroups:
   - build-ops
 
+buildworker_archs:
+  - x86_64-musl
+  - armv7l-musl
+  - armv6l-musl
+
+nomad_meta:
+  builder: "true"
+
 nomad_host_volumes:
   - name: terrastate
     path: /nomad/terrastate

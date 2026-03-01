@@ -26,6 +26,9 @@ buildworker_archs:
   - armv7l
   - armv6l
 
+nomad_meta:
+  builder: "true"
+
 nomad_host_volumes:
   - name: void-packages
     path: /data/void-packages
