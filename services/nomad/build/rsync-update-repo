@@ -40,7 +40,7 @@ run() {
     done
 
     case "$ARCH" in
-        x86_64|i686)
+        i686)
             ARCH=x86_64
             for repo in /multilib /multilib/bootstrap /multilib/nonfree; do
                 process_repo "$repo"
