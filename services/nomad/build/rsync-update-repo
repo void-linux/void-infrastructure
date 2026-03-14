@@ -33,7 +33,7 @@ run() {
 
     # copy files to repo
     msg "Copying new packages to the shadow mirror"
-    rsync -va "${RSYNC_MODULE_PATH:?}"/ "$TGT_BASE/$TGT/"
+    rsync -va --ignore-existing "${RSYNC_MODULE_PATH:?}"/ "$TGT_BASE/$TGT/"
 
     for repo in / /bootstrap /debug /nonfree; do
         process_repo "$repo"
