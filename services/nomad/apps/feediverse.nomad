@@ -1,3 +1,4 @@
+# the token for this must have the permissions: read:statuses, profile, write:media, write:status
 job "feediverse" {
   type        = "service"
   datacenters = ["VOID"]
