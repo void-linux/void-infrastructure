@@ -28,11 +28,11 @@ job "repo-exporter" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/repo-exporter:v0.1.1"
+        image = "ghcr.io/void-linux/repo-exporter:v0.1.2"
       }
 
       resources {
-        memory = 1000
+        memory = 1500
       }
     }
   }
