@@ -8,7 +8,7 @@
     nomad_role: client
   roles:
     - consul
-    - nomad-client
+    - nomad_client
 
 - name: Nomad-based Mirrors
   hosts: hashimirror
