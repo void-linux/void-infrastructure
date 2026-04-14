@@ -43,7 +43,7 @@ job "maddy" {
       }
 
       config {
-        image        = "docker.io/foxcpp/maddy:0.7.0"
+        image        = "docker.io/foxcpp/maddy:0.9.3"
         entrypoint   = ["/bin/maddy", "--config", "/local/maddy.conf", "run"]
         network_mode = "host"
       }
