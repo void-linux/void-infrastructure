@@ -44,7 +44,7 @@ job "ccache_exporter" {
         }
 
         config {
-          image = "ghcr.io/duncaen/ccache_exporter:v0.0.1"
+          image = "ghcr.io/duncaen/ccache_exporter:v0.0.3"
           args  = ["-ccache-dir", "/ccache", "-ccache-size", group.value.size]
         }
       }
