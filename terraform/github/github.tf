@@ -232,6 +232,13 @@ locals {
         "pkg-committers",
       ]
     }
+
+    ".github" = {
+      description = "Default files for the org"
+      teams = [
+        "webmasters",
+      ]
+    }
   }
 }
 
