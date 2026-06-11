@@ -27,6 +27,10 @@ job "nginx" {
         network_mode = "host"
       }
 
+      resources {
+        memory = 2000
+      }
+
       dynamic "volume_mount" {
         for_each = ["mirror", "sources", ]
 
