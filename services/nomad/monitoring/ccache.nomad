@@ -8,6 +8,7 @@ job "ccache_exporter" {
       glibc   = { host = "a-fsn-de", size = "16GB" }
       musl    = { host = "a-hel-fi", size = "8GB" }
       aarch64 = { host = "b-fsn-de", size = "16GB" }
+      x86_64  = { host = "a-nbg-de", size = "32GB" }
     }
 
     labels = [group.key]
