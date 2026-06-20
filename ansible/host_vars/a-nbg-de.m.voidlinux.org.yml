@@ -1,0 +1,16 @@
+---
+network_static_routes:
+  - to: default
+    via: 152.53.152.1
+  - to: default
+    via: fe80::1
+
+network_static_interfaces:
+  - name: eth0
+    type: direct
+    addrs:
+      - 152.53.154.59/22
+      - 2a00:11c0:47:331e::/64
+
+sshd_AllowGroups:
+  - build-ops
