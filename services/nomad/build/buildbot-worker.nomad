@@ -9,6 +9,7 @@ job "buildbot-worker" {
       // memory is ~90% of capacity
       // memory_max is ~95% of capacity
       { name = "glibc", jobs = 10, cpu = 38100, mem = 115840, mem_max = 122270 },
+      { name = "x86_64-glibc", jobs = 8, cpu = 15000, mem = 14000, mem_max = 15000 },
       { name = "musl", jobs = 6, cpu = 21700, mem = 57690, mem_max = 60890 },
       { name = "aarch64", jobs = 6, cpu = 12000, mem = 28500, mem_max = 30500 },
     ]
@@ -164,7 +165,7 @@ EOF
         template {
           data        = <<EOF
 {{ range service "root-pkgs-internal" }}
-{{ if eq "${group.value.name}" "glibc" }}
+{{ if "${group.value.name}" | regexMatch ".*glibc" }}
 repository=http://{{ .Address }}:{{ .Port }}/bootstrap
 repository=http://{{ .Address }}:{{ .Port }}
 repository=http://{{ .Address }}:{{ .Port }}/nonfree

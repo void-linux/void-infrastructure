@@ -102,12 +102,13 @@ EOF
       template {
         data = jsonencode({
           workers = [
-            { name = "glibc", max-builds = 4 },
+            { name = "glibc", max-builds = 3 },
+            { name = "x86_64-glibc", max-builds = 1 },
             { name = "musl", max-builds = 3 },
             { name = "aarch64", max-builds = 2 },
           ],
           builders = [
-            { name = "x86_64", host = "x86_64", worker = "glibc", },
+            { name = "x86_64", host = "x86_64", worker = "x86_64-glibc", },
             { name = "i686", host = "i686", worker = "glibc", },
             { name = "armv7l", host = "x86_64", target = "armv7l", worker = "glibc", },
             { name = "armv6l", host = "x86_64", target = "armv6l", worker = "glibc", },
