@@ -19,6 +19,7 @@ void_mesh:
   b-fsn-de.m.voidlinux.org: 192.168.99.115
   a-fra-de.m.voidlinux.org: 192.168.99.117
   a-sea-us.m.voidlinux.org: 192.168.99.126
+  a-nbg-de.m.voidlinux.org: 192.168.99.127
 
 consul_servers:
   - 192.168.99.120
