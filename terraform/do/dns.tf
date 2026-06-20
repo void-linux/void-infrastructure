@@ -352,6 +352,20 @@ resource "digitalocean_record" "a_sea_us" {
   value  = "199.255.18.172"
 }
 
+resource "digitalocean_record" "a_nbg_de" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "A"
+  name   = "a-nbg-de.m"
+  value  = "152.53.154.59"
+}
+
+resource "digitalocean_record" "a_nbg_de_v6" {
+  domain = digitalocean_domain.voidlinux_org.name
+  type   = "AAAA"
+  name   = "a-nbg-de.m"
+  value  = "2a00:11c0:47:331e::"
+}
+
 #######################################################################
 # Services                                                            #
 #                                                                     #
