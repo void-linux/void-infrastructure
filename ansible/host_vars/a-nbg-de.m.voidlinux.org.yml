@@ -14,3 +14,23 @@ network_static_interfaces:
 
 sshd_AllowGroups:
   - build-ops
+
+buildworker_archs:
+  - x86_64
+
+nomad_meta:
+  builder: "true"
+
+nomad_host_volumes:
+  - name: x86_64-glibc_hostdir
+    path: /hostdir
+    read_only: false
+  - name: x86_64-glibc_workdir
+    path: /workdir
+    read_only: false
+  - name: x86_64-glibc_buildrootdir
+    path: /buildroot
+    read_only: false
+  - name: ccache
+    path: /hostdir/ccache
+    read_only: true

@@ -8,6 +8,7 @@
     mode: "0644"
   vars:
     nomad_retry_join_servers: "{{ groups['hashimaster'] | map('extract', void_mesh) | list | sort }}"
+  tags: [configure_nomad_client]
   notify:
     - nomad
 
