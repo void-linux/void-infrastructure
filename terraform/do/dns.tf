@@ -338,13 +338,6 @@ resource "digitalocean_record" "b_lej_de" {
   value  = "78.46.212.193"
 }
 
-resource "digitalocean_record" "a_sfo3_us" {
-  domain = digitalocean_domain.voidlinux_org.name
-  type   = "A"
-  name   = "a-sfo3-us.m"
-  value  = digitalocean_droplet.a_sfo3_us.ipv4_address
-}
-
 resource "digitalocean_record" "a_sea_us" {
   domain = digitalocean_domain.voidlinux_org.name
   type   = "A"
