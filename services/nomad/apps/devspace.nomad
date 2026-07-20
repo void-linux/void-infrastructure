@@ -58,7 +58,7 @@ job "devspace" {
       }
 
       config {
-        image        = "ghcr.io/void-linux/infra-sftpgo:20241231R1"
+        image        = "ghcr.io/void-linux/infra-sftpgo:20260720R1"
         network_mode = "host"
       }
 
@@ -138,7 +138,7 @@ EOF
       }
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20250719R1"
+        image = "ghcr.io/void-linux/infra-nginx:20260531R1"
       }
 
       template {
