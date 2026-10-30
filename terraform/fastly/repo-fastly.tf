@@ -7,11 +7,11 @@ resource "fastly_service_vcl" "main_repo" {
   }
 
   backend {
-    address = "repo-fi.voidlinux.org"
+    address = "repo-de.voidlinux.org"
     name    = "primary-origin"
     port    = 443
     use_ssl = true
-    shield  = "hel-helsinki-fi"
+    shield  = "frankfurt-de"
   }
 
   snippet {
