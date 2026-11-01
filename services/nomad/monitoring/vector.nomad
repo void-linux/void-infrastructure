@@ -50,7 +50,18 @@ job "vector" {
       }
 
       env {
-        NOMAD_HOST = "${node.unique.name}"
+        NOMAD_HOST                                     = "${node.unique.name}"
+        VECTOR_DANGEROUSLY_ALLOW_ENV_VAR_INTERPOLATION = "true"
+      }
+
+      template {
+        data        = <<EOF
+{{ range nomadService "vmlogs" }}
+VMLOGS_ADDR=http://{{ .Address }}:{{ .Port }}/insert/elasticsearch/
+{{ end }}
+EOF
+        destination = "local/env"
+        env         = true
       }
 
       template {
@@ -69,7 +80,7 @@ job "vector" {
             vlogs = {
               type        = "elasticsearch"
               inputs      = ["docker"]
-              endpoints   = ["http://vmlogs.service.consul:9428/insert/elasticsearch/"]
+              endpoints   = ["$${VMLOGS_ADDR}"]
               api_version = "v8"
               compression = "gzip"
               healthcheck = { enabled = false }
