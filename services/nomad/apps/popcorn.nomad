@@ -69,13 +69,15 @@ EOF
     }
 
     service {
-      name = "popcorn-statrepo"
-      port = "statrepo"
+      provider = "nomad"
+      name     = "popcorn-statrepo"
+      port     = "statrepo"
     }
 
     service {
-      name = "popcorn-pqueryd"
-      port = "pqueryd"
+      provider = "nomad"
+      name     = "popcorn-pqueryd"
+      port     = "pqueryd"
     }
 
     volume "popcorn_data" {
