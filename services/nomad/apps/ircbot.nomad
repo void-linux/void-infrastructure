@@ -14,12 +14,14 @@ job "ircbot" {
     }
 
     service {
-      name = "ircbot"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "ircbot.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "ircbot"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=ircbot.voidlinux.org",
+      ]
     }
 
     task "ircbot" {

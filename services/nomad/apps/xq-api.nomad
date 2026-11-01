@@ -25,12 +25,14 @@ job "xq-api" {
     }
 
     service {
-      name = "xq-api"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "xq-api.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "xq-api"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=xq-api.voidlinux.org",
+      ]
     }
 
     task "xq-api" {

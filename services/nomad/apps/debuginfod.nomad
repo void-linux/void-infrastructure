@@ -26,12 +26,14 @@ job "debuginfod" {
     }
 
     service {
-      name = "debuginfod"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "debuginfod.s.voidlinux.org debuginfod.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "debuginfod"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=debuginfod.s.voidlinux.org debuginfod.voidlinux.org",
+      ]
 
       check {
         type         = "http"

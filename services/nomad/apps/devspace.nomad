@@ -27,12 +27,15 @@ job "devspace" {
     }
 
     service {
-      name = "devspace-sftp"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "devspace-sftp.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "devspace-sftp"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=devspace-sftp.voidlinux.org",
+      ]
+
       check {
         type     = "http"
         port     = 8081
@@ -121,12 +124,14 @@ EOF
     }
 
     service {
-      name = "devspace"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "devspace.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "devspace"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=devspace.voidlinux.org",
+      ]
     }
 
     task "nginx" {

@@ -14,12 +14,14 @@ job "infradocs" {
     }
 
     service {
-      name = "infradocs"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "infradocs.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "infradocs"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=infradocs.voidlinux.org",
+      ]
 
       check {
         type         = "http"

@@ -18,12 +18,14 @@ job "popcorn" {
     }
 
     service {
-      name = "popcorn"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "popcorn.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "popcorn"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=popcorn.voidlinux.org",
+      ]
     }
 
     task "nginx" {
