@@ -21,12 +21,14 @@ job "prometheus" {
     }
 
     service {
-      name = "prometheus"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "prometheus.s.voidlinux.org prometheus.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "prometheus"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=prometheus.s.voidlinux.org prometheus.voidlinux.org",
+      ]
 
       check {
         type         = "http"
