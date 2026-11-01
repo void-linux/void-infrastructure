@@ -57,6 +57,8 @@ job "buildbot" {
       provider = "nomad"
       name     = "buildbot-metrics"
       port     = "metrics"
+
+      tags = ["prometheus_enable", "prometheus_job=buildbot"]
     }
 
     task "buildbot" {
