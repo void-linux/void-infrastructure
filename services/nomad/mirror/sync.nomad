@@ -45,6 +45,7 @@ job "sync" {
             "--delete-after",
             "--delay-updates",
             "--links",
+            "--filter=P *-repodata",
             "rsync://${env["RSYNC_ADDR"]}/${group.value}/",
             "/${group.value}/",
           ]
@@ -62,7 +63,7 @@ EOF
         }
 
         resources {
-          memory = 1000
+          memory = 3000
         }
 
         volume_mount {
