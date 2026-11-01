@@ -10,12 +10,14 @@ job "etherpad" {
     }
 
     service {
-      name = "pad"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "pad.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "pad"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=pad.voidlinux.org",
+      ]
     }
 
     volume "etherpad" {

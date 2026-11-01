@@ -25,12 +25,14 @@ job "man-cgi" {
     }
 
     service {
-      name = "man-cgi"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "man.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "man-cgi"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=man.voidlinux.org",
+      ]
     }
 
     task "man-cgi" {

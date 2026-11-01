@@ -12,12 +12,14 @@ job "alps" {
     }
 
     service {
-      name = "alps"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "alps.s.voidlinux.org alps.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "alps"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=alps.s.voidlinux.org alps.voidlinux.org",
+      ]
     }
 
     task "alps" {
