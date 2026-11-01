@@ -22,11 +22,13 @@ job "vector" {
     }
 
     service {
-      port = "metrics"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "vector-tmp.voidlinux.org"
-      }
+      provider = "nomad"
+      port     = "metrics"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=vector-tmp.voidlinux.org",
+      ]
     }
 
     task "vector" {

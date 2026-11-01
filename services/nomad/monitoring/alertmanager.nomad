@@ -12,12 +12,15 @@ job "alertmanager" {
     }
 
     service {
-      name = "alertmanager"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "alertmanager.s.voidlinux.org alertmanager.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "alertmanager"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=alertmanager.s.voidlinux.org alertmanager.voidlinux.org",
+        "prometheus_enable",
+      ]
 
       check {
         type         = "http"
@@ -46,6 +49,7 @@ job "alertmanager" {
 
       template {
         data        = <<EOT
+{{- $allocID := env "NOMAD_ALLOC_ID" -}}
 global:
 route:
   receiver: 'infra-team'
@@ -56,7 +60,9 @@ route:
 receivers:
   - name: infra-team
     webhook_configs:
-      - url: http://alertrelay-irc.service.consul:21225/xbps
+{{ range nomadService 1 $allocID "alertrelay-irc" }}
+      - url: http://{{ .Address }}:{{ .Port }}/xbps
+{{ end }}
 EOT
         destination = "local/alertmanager.yml"
       }

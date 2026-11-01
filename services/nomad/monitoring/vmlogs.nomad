@@ -14,12 +14,14 @@ job "vmlogs" {
     }
 
     service {
-      name = "vmlogs"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "vmlogs.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "vmlogs"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=vmlogs.voidlinux.org",
+      ]
     }
 
     volume "vmlogs_data" {

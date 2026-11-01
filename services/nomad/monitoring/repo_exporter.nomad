@@ -19,7 +19,10 @@ job "repo-exporter" {
     }
 
     service {
-      port = "metrics"
+      provider = "nomad"
+      name     = "repo-exporter"
+      port     = "metrics"
+
       check {
         type         = "http"
         port         = "metrics"

@@ -31,8 +31,11 @@ job "ccache_exporter" {
       }
 
       service {
-        name = "ccache-exporter"
-        port = "http"
+        provider = "nomad"
+        name     = "ccache-exporter"
+        port     = "http"
+
+        tags = ["prometheus_enable"]
       }
 
       task "exporter" {

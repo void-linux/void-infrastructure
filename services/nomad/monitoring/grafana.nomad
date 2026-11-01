@@ -24,12 +24,14 @@ job "grafana" {
     }
 
     service {
-      name = "grafana"
-      port = "http"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "grafana.s.voidlinux.org grafana.voidlinux.org"
-      }
+      provider = "nomad"
+      name     = "grafana"
+      port     = "http"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=grafana.s.voidlinux.org grafana.voidlinux.org",
+      ]
 
       check {
         type         = "http"
