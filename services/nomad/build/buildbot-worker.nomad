@@ -121,7 +121,8 @@ job "buildbot-worker" {
 
         template {
           data        = <<EOF
-{{ range service "buildbot-worker" -}}
+{{- $allocID := env "NOMAD_ALLOC_ID" -}}
+{{ range nomadService 1 $allocID "buildbot-worker" -}}
 [buildbot]
 host = {{ .Address }}
 worker-port = {{ .Port }}
@@ -135,6 +136,7 @@ EOF
 
         template {
           data        = <<EOF
+{{- $allocID := env "NOMAD_ALLOC_ID" -}}
 XBPS_MAKEJOBS=${group.value.jobs}
 XBPS_CHROOT_CMD=uchroot
 XBPS_CCACHE=yes
@@ -142,7 +144,7 @@ XBPS_DEBUG_PKGS=yes
 XBPS_USE_GIT_REVS=yes
 XBPS_DISTFILES_MIRROR=https://sources.voidlinux.org
 XBPS_PRESERVE_PKGS=yes
-{{ range service "root-pkgs-internal" }}
+{{ range nomadService 1 $allocID "root-pkgs-internal" }}
 XBPS_MIRROR=http://{{ .Address }}:{{ .Port }}
 {{ end }}
 EOF
@@ -164,7 +166,8 @@ EOF
         // the builders should use the internal mirror
         template {
           data        = <<EOF
-{{ range service "root-pkgs-internal" }}
+{{- $allocID := env "NOMAD_ALLOC_ID" -}}
+{{ range nomadService 1 $allocID "root-pkgs-internal" }}
 {{ if "${group.value.name}" | regexMatch ".*glibc" }}
 repository=http://{{ .Address }}:{{ .Port }}/bootstrap
 repository=http://{{ .Address }}:{{ .Port }}
