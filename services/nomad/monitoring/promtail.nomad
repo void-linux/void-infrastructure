@@ -19,11 +19,13 @@ job "promtail" {
     }
 
     service {
-      port = "metrics"
-      meta {
-        nginx_enable = "true"
-        nginx_names  = "promtail-tmp.voidlinux.org"
-      }
+      provider = "nomad"
+      port     = "metrics"
+
+      tags = [
+        "nginx_enable",
+        "nginx_names=promtail-tmp.voidlinux.org",
+      ]
     }
 
     task "promtail" {

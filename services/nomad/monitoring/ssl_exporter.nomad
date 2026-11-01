@@ -15,8 +15,9 @@ job "ssl-exporter" {
     }
 
     service {
-      name = "ssl-exporter"
-      port = "http"
+      provider = "nomad"
+      name     = "ssl-exporter"
+      port     = "http"
 
       check {
         type         = "http"

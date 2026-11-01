@@ -10,8 +10,9 @@ job "alertrelay" {
     }
 
     service {
-      name = "alertrelay-irc"
-      port = "http"
+      provider = "nomad"
+      name     = "alertrelay-irc"
+      port     = "http"
     }
 
     task "app" {
