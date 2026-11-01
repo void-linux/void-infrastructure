@@ -54,38 +54,38 @@ job "vector" {
       }
 
       template {
-        data = yamlencode({
-          sources = {
-            docker = {
-              type = "docker_logs"
-              exclude_containers = [
-                "vector-",
-                "loki-",
-                "nomad_init_",
-              ]
-            }
-          }
-          sinks = {
-            vlogs = {
-              type        = "elasticsearch"
-              inputs      = ["docker"]
-              endpoints   = ["http://vmlogs.service.consul:9428/insert/elasticsearch/"]
-              api_version = "v8"
-              compression = "gzip"
-              healthcheck = { enabled = false }
-              query = {
-                "_time_field" = "timestamp"
-                "_stream_fields" = join(",", formatlist("label.com.hashicorp.nomad.%s", [
-                  "namespace", "job_name", "task_group_name", "task_name", "alloc_id",
-                ]))
-                "_msg_field" = "message"
-              }
-            }
-          }
-        })
-        destination     = "local/vector.yaml"
-        left_delimiter  = "[["
-        right_delimiter = "]]"
+        data        = <<EOF
+sources:
+  docker:
+    type: docker_logs
+    exclude_containers:
+      - "vector-"
+      - "loki-"
+      - "nomad_init_"
+sinks:
+  vlogs:
+    type: elasticsearch
+    inputs:
+      - docker
+    endpoints:
+{{ range nomadService "vmlogs" }}
+      - "{{ .Address }}:{{ .Port }}"
+{{ end }}
+    api_version: v8
+    compression: gzip
+    healthcheck:
+      enabled: false
+    query:
+      _time_field: timestamp
+      _stream_fields:
+        - label.com.hashicorp.nomad.namespace
+        - label.com.hashicorp.nomad.job_name
+        - label.com.hashicorp.nomad.task_group_name
+        - label.com.hashicorp.nomad.task_name
+        - label.com.hashicorp.nomad.alloc_id
+      _msg_field: message
+EOF
+        destination = "local/vector.yaml"
       }
     }
   }
