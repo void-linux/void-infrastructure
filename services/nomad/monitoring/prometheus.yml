@@ -1,4 +1,5 @@
 ---
+# {{ $allocID := env "NOMAD_ALLOC_ID" }}
 global:
   scrape_interval: 30s
   evaluation_interval: 30s
@@ -6,10 +7,11 @@ rule_files:
   - /local/alerts/*.yml
 alerting:
   alertmanagers:
-    - consul_sd_configs:
-      - server: {{ env "NOMAD_HOST_IP_http" }}:8500
-        datacenter: void
-        services: ['alertmanager']
+    - static_configs:
+        - targets:
+          # {{ range nomadService "alertmanager?ns=monitoring" }}
+          - '{{ .Address }}:{{ .Port }}'
+          # {{ end }}
 scrape_configs:
   - job_name: prometheus
     static_configs:
@@ -17,12 +19,13 @@ scrape_configs:
         - localhost:9090
   - job_name: node
     consul_sd_configs:
-      - server: {{ env "NOMAD_HOST_IP_http" }}:8500
+      - server: '{{ env "NOMAD_HOST_IP_http" }}:8500'
         datacenter: void
         services: ['node-exporter']
     relabel_configs:
       - source_labels: ['__meta_consul_node']
         target_label: instance
+  # {{ range nomadService 1 $allocID "ssl-exporter?ns=monitoring" }}
   - job_name: 'ssl'
     metrics_path: /probe
     scrape_interval: 2m
@@ -46,7 +49,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: ssl-exporter.service.consul:9219
+        replacement: '{{ .Address }}:{{ .Port }}'
   - job_name: 'ssl-self-signed'
     metrics_path: /probe
     scrape_interval: 2m
@@ -61,29 +64,27 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: ssl-exporter.service.consul:9219
-  - job_name: alertmanager
-    consul_sd_configs:
-      - server: {{ env "NOMAD_HOST_IP_http" }}:8500
-        datacenter: void
-        services: ['alertmanager']
-    relabel_configs:
-      - source_labels: ['__meta_consul_node']
-        target_label: instance
-  - job_name: loki
-    consul_sd_configs:
-      - server: {{ env "NOMAD_HOST_IP_http" }}:8500
-        datacenter: void
-        services: ['loki']
-  - job_name: 'sync-x86_64-glibc'
+        replacement: '{{ .Address }}:{{ .Port }}'
+  # {{ end }}
+  # {{ range $svc := nomadService 1 $allocID "repo-exporter?ns=monitoring" }}
+  # {{ range $arch := "x86_64,x86_64-musl,i686,aarch64,aarch64-musl,armv7l,armv7l-musl,armv6l,armv6l-musl" | split "," }}
+  #   {{ $path := "" }}
+  #   {{ if $arch | regexMatch "^aarch64.*$" }}
+  #     {{ $path = "/aarch64" }}
+  #   {{ else if $arch | regexMatch "^.*-musl$" }}
+  #     {{ $path = "/musl" }}
+  #   {{ end }}
+  - job_name: 'sync-{{ $arch }}'
     metrics_path: /probe
     scrape_interval: 2m
     params:
-      arch: [x86_64]
+      arch: ['{{ $arch }}']
     static_configs:
       - targets:
-          - root-pkgs-internal.service.consul
-          - repo-default.voidlinux.org/current
+          # {{ range nomadService 1 $allocID "root-pkgs-internal?ns=build" }}
+          - '{{ .Address }}:{{ .Port }}/{{ $path }}'
+          # {{ end }}
+          - 'repo-default.voidlinux.org/current{{ $path }}'
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -92,169 +93,10 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
+        replacement: '{{ $svc.Address }}:{{ $svc.Port }}'
       - target_label: zone
         replacement: internal
-  - job_name: 'sync-i686-glibc'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      arch: [i686]
-    static_configs:
-      - targets:
-          - root-pkgs-internal.service.consul
-          - repo-default.voidlinux.org/current
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_arch]
-        target_label: arch
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
-      - target_label: zone
-        replacement: internal
-  - job_name: 'sync-armv7l-glibc'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      arch: [armv7l]
-    static_configs:
-      - targets:
-          - root-pkgs-internal.service.consul
-          - repo-default.voidlinux.org/current
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_arch]
-        target_label: arch
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
-      - target_label: zone
-        replacement: internal
-  - job_name: 'sync-armv6l-glibc'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      arch: [armv6l]
-    static_configs:
-      - targets:
-          - root-pkgs-internal.service.consul
-          - repo-default.voidlinux.org/current
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_arch]
-        target_label: arch
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
-      - target_label: zone
-        replacement: internal
-  - job_name: 'sync-x86_64-musl'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      arch: [x86_64-musl]
-    static_configs:
-      - targets:
-          - root-pkgs-internal.service.consul/musl
-          - repo-default.voidlinux.org/current/musl
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_arch]
-        target_label: arch
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
-      - target_label: zone
-        replacement: internal
-  - job_name: 'sync-armv7l-musl'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      arch: [armv7l-musl]
-    static_configs:
-      - targets:
-          - root-pkgs-internal.service.consul/musl
-          - repo-default.voidlinux.org/current/musl
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_arch]
-        target_label: arch
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
-      - target_label: zone
-        replacement: internal
-  - job_name: 'sync-armv6l-musl'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      arch: [armv6l-musl]
-    static_configs:
-      - targets:
-          - root-pkgs-internal.service.consul/musl
-          - repo-default.voidlinux.org/current/musl
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_arch]
-        target_label: arch
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
-      - target_label: zone
-        replacement: internal
-  - job_name: 'sync-aarch64-glibc'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      arch: [aarch64]
-    static_configs:
-      - targets:
-          - root-pkgs-internal.service.consul/aarch64
-          - repo-default.voidlinux.org/current/aarch64
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_arch]
-        target_label: arch
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
-      - target_label: zone
-        replacement: internal
-  - job_name: 'sync-aarch64-musl'
-    metrics_path: /probe
-    scrape_interval: 2m
-    params:
-      arch: [aarch64-musl]
-    static_configs:
-      - targets:
-          - root-pkgs-internal.service.consul/aarch64
-          - repo-default.voidlinux.org/current/aarch64
-    relabel_configs:
-      - source_labels: [__address__]
-        target_label: __param_target
-      - source_labels: [__param_arch]
-        target_label: arch
-      - source_labels: [__param_target]
-        target_label: instance
-      - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
-      - target_label: zone
-        replacement: internal
+  # {{ end }}
   - job_name: 'mirror-sync'
     metrics_path: /probe
     scrape_interval: 2m
@@ -270,19 +112,40 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: repo-exporter-exporter.service.consul:9213
+        replacement: "{{ $svc.Address }}:{{ $svc.Port }}"
       - target_label: zone
         replacement: external
-  - job_name: ccache
-    consul_sd_configs:
-      - server: {{ env "NOMAD_HOST_IP_http" }}:8500
-        datacenter: void
-        services: ['ccache-exporter']
+  # {{ end }}
+  # discover metrics from nomad services with the 'prometheus_enable' tag
+  # use the 'prometheus_path=...' tag to change the url path to scrape metrics from (default: '/metrics')
+  # use the 'prometheus_job=...' tag to change the name of the job in prometheus (default: service name)
+  - job_name: nomad_sd
+    nomad_sd_configs:
+      # all namespaces
+      # {{ range "apps,apps-restricted,build,infrastructure,mirror,monitoring" | split "," }}
+      - server: 'http://{{ env "attr.unique.network.ip-address" }}:4646'
+        namespace: '{{ . }}'
+      # {{ end }}
     relabel_configs:
-      - source_labels: ['__meta_consul_node']
-        target_label: instance
-  - job_name: buildbot
-    consul_sd_configs:
-      - server: {{ env "NOMAD_HOST_IP_http" }}:8500
-        datacenter: void
-        services: ['buildbot-metrics']
+      # keep only services with the 'prometheus_enable=true' tag
+      - source_labels: ['__meta_nomad_tags']
+        regex: '.*,prometheus_enable,.*'
+        action: keep
+      # change the metrics url path
+      - source_labels: ['__meta_nomad_tags']
+        regex: '.*,prometheus_path=(.*),.*'
+        replacement: '$1'
+        target_label: '__metrics_path__'
+      # set default job name to nomad service name
+      - source_labels: ['__meta_nomad_service']
+        target_label: job
+      # override job name via tag
+      - source_labels: ['__meta_nomad_tags']
+        regex: '.*,prometheus_job=(.*),.*'
+        target_label: job
+      # get namespace from nomad
+      - source_labels: ['__meta_nomad_namespace']
+        target_label: namespace
+      # get datacenter from nomad
+      - source_labels: ['__meta_nomad_dc']
+        target_label: datacenter
