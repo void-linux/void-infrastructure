@@ -34,8 +34,9 @@ job "buildbot" {
     }
 
     service {
-      name = "buildbot-www"
-      port = "http"
+      provider = "nomad"
+      name     = "buildbot-www"
+      port     = "http"
 
       check {
         type         = "http"
@@ -47,13 +48,15 @@ job "buildbot" {
     }
 
     service {
-      name = "buildbot-worker"
-      port = "worker"
+      provider = "nomad"
+      name     = "buildbot-worker"
+      port     = "worker"
     }
 
     service {
-      name = "buildbot-metrics"
-      port = "metrics"
+      provider = "nomad"
+      name     = "buildbot-metrics"
+      port     = "metrics"
     }
 
     task "buildbot" {
