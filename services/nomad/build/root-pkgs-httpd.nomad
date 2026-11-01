@@ -13,8 +13,9 @@ job "build-mirror" {
     }
 
     service {
-      name = "root-pkgs-internal"
-      port = "http"
+      provider = "nomad"
+      name     = "root-pkgs-internal"
+      port     = "http"
     }
 
     volume "root-pkgs" {
