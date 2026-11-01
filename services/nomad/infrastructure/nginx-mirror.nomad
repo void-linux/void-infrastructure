@@ -28,8 +28,8 @@ job "nginx" {
       }
 
       resources {
-        memory = 2000
-        memory_max = -1
+        memory     = 2000
+        memory_max = 16384
       }
 
       dynamic "volume_mount" {
