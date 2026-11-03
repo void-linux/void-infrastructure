@@ -59,3 +59,9 @@ plugin "docker" {
     allow_caps = {{ ( nomad_default_caps + ( nomad_extra_caps | default([]) ) ) | to_json }}
   }
 }
+
+plugin "nomad-driver-exec2" {
+  config {
+    unveil_by_task = true
+  }
+}
