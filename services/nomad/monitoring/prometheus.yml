@@ -37,7 +37,7 @@ scrape_configs:
           - docs.voidlinux.org
           - infradocs.voidlinux.org
           - repo-fi.voidlinux.org
-          - repo-us.voidlinux.org
+          - repo-de.voidlinux.org
           - sources.voidlinux.org
           - terraform.voidlinux.org
           - voidlinux.org
@@ -127,7 +127,7 @@ scrape_configs:
         namespace: '{{ . }}'
       # {{ end }}
     relabel_configs:
-      # keep only services with the 'prometheus_enable=true' tag
+      # keep only services with the 'prometheus_enable' tag
       - source_labels: ['__meta_nomad_tags']
         regex: '.*,prometheus_enable,.*'
         action: keep
