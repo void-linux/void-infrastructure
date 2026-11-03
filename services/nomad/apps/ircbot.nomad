@@ -28,7 +28,7 @@ job "ircbot" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/ircbot:v0.1.5"
+        image = "ghcr.io/void-linux/ircbot:v0.1.6"
       }
 
       env {
@@ -36,6 +36,7 @@ job "ircbot" {
         IRC_CHANNEL = "#xbps"
         IRC_NICK    = "void-robot"
         IRC_SASL    = "true"
+        IRC_BOTMODE = "true"
       }
 
       template {
