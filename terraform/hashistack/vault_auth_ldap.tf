@@ -7,6 +7,7 @@ resource "vault_ldap_auth_backend" "ldap" {
   url         = "ldap://localhost"
   userdn      = "ou=entities,dc=netauth,dc=voidlinux,dc=org"
   userattr    = "uid"
+  userfilter  = "(uid={{.Username}})"
   discoverdn  = false
   groupdn     = "ou=entities,dc=netauth,dc=voidlinux,dc=org"
   groupfilter = "(uid={{.Username}})"

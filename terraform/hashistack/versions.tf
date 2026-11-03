@@ -6,7 +6,7 @@ terraform {
     }
     vault = {
       source  = "hashicorp/vault"
-      version = "~> 2.23.0"
+      version = "~> 5.13.0"
     }
     nomad = {
       source  = "hashicorp/nomad"
