@@ -17,14 +17,6 @@ scrape_configs:
     static_configs:
       - targets:
         - localhost:9090
-  - job_name: node
-    consul_sd_configs:
-      - server: '{{ env "NOMAD_HOST_IP_http" }}:8500'
-        datacenter: void
-        services: ['node-exporter']
-    relabel_configs:
-      - source_labels: ['__meta_consul_node']
-        target_label: instance
   # {{ range nomadService 1 $allocID "ssl-exporter?ns=monitoring" }}
   - job_name: 'ssl'
     metrics_path: /probe

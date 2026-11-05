@@ -1,4 +1,10 @@
 ---
+- name: Install plugins
+  community.general.xbps:
+    pkg: nomad-driver-exec2
+    state: present
+  tags: [install_nomad]
+
 - name: Install Configuration
   ansible.builtin.template:
     src: 40-client.hcl
