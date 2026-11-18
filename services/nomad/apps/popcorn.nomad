@@ -32,7 +32,7 @@ job "popcorn" {
       driver = "docker"
 
       config {
-        image = "ghcr.io/void-linux/infra-nginx:20250719R1"
+        image = "ghcr.io/void-linux/infra-nginx:20261118R1"
       }
 
       template {
